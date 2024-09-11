@@ -1,10 +1,15 @@
-const express = require('express');
-const app = express();
-const db = require('./database/db'); // Import połączenia z bazą danych pliku db.js
+const app = require('./app');
+const sequelize = require('./config/sequelize');
 
-app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from the server!' });
-});
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Modele zostały zsynchronizowane z bazą danych.');
+  })
+  .catch(err => {
+    console.error('Błąd synchronizacji modeli:', err);
+  });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Serwer działa na porcie ${PORT}`);
+});
