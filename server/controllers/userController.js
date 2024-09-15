@@ -1,25 +1,21 @@
 const Uzytkownik = require('../models/User');
 
-// Pula dostępnych zdjęć (URL)
-const zdjeciaPula = [
-  'https://example.com/zdjecie1.jpg',
-  'https://example.com/zdjecie2.jpg',
-  'https://example.com/zdjecie3.jpg',
+const profileImages = [
+  '/images/profile_pictures/picture_1.png'
 ];
 
-// Funkcja losująca zdjęcie z puli
-const wylosujZdjecie = () => {
-  const randomIndex = Math.floor(Math.random() * zdjeciaPula.length);
-  return zdjeciaPula[randomIndex];
+const randImages = () => {
+  const randomIndex = Math.floor(Math.random() * profileImages.length);
+  return profileImages[randomIndex]; 
 };
 
-// Dodawanie nowego użytkownika
+// Funkcja do tworzenia użytkownika
 const createUser = (req, res) => {
   Uzytkownik.create({
     email: req.body.email,
-    haslo: req.body.haslo,
-    nazwaUzytkownika: req.body.nazwaUzytkownika,
-    zdjecie: wylosujZdjecie(),
+    password: req.body.password,
+    username: req.body.username,
+    image: randImages(),
   })
     .then(user => {
       res.json(user);
@@ -29,6 +25,41 @@ const createUser = (req, res) => {
     });
 };
 
+// Funkcja rejestracji użytkownika
+const registerUser = async (req, res) => {
+  const { email, username, password, role, image } = req.body;
+
+  try {
+    // Sprawdzenie, czy użytkownik z podanym emailem już istnieje
+    const existingUser = await Uzytkownik.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Użytkownik z tym emailem już istnieje' });
+    }
+
+    // Tworzenie nowego użytkownika
+    const newUser = await Uzytkownik.create({
+      email,
+      username,
+      password,  // Hasło zostanie zahashowane dzięki hookowi Sequelize
+      role: role || 'user',  // Rola domyślnie to 'user'
+      image: image || '/images/profile_pictures/picture_1.png'  // Opcjonalne zdjęcie
+    });
+
+    // Odpowiedź z utworzonym użytkownikiem (bez hasła)
+    res.status(201).json({
+      id: newUser.id,
+      email: newUser.email,
+      username: newUser.username,
+      role: newUser.role,
+      image: newUser.image
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
+// Eksportowanie obu funkcji
 module.exports = {
   createUser,
+  registerUser
 };

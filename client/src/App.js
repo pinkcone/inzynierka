@@ -1,10 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Register from './components/Register';  // Import komponentu
 
 function App() {
   return (
-    <div className="App">
-     <h1>Tu będzie projekt inżynierski</h1>
+    <div>
+      <Register />
     </div>
   );
 }

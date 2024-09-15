@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const app = express();
-const userRoutes = require('./routes/userRoutes'); // Import tras
+const userRoutes = require('./routes/userRoutes');
 
-// Middleware do parsowania ciała żądania
+
 app.use(express.json());
+app.use('/images/profile_pictures', express.static(path.join(__dirname, 'images/profile_pictures')));
 
-// Trasy
 app.use('/api/users', userRoutes);
 
 module.exports = app;
