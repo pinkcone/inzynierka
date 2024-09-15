@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, registerUser } = require('../controllers/userController'); // Sprawdź import
+const { loginUser, registerUser, createUser } = require('../controllers/userController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// Trasa do dodawania użytkownika
-router.post('/add-user', createUser);
-
-// Trasa do rejestracji użytkownika
+router.post('/login', loginUser);
+router.post('/add-user', authMiddleware, createUser);
 router.post('/register', registerUser);
 
 module.exports = router;
