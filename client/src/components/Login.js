@@ -1,54 +1,46 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Register = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
     password: ''
   });
 
   const [errors, setErrors] = useState({
     email: '',
-    username: '',
     password: ''
   });
 
   const [message, setMessage] = useState('');
 
-  // Obsługa zmiany w polach formularza
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
 
-    // Resetowanie błędów dla zmienianego pola
+    
     setErrors({
       ...errors,
       [e.target.name]: ''
     });
   };
 
-  // Obsługa wysyłania formularza
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let valid = true;
     const newErrors = {
       email: '',
-      username: '',
       password: ''
     };
 
-    // Walidacja pól
+ 
     if (!formData.email) {
       newErrors.email = 'Email jest wymagany';
-      valid = false;
-    }
-
-    if (!formData.username) {
-      newErrors.username = 'Nazwa użytkownika jest wymagana';
       valid = false;
     }
 
@@ -63,25 +55,24 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('/api/users/register', {
+      const response = await fetch('/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),  // Konwertujemy dane do formatu JSON
+        body: JSON.stringify(formData),  
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Rejestracja zakończona sukcesem!');  // Wyświetl komunikat o sukcesie
+        setMessage('Zalogowano pomyślnie!');  
         setFormData({
           email: '',
-          username: '',
           password: ''
-        });  // Resetowanie formularza po udanej rejestracji
+        }); 
       } else {
-        setMessage(data.message || 'Wystąpił błąd podczas rejestracji.');
+        setMessage(data.message || 'Wystąpił błąd podczas logowania.');
       }
     } catch (error) {
       setMessage('Błąd sieci, spróbuj ponownie.');
@@ -90,7 +81,7 @@ const Register = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Rejestracja</h2>
+      <h2>Logowanie</h2>
       <form onSubmit={handleSubmit} className="form-group">
         <div className="mb-3">
           <label htmlFor="email">Email:</label>
@@ -106,19 +97,6 @@ const Register = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="username">Nazwa użytkownika:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-            value={formData.username}
-            onChange={handleChange}
-          />
-          {errors.username && <div className="invalid-feedback">{errors.username}</div>}
-        </div>
-
-        <div className="mb-3">
           <label htmlFor="password">Hasło:</label>
           <input
             type="password"
@@ -131,7 +109,7 @@ const Register = () => {
           {errors.password && <div className="invalid-feedback">{errors.password}</div>}
         </div>
 
-        <button type="submit" className="btn btn-primary">Zarejestruj się</button>
+        <button type="submit" className="btn btn-primary">Zaloguj się</button>
       </form>
 
       {message && <p className="mt-3">{message}</p>}  {}
@@ -139,4 +117,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
