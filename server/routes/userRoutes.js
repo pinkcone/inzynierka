@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, registerUser, loginUser } = require('../controllers/userController'); // Sprawdź import
 
-// Trasa do dodawania użytkownika
-router.post('/add-user', createUser);
+const { loginUser, registerUser, createUser } = require('../controllers/userController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// Trasa do rejestracji użytkownika
+
+router.post('/login', loginUser);
+router.post('/add-user', authMiddleware, createUser);
 router.post('/register', registerUser);
 
-// Trasa do logowania użytkownika
-router.post('/login', loginUser); 
-
 module.exports = router;
+
