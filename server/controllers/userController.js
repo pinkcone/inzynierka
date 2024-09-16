@@ -95,42 +95,8 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: 'Błąd serwera', error: error.message });
   }
 };
-// Funkcja logowania użytkownika
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    // Sprawdzamy, czy użytkownik istnieje w bazie danych
-    const user = await Uzytkownik.findOne({ where: { email } });
-    if (!user) {
-      return res.status(400).json({ message: 'Nieprawidłowy email lub hasło' });
-    }
 
-    // Porównujemy hasło wprowadzone przez użytkownika z hasłem w bazie danych
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Nieprawidłowy email lub hasło' });
-    }
 
-    // Generowanie tokena JWT
-    const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: '1h' // Token ważny przez 1 godzinę
-    });
-
-    // Zwracamy dane użytkownika i token
-    res.status(200).json({
-      message: 'Logowanie zakończone sukcesem',
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        role: user.role
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Błąd serwera', error: error.message });
-  }
-};
 // Eksportowanie obu funkcji
 module.exports = {
   createUser,
