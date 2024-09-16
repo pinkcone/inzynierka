@@ -33,8 +33,8 @@ const Navbar = () => {
                   />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/profile">Profil</Dropdown.Item>
-                  <Dropdown.Item href="#/settings">Ustawienia</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/profile">Profil</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/settings">Ustawienia</Dropdown.Item>
                   <Dropdown.Item onClick={logout}>Wyloguj się</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

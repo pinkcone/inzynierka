@@ -15,7 +15,7 @@ const Login = ({ onLoginSuccess }) => {
 
   const [message, setMessage] = useState('');
 
-  const navigate = useNavigate(); // Inicjalizuj useNavigate
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setFormData({
@@ -70,7 +70,7 @@ const Login = ({ onLoginSuccess }) => {
         if (typeof onLoginSuccess === 'function') {
           onLoginSuccess();
         }
-        navigate('/'); // Przekierowanie na stronę główną
+        navigate('/'); 
       } else {
         setMessage(data.message || 'Wystąpił błąd podczas logowania.');
       }
