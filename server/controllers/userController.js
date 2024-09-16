@@ -1,7 +1,12 @@
-const Uzytkownik = require('../models/User');
+const User = require('../models/User');
 
 const profileImages = [
-  '/images/profile_pictures/picture_1.png'
+  '/images/profile_pictures/picture_1.png',
+  '/images/profile_pictures/picture_2.png',
+  '/images/profile_pictures/picture_3.png',
+  '/images/profile_pictures/picture_4.png',
+  '/images/profile_pictures/picture_5.png',
+  '/images/profile_pictures/picture_6.png'
 ];
 
 const randImages = () => {
@@ -9,9 +14,8 @@ const randImages = () => {
   return profileImages[randomIndex]; 
 };
 
-// Funkcja do tworzenia użytkownika
 const createUser = (req, res) => {
-  Uzytkownik.create({
+  User.create({
     email: req.body.email,
     password: req.body.password,
     username: req.body.username,
@@ -25,33 +29,29 @@ const createUser = (req, res) => {
     });
 };
 
-// Funkcja rejestracji użytkownika
+
 const registerUser = async (req, res) => {
   const { email, username, password, role, image } = req.body;
 
   try {
-    // Sprawdzenie, czy użytkownik z podanym emailem już istnieje
-    const existingUser = await Uzytkownik.findOne({ where: { email } });
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ message: 'Użytkownik z tym emailem już istnieje' });
     }
     
-    // Sprawdzenie, czy użytkownik z podaną nazwą użytkownika już istnieje
-    const existingUsernameUser = await Uzytkownik.findOne({ where: { username } });
+    const existingUsernameUser = await User.findOne({ where: { username } });
     if (existingUsernameUser) {
       return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
     }
   
-    // Tworzenie nowego użytkownika
-    const newUser = await Uzytkownik.create({
+    const newUser = await User.create({
       email,
       username,
-      password,  // Hasło zostanie zahashowane dzięki hookowi Sequelize
-      role: role || 'user',  // Rola domyślnie to 'user'
-      image: image || '/images/profile_pictures/picture_1.png'  // Opcjonalne zdjęcie
+      password,
+      role: role || 'user',
+      image: image || '/images/profile_pictures/picture_1.png'
     });
 
-    // Odpowiedź z utworzonym użytkownikiem (bez hasła)
     res.status(201).json({
       id: newUser.id,
       email: newUser.email,
@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
 
   try {
 
-    const user = await Uzytkownik.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       return res.status(400).json({ message: 'Użytkownik nie istnieje' });
@@ -96,8 +96,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-
-// Eksportowanie obu funkcji
 module.exports = {
   createUser,
   registerUser,
