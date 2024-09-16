@@ -1,36 +1,19 @@
-import React, { useState } from 'react';
-import { FaUser } from 'react-icons/fa';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './components/HomePage';
 import Register from './components/Register';
 import Login from './components/Login';
 
-function App() {
-    const [isLogin, setIsLogin] = useState(true);
-
-    return (
-        <div className="container mt-4">
-            <div className="text-center mb-4">
-                <FaUser size={50} />
-                <h1>Witamy w naszej aplikacji!</h1>
-            </div>
-
-            <div className="text-center mb-4">
-                <button
-                    className={`btn ${isLogin ? 'btn-primary' : 'btn-secondary'} me-2`}
-                    onClick={() => setIsLogin(true)}
-                >
-                    Logowanie
-                </button>
-                <button
-                    className={`btn ${!isLogin ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => setIsLogin(false)}
-                >
-                    Rejestracja
-                </button>
-            </div>
-
-            {isLogin ? <Login /> : <Register />}
-        </div>
-    );
-}
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;

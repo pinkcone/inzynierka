@@ -1,0 +1,26 @@
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  background-color: #20B2AA !important;; 
+  color: white; 
+}
+
+
+.navbar-logo {
+  width: 100px;
+  height: auto;
+  margin-left: 60px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dropdown-toggle-custom {
+
+}
