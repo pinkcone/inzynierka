@@ -5,7 +5,6 @@ const userRoutes = require('./routes/userRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const setRoutes = require('./routes/setRoutes');
 const answerRoutes = require('./routes/answerRoutes');
-const setRoutes = require('./routes/setRoutes');
 require('dotenv').config();
 
 const cors = require('cors');

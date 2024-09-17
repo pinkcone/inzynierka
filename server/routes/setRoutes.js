@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { addSet, editSet, deleteSet, changeSetOwner, getAllUserSets } = require('../controllers/setController');
+const { addSet, editSet, deleteSet, changeSetOwner, getAllUserSets, getSetById } = require('../controllers/setController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.post('/add', authMiddleware, addSet);
