@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const CreateSet = () => {
+const AddSet = () => {
   const [formData, setFormData] = useState({
     name: '',
     isPublic: true,
@@ -9,7 +8,6 @@ const CreateSet = () => {
   });
 
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -21,21 +19,22 @@ const CreateSet = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/quiz/set', {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/sets/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
-
+  
       if (response.ok) {
         setMessage('Zestaw został utworzony!');
         setFormData({ name: '', isPublic: true, keyWords: '' });
-        navigate('/');
       } else {
-        setMessage('Wystąpił błąd podczas tworzenia zestawu.');
+        const errorData = await response.json();
+        setMessage(`Wystąpił błąd podczas tworzenia zestawu: ${errorData.message}`);
       }
     } catch (error) {
       setMessage('Błąd sieci, spróbuj ponownie.');
@@ -85,4 +84,4 @@ const CreateSet = () => {
   );
 };
 
-export default CreateSet;
+export default AddSet;

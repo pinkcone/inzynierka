@@ -12,6 +12,7 @@ const useAuth = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
+        console.log('Decoded Token:', decodedToken); // Debugowanie
         setUser(decodedToken); 
         setIsAuthenticated(true); 
       } catch (error) {
@@ -21,6 +22,7 @@ const useAuth = () => {
       }
     }
   }, []);
+  
 
   const logout = () => {
     localStorage.removeItem('token'); 

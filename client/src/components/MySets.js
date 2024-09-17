@@ -1,97 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importuj useNavigate
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import '../styles/MySets.css';
 
 const MySets = () => {
   const [sets, setSets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // Inicjalizuj useNavigate
 
-  // Pobierz zestawy użytkownika z backendu
   useEffect(() => {
     const fetchSets = async () => {
       try {
-        const response = await fetch('/api/quiz/sets', {
+        const response = await fetch('/api/sets', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // zakładam, że masz token
-          },
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
         });
-        if (!response.ok) {
-          throw new Error('Wystąpił błąd podczas pobierania zestawów');
+
+        if (response.ok) {
+          const data = await response.json();
+          setSets(data);
+        } else {
+          setError('Nie udało się pobrać zestawów.');
         }
-        const data = await response.json();
-        setSets(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
+      } catch (err) {
+        setError('Wystąpił błąd podczas pobierania zestawów.');
       }
     };
 
     fetchSets();
   }, []);
 
-  // Funkcja do usuwania zestawu
-  const handleDeleteSet = async (setId) => {
+  const handleDelete = async (setId) => {
     if (window.confirm('Czy na pewno chcesz usunąć ten zestaw?')) {
       try {
-        const response = await fetch(`/api/quiz/set/${setId}`, {
+        const response = await fetch(`/api/sets/delete/${setId}`, {
           method: 'DELETE',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // zakładam, że masz token
-          },
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
         });
 
-        if (!response.ok) {
-          throw new Error('Wystąpił błąd podczas usuwania zestawu');
+        if (response.ok) {
+          setSets(sets.filter((set) => set.id !== setId));
+          setMessage('Zestaw został usunięty.');
+        } else {
+          const errorData = await response.json();
+          setMessage(`Nie udało się usunąć zestawu: ${errorData.message}`);
         }
-
-        // Usuń zestaw z widoku
-        setSets(sets.filter((set) => set.id !== setId));
       } catch (error) {
-        alert('Nie udało się usunąć zestawu');
+        setMessage('Wystąpił błąd podczas usuwania zestawu.');
       }
     }
   };
 
-  // Przejście do szczegółów zestawu
-  const handleViewSet = (setId) => {
-    navigate(`/sets/${setId}`);
+  const handleOpen = (setId) => {
+    navigate(`/page-set/${setId}`); // Przekierowuje na stronę PageSet
   };
 
-  if (loading) {
-    return <div>Ładowanie zestawów...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
-    <div className="container">
-      <h2>Moje Zestawy</h2>
-      {sets.length === 0 ? (
-        <p>Nie masz żadnych zestawów.</p>
-      ) : (
-        <ul className="list-group">
-          {sets.map((set) => (
-            <li key={set.id} className="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <strong>{set.name}</strong>
-                <span> (Publiczny: {set.isPublic ? 'Tak' : 'Nie'})</span>
-              </div>
-              <div>
-                <button className="btn btn-primary me-2" onClick={() => handleViewSet(set.id)}>
-                  Zobacz szczegóły
-                </button>
-                <button className="btn btn-danger" onClick={() => handleDeleteSet(set.id)}>
-                  Usuń
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="app-container">
+      <Navbar />
+      <div className="main-content">
+        <Sidebar />
+        <div className="content">
+          <h2 className="text-center mb-4">Moje zestawy</h2>
+          {error && <div className="alert alert-danger">{error}</div>}
+          {message && <div className="alert alert-success">{message}</div>}
+
+          {sets.length > 0 ? (
+            <ul className="list-group">
+              {sets.map((set) => (
+                <li key={set.id} className="list-group-item d-flex justify-content-between align-items-center">
+                  <span>{set.name}</span>
+                  <div>
+                    <button 
+                      onClick={() => handleDelete(set.id)} 
+                      className="btn btn-danger btn-sm ml-2"
+                    >
+                      Usuń
+                    </button>
+                    <button 
+                      onClick={() => handleOpen(set.id)} 
+                      className="btn btn-primary btn-sm ml-2"
+                    >
+                      Otwórz
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center">Brak zestawów.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

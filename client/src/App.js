@@ -4,10 +4,11 @@ import HomePage from './components/HomePage';
 import Register from './components/Register';
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
-import CreateSet from './components/CreateSet';
 import AddQuestion from './components/AddQuestion';
 import AddAnswer from './components/AddAnswer';
 import MySets from './components/MySets'; 
+import AddSet from './components/AddSet';
+import PageSet from './components/PageSet';
 
 
 const App = () => {
@@ -18,10 +19,11 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/create-set" element={<CreateSet />} />
+        <Route path="/addset" element={<AddSet />} />
         <Route path="/add-question/:setId" element={<AddQuestion />} />
         <Route path="/add-answer/:questionId" element={<AddAnswer />} />
-        <Route path="/my-sets" element={<MySets />} />
+        <Route path="/mysets" element={<MySets />} />
+        <Route path="/page-set/:id" element={<PageSet />} />
       </Routes>
     </Router>
   );

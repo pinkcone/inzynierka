@@ -19,7 +19,7 @@ const Question = sequelize.define('Question', {
   setId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Sets',
+      model: 'Set',
       key: 'id'
     }
   }

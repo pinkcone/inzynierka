@@ -5,7 +5,7 @@ const addQuestion = async (req, res) => {
     try{
         const { content, type } = req.body;
         const { setId } = req.params;
-        const usedId = req.user.id;
+        const userId = req.user.id;
 
         const set = await Set.findOne({ where: { id: setId, ownerId: userId}});
         if(!set) {
