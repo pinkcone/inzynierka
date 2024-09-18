@@ -12,7 +12,7 @@ const useAuth = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log('Decoded Token:', decodedToken); // Debugowanie
+        console.log('Decoded Token:', decodedToken); 
         setUser(decodedToken); 
         setIsAuthenticated(true); 
       } catch (error) {

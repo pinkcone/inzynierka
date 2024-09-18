@@ -9,6 +9,8 @@ import AddAnswer from './components/AddAnswer';
 import MySets from './components/MySets'; 
 import AddSet from './components/AddSet';
 import PageSet from './components/PageSet';
+import EditQuestion from './components/EditQuestion';
+import EditAnswer from './components/EditAnswer';
 
 
 const App = () => {
@@ -24,6 +26,12 @@ const App = () => {
         <Route path="/add-answer/:questionId" element={<AddAnswer />} />
         <Route path="/mysets" element={<MySets />} />
         <Route path="/page-set/:id" element={<PageSet />} />
+        <Route path="/edit-question/:id" element={<EditQuestion />} />
+        <Route path="/edit-answer/:id" element={<EditAnswer />} />
+
+        <Route path="/edit-question/:questionId" element={<EditQuestion />} />
+        <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
+        <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
       </Routes>
     </Router>
   );

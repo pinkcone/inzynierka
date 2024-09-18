@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importuj useNavigate
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import '../styles/MySets.css';
@@ -8,7 +8,7 @@ const MySets = () => {
   const [sets, setSets] = useState([]);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Inicjalizuj useNavigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchSets = async () => {
@@ -57,7 +57,11 @@ const MySets = () => {
   };
 
   const handleOpen = (setId) => {
-    navigate(`/page-set/${setId}`); // Przekierowuje na stronę PageSet
+    navigate(`/page-set/${setId}`); 
+  };
+
+  const handleAddSetClick = () => {
+    navigate('/addset'); 
   };
 
   return (
@@ -67,6 +71,12 @@ const MySets = () => {
         <Sidebar />
         <div className="content">
           <h2 className="text-center mb-4">Moje zestawy</h2>
+          <button 
+            onClick={handleAddSetClick} 
+            className="btn btn-primary mb-4"
+          >
+            Dodaj zestaw
+          </button>
           {error && <div className="alert alert-danger">{error}</div>}
           {message && <div className="alert alert-success">{message}</div>}
 

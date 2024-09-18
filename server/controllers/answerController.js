@@ -100,10 +100,27 @@ const getAnswersByQuestionId = async (req, res) => {
       res.status(500).json({ message: 'Błąd podczas pobierania odpowiedzi.', error: error.message });
     }
   };
+
+  const getAnswerById = async (req, res) => {
+    try {
+      const { id } = req.params; 
+      const answer = await Answer.findByPk(id); 
+  
+      if (!answer) {
+        return res.status(404).json({ message: 'Odpowiedź nie została znaleziona.' }); 
+      }
+  
+      res.status(200).json(answer); 
+    } catch (error) {
+      res.status(500).json({ message: 'Błąd podczas pobierania odpowiedzi.', error: error.message }); 
+    }
+  };
+  
   
   module.exports = {
     addAnswer,
     editAnswer,
     deleteAnswer,
-    getAnswersByQuestionId
+    getAnswersByQuestionId,
+    getAnswerById
   };

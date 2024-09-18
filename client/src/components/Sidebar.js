@@ -1,37 +1,20 @@
-import React, { useState } from 'react';
-import '../styles/Sidebar.css'; 
-import CreateSet from './AddSet';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth'; 
+import '../styles/Sidebar.css';
 
 const Sidebar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
-  const openModal = () => {
-    console.log('Opening modal');
-    setIsModalOpen(true);
-  };
-  
-  const closeModal = () => {
-    console.log('Closing modal');
-    setIsModalOpen(false);
-  };
+  if (!isAuthenticated) {
+    return null; 
+  }
+
   return (
     <div className="sidebar">
       <Link to="/mysets" className="sidebar-link">Moje Zestawy</Link>
-      <a href="/tests" className="sidebar-link">Testy</a>
-      <a href="/materials" className="sidebar-link">Materiały</a>
-      <button onClick={openModal} className="sidebar-link create-set-btn">
-        Utwórz Zestaw
-      </button>
-      
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <CreateSet />
-            <button className="btn btn-secondary" onClick={closeModal}>Zamknij</button>
-          </div>
-        </div>
-      )}
+      <a href="/tests" className="sidebar-link">TU COŚ BĘDZIE</a>
+      <a href="/materials" className="sidebar-link">TU TEZ</a>
     </div>
   );
 };

@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 
-const AddQuestion = ({ setId }) => {
-  const [formData, setFormData] = useState({
-    content: '',
-    type: 'single'
-  });
-
+const AddQuestion = ({ setId, onQuestionAdded }) => {
+  const [formData, setFormData] = useState({ content: '' });
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/quiz/question', {
+      const response = await fetch(`/api/questions/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,8 +21,10 @@ const AddQuestion = ({ setId }) => {
       });
 
       if (response.ok) {
+        const result = await response.json();
         setMessage('Pytanie zostało dodane!');
-        setFormData({ content: '', type: 'single' });
+        setFormData({ content: '' });
+        onQuestionAdded(result.id); 
       } else {
         setMessage('Wystąpił błąd podczas dodawania pytania.');
       }
@@ -52,19 +47,6 @@ const AddQuestion = ({ setId }) => {
             value={formData.content}
             onChange={handleChange}
           />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="type">Typ:</label>
-          <select
-            id="type"
-            name="type"
-            className="form-control"
-            value={formData.type}
-            onChange={handleChange}
-          >
-            <option value="single">Jednokrotnego wyboru</option>
-            <option value="multiple">Wielokrotnego wyboru</option>
-          </select>
         </div>
         <button type="submit" className="btn btn-primary">Dodaj Pytanie</button>
         {message && <p>{message}</p>}

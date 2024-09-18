@@ -1,70 +1,45 @@
 import React, { useState } from 'react';
 
-const AddAnswer = ({ questionId }) => {
-  const [formData, setFormData] = useState({
-    content: '',
-    isTrue: false
-  });
-
-  const [message, setMessage] = useState('');
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.name === 'isTrue' ? e.target.checked : e.target.value
-    });
-  };
+const AddAnswer = ({ questionId, onAnswerAdded }) => {
+  const [content, setContent] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await fetch('/api/quiz/answer', {
+      const response = await fetch(`/api/answers/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ ...formData, questionId })
+        body: JSON.stringify({ questionId, content })
       });
 
       if (response.ok) {
-        setMessage('Odpowiedź została dodana!');
-        setFormData({ content: '', isTrue: false });
+        setContent('');
+        onAnswerAdded(); 
       } else {
-        setMessage('Wystąpił błąd podczas dodawania odpowiedzi.');
+        const errorData = await response.json();
+        setError(errorData.message || 'Nie udało się dodać odpowiedzi.');
       }
-    } catch (error) {
-      setMessage('Błąd sieci, spróbuj ponownie.');
+    } catch (err) {
+      setError('Wystąpił błąd podczas dodawania odpowiedzi.');
     }
   };
 
   return (
-    <div className="container">
-      <h2>Dodaj Odpowiedź</h2>
+    <div className="add-answer-form">
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="content">Treść odpowiedzi:</label>
-          <input
-            type="text"
-            id="content"
-            name="content"
-            className="form-control"
-            value={formData.content}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="isTrue">Poprawna:</label>
-          <input
-            type="checkbox"
-            id="isTrue"
-            name="isTrue"
-            checked={formData.isTrue}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Dodaj Odpowiedź</button>
-        {message && <p>{message}</p>}
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Treść odpowiedzi"
+          required
+        />
+        <button type="submit">Dodaj odpowiedź</button>
+        {error && <div className="alert alert-danger">{error}</div>}
       </form>
     </div>
   );
