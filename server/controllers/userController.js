@@ -11,7 +11,11 @@ const profileImages = [
 
 const randImages = () => {
   const randomIndex = Math.floor(Math.random() * profileImages.length);
-  return profileImages[randomIndex]; 
+  const selectedImage = profileImages[randomIndex];
+
+  console.log('Wylosowany obrazek:', selectedImage);
+
+  return selectedImage;
 };
 
 const createUser = (req, res) => {
@@ -31,7 +35,7 @@ const createUser = (req, res) => {
 
 
 const registerUser = async (req, res) => {
-  const { email, username, password, role, image } = req.body;
+  const { email, username, password, role} = req.body;
 
   try {
     const existingUser = await User.findOne({ where: { email } });
@@ -49,7 +53,7 @@ const registerUser = async (req, res) => {
       username,
       password,
       role: role || 'user',
-      image: image || '/images/profile_pictures/picture_1.png'
+      image: randImages()
     });
 
     // Generowanie tokenu JWT po rejestracji
