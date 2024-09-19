@@ -8,11 +8,8 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: 'Brak autoryzacji. Token nie został dostarczony.' });
   }
 
-  console.log('Token received:', token);
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token:', decoded);
     req.user = decoded;
     next();
   } catch (error) {
