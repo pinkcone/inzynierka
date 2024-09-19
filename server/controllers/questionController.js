@@ -101,9 +101,26 @@ const editQuestion = async (req, res) => {
     }
   };
   
+  const getQuestionById = async (req, res) => {
+    try {
+      const { id } = req.params; // Pobieramy ID pytania z parametrów URL
+  
+      const question = await Question.findOne({ where: { id } });
+  
+      if (!question) {
+        return res.status(404).json({ message: 'Pytanie nie zostało znalezione.' });
+      }
+  
+      res.status(200).json(question);
+    } catch (error) {
+      res.status(500).json({ message: 'Błąd podczas pobierania pytania.', error: error.message });
+    }
+  };
+  
   module.exports = {
     addQuestion,
     editQuestion,
     deleteQuestion,
-    getQuestionsBySet
+    getQuestionsBySet,
+    getQuestionById // Dodajemy nową funkcję do eksportu
   };
