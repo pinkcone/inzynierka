@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Register.css';
 
@@ -16,6 +17,7 @@ const Register = () => {
   });
 
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -77,6 +79,8 @@ const Register = () => {
           username: '',
           password: ''
         });
+
+        navigate('/');
       } else {
         setMessage(data.message || 'Wystąpił błąd podczas rejestracji.');
       }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 const Login = ({ onLoginSuccess }) => {
@@ -13,6 +14,8 @@ const Login = ({ onLoginSuccess }) => {
   });
 
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -64,11 +67,15 @@ const Login = ({ onLoginSuccess }) => {
         localStorage.setItem('token', data.token);
         setMessage('Zalogowano pomyślnie!');
         setFormData({ email: '', password: '' });
-        onLoginSuccess();
+        if (typeof onLoginSuccess === 'function') {
+          onLoginSuccess();
+        }
+        navigate('/');
       } else {
         setMessage(data.message || 'Wystąpił błąd podczas logowania.');
       }
     } catch (error) {
+      console.error('Error:', error);
       setMessage('Błąd sieci, spróbuj ponownie.');
     }
   };
