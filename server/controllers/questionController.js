@@ -2,25 +2,33 @@ const Question = require('../models/Question');
 const Set = require('../models/Set');
 
 const addQuestion = async (req, res) => {
-    try{
-        const { content, type } = req.body;
-        const { setId } = req.params;
-        const usedId = req.user.id;
+  try {
+      console.log('Request body:', req.body);
+      const { content, type, setId } = req.body;
+      const userId = req.user.id;
 
-        const set = await Set.findOne({ where: { id: setId, ownerId: userId}});
-        if(!set) {
-            return res.status(404).json({message: "Zestaw nie został odnaleziony!"});
-        }
-            const newQuestion = await Question.create({
-                content,
-                type,
-                setId
-            });
-            res.status(201).json(newQuestion);
-        
-    }catch(error){
-        res.status(500).json({ message: 'Błąd podczas dodawania pytania.', error: error.message });
-    }
+      console.log('User ID:', userId); 
+      console.log('Set ID:', setId); 
+
+      
+      const set = await Set.findOne({ where: { id: setId, ownerId: userId } });
+      if (!set) {
+          console.log('Set not found'); 
+          return res.status(404).json({ message: 'Zestaw nie został odnaleziony!' });
+      }
+
+      const newQuestion = await Question.create({
+          content,
+          type,
+          setId
+      });
+      res.status(201).json(newQuestion); 
+
+  } catch (error) {
+      console.error('Error in addQuestion:', error.message);
+      console.error('Full error details:', error); 
+      res.status(500).json({ message: 'Błąd podczas dodawania pytania.', error: error.message });
+  }
 };
 
 const editQuestion = async (req, res) => {

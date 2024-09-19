@@ -1,4 +1,5 @@
 const Set = require('../models/Set');
+const User = require('../models/User'); 
 
 const addSet = async (req, res) => {
     try{
@@ -56,7 +57,7 @@ const editSet = async (req, res) => {
       res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
     }
   };
-
+  
   const changeSetOwner = async (req, res) => {
     try {
       const { setId, newOwnerId } = req.body;
@@ -80,9 +81,41 @@ const editSet = async (req, res) => {
     }
   };
 
+  
+  const getAllUserSets = async (req, res) => {
+    try {
+      const sets = await Set.findAll({ where: { ownerId: req.user.id } });
+  
+      if (!sets.length) {
+        return res.status(404).json({ message: 'Nie znaleziono zestawów.' });
+      }
+  
+      res.status(200).json(sets);
+    } catch (error) {
+      res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
+    }
+  };
+
+  const getSetById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const set = await Set.findOne({ where: { id, ownerId: req.user.id } });
+
+        if (!set) {
+            return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
+        }
+
+        res.status(200).json(set);
+    } catch (error) {
+        res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawu.', error: error.message });
+    }
+};
+  
   module.exports = {
     addSet,
     editSet,
     deleteSet,
-    changeSetOwner
+    changeSetOwner,
+    getAllUserSets,
+    getSetById
   };

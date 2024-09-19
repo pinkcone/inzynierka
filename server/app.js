@@ -7,6 +7,8 @@ const setRoutes = require('./routes/setRoutes');
 const answerRoutes = require('./routes/answerRoutes');
 require('dotenv').config();
 
+const cors = require('cors');
+app.use(cors());
 
 app.use(express.json());
 app.use('/images/profile_pictures', express.static(path.join(__dirname, 'images/profile_pictures')));
@@ -15,4 +17,5 @@ app.use('/api/users', userRoutes);
 app.use('/api/sets', setRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/answers', answerRoutes);
+
 module.exports = app;
