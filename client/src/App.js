@@ -28,7 +28,6 @@ const App = () => {
         <Route path="/page-set/:id" element={<PageSet />} />
         <Route path="/edit-question/:id" element={<EditQuestion />} />
         <Route path="/edit-answer/:id" element={<EditAnswer />} />
-
         <Route path="/edit-question/:questionId" element={<EditQuestion />} />
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
