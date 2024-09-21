@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Login.css';
+import styles from '../../styles/Login.module.css'; 
 
 const Login = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState({
@@ -81,42 +81,42 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-      <div className="container-login">
-        <div className="login-card">
-          <h2 className="login-title">Logowanie</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email">Email:</label>
-              <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                  value={formData.email}
-                  onChange={handleChange}
-              />
-              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-            </div>
+    <div className={styles.containerLogin}>
+      <div className={styles.loginCard}>
+        <h2 className={styles.loginTitle}>Logowanie</h2>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.mb3}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className={`${styles.formControl} ${errors.email ? styles.isInvalid : ''}`}
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <div className={styles.invalidFeedback}>{errors.email}</div>}
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="password">Hasło:</label>
-              <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                  value={formData.password}
-                  onChange={handleChange}
-              />
-              {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-            </div>
+          <div className={styles.mb3}>
+            <label htmlFor="password">Hasło:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className={`${styles.formControl} ${errors.password ? styles.isInvalid : ''}`}
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && <div className={styles.invalidFeedback}>{errors.password}</div>}
+          </div>
 
-            <button type="submit" className="btn btn-primary login-button">Zaloguj się</button>
-          </form>
+          <button type="submit" className={styles.btnPrimary}>Zaloguj się</button>
+        </form>
 
-          {message && <p className="login-message">{message}</p>}
-        </div>
+        {message && <p className={styles.loginMessage}>{message}</p>}
       </div>
+    </div>
   );
 };
 

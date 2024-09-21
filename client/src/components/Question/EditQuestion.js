@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import styles from '../../styles/EditQuestion.module.css';
 
-const EditQuestion = () => {
+const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   const { id } = useParams(); 
   const navigate = useNavigate(); 
   const [questionContent, setQuestionContent] = useState(''); 
@@ -9,19 +10,16 @@ const EditQuestion = () => {
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    console.log('Parametr id:', id); 
-
     const fetchQuestion = async () => {
-      if (!id) {
-        console.error('Brak id w URL');
-        setError('Brak ID pytania w URL.');
+      if (!questionId) {
+        console.error('Brak id pytania do edycji');
+        setError('Brak ID pytania do edycji.');
         setLoading(false);
         return;
       }
 
       try {
-        console.log('Pobieranie pytania o ID:', id); 
-        const response = await fetch(`/api/questions/${id}`, {
+        const response = await fetch(`/api/questions/${questionId}`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -30,7 +28,6 @@ const EditQuestion = () => {
         if (response.ok) {
           const data = await response.json();
           setQuestionContent(data.content);
-          console.log('Treść pytania:', data.content); 
         } else {
           const errorData = await response.json();
           setError(errorData.message || 'Nie udało się pobrać pytania.');
@@ -44,18 +41,18 @@ const EditQuestion = () => {
     };
 
     fetchQuestion();
-  }, [id]);
+  }, [questionId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!id) {
-      console.error('Brak id w URL');
-      setError('Brak ID pytania w URL.');
+    if (!questionId) {
+      console.error('Brak id pytania do edycji');
+      setError('Brak ID pytania do edycji.');
       return;
     }
 
     try {
-      const response = await fetch(`/api/questions/edit/${id}`, {
+      const response = await fetch(`/api/questions/edit/${questionId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -66,7 +63,9 @@ const EditQuestion = () => {
 
       if (response.ok) {
         alert('Pytanie zostało zaktualizowane.');
-        navigate(`/page-set/${id}`); 
+        onEditComplete();  
+        onClose(); 
+        navigate(`/page-set/${id}`);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się zaktualizować pytania.');
@@ -82,10 +81,10 @@ const EditQuestion = () => {
   }
 
   return (
-    <div className="app-container">
-      <div className="main-content">
+    <div className={styles.appContainer}>
+      <div className={styles.mainContent}>
         <h2>Edytuj Pytanie</h2>
-        {error && <div className="alert alert-danger">{error}</div>}
+        {error && <div className={styles.alert}>{error}</div>}
         <form onSubmit={handleSubmit}>
           <textarea 
             value={questionContent} 

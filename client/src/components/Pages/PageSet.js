@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import SetSidebar from './SetSidebar';
-import '../styles/PageSet.css';
-import AddQuestion from './AddQuestion';
-import AddAnswer from './AddAnswer';
-import { FaEdit, FaTrash } from 'react-icons/fa'; // Ikony do edycji i usuwania
+import { useParams } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
+import SetSidebar from '../Sidebar/SetSidebar';
+import styles from '../../styles/PageSet.module.css';
+import AddQuestion from '../Question/AddQuestion';
+import AddAnswer from '../Answer/AddAnswer';
+import EditQuestion from '../Question/EditQuestion';
+import EditAnswer from '../Answer/EditAnswer';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const PageSet = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [set, setSet] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [activeSection, setActiveSection] = useState('');
-  const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [showAddAnswer, setShowAddAnswer] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
+  const [editQuestionId, setEditQuestionId] = useState(null);
+  const [editAnswerId, setEditAnswerId] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const fetchSet = async () => {
@@ -48,8 +50,6 @@ const PageSet = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          
-          // Fetch answers for each question
           const questionsWithAnswers = await Promise.all(
             data.map(async (question) => {
               try {
@@ -61,7 +61,6 @@ const PageSet = () => {
                 const answersData = answersResponse.ok ? await answersResponse.json() : [];
                 return { ...question, answers: answersData };
               } catch (err) {
-                console.error(`Error fetching answers for question ${question.id}:`, err);
                 return { ...question, answers: [] };
               }
             })
@@ -80,24 +79,17 @@ const PageSet = () => {
     fetchQuestions();
   }, [id]);
 
-  const handleAddQuestionClick = () => {
-    setActiveSection('addQuestion');
-    setShowAddQuestion(true);
-    setShowAddAnswer(false);
-  };
-
   const handleAddAnswerClick = (questionId) => {
     setSelectedQuestionId(questionId);
-    setActiveSection('addAnswer');
     setShowAddAnswer(true);
   };
 
   const handleEditQuestionClick = (questionId) => {
-    navigate(`/edit-question/${questionId}`);
+    setEditQuestionId(questionId);
   };
 
-  const handleEditAnswerClick = (answerId) => {
-    navigate(`/edit-answer/${answerId}`);
+  const handleEditAnswerClick = (answer) => {
+    setEditAnswerId(answer.id);
   };
 
   const handleDeleteAnswerClick = async (answerId) => {
@@ -109,8 +101,8 @@ const PageSet = () => {
         }
       });
       if (response.ok) {
-        alert('Odpowiedź została usunięta.');
-        await refreshQuestions(); 
+        showMessage('Odpowiedź została usunięta.');
+        await refreshQuestions();
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się usunąć odpowiedzi.');
@@ -120,19 +112,33 @@ const PageSet = () => {
     }
   };
 
-  const handleQuestionAdded = async (questionId) => {
-    setShowAddQuestion(false);
-    setSelectedQuestionId(questionId);
-    setShowAddAnswer(true);
-    setActiveSection('addAnswer');
-    setSuccessMessage('Pytanie zostało dodane pomyślnie!');
+  const showMessage = (message) => {
+    setSuccessMessage(message);
+    const timeoutId = setTimeout(() => {
+      setSuccessMessage('');
+    }, 1000);
+
+    return timeoutId;
+  };
+
+  const handleQuestionAdded = async () => {
+    showMessage('Pytanie zostało dodane pomyślnie!');
     await refreshQuestions();
   };
 
   const handleAnswerAdded = async () => {
-    setShowAddAnswer(false);
-    setSuccessMessage('Odpowiedź została dodana pomyślnie!');
-    await refreshQuestions(); 
+    showMessage('Odpowiedź została dodana pomyślnie!');
+    await refreshQuestions();
+  };
+
+  const handleAnswerEdited = async () => {
+    showMessage('Odpowiedź została edytowana pomyślnie!');
+    await refreshQuestions();
+  };
+
+  const handleEditComplete = async () => {
+    showMessage('Pytanie zostało zaktualizowane.');
+    await refreshQuestions();
   };
 
   const refreshQuestions = async () => {
@@ -155,7 +161,6 @@ const PageSet = () => {
               const answersData = answersResponse.ok ? await answersResponse.json() : [];
               return { ...question, answers: answersData };
             } catch (err) {
-              console.error(`Error fetching answers for question ${question.id}:`, err);
               return { ...question, answers: [] };
             }
           })
@@ -172,92 +177,84 @@ const PageSet = () => {
 
   const handleSidebarClick = (section) => {
     setActiveSection(section);
-    if (section === 'addQuestion') {
-      setShowAddQuestion(true);
-      setShowAddAnswer(false);
-    } else if (section === 'manage' || section === 'addCollaborator' || section === 'deleteSet') {
-      setShowAddQuestion(false);
-      setShowAddAnswer(false);
-    }
   };
 
   const handleSidebarClose = () => {
     setActiveSection('');
-    setShowAddQuestion(false);
-    setShowAddAnswer(false);
     setSuccessMessage('');
   };
 
   return (
-    <div className="app-container">
+    <div className={styles.appContainer}>
       <Navbar />
-      <div className="main-content">
-        <SetSidebar 
+      <div className={styles.mainContent}>
+        <SetSidebar  
           onSectionClick={handleSidebarClick} 
           activeSection={activeSection} 
           setName={set?.name || 'Loading...'}
           onClose={handleSidebarClose}
         />
-        <div className="content">
-          {activeSection === '' ? (
-            <div>
-              {error && <div className="alert alert-danger">{error}</div>}
-              {questions.length > 0 ? (
-                <div className="questions-list">
-                  {questions.map((question) => (
-                    <div key={question.id} className="question-item">
-                      <h4>{question.content}</h4>
-                      <button onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
-                      <button onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
-                      <div className="answers-list">
-                        {question.answers && question.answers.length > 0 ? (
-                          question.answers.map((answer) => (
-                            <div key={answer.id} className="answer-item">
-                              <p>{answer.content}</p>
-                              <button onClick={() => handleEditAnswerClick(answer.id)}><FaEdit /> Edytuj</button>
-                              <button onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
-                            </div>
-                          ))
-                        ) : (
-                          <p>Brak odpowiedzi</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+        <div className={styles.content}>
+          {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}
+          {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
+          {questions.length > 0 ? (
+            <div className={styles.questionsList}>
+              {questions.map((question) => (
+                <div key={question.id} className={styles.questionItem}>
+                  <h4>{question.content}</h4>
+                  <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
+                  <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
+                  <div className={styles.answersList}>
+                    {question.answers && question.answers.length > 0 ? (
+                      question.answers.map((answer) => (
+                        <div key={answer.id} className={styles.answerItem}>
+                          <p>{answer.content}</p>
+                          <button className={styles.buttonEdit} onClick={() => handleEditAnswerClick(answer)}><FaEdit /> Edytuj</button>
+                          <button className={styles.buttonDelete} onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Brak odpowiedzi</p>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <p>Brak pytań</p>
-              )}
-              {showAddAnswer && <AddAnswer questionId={selectedQuestionId} onAnswerAdded={handleAnswerAdded} />}
+              ))}
             </div>
-          ) : activeSection === 'addQuestion' ? (
-            <div className="popup">
-              <button className="popup-close" onClick={handleSidebarClose}>X</button>
-              <AddQuestion setId={id} onQuestionAdded={handleQuestionAdded} />
-              {successMessage && <div className="alert alert-success">{successMessage}</div>}
-            </div>
-          ) : activeSection === 'addAnswer' ? (
-            <div className="popup">
-              <button className="popup-close" onClick={handleSidebarClose}>X</button>
+          ) : (
+            <p>Brak pytań</p>
+          )}
+          {showAddAnswer && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setShowAddAnswer(false)}>X</button>
               <AddAnswer questionId={selectedQuestionId} onAnswerAdded={handleAnswerAdded} />
             </div>
-          ) : activeSection === 'manage' ? (
-            <div className="popup">
-              <button className="popup-close" onClick={handleSidebarClose}>X</button>
-              <h4>Zarządzaj prywatnością</h4>
-              <p><strong>Publiczny:</strong> {set.isPublic ? 'Tak' : 'Nie'}</p>
+          )}
+          {activeSection === 'addQuestion' && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
+              <AddQuestion setId={id} onQuestionAdded={handleQuestionAdded} />
             </div>
-          ) : activeSection === 'addCollaborator' ? (
-            <div className="popup">
-              <button className="popup-close" onClick={handleSidebarClose}>X</button>
-              <h4>Dodaj współtwórcę</h4>
+          )}
+          {editQuestionId && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setEditQuestionId(null)}>X</button>
+              <EditQuestion 
+                questionId={editQuestionId} 
+                onClose={() => setEditQuestionId(null)} 
+                onEditComplete={handleEditComplete} // Przekazanie callbacka
+              />
             </div>
-          ) : activeSection === 'deleteSet' ? (
-            <div className="popup">
-              <button className="popup-close" onClick={handleSidebarClose}>X</button>
-              <h4>Usuń zestaw</h4>
+          )}
+          {editAnswerId && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setEditAnswerId(null)}>X</button>
+              <EditAnswer 
+                answerId={editAnswerId} 
+                onClose={() => setEditAnswerId(null)} 
+                onAnswerEdited={handleAnswerEdited} 
+              />
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>
