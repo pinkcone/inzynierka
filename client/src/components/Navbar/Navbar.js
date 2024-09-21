@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth'; 
+import useAuth from '../../hooks/useAuth'; 
 import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../styles/Navbar.module.css';
+import styles from '../../styles/Navbar.module.css';
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth(); 
@@ -15,7 +15,7 @@ const Navbar = () => {
           <img 
             src="/images/logo.png"
             alt="Logo"
-            className={styles['navbar-logo']} // Użyj modułu CSS
+            className={styles['navbar-logo']} 
           />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@ const Navbar = () => {
                   <img
                     src={user?.image || '/images/profile_pictures/picture_1.png'} 
                     alt="User Avatar"
-                    className={styles['user-avatar']} // Użyj modułu CSS
+                    className={styles['user-avatar']}
                   />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

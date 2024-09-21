@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar'; 
-import useAuth from '../hooks/useAuth'; 
+import Navbar from '../Navbar/Navbar'; 
+import useAuth from '../../hooks/useAuth'; 
 
 const UserProfile = () => {
   const { user } = useAuth(); 

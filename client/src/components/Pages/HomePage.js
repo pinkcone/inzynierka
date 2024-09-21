@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
+import Navbar from '../Navbar/Navbar';
+import Sidebar from '../Sidebar/Sidebar';
 import { FaSearch } from 'react-icons/fa';
-import styles from '../styles/HomePage.module.css'; // Import modułu CSS
+import styles from '../../styles/HomePage.module.css'; 
 
 const HomePage = () => {
   return (

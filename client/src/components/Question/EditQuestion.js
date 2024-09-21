@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import styles from '../styles/EditQuestion.module.css'; // Import modułu CSS
+import styles from '../../styles/EditQuestion.module.css';
 
-const EditQuestion = ({ questionId, onClose }) => {
+const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   const { id } = useParams(); 
   const navigate = useNavigate(); 
   const [questionContent, setQuestionContent] = useState(''); 
@@ -63,7 +63,8 @@ const EditQuestion = ({ questionId, onClose }) => {
 
       if (response.ok) {
         alert('Pytanie zostało zaktualizowane.');
-        onClose(); // Zamyka popup
+        onEditComplete();  
+        onClose(); 
         navigate(`/page-set/${id}`);
       } else {
         const errorData = await response.json();

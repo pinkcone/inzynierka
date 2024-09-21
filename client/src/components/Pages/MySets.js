@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
-import AddSet from './AddSet'; // Import AddSet
-import styles from '../styles/MySets.module.css'; // Import modułu CSS
+import Navbar from '../Navbar/Navbar';
+import Sidebar from '../Sidebar/Sidebar';
+import AddSet from '../Set/AddSet'; 
+import styles from '../../styles/MySets.module.css'; 
 
 const MySets = () => {
   const [sets, setSets] = useState([]);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const [showAddSetPopup, setShowAddSetPopup] = useState(false); // Dodanie stanu do obsługi popupu
+  const [showAddSetPopup, setShowAddSetPopup] = useState(false); 
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -36,31 +36,8 @@ const MySets = () => {
   }, []);
 
   const handleAddSet = (newSet) => {
-    setSets((prevSets) => [...prevSets, newSet]); // Dodanie nowego zestawu do listy
-    setShowAddSetPopup(false); // Zamknięcie popupu po dodaniu zestawu
-  };
-
-  const handleDelete = async (setId) => {
-    if (window.confirm('Czy na pewno chcesz usunąć ten zestaw?')) {
-      try {
-        const response = await fetch(`/api/sets/delete/${setId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        if (response.ok) {
-          setSets(sets.filter((set) => set.id !== setId));
-          setMessage('Zestaw został usunięty.');
-        } else {
-          const errorData = await response.json();
-          setMessage(`Nie udało się usunąć zestawu: ${errorData.message}`);
-        }
-      } catch (error) {
-        setMessage('Wystąpił błąd podczas usuwania zestawu.');
-      }
-    }
+    setSets((prevSets) => [...prevSets, newSet]); 
+    setShowAddSetPopup(false); 
   };
 
   const handleOpen = (setId) => {
@@ -68,7 +45,7 @@ const MySets = () => {
   };
 
   const handleAddSetClick = () => {
-    setShowAddSetPopup(true); // Otwórz popup z formularzem dodawania zestawu
+    setShowAddSetPopup(true); 
   };
 
   const closePopup = () => {
@@ -105,12 +82,6 @@ const MySets = () => {
                 <li key={set.id} className={styles.listGroupItem}>
                   <span>{set.name}</span>
                   <div>
-                    <button 
-                      onClick={() => handleDelete(set.id)} 
-                      className={styles.btnDanger}
-                    >
-                      Usuń
-                    </button>
                     <button 
                       onClick={() => handleOpen(set.id)} 
                       className={styles.btnPrimary}

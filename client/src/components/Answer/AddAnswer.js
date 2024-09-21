@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styles from '../styles/AddAnswer.module.css'; // Import modułu CSS
+import React, { useState, useEffect, useCallback } from 'react';
+import styles from '../../styles/AddAnswer.module.css';
 
 const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [content, setContent] = useState('');
@@ -7,7 +7,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchAnswers = async () => {
+  const fetchAnswers = useCallback(async () => {
     try {
       const response = await fetch(`/api/answers/question/${questionId}`, {
         headers: {
@@ -26,11 +26,11 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [questionId]);
 
   useEffect(() => {
     fetchAnswers();
-  }, [questionId]);
+  }, [fetchAnswers]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +47,8 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
 
       if (response.ok) {
         setContent('');
-        onAnswerAdded(); // Wywołanie callbacka po dodaniu odpowiedzi
+        await fetchAnswers(); 
+        onAnswerAdded();  
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się dodać odpowiedzi.');

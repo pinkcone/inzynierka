@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from '../styles/AddSet.module.css'; // Import modułu CSS
+import styles from '../../styles/AddSet.module.css';
 
 const AddSet = ({ onAddSet }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +11,6 @@ const AddSet = ({ onAddSet }) => {
   const [nameError, setNameError] = useState('');
   const [keyWordsError, setKeyWordsError] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -20,7 +18,7 @@ const AddSet = ({ onAddSet }) => {
       [e.target.name]: e.target.value
     });
 
-    // Resetujemy błędy przy zmianie wartości
+    
     if (e.target.name === 'name') {
       setNameError('');
     } else if (e.target.name === 'keyWords') {
@@ -47,7 +45,7 @@ const AddSet = ({ onAddSet }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Walidacja formularza
+  
     if (!validate()) {
       return;
     }
@@ -72,11 +70,11 @@ const AddSet = ({ onAddSet }) => {
         }
       } else {
         const errorData = await response.json();
-        console.error('Error response:', errorData); // Logowanie błędów
+        console.error('Error response:', errorData); 
         setMessage(errorData.message || 'Wystąpił błąd podczas tworzenia zestawu.');
       }
     } catch (error) {
-      console.error('Network error:', error); // Logowanie błędów sieci
+      console.error('Network error:', error); 
       setMessage('Błąd sieci, spróbuj ponownie.');
     }
   };

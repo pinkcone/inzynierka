@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import Register from './components/Register';
-import Login from './components/Login';
-import UserProfile from './components/UserProfile';
-import AddQuestion from './components/AddQuestion';
-import AddAnswer from './components/AddAnswer';
-import MySets from './components/MySets'; 
-import AddSet from './components/AddSet';
-import PageSet from './components/PageSet';
-import EditQuestion from './components/EditQuestion';
-import EditAnswer from './components/EditAnswer';
+import HomePage from './components/Pages/HomePage';
+import Register from './components/Pages/Register';
+import Login from './components/Pages/Login';
+import UserProfile from './components/Pages/UserProfile';
+import AddQuestion from './components/Question/AddQuestion';
+import AddAnswer from './components/Answer/AddAnswer';
+import MySets from './components/Pages/MySets'; 
+import AddSet from './components/Set/AddSet';
+import PageSet from './components/Pages/PageSet';
+import EditQuestion from './components/Question/EditQuestion';
+import EditAnswer from './components/Answer/EditAnswer';
 
 
 const App = () => {

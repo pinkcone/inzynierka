@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import styles from '../styles/SetSidebar.module.css'; // Import modułu CSS
+import styles from '../../styles/SetSidebar.module.css';
 
 const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
   const navigate = useNavigate();
