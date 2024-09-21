@@ -1,29 +1,29 @@
 .sidebar {
-    width: 250px; /* Szerokość sidebaru */
-    background-color: #f8f9fa; /* Kolor tła */
-    padding: 20px; /* Padding wewnętrzny */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Cień */
-    height: calc(100vh - 60px); /* Wysokość sidebaru minus wysokość navbaru (przykładowo 60px) */
+    width: 250px; 
+    background-color: #f8f9fa; 
+    padding: 20px; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+    height: calc(100vh - 60px); 
   }
   
   .sidebarHeader {
     display: flex;
-    justify-content: space-between; /* Rozmieszczenie elementów w poziomie */
-    align-items: center; /* Wyrównanie w pionie */
-    margin-bottom: 20px; /* Odstęp od dolnej części */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; 
   }
   
   .setName h3 {
-    margin: 0; /* Brak marginesu */
-    font-size: 1.5em; /* Rozmiar czcionki */
+    margin: 0;
+    font-size: 1.5em;
   }
   
   .backButton {
-    background: none; /* Brak tła */
-    border: none; /* Brak ramki */
-    cursor: pointer; /* Kursor wskazujący */
-    color: #007bff; /* Kolor tekstu */
-    font-size: 1em; /* Rozmiar czcionki */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 1em;
   }
   
   .backButton:hover {
@@ -31,28 +31,29 @@
   }
   
   ul {
-    list-style-type: none; /* Brak punktów w liście */
-    padding: 0; /* Brak paddingu */
+    list-style-type: none; 
+    padding: 0;
   }
   
   .sidebarButton {
-    width: 100%; /* Szerokość 100% */
-    padding: 10px; /* Padding wewnętrzny */
-    background-color: transparent; /* Tło przezroczyste */
-    border: none; /* Brak ramki */
-    text-align: left; /* Tekst wyrównany do lewej */
-    cursor: pointer; /* Kursor wskazujący */
-    color: #333; /* Kolor tekstu */
-    font-size: 1em; /* Rozmiar czcionki */
+    width: 100%;
+    padding: 10px;
+    background-color: transparent; 
+    border: none; 
+    text-align: left;
+    cursor: pointer;
+    color: #333;
+    font-size: 1em;
   }
   
   .sidebarButton:hover {
-    background-color: #e2e6ea; /* Tło po najechaniu */
+    background-color: #e2e6ea;
   }
   
   .active {
-    font-weight: bold; /* Pogrubienie aktywnego przycisku */
-    color: #007bff; /* Kolor aktywnego przycisku */
-    background-color: #e9ecef; /* Tło aktywnego przycisku */
+    font-weight: bold;
+    color: #007bff; 
+    background-color: #e9ecef;
   }
+  
   

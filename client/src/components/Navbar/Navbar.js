@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const { isAuthenticated, user, logout } = useAuth(); 
+  const { isAuthenticated, user, logout } = useAuth();
 
   return (
     <nav className={`navbar navbar-expand-lg navbar-light bg-light w-100 ${styles['navbar-custom']}`}>
@@ -27,7 +27,7 @@ const Navbar = () => {
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic" className={styles['dropdown-toggle-custom']}>
                   <img
-                    src={user?.image || '/images/profile_pictures/picture_1.png'} 
+                    src={user?.image || '/images/profile_pictures/picture_1.png'}
                     alt="User Avatar"
                     className={styles['user-avatar']}
                   />
