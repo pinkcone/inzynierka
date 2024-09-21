@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-const EditAnswer = () => {
-  const { id } = useParams(); 
+const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
   const [answer, setAnswer] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
-    console.log('Parametr id:', id); 
-
     const fetchAnswer = async () => {
-      if (!id) {
-        console.error('Brak id w URL');
-        setError('Brak ID odpowiedzi w URL.');
+      if (!answerId) {
+        setError('Brak ID odpowiedzi.');
         return;
       }
 
       try {
-        console.log('Pobieranie odpowiedzi o ID:', id); 
-        const response = await fetch(`/api/answers/${id}`, { 
+        const response = await fetch(`/api/answers/${answerId}`, { 
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -35,18 +29,12 @@ const EditAnswer = () => {
     };
 
     fetchAnswer();
-  }, [id]); 
+  }, [answerId]); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!id) {
-      console.error('Brak id w URL');
-      setError('Brak ID odpowiedzi w URL.');
-      return;
-    }
-
     try {
-      const response = await fetch(`/api/answers/edit/${id}`, { 
+      const response = await fetch(`/api/answers/edit/${answerId}`, { 
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -56,6 +44,8 @@ const EditAnswer = () => {
       });
       if (response.ok) {
         alert('Odpowiedź została zaktualizowana.');
+        onAnswerEdited();
+        onClose();
       } else {
         setError('Nie udało się zaktualizować odpowiedzi.');
       }

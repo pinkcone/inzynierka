@@ -1,0 +1,40 @@
+/* EditQuestion.module.css */
+.app-container {
+    padding: 20px;
+  }
+  
+  .main-content {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .alert {
+    color: red;
+    margin-bottom: 15px;
+  }
+  

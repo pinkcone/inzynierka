@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import '../styles/MySets.css';
+import AddSet from './AddSet'; // Import AddSet
+import styles from '../styles/MySets.module.css'; // Import modułu CSS
 
 const MySets = () => {
   const [sets, setSets] = useState([]);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [showAddSetPopup, setShowAddSetPopup] = useState(false); // Dodanie stanu do obsługi popupu
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const MySets = () => {
           const data = await response.json();
           setSets(data);
         } else {
-          setError('Nie udało się pobrać zestawów.');
+          setError('Brak zestawów.');
         }
       } catch (err) {
         setError('Wystąpił błąd podczas pobierania zestawów.');
@@ -32,6 +34,11 @@ const MySets = () => {
 
     fetchSets();
   }, []);
+
+  const handleAddSet = (newSet) => {
+    setSets((prevSets) => [...prevSets, newSet]); // Dodanie nowego zestawu do listy
+    setShowAddSetPopup(false); // Zamknięcie popupu po dodaniu zestawu
+  };
 
   const handleDelete = async (setId) => {
     if (window.confirm('Czy na pewno chcesz usunąć ten zestaw?')) {
@@ -61,40 +68,52 @@ const MySets = () => {
   };
 
   const handleAddSetClick = () => {
-    navigate('/addset'); 
+    setShowAddSetPopup(true); // Otwórz popup z formularzem dodawania zestawu
+  };
+
+  const closePopup = () => {
+    setShowAddSetPopup(false);
   };
 
   return (
-    <div className="app-container">
+    <div className={styles.appContainer}>
       <Navbar />
-      <div className="main-content">
+      <div className={styles.mainContent}>
         <Sidebar />
-        <div className="content">
-          <h2 className="text-center mb-4">Moje zestawy</h2>
+        <div className={styles.content}>
+          <h2 className={styles.textCenter}>Moje zestawy</h2>
           <button 
             onClick={handleAddSetClick} 
-            className="btn btn-primary mb-4"
+            className={styles.buttonPrimary}
           >
             Dodaj zestaw
           </button>
-          {error && <div className="alert alert-danger">{error}</div>}
-          {message && <div className="alert alert-success">{message}</div>}
+          {showAddSetPopup && (
+            <div className={styles.popupOverlay}>
+              <div className={styles.popup}>
+                <button className={styles.closeButton} onClick={closePopup}>✖</button>
+                <AddSet onAddSet={handleAddSet} />
+              </div>
+            </div>
+          )}
+          {error && <div className={styles.alertDanger}>{error}</div>}
+          {message && <div className={styles.alertSuccess}>{message}</div>}
 
-          {sets.length > 0 ? (
-            <ul className="list-group">
+          {sets.length > 0 && (
+            <ul className={styles.listGroup}>
               {sets.map((set) => (
-                <li key={set.id} className="list-group-item d-flex justify-content-between align-items-center">
+                <li key={set.id} className={styles.listGroupItem}>
                   <span>{set.name}</span>
                   <div>
                     <button 
                       onClick={() => handleDelete(set.id)} 
-                      className="btn btn-danger btn-sm ml-2"
+                      className={styles.btnDanger}
                     >
                       Usuń
                     </button>
                     <button 
                       onClick={() => handleOpen(set.id)} 
-                      className="btn btn-primary btn-sm ml-2"
+                      className={styles.btnPrimary}
                     >
                       Otwórz
                     </button>
@@ -102,8 +121,6 @@ const MySets = () => {
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="text-center">Brak zestawów.</p>
           )}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth'; 
-import '../styles/Sidebar.css';
+import useAuth from '../hooks/useAuth';
+import styles from '../styles/Sidebar.module.css'; // Import modułu CSS
 
 const Sidebar = () => {
   const { isAuthenticated } = useAuth();
@@ -11,10 +11,10 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="sidebar">
-      <Link to="/mysets" className="sidebar-link">Moje Zestawy</Link>
-      <a href="/tests" className="sidebar-link">TU COŚ BĘDZIE</a>
-      <a href="/materials" className="sidebar-link">TU TEZ</a>
+    <div className={styles.sidebar}> {/* Użycie klasy z modułu CSS */}
+      <Link to="/mysets" className={styles['sidebar-link']}>Moje Zestawy</Link> {/* Użycie klasy z modułu CSS */}
+      <a href="/tests" className={styles['sidebar-link']}>TU COŚ BĘDZIE</a> {/* Użycie klasy z modułu CSS */}
+      <a href="/materials" className={styles['sidebar-link']}>TU TEZ</a> {/* Użycie klasy z modułu CSS */}
     </div>
   );
 };

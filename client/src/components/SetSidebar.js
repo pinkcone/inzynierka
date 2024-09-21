@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import styles from '../styles/SetSidebar.module.css'; // Import modułu CSS
 
 const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
   const navigate = useNavigate();
@@ -10,12 +11,12 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
   };
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <div className="set-name">
+    <div className={styles.sidebar}>
+      <div className={styles.sidebarHeader}>
+        <div className={styles.setName}>
           <h3>{setName}</h3>
         </div>
-        <button className="back-button" onClick={handleBackClick}>
+        <button className={styles.backButton} onClick={handleBackClick}>
           <FaArrowLeft />
           Powrót
         </button>
@@ -23,7 +24,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
       <ul>
         <li>
           <button
-            className={`sidebar-button ${activeSection === 'addQuestion' ? 'active' : ''}`}
+            className={`${styles.sidebarButton} ${activeSection === 'addQuestion' ? styles.active : ''}`}
             onClick={() => onSectionClick('addQuestion')}
           >
             Dodaj pytanie
@@ -31,7 +32,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
         </li>
         <li>
           <button
-            className={`sidebar-button ${activeSection === 'manage' ? 'active' : ''}`}
+            className={`${styles.sidebarButton} ${activeSection === 'manage' ? styles.active : ''}`}
             onClick={() => onSectionClick('manage')}
           >
             Zarządzaj prywatnością
@@ -39,7 +40,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
         </li>
         <li>
           <button
-            className={`sidebar-button ${activeSection === 'addCollaborator' ? 'active' : ''}`}
+            className={`${styles.sidebarButton} ${activeSection === 'addCollaborator' ? styles.active : ''}`}
             onClick={() => onSectionClick('addCollaborator')}
           >
             Dodaj współtwórcę
@@ -47,7 +48,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
         </li>
         <li>
           <button
-            className={`sidebar-button ${activeSection === 'deleteSet' ? 'active' : ''}`}
+            className={`${styles.sidebarButton} ${activeSection === 'deleteSet' ? styles.active : ''}`}
             onClick={() => onSectionClick('deleteSet')}
           >
             Usuń zestaw

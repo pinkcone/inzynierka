@@ -3,20 +3,19 @@ import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'; 
 import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/Navbar.css'; 
-
+import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth(); 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light w-100 navbar-custom">
+    <nav className={`navbar navbar-expand-lg navbar-light bg-light w-100 ${styles['navbar-custom']}`}>
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img 
             src="/images/logo.png"
             alt="Logo"
-            className="navbar-logo" 
+            className={styles['navbar-logo']} // Użyj modułu CSS
           />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,11 +25,11 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             {isAuthenticated ? (
               <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropdown-toggle-custom">
+                <Dropdown.Toggle variant="success" id="dropdown-basic" className={styles['dropdown-toggle-custom']}>
                   <img
                     src={user?.image || '/images/profile_pictures/picture_1.png'} 
                     alt="User Avatar"
-                    className="user-avatar"
+                    className={styles['user-avatar']} // Użyj modułu CSS
                   />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

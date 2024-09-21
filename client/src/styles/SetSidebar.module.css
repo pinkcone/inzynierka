@@ -1,0 +1,58 @@
+.sidebar {
+    width: 250px; /* Szerokość sidebaru */
+    background-color: #f8f9fa; /* Kolor tła */
+    padding: 20px; /* Padding wewnętrzny */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Cień */
+    height: calc(100vh - 60px); /* Wysokość sidebaru minus wysokość navbaru (przykładowo 60px) */
+  }
+  
+  .sidebarHeader {
+    display: flex;
+    justify-content: space-between; /* Rozmieszczenie elementów w poziomie */
+    align-items: center; /* Wyrównanie w pionie */
+    margin-bottom: 20px; /* Odstęp od dolnej części */
+  }
+  
+  .setName h3 {
+    margin: 0; /* Brak marginesu */
+    font-size: 1.5em; /* Rozmiar czcionki */
+  }
+  
+  .backButton {
+    background: none; /* Brak tła */
+    border: none; /* Brak ramki */
+    cursor: pointer; /* Kursor wskazujący */
+    color: #007bff; /* Kolor tekstu */
+    font-size: 1em; /* Rozmiar czcionki */
+  }
+  
+  .backButton:hover {
+    background-color: #e2e6ea;
+  }
+  
+  ul {
+    list-style-type: none; /* Brak punktów w liście */
+    padding: 0; /* Brak paddingu */
+  }
+  
+  .sidebarButton {
+    width: 100%; /* Szerokość 100% */
+    padding: 10px; /* Padding wewnętrzny */
+    background-color: transparent; /* Tło przezroczyste */
+    border: none; /* Brak ramki */
+    text-align: left; /* Tekst wyrównany do lewej */
+    cursor: pointer; /* Kursor wskazujący */
+    color: #333; /* Kolor tekstu */
+    font-size: 1em; /* Rozmiar czcionki */
+  }
+  
+  .sidebarButton:hover {
+    background-color: #e2e6ea; /* Tło po najechaniu */
+  }
+  
+  .active {
+    font-weight: bold; /* Pogrubienie aktywnego przycisku */
+    color: #007bff; /* Kolor aktywnego przycisku */
+    background-color: #e9ecef; /* Tło aktywnego przycisku */
+  }
+  

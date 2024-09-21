@@ -1,8 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/AddAnswer.module.css'; // Import modułu CSS
 
 const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
+  const [answers, setAnswers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAnswers = async () => {
+    try {
+      const response = await fetch(`/api/answers/question/${questionId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setAnswers(data);
+      } else {
+        setError('Nie udało się pobrać odpowiedzi.');
+      }
+    } catch (err) {
+      setError('Błąd podczas pobierania odpowiedzi.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAnswers();
+  }, [questionId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +47,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
 
       if (response.ok) {
         setContent('');
-        onAnswerAdded(); 
+        onAnswerAdded(); // Wywołanie callbacka po dodaniu odpowiedzi
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się dodać odpowiedzi.');
@@ -29,18 +57,39 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
     }
   };
 
+  if (loading) {
+    return <p>Ładowanie odpowiedzi...</p>;
+  }
+
   return (
-    <div className="add-answer-form">
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Treść odpowiedzi"
-          required
-        />
-        <button type="submit">Dodaj odpowiedź</button>
-        {error && <div className="alert alert-danger">{error}</div>}
-      </form>
+    <div className={styles.addAnswerSection}>
+      <h3>Odpowiedzi:</h3>
+      {error && <div className={styles.alert}>{error}</div>}
+
+      <ul className={styles.answersList}>
+        {answers.length > 0 ? (
+          answers.map((answer) => (
+            <li key={answer.id} className={styles.answerItem}>
+              {answer.content}
+            </li>
+          ))
+        ) : (
+          <li>Brak odpowiedzi do tego pytania.</li>
+        )}
+      </ul>
+
+      <div className={styles.addAnswerForm}>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            className={styles.textarea}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Treść odpowiedzi"
+            required
+          />
+          <button type="submit" className={styles.button}>Dodaj odpowiedź</button>
+        </form>
+      </div>
     </div>
   );
 };

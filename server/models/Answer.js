@@ -19,7 +19,7 @@ const Answer = sequelize.define('Answer', {
   questionId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Question',
+      model: 'Questions',
       key: 'id'
     }
   }
