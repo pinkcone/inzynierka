@@ -1,5 +1,8 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
+// Lista dostępnych obrazków profilowych
 const profileImages = [
   '/images/profile_pictures/picture_1.png',
   '/images/profile_pictures/picture_2.png',
@@ -9,6 +12,7 @@ const profileImages = [
   '/images/profile_pictures/picture_6.png'
 ];
 
+// Funkcja losująca obrazek profilowy
 const randImages = () => {
   const randomIndex = Math.floor(Math.random() * profileImages.length);
   const selectedImage = profileImages[randomIndex];
@@ -18,6 +22,7 @@ const randImages = () => {
   return selectedImage;
 };
 
+// Funkcja tworzenia użytkownika
 const createUser = (req, res) => {
   User.create({
     email: req.body.email,
@@ -33,16 +38,16 @@ const createUser = (req, res) => {
     });
 };
 
-
+// Funkcja rejestracji użytkownika
 const registerUser = async (req, res) => {
-  const { email, username, password, role} = req.body;
+  const { email, username, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ message: 'Użytkownik z tym emailem już istnieje' });
     }
-    
+
     const existingUsernameUser = await User.findOne({ where: { username } });
     if (existingUsernameUser) {
       return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
@@ -58,7 +63,13 @@ const registerUser = async (req, res) => {
 
     // Generowanie tokenu JWT po rejestracji
     const token = jwt.sign(
-      { id: newUser.id, email: newUser.email, username: newUser.username, role: newUser.role },
+      {
+        id: newUser.id,
+        email: newUser.email,
+        username: newUser.username,
+        role: newUser.role,
+        image: newUser.image // Dodanie obrazka do tokenu
+      },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -80,12 +91,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-
-const bcrypt = require('bcrypt');
-
 // Funkcja logowania użytkownika
-const jwt = require('jsonwebtoken');
-
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -100,17 +106,23 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Nieprawidłowe hasło' });
     }
-
+  
     // Generowanie tokenu JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, username: user.username, role: user.role },
+      {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+        image: user.image 
+      },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' } // Token ważny przez 1 godzinę
+      { expiresIn: '1h' }
     );
 
     res.status(200).json({
       message: 'Zalogowano pomyślnie',
-      token, // Zwracanie tokenu do klienta
+      token, 
       user: {
         id: user.id,
         email: user.email,
@@ -123,7 +135,6 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: 'Błąd serwera', error: error.message });
   }
 };
-
 
 module.exports = {
   createUser,

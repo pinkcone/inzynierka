@@ -2,22 +2,29 @@ const Set = require('../models/Set');
 const User = require('../models/User'); 
 
 const addSet = async (req, res) => {
-    try{
-        const {name, isPublic, keyWords } = req.body;
-        const userId = req.user.id;
+  try {
+      const { name, isPublic, keyWords } = req.body;
+      const userId = req.user.id;
 
-        const newSet = await Set.create({
-            name,
-            isPublic,
-            keyWords,
-            ownerId: userId
-          });
+      // Sprawdź, czy zestaw o danej nazwie już istnieje
+      const existingSet = await Set.findOne({ where: { name, ownerId: userId } });
+      if (existingSet) {
+          return res.status(400).json({ message: 'Zestaw o tej nazwie już istnieje. Proszę podać inną nazwę.' });
+      }
 
-          res.status(201).json(newSet);
-    } catch(error){
-        res.status(500).json({message: 'Błąd podczas dodawania zestawu.', error: error.message});      
-    }
+      const newSet = await Set.create({
+          name,
+          isPublic,
+          keyWords,
+          ownerId: userId
+      });
+
+      res.status(201).json(newSet);
+  } catch (error) {
+      res.status(500).json({ message: 'Błąd podczas dodawania zestawu.', error: error.message });
+  }
 };
+
 
 const editSet = async (req, res) => {
     try {
@@ -45,7 +52,7 @@ const editSet = async (req, res) => {
     try {
       const { id } = req.params;
       const userId = req.user.id;
-  
+      
       const set = await Set.findOne({ where: { id, ownerId: userId } });
       if (!set) {
         return res.status(404).json({ message: 'Zestaw nie został znaleziony lub brak uprawnień.' });

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { differenceInSeconds } from 'date-fns';
 
 const useAuth = () => {
@@ -14,10 +14,11 @@ const useAuth = () => {
       try {
         const decodedToken = jwtDecode(token);
         const currentTime = Date.now() / 1000;
+
         if (decodedToken.exp < currentTime) {
           logout('Twoja sesja wygasła. Zaloguj się ponownie.');
         } else {
-          setUser(decodedToken);
+          setUser(decodedToken); 
           setIsAuthenticated(true);
 
           const interval = setInterval(() => {

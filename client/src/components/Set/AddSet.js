@@ -45,39 +45,39 @@ const AddSet = ({ onAddSet }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
     if (!validate()) {
-      return;
+        return;
     }
 
     try {
-      const response = await fetch('/api/sets/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(formData)
-      });
+        const response = await fetch('/api/sets/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(formData)
+        });
 
-      if (response.ok) {
-        const newSet = await response.json();
-        setMessage('Zestaw został utworzony!');
-        setFormData({ name: '', isPublic: true, keyWords: '' });
+        if (response.ok) {
+            const newSet = await response.json();
+            setMessage('Zestaw został utworzony!');
+            setFormData({ name: '', isPublic: true, keyWords: '' });
 
-        if (onAddSet) {
-          onAddSet(newSet);
+            if (onAddSet) {
+                onAddSet(newSet);
+            }
+        } else {
+            const errorData = await response.json();
+            console.error('Error response:', errorData);
+            setMessage(errorData.message || 'Wystąpił błąd podczas tworzenia zestawu.');
         }
-      } else {
-        const errorData = await response.json();
-        console.error('Error response:', errorData); 
-        setMessage(errorData.message || 'Wystąpił błąd podczas tworzenia zestawu.');
-      }
     } catch (error) {
-      console.error('Network error:', error); 
-      setMessage('Błąd sieci, spróbuj ponownie.');
+        console.error('Network error:', error);
+        setMessage('Błąd sieci, spróbuj ponownie.');
     }
-  };
+};
+
 
   return (
     <div className={styles.container}>

@@ -7,7 +7,11 @@ import AddQuestion from '../Question/AddQuestion';
 import AddAnswer from '../Answer/AddAnswer';
 import EditQuestion from '../Question/EditQuestion';
 import EditAnswer from '../Answer/EditAnswer';
+import ManageSet from '../Set/ManageSet';
+import AddCollaborator from '../Set/AddCollaborator';
+import DeleteSet from '../Set/DeleteSet';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const PageSet = () => {
   const { id } = useParams();
@@ -20,64 +24,70 @@ const PageSet = () => {
   const [editQuestionId, setEditQuestionId] = useState(null);
   const [editAnswerId, setEditAnswerId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const [showAddCollaborator, setShowAddCollaborator] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchSet = async () => {
+    try {
+      const response = await fetch(`/api/sets/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSet(data);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Nie udało się pobrać zestawu.');
+      }
+    } catch (err) {
+      setError('Wystąpił błąd podczas pobierania zestawu.');
+    }
+  };
+
+  const fetchQuestions = async () => {
+    try {
+      const response = await fetch(`/api/questions/set/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const questionsWithAnswers = await Promise.all(
+          data.map(async (question) => {
+            try {
+              const answersResponse = await fetch(`/api/answers/question/${question.id}`, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+              });
+              const answersData = answersResponse.ok ? await answersResponse.json() : [];
+              return { ...question, answers: answersData };
+            } catch (err) {
+              return { ...question, answers: [] };
+            }
+          })
+        );
+        setQuestions(questionsWithAnswers);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Nie udało się pobrać pytań.');
+      }
+    } catch (err) {
+      setError('Wystąpił błąd podczas pobierania pytań.');
+    }
+  };
 
   useEffect(() => {
-    const fetchSet = async () => {
-      try {
-        const response = await fetch(`/api/sets/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setSet(data);
-        } else {
-          const errorData = await response.json();
-          setError(errorData.message || 'Nie udało się pobrać zestawu.');
-        }
-      } catch (err) {
-        setError('Wystąpił błąd podczas pobierania zestawu.');
-      }
-    };
-
-    const fetchQuestions = async () => {
-      try {
-        const response = await fetch(`/api/questions/set/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          const questionsWithAnswers = await Promise.all(
-            data.map(async (question) => {
-              try {
-                const answersResponse = await fetch(`/api/answers/question/${question.id}`, {
-                  headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-                });
-                const answersData = answersResponse.ok ? await answersResponse.json() : [];
-                return { ...question, answers: answersData };
-              } catch (err) {
-                return { ...question, answers: [] };
-              }
-            })
-          );
-          setQuestions(questionsWithAnswers);
-        } else {
-          const errorData = await response.json();
-          setError(errorData.message || 'Nie udało się pobrać pytań.');
-        }
-      } catch (err) {
-        setError('Wystąpił błąd podczas pobierania pytań.');
-      }
-    };
-
     fetchSet();
     fetchQuestions();
   }, [id]);
+
+  const handleSetUpdated = async () => {
+    await fetchSet();
+  };
 
   const handleAddAnswerClick = (questionId) => {
     setSelectedQuestionId(questionId);
@@ -117,7 +127,6 @@ const PageSet = () => {
     const timeoutId = setTimeout(() => {
       setSuccessMessage('');
     }, 1000);
-
     return timeoutId;
   };
 
@@ -132,7 +141,7 @@ const PageSet = () => {
   };
 
   const handleAnswerEdited = async () => {
-    showMessage('Odpowiedź została edytowana pomyślnie!');
+    showMessage('Odpowiedź została edytowana!');
     await refreshQuestions();
   };
 
@@ -184,6 +193,21 @@ const PageSet = () => {
     setSuccessMessage('');
   };
 
+
+  const handleCollaboratorAdded = async () => {
+    await fetchSet(); 
+    showMessage('Współtwórca został dodany!');
+  };
+
+
+  const handleSetDeleted = () => {
+    setSuccessMessage('Zestaw został pomyślnie usunięty!');
+    setTimeout(() => {
+      setSuccessMessage('');
+      navigate('/mysets'); 
+    }, 2000);
+  };
+
   return (
     <div className={styles.appContainer}>
       <Navbar />
@@ -192,10 +216,12 @@ const PageSet = () => {
           onSectionClick={handleSidebarClick} 
           activeSection={activeSection} 
           setName={set?.name || 'Loading...'}
+          setId={id} 
           onClose={handleSidebarClose}
+          onSetUpdated={handleSetUpdated} 
         />
         <div className={styles.content}>
-          {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}
+          {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
@@ -241,7 +267,7 @@ const PageSet = () => {
               <EditQuestion 
                 questionId={editQuestionId} 
                 onClose={() => setEditQuestionId(null)} 
-                onEditComplete={handleEditComplete} // Przekazanie callbacka
+                onEditComplete={handleEditComplete} 
               />
             </div>
           )}
@@ -252,6 +278,39 @@ const PageSet = () => {
                 answerId={editAnswerId} 
                 onClose={() => setEditAnswerId(null)} 
                 onAnswerEdited={handleAnswerEdited} 
+              />
+            </div>
+          )}
+          {activeSection === 'manageSet' && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
+              <ManageSet 
+                setId={id} 
+                initialName={set?.name || ''} 
+                initialPrivacy={set?.isPublic || true} 
+                onClose={handleSidebarClose} 
+                onUpdate={(updatedSet) => setSet(updatedSet)} 
+                onSetUpdated={handleSetUpdated} 
+              />
+            </div>
+          )}
+          {activeSection === 'addCollaborator' && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setActiveSection('')}>X</button>
+              <AddCollaborator 
+                setId={id} 
+                onClose={() => setActiveSection('')} 
+                onCollaboratorAdded={handleCollaboratorAdded} 
+              />
+            </div>
+          )}
+          {activeSection === 'deleteSet' && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
+              <DeleteSet 
+                setId={id} 
+                onClose={handleSidebarClose} 
+                onSetDeleted={handleSetDeleted} 
               />
             </div>
           )}

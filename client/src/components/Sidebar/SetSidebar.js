@@ -10,6 +10,10 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
     navigate('/mysets');
   };
 
+  const handleSectionClick = (section) => {
+    onSectionClick(section);
+  };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
@@ -23,34 +27,28 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose }) => {
       </div>
       <ul>
         <li>
-          <button
-            className={`${styles.sidebarButton} ${activeSection === 'addQuestion' ? styles.active : ''}`}
-            onClick={() => onSectionClick('addQuestion')}
-          >
+          <button className={`${styles.sidebarButton} ${activeSection === 'addQuestion' ? styles.active : ''}`}
+            onClick={() => handleSectionClick('addQuestion')}>
             Dodaj pytanie
           </button>
         </li>
         <li>
-          <button
-            className={`${styles.sidebarButton} ${activeSection === 'manage' ? styles.active : ''}`}
-            onClick={() => onSectionClick('manage')}
-          >
+          <button className={`${styles.sidebarButton} ${activeSection === 'manageSet' ? styles.active : ''}`}
+            onClick={() => handleSectionClick('manageSet')}>
             Zarządzaj prywatnością
           </button>
         </li>
+
         <li>
-          <button
-            className={`${styles.sidebarButton} ${activeSection === 'addCollaborator' ? styles.active : ''}`}
-            onClick={() => onSectionClick('addCollaborator')}
-          >
+          <button className={`${styles.sidebarButton} ${activeSection === 'addCollaborator' ? styles.active : ''}`}
+            onClick={() => handleSectionClick('addCollaborator')}>
             Dodaj współtwórcę
           </button>
         </li>
+
         <li>
-          <button
-            className={`${styles.sidebarButton} ${activeSection === 'deleteSet' ? styles.active : ''}`}
-            onClick={() => onSectionClick('deleteSet')}
-          >
+          <button className={`${styles.sidebarButton} ${activeSection === 'deleteSet' ? styles.active : ''}`}
+            onClick={() => handleSectionClick('deleteSet')}>
             Usuń zestaw
           </button>
         </li>
