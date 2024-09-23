@@ -1,5 +1,6 @@
 const Question = require('../models/Question');
 const Set = require('../models/Set');
+const Answer = require('../models/Answer');
 
 const addQuestion = async (req, res) => {
   try {
@@ -76,8 +77,11 @@ const editQuestion = async (req, res) => {
         return res.status(404).json({ message: 'Pytanie nie zostało znalezione lub brak uprawnień.' });
       }
   
+      await Answer.destroy({ where: { questionId: question.id } });
+  
       await question.destroy();
-      res.status(200).json({ message: 'Pytanie zostało usunięte.' });
+  
+      res.status(200).json({ message: 'Pytanie oraz powiązane odpowiedzi zostały usunięte.' });
     } catch (error) {
       res.status(500).json({ message: 'Błąd podczas usuwania pytania.', error: error.message });
     }

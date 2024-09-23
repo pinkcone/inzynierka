@@ -1,5 +1,7 @@
 const Set = require('../models/Set');
 const User = require('../models/User'); 
+const Question = require('../models/Question');
+const Answer = require('../models/Answer'); 
 
 const addSet = async (req, res) => {
   try {
@@ -50,20 +52,30 @@ const editSet = async (req, res) => {
 
   const deleteSet = async (req, res) => {
     try {
-      const { id } = req.params;
-      const userId = req.user.id;
-      
-      const set = await Set.findOne({ where: { id, ownerId: userId } });
-      if (!set) {
-        return res.status(404).json({ message: 'Zestaw nie został znaleziony lub brak uprawnień.' });
-      }
-  
-      await set.destroy();
-      res.status(200).json({ message: 'Zestaw został usunięty.' });
+        const { id } = req.params;  
+        const userId = req.user.id; 
+
+        const set = await Set.findOne({ where: { id, ownerId: userId } });
+        if (!set) {
+            return res.status(404).json({ message: 'Zestaw nie został znaleziony lub brak uprawnień.' });
+        }
+
+        const questions = await Question.findAll({ where: { setId: set.id } });
+
+        for (const question of questions) {
+            await Answer.destroy({ where: { questionId: question.id } });
+        }
+
+        await Question.destroy({ where: { setId: set.id } });
+
+        await set.destroy();
+
+        res.status(200).json({ message: 'Zestaw i wszystkie powiązane pytania oraz odpowiedzi zostały usunięte.' });
     } catch (error) {
-      res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
+        res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
     }
-  };
+};
+
   
   const changeSetOwner = async (req, res) => {
     try {

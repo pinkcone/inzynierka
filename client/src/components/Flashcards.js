@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/Flashcards.module.css';
 import Navbar from './Navbar/Navbar';
-import FlashcardSidebar from "./Sidebar/FlashcardSidebar";
 
 const Flashcards = () => {
     const [currentCard, setCurrentCard] = useState(0);
@@ -62,11 +61,7 @@ const Flashcards = () => {
         <div className={styles.appContainer}>
             <Navbar />
             <div className={styles.mainContent}>
-                <FlashcardSidebar
-                    onSectionClick={handleSidebarClick}
-                    activeSection={activeSection}
-                    onClose={handleSidebarClose}
-                />
+
                 <div className={styles.content}>
                     <h2>Aktualny Zestaw Fiszek</h2>
 

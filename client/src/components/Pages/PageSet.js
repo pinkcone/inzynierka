@@ -103,22 +103,26 @@ const PageSet = () => {
   };
 
   const handleDeleteAnswerClick = async (answerId) => {
-    try {
-      const response = await fetch(`/api/answers/delete/${answerId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+    const confirmDelete = window.confirm('Czy na pewno chcesz usunąć tę odpowiedź?');
+    
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`/api/answers/delete/${answerId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if (response.ok) {
+          showMessage('Odpowiedź została usunięta.');
+          await refreshQuestions();
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message || 'Nie udało się usunąć odpowiedzi.');
         }
-      });
-      if (response.ok) {
-        showMessage('Odpowiedź została usunięta.');
-        await refreshQuestions();
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Nie udało się usunąć odpowiedzi.');
+      } catch (err) {
+        setError('Wystąpił błąd podczas usuwania odpowiedzi.');
       }
-    } catch (err) {
-      setError('Wystąpił błąd podczas usuwania odpowiedzi.');
     }
   };
 
@@ -208,6 +212,31 @@ const PageSet = () => {
     }, 2000);
   };
 
+  const handleDeleteQuestionClick = async (questionId) => {
+    const confirmDelete = window.confirm('Czy na pewno chcesz usunąć to pytanie?');
+  
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`/api/questions/delete/${questionId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if (response.ok) {
+          showMessage('Pytanie zostało usunięte.');
+          await refreshQuestions();
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message || 'Nie udało się usunąć pytania.');
+        }
+      } catch (err) {
+        setError('Wystąpił błąd podczas usuwania pytania.');
+      }
+    }
+  };
+
+
   return (
     <div className={styles.appContainer}>
       <Navbar />
@@ -230,6 +259,7 @@ const PageSet = () => {
                   <h4>{question.content}</h4>
                   <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
                   <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
+                  <button className={styles.buttonDelete} onClick={() => handleDeleteQuestionClick(question.id)}><FaTrash /> Usuń pytanie</button>
                   <div className={styles.answersList}>
                     {question.answers && question.answers.length > 0 ? (
                       question.answers.map((answer) => (

@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ManageSet = ({ setId, initialName, initialPrivacy, onClose, onUpdate, onSetUpdated }) => {
-  const [name, setName] = useState(initialName);
-  const [isPublic, setIsPublic] = useState(initialPrivacy);
+const ManageSet = ({ setId, onClose, onUpdate, onSetUpdated }) => {
+  const [name, setName] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
   const [keyWords, setKeyWords] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true); 
+
+  const fetchSetDetails = async () => {
+    try {
+      const response = await fetch(`/api/sets/${setId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Nie udało się pobrać szczegółów zestawu.');
+      }
+      const setData = await response.json();
+
+      setName(setData.name);
+      setIsPublic(setData.isPublic);
+      setKeyWords(setData.keyWords || '');
+      setLoading(false);  
+    } catch (error) {
+      console.error(error);
+      setMessage('Błąd: ' + error.message);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSetDetails();
+  }, [setId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +52,7 @@ const ManageSet = ({ setId, initialName, initialPrivacy, onClose, onUpdate, onSe
 
       if (!response.ok) throw new Error('Nie udało się zaktualizować zestawu.');
 
-      onUpdate({ name, isPublic });
+      onUpdate({ name, isPublic, keyWords });
       onSetUpdated();
       setMessage('Zestaw został zaktualizowany!');
       onClose();
@@ -33,6 +61,10 @@ const ManageSet = ({ setId, initialName, initialPrivacy, onClose, onUpdate, onSe
       setMessage('Błąd: ' + error.message);
     }
   };
+
+  if (loading) {
+    return <p>Ładowanie danych zestawu...</p>; 
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -50,7 +82,7 @@ const ManageSet = ({ setId, initialName, initialPrivacy, onClose, onUpdate, onSe
         <label htmlFor="privacySelect">Prywatność:</label>
         <select 
           id="privacySelect"
-          value={isPublic} 
+          value={isPublic ? 'true' : 'false'} 
           onChange={(e) => setIsPublic(e.target.value === 'true')}
         >
           <option value="true">Publiczny</option>
