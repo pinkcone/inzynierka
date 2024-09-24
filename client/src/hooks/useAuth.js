@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
-import { differenceInSeconds } from 'date-fns';
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

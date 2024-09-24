@@ -8,7 +8,6 @@ router.put('/edit/:id', authMiddleware, editSet);
 router.delete('/delete/:id', authMiddleware, deleteSet);
 router.put('/change-owner', authMiddleware, changeSetOwner);
 router.get('/', authMiddleware, getAllUserSets);
-
 router.get('/:id', authMiddleware, getSetById);
 
 module.exports = router;
