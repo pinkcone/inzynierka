@@ -32,7 +32,8 @@ const App = () => {
         <Route path="/edit-question/:questionId" element={<EditQuestion />} />
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
-        <Route path="/flashcards" element={<Flashcards />} />
+        <Route path="/flashcards/:setId" element={<Flashcards />} />
+
       </Routes>
     </Router>
   );

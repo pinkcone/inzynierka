@@ -115,12 +115,26 @@ const getAnswersByQuestionId = async (req, res) => {
       res.status(500).json({ message: 'Błąd podczas pobierania odpowiedzi.', error: error.message }); 
     }
   };
-  
+  const getCorrectAnswersByQuestionId = async (req, res) => {
+    try {
+        const { questionId } = req.params;
+        const answers = await Answer.findAll({ where: { questionId, isCorrect: true } });
+
+        if (!answers.length) {
+            return res.status(404).json({ message: 'Brak poprawnych odpowiedzi dla tego pytania.' });
+        }
+
+        res.status(200).json(answers);
+    } catch (error) {
+        res.status(500).json({ message: 'Błąd podczas pobierania poprawnych odpowiedzi.', error: error.message });
+    }
+};
   
   module.exports = {
     addAnswer,
     editAnswer,
     deleteAnswer,
     getAnswersByQuestionId,
-    getAnswerById
+    getAnswerById,
+    getCorrectAnswersByQuestionId
   };

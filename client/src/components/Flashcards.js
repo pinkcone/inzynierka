@@ -1,99 +1,192 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from '../styles/Flashcards.module.css';
 import Navbar from './Navbar/Navbar';
 
 const Flashcards = () => {
+    const { setId } = useParams();
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [activeSection, setActiveSection] = useState('');
-    const [progress, setProgress] = useState([]); // Track progress
+    const [progress, setProgress] = useState([]);
+    const [cards, setCards] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [question, setQuestion] = useState(null);
+    const [answers, setAnswers] = useState([]);
+    
+    const fetchFlashcards = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Brak tokenu autoryzacyjnego!');
+            return;
+        }
 
-    // Questions and answers hardcoded for now
-    const cards = [
-        { question: 'Pytanie 1', answer: 'Odpowiedź 1' },
-        { question: 'Pytanie 2', answer: 'Odpowiedź 2' },
-        { question: 'Pytanie 3', answer: 'Odpowiedź 3' },
-        { question: 'Pytanie 4', answer: 'Odpowiedź 4' },
-        { question: 'Pytanie 5', answer: 'Odpowiedź 5' },
+        try {
+            const response = await fetch(`http://localhost:5000/api/flashcards/set/${setId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setCards(data);
+                setLoading(false);
 
-    ];
+                if (data.length > 0) {
+                    fetchQuestion(data[currentCard].questionId);
+                }
+            } else {
+                console.error('Błąd podczas pobierania fiszek:', response.statusText);
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error('Błąd podczas pobierania fiszek:', error);
+            setLoading(false);
+        }
+    };
+
+    const fetchQuestion = async (questionId) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:5000/api/questions/${questionId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setQuestion(data);
+                fetchAnswers(questionId);
+            } else {
+                console.error('Błąd podczas pobierania pytania:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Błąd podczas pobierania pytania:', error);
+        }
+    };
+
+    const fetchAnswers = async (questionId) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:5000/api/answers/question/correct/${questionId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setAnswers(data);
+            } else {
+                console.error('Błąd podczas pobierania odpowiedzi:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Błąd podczas pobierania odpowiedzi:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchFlashcards();
+    }, [setId]);
 
     const nextCard = () => {
         setCurrentCard((prevCard) => (prevCard + 1) % cards.length);
         setFlipped(false);
+        fetchQuestion(cards[currentCard].questionId);
     };
 
     const prevCard = () => {
         setCurrentCard((prevCard) => (prevCard - 1 + cards.length) % cards.length);
         setFlipped(false);
+        fetchQuestion(cards[currentCard].questionId);
     };
 
     const flipCard = () => {
         setFlipped(!flipped);
     };
 
-    const handleSidebarClick = (section) => {
-        setActiveSection(section);
-    };
-
-    const handleSidebarClose = () => {
-        setActiveSection('');
-    };
-
-    // Handle user feedback and update progress bar from left to right
-    const handleFeedback = (level) => {
-        const newProgress = [...progress];
-
-        // If progress array has the same length as cards, we update the existing value
-        if (newProgress.length < cards.length) {
-            if (level === 'good') newProgress.push('green');
-            else if (level === 'neutral') newProgress.push('yellow');
-            else newProgress.push('red');
-        } else {
-            newProgress[currentCard] = level === 'good' ? 'green' : level === 'neutral' ? 'yellow' : 'red';
+    const handleFeedback = async (level) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Brak tokenu autoryzacyjnego przy aktualizacji postępu!');
+            return;
         }
 
-        setProgress(newProgress);
-        nextCard();
+        try {
+            const newProgress = [...progress];
+
+            await fetch(`/api/single-flashcard/update/${cards[currentCard].id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    evaluation: level === 'good' ? 1 : level === 'neutral' ? 0 : -1
+                })
+            });
+
+            if (newProgress.length < cards.length) {
+                newProgress.push(level === 'good' ? 'green' : level === 'neutral' ? 'yellow' : 'red');
+            } else {
+                newProgress[currentCard] = level === 'good' ? 'green' : level === 'neutral' ? 'yellow' : 'red';
+            }
+
+            setProgress(newProgress);
+            nextCard();
+        } catch (error) {
+            console.error('Błąd podczas aktualizacji postępu fiszki:', error);
+        }
     };
 
     return (
         <div className={styles.appContainer}>
             <Navbar />
             <div className={styles.mainContent}>
-
                 <div className={styles.content}>
                     <h2>Aktualny Zestaw Fiszek</h2>
 
-                    {/* Progress Bar */}
-                    <div className={styles.progressBar}>
-                        {Array.from({ length: cards.length }, (_, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.progressTile} ${progress[index] ? styles[progress[index]] : ''}`} // Apply color
-                            />
-                        ))}
-                    </div>
-
-                    <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
-                        <div className={styles.cardInner}>
-                            <div className={styles.cardFront}>
-                                {cards[currentCard].question}
+                    {loading ? (
+                        <p>Ładowanie fiszek...</p>
+                    ) : (
+                        <>
+                            <div className={styles.progressBar}>
+                                {Array.from({ length: cards.length }, (_, index) => (
+                                    <div
+                                        key={index}
+                                        className={`${styles.progressTile} ${progress[index] ? styles[progress[index]] : ''}`}
+                                    />
+                                ))}
                             </div>
-                            <div className={styles.cardBack}>
-                                {cards[currentCard].answer}
-                            </div>
-                        </div>
-                        <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}>&#9664;</button>
-                        <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}>&#9654;</button>
-                    </div>
 
-                    {/* Emotion Buttons */}
-                    <div className={styles.emotions}>
-                        <span onClick={() => handleFeedback('good')}>&#128512;</span> {/* Good */}
-                        <span onClick={() => handleFeedback('neutral')}>&#128528;</span> {/* Neutral */}
-                        <span onClick={() => handleFeedback('bad')}>&#128577;</span> {/* Bad */}
-                    </div>
+                            <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
+                                <div className={styles.cardInner}>
+                                    <div className={styles.cardFront}>
+                                        {/* Wyświetlamy pytanie */}
+                                        {question ? question.content : 'Brak fiszek do wyświetlenia'}
+                                    </div>
+                                    <div className={styles.cardBack}>
+                                        {/* Wyświetlamy odpowiedzi */}
+                                        {answers.length > 0 ? (
+                                            <ul>
+                                                {answers.map((answer) => (
+                                                    <li key={answer.id}>{answer.content}</li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            'Brak odpowiedzi'
+                                        )}
+                                    </div>
+                                </div>
+                                <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}>&#9664;</button>
+                                <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}>&#9654;</button>
+                            </div>
+
+                            <div className={styles.emotions}>
+                                <span onClick={() => handleFeedback('good')}>&#128512;</span>
+                                <span onClick={() => handleFeedback('neutral')}>&#128528;</span>
+                                <span onClick={() => handleFeedback('bad')}>&#128577;</span>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

@@ -5,6 +5,8 @@ const userRoutes = require('./routes/userRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const setRoutes = require('./routes/setRoutes');
 const answerRoutes = require('./routes/answerRoutes');
+const flashcardRoutes = require('./routes/flashcardsRoutes');
+const singleFlashcardRoutes = require('./routes/singleFlashcardRoutes');
 require('dotenv').config();
 
 const cors = require('cors');
@@ -17,5 +19,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/sets', setRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/answers', answerRoutes);
+app.use('/api/flashcards', flashcardRoutes);
+app.use('/api/single-flashcards', singleFlashcardRoutes);
 
 module.exports = app;
