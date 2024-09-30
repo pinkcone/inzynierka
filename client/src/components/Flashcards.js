@@ -7,12 +7,13 @@ const Flashcards = () => {
     const { setId } = useParams();
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [progress, setProgress] = useState([]);
+    const [progress, setProgress] = useState([]); // Przechowywanie kolorów postępu
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [question, setQuestion] = useState(null);
     const [answers, setAnswers] = useState([]);
-    
+
+    // Funkcja do pobrania fiszek z serwera
     const fetchFlashcards = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -31,8 +32,12 @@ const Flashcards = () => {
                 setCards(data);
                 setLoading(false);
 
+                // Inicjalizujemy tablicę postępu na szaro (domyślny stan)
+                setProgress(Array(data.length).fill('gray'));
+
+                // Pobieramy pierwsze pytanie i odpowiedzi
                 if (data.length > 0) {
-                    fetchQuestion(data[currentCard].questionId);
+                    setCurrentCard(0);  // Ustawiamy na pierwszą fiszkę
                 }
             } else {
                 console.error('Błąd podczas pobierania fiszek:', response.statusText);
@@ -87,53 +92,67 @@ const Flashcards = () => {
         fetchFlashcards();
     }, [setId]);
 
+    // Wywołanie pobierania pytania i odpowiedzi za każdym razem, gdy currentCard się zmieni
+    useEffect(() => {
+        if (cards.length > 0) {
+            fetchQuestion(cards[currentCard].questionId);
+        }
+    }, [currentCard, cards]);
+
     const nextCard = () => {
         setCurrentCard((prevCard) => (prevCard + 1) % cards.length);
         setFlipped(false);
-        fetchQuestion(cards[currentCard].questionId);
     };
 
     const prevCard = () => {
         setCurrentCard((prevCard) => (prevCard - 1 + cards.length) % cards.length);
         setFlipped(false);
-        fetchQuestion(cards[currentCard].questionId);
     };
 
     const flipCard = () => {
         setFlipped(!flipped);
     };
 
-    const handleFeedback = async (level) => {
+    // Funkcja do wysyłania oceny na backend i aktualizacji postępu
+    const handleFeedback = async (evaluation) => {
         const token = localStorage.getItem('token');
         if (!token) {
-            console.error('Brak tokenu autoryzacyjnego przy aktualizacji postępu!');
+            console.error('Brak tokenu autoryzacyjnego przy aktualizacji fiszki!');
             return;
         }
 
         try {
-            const newProgress = [...progress];
-
-            await fetch(`/api/single-flashcard/update/${cards[currentCard].id}`, {
+            const flashcardId = cards[currentCard].id;
+            const response = await fetch(`/api/flashcards/update/${flashcardId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    evaluation: level === 'good' ? 1 : level === 'neutral' ? 0 : -1
-                })
+                body: JSON.stringify({ userRate: evaluation })
             });
 
-            if (newProgress.length < cards.length) {
-                newProgress.push(level === 'good' ? 'green' : level === 'neutral' ? 'yellow' : 'red');
-            } else {
-                newProgress[currentCard] = level === 'good' ? 'green' : level === 'neutral' ? 'yellow' : 'red';
-            }
+            if (response.ok) {
+                const updatedFlashcard = await response.json();
+                console.log('Zaktualizowana fiszka:', updatedFlashcard);
 
-            setProgress(newProgress);
-            nextCard();
+                // Aktualizujemy postęp na podstawie oceny
+                const newProgress = [...progress];
+                if (evaluation === 1) {
+                    newProgress[currentCard] = 'green';
+                } else if (evaluation === 0) {
+                    newProgress[currentCard] = 'yellow';
+                } else if (evaluation === -1) {
+                    newProgress[currentCard] = 'red';
+                }
+                setProgress(newProgress);
+
+                nextCard(); // Przejście do następnej fiszki po ocenie
+            } else {
+                console.error('Błąd podczas aktualizacji fiszki:', response.statusText);
+            }
         } catch (error) {
-            console.error('Błąd podczas aktualizacji postępu fiszki:', error);
+            console.error('Błąd podczas aktualizacji fiszki:', error);
         }
     };
 
@@ -181,9 +200,9 @@ const Flashcards = () => {
                             </div>
 
                             <div className={styles.emotions}>
-                                <span onClick={() => handleFeedback('good')}>&#128512;</span>
-                                <span onClick={() => handleFeedback('neutral')}>&#128528;</span>
-                                <span onClick={() => handleFeedback('bad')}>&#128577;</span>
+                                <span onClick={() => handleFeedback(1)}>&#128512;</span> {/* good */}
+                                <span onClick={() => handleFeedback(0)}>&#128528;</span> {/* neutral */}
+                                <span onClick={() => handleFeedback(-1)}>&#128577;</span> {/* bad */}
                             </div>
                         </>
                     )}
