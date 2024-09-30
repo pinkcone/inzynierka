@@ -118,7 +118,16 @@ const getAnswersByQuestionId = async (req, res) => {
   const getCorrectAnswersByQuestionId = async (req, res) => {
     try {
         const { questionId } = req.params;
-        const answers = await Answer.findAll({ where: { questionId, isCorrect: true } });
+        console.log(`Pobieranie odpowiedzi dla pytania ID: ${questionId}`);
+
+        const answers = await Answer.findAll({
+            where: { 
+                questionId: questionId,
+                isTrue: 0
+            }
+        });
+
+        console.log(`Znaleziono ${answers.length} odpowiedzi`);
 
         if (!answers.length) {
             return res.status(404).json({ message: 'Brak poprawnych odpowiedzi dla tego pytania.' });
@@ -126,9 +135,13 @@ const getAnswersByQuestionId = async (req, res) => {
 
         res.status(200).json(answers);
     } catch (error) {
+        console.error('Błąd podczas pobierania poprawnych odpowiedzi:', error);
         res.status(500).json({ message: 'Błąd podczas pobierania poprawnych odpowiedzi.', error: error.message });
     }
 };
+
+
+
   
   module.exports = {
     addAnswer,
