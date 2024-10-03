@@ -38,7 +38,7 @@ const AddSet = ({ onAddSet }) => {
       setKeyWordsError('Słowa kluczowe są wymagane.');
       isValid = false;
     }
-
+    
     return isValid;
   };
 

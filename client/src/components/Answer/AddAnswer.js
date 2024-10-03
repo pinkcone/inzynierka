@@ -3,6 +3,7 @@ import styles from '../../styles/AddAnswer.module.css';
 
 const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [content, setContent] = useState('');
+  const [isTrue, setIsTrue] = useState(true); // St
   const [error, setError] = useState('');
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,11 +43,15 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ questionId, content })
-      });
+        body: JSON.stringify({
+          questionId,
+          content,
+          isTrue: isTrue === 'true' // Zamiana stringu na boolean
+        })      });
 
       if (response.ok) {
         setContent('');
+        setIsTrue('true'); // Reset rozwijanej listy po dodaniu odpowiedzi
         await fetchAnswers(); 
         onAnswerAdded();  
       } else {
@@ -71,8 +76,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
         {answers.length > 0 ? (
           answers.map((answer) => (
             <li key={answer.id} className={styles.answerItem}>
-              {answer.content}
-            </li>
+            {answer.content} - {answer.isTrue ? 'Poprawna' : 'Fałszywa'}            </li>
           ))
         ) : (
           <li>Brak odpowiedzi do tego pytania.</li>
@@ -88,6 +92,19 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
             placeholder="Treść odpowiedzi"
             required
           />
+           {/* Pole wyboru Poprawna/Fałszywa */}
+           <label className={styles.selectLabel}>
+            Czy to jest poprawna odpowiedź?
+            <select
+              value={isTrue}
+              onChange={(e) => setIsTrue(e.target.value)} // Zmieniamy stan isTrue na podstawie wybranej opcji
+              className={styles.selectInput}
+            >
+              <option value="true">Poprawna</option>
+              <option value="false">Fałszywa</option>
+            </select>
+          </label>
+          
           <button type="submit" className={styles.button}>Dodaj odpowiedź</button>
         </form>
       </div>

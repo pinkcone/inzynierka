@@ -12,6 +12,7 @@ import AddCollaborator from '../Set/AddCollaborator';
 import DeleteSet from '../Set/DeleteSet';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 const PageSet = () => {
   const { id } = useParams();
@@ -26,6 +27,8 @@ const PageSet = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const navigate = useNavigate();
+  const [isOwner, setIsOwner] = useState(false); 
+  const [userId, setUserId] = useState(null); 
 
   const fetchSet = async () => {
     try {
@@ -37,6 +40,25 @@ const PageSet = () => {
       if (response.ok) {
         const data = await response.json();
         setSet(data);
+
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken); 
+        const userId = decodedToken.userId || decodedToken.id || decodedToken.sub; 
+
+        console.log('Decoded User ID:', userId); 
+        console.log('Set Owner ID:', data.ownerId); 
+        console.log('Porównanie userId i ownerId');
+        console.log('userId:', userId.toString());
+        console.log('ownerId:', data.ownerId.toString());
+
+        if (userId.toString() === data.ownerId.toString()) {
+          setIsOwner(true); 
+          console.log('Użytkownik jest właścicielem zestawu.');
+        } else {
+          setIsOwner(false); 
+          console.log('Użytkownik nie jest właścicielem zestawu.');
+        }
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się pobrać zestawu.');
@@ -45,6 +67,7 @@ const PageSet = () => {
       setError('Wystąpił błąd podczas pobierania zestawu.');
     }
   };
+
 
   const fetchQuestions = async () => {
     try {
@@ -248,25 +271,38 @@ const PageSet = () => {
           setId={id} 
           onClose={handleSidebarClose}
           onSetUpdated={handleSetUpdated} 
+          isOwner={isOwner} 
         />
         <div className={styles.content}>
           {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
+  
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
               {questions.map((question) => (
                 <div key={question.id} className={styles.questionItem}>
                   <h4>{question.content}</h4>
-                  <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
-                  <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
-                  <button className={styles.buttonDelete} onClick={() => handleDeleteQuestionClick(question.id)}><FaTrash /> Usuń pytanie</button>
+  
+                  {isOwner && (
+                      <div className={styles.questionActions}>
+                      <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
+                      <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
+                      <button className={styles.buttonDelete} onClick={() => handleDeleteQuestionClick(question.id)}><FaTrash /> Usuń pytanie</button>
+                    </div>
+                  )}
+  
                   <div className={styles.answersList}>
                     {question.answers && question.answers.length > 0 ? (
                       question.answers.map((answer) => (
                         <div key={answer.id} className={styles.answerItem}>
                           <p>{answer.content}</p>
-                          <button className={styles.buttonEdit} onClick={() => handleEditAnswerClick(answer)}><FaEdit /> Edytuj</button>
-                          <button className={styles.buttonDelete} onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
+  
+                          {isOwner && (
+                              <div className={styles.answerActions}>
+                              <button className={styles.buttonEdit} onClick={() => handleEditAnswerClick(answer)}><FaEdit /> Edytuj</button>
+                              <button className={styles.buttonDelete} onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
+                            </div>
+                          )}
                         </div>
                       ))
                     ) : (
@@ -279,18 +315,21 @@ const PageSet = () => {
           ) : (
             <p>Brak pytań</p>
           )}
+  
           {showAddAnswer && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => setShowAddAnswer(false)}>X</button>
               <AddAnswer questionId={selectedQuestionId} onAnswerAdded={handleAnswerAdded} />
             </div>
           )}
+  
           {activeSection === 'addQuestion' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
               <AddQuestion setId={id} onQuestionAdded={handleQuestionAdded} />
             </div>
           )}
+  
           {editQuestionId && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => setEditQuestionId(null)}>X</button>
@@ -301,6 +340,7 @@ const PageSet = () => {
               />
             </div>
           )}
+  
           {editAnswerId && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => setEditAnswerId(null)}>X</button>
@@ -311,6 +351,7 @@ const PageSet = () => {
               />
             </div>
           )}
+  
           {activeSection === 'manageSet' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
@@ -324,6 +365,7 @@ const PageSet = () => {
               />
             </div>
           )}
+  
           {activeSection === 'addCollaborator' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => setActiveSection('')}>X</button>
@@ -334,6 +376,7 @@ const PageSet = () => {
               />
             </div>
           )}
+  
           {activeSection === 'deleteSet' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
@@ -347,7 +390,7 @@ const PageSet = () => {
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default PageSet;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
   const [answer, setAnswer] = useState('');
+  const [isTrue, setIsTrue] = useState('true'); // Stan dla poprawności odpowiedzi
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
         if (response.ok) {
           const data = await response.json();
           setAnswer(data.content);
+          setIsTrue(data.isTrue ? 'true' : 'false'); // Ustawienie wartości isTrue
         } else {
           setError('Nie udało się pobrać odpowiedzi.');
         }
@@ -40,7 +42,10 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ content: answer })
+        body: JSON.stringify({
+          content: answer,
+          isTrue: isTrue === 'true' // Zmieniamy isTrue na boolean
+        })
       });
       if (response.ok) {
         alert('Odpowiedź została zaktualizowana.');
@@ -62,7 +67,18 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
         <textarea 
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
+          placeholder="Edytuj treść odpowiedzi"
         />
+        <label>
+          Czy to jest poprawna odpowiedź?
+          <select
+            value={isTrue}
+            onChange={(e) => setIsTrue(e.target.value)} // Zmieniamy wartość isTrue
+          >
+            <option value="true">Poprawna</option>
+            <option value="false">Fałszywa</option>
+          </select>
+        </label>
         <button type="submit">Zapisz zmiany</button>
       </form>
     </div>

@@ -3,6 +3,8 @@ const User = require('../models/User');
 const Question = require('../models/Question');
 const Answer = require('../models/Answer'); 
 
+const { Op } = require('sequelize');
+
 const addSet = async (req, res) => {
   try {
       const { name, isPublic, keyWords } = req.body;
@@ -117,24 +119,61 @@ const editSet = async (req, res) => {
 
   const getSetById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const set = await Set.findOne({ where: { id, ownerId: req.user.id } });
-
-        if (!set) {
-            return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
-        }
-
-        res.status(200).json(set);
-    } catch (error) {
-        res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawu.', error: error.message });
-    }
-};
+      const { id } = req.params;
+      const userId = req.user ? req.user.id : null;  // Sprawdź, czy użytkownik jest zalogowany
   
+      // Szukaj zestawu po ID, bez względu na właściciela
+      const set = await Set.findByPk(id);
+  
+      if (!set) {
+        return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
+      }
+  
+      // Sprawdź, czy zestaw jest prywatny i użytkownik nie jest właścicielem
+      if (!set.isPublic && set.ownerId !== userId) {
+        return res.status(403).json({ message: 'Brak dostępu do tego zestawu.' });
+      }
+  
+      res.status(200).json(set);
+    } catch (error) {
+      res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawu.', error: error.message });
+    }
+  };
+  
+
+const getPublicSets = async (req, res) => {
+  try {
+    const { keyword } = req.query;  // Odczyt słowa kluczowego z parametrów zapytania, jeśli jest obecne
+
+    // Filtruj zestawy publiczne, opcjonalnie szukając po słowach kluczowych
+    const whereClause = {
+      isPublic: true,
+    };
+
+    if (keyword) {
+      whereClause.keyWords = { [Op.like]: `%${keyword}%` };  // Szukaj zestawów zawierających słowo kluczowe
+    }
+
+    const publicSets = await Set.findAll({
+      where: whereClause
+    });
+
+    if (publicSets.length === 0) {
+      return res.status(404).json({ message: 'Nie znaleziono żadnych publicznych zestawów.' });
+    }
+
+    res.status(200).json(publicSets);
+  } catch (error) {
+    res.status(500).json({ message: 'Wystąpił błąd podczas pobierania publicznych zestawów.', error: error.message });
+  }
+};
+
   module.exports = {
     addSet,
     editSet,
     deleteSet,
     changeSetOwner,
     getAllUserSets,
-    getSetById
+    getSetById,
+    getPublicSets
   };
