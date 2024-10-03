@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { FaSearch } from 'react-icons/fa';
 import styles from '../../styles/HomePage.module.css'; 
 import { useNavigate } from 'react-router-dom';
-import debounce from 'lodash.debounce'; // Dodaj debounce
+import debounce from 'lodash.debounce'; 
 
 const HomePage = () => {
   const [sets, setSets] = useState([]);
@@ -20,7 +20,7 @@ const HomePage = () => {
       if (response.ok) {
         const data = await response.json();
         setSets(data);
-        setError(''); // Reset błędu po znalezieniu zestawów
+        setError(''); 
       } else {
         setError('Nie znaleziono żadnych zestawów.');
       }
@@ -31,10 +31,9 @@ const HomePage = () => {
     }
   };
 
-  // Debounced search function (zapobiega wielokrotnym zapytaniom przy szybkim wpisywaniu)
   const debouncedFetchSets = debounce(() => {
     fetchPublicSets();
-  }, 500); // Opóźnienie 500 ms
+  }, 500); 
 
   useEffect(() => {
     debouncedFetchSets();
@@ -42,7 +41,6 @@ const HomePage = () => {
     setIsLoggedIn(!!token);
   }, [searchTerm]);
 
-  // Clean up debounce po zakończeniu komponentu
   useEffect(() => {
     return () => {
       debouncedFetchSets.cancel();

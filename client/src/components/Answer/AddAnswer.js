@@ -3,7 +3,7 @@ import styles from '../../styles/AddAnswer.module.css';
 
 const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [content, setContent] = useState('');
-  const [isTrue, setIsTrue] = useState(true); // St
+  const [isTrue, setIsTrue] = useState(true); 
   const [error, setError] = useState('');
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
 
       if (response.ok) {
         setContent('');
-        setIsTrue('true'); // Reset rozwijanej listy po dodaniu odpowiedzi
+        setIsTrue('true');
         await fetchAnswers(); 
         onAnswerAdded();  
       } else {
@@ -76,7 +76,8 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
         {answers.length > 0 ? (
           answers.map((answer) => (
             <li key={answer.id} className={styles.answerItem}>
-            {answer.content} - {answer.isTrue ? 'Poprawna' : 'Fałszywa'}            </li>
+            {answer.content} - {answer.isTrue ? 'Poprawna' : 'Fałszywa'}            
+            </li>
           ))
         ) : (
           <li>Brak odpowiedzi do tego pytania.</li>
@@ -92,12 +93,11 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
             placeholder="Treść odpowiedzi"
             required
           />
-           {/* Pole wyboru Poprawna/Fałszywa */}
            <label className={styles.selectLabel}>
             Czy to jest poprawna odpowiedź?
             <select
               value={isTrue}
-              onChange={(e) => setIsTrue(e.target.value)} // Zmieniamy stan isTrue na podstawie wybranej opcji
+              onChange={(e) => setIsTrue(e.target.value)}
               className={styles.selectInput}
             >
               <option value="true">Poprawna</option>

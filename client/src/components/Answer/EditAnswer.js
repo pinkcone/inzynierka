@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
   const [answer, setAnswer] = useState('');
-  const [isTrue, setIsTrue] = useState('true'); // Stan dla poprawności odpowiedzi
+  const [isTrue, setIsTrue] = useState('true'); 
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
         if (response.ok) {
           const data = await response.json();
           setAnswer(data.content);
-          setIsTrue(data.isTrue ? 'true' : 'false'); // Ustawienie wartości isTrue
+          setIsTrue(data.isTrue ? 'true' : 'false');
         } else {
           setError('Nie udało się pobrać odpowiedzi.');
         }
@@ -44,7 +44,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
         },
         body: JSON.stringify({
           content: answer,
-          isTrue: isTrue === 'true' // Zmieniamy isTrue na boolean
+          isTrue: isTrue === 'true'
         })
       });
       if (response.ok) {
@@ -73,7 +73,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
           Czy to jest poprawna odpowiedź?
           <select
             value={isTrue}
-            onChange={(e) => setIsTrue(e.target.value)} // Zmieniamy wartość isTrue
+            onChange={(e) => setIsTrue(e.target.value)}
           >
             <option value="true">Poprawna</option>
             <option value="false">Fałszywa</option>
