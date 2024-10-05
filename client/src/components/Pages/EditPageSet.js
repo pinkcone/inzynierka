@@ -96,7 +96,7 @@ const EditPageSet = () => {
   useEffect(() => {
     fetchSet();
     fetchQuestions();
-  }, [id, fetchSet, fetchQuestions]);
+  }, [id]);
 
   const handleSetUpdated = async () => {
     await fetchSet();
