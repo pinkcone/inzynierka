@@ -65,7 +65,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
         alert('Pytanie zostało zaktualizowane.');
         onEditComplete();  
         onClose(); 
-        navigate(`/page-set/${id}`);
+        navigate(`/editset/${id}`);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się zaktualizować pytania.');

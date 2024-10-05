@@ -12,6 +12,7 @@ import PageSet from './components/Pages/PageSet';
 import EditQuestion from './components/Question/EditQuestion';
 import EditAnswer from './components/Answer/EditAnswer';
 import Flashcards from './components/Flashcards';
+import EditPageSet from './components/Pages/EditPageSet';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
         <Route path="/flashcards/:setId" element={<Flashcards />} />
+        <Route path="/editset/:id" element={<EditPageSet />} /> 
 
       </Routes>
     </Router>

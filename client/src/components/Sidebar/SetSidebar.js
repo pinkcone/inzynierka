@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from '../../styles/SetSidebar.module.css';
 
-const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner }) => {
+const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, isEditing }) => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -26,7 +26,17 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner }
         </button>
       </div>
       <ul>
-        {isOwner && (
+        {isOwner && !isEditing && ( 
+          <li>
+            <button
+              className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
+              onClick={() => onSectionClick('createTest')}
+            >
+              Utwórz test
+            </button>
+          </li>
+        )}
+        {isOwner && isEditing && (
           <>
             <li>
               <button
@@ -41,7 +51,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner }
                 className={`${styles.sidebarButton} ${activeSection === 'manageSet' ? styles.active : ''}`}
                 onClick={() => handleSectionClick('manageSet')}
               >
-                Zarządzaj prywatnością
+                Zarządzaj zestawem
               </button>
             </li>
             <li>

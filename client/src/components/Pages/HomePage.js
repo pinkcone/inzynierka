@@ -56,7 +56,7 @@ const HomePage = () => {
     if (isLoggedIn) {
       navigate(`/page-set/${setId}`);  
     } else {
-      alert('Aby zobaczyć zawartość zestawu, musisz być zalogowanym użytkownikiem.');
+      navigate('/login');
     }
   };
 
