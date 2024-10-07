@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize'); // Upewnij się, że importujesz Op, jeśli go używasz
 
 // Lista dostępnych obrazków profilowych
 const profileImages = [
@@ -136,8 +137,62 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+//Edycja danych użytkownika
+// Edycja danych użytkownika
+const updateUser = async (req, res) => {
+  const { username, email, password } = req.body;
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
+    }
+
+    if (email) {
+      const existingEmailUser = await User.findOne({ where: { email, id: { [Op.ne]: userId } } });
+      if (existingEmailUser) {
+        return res.status(400).json({ message: 'Email jest już zajęty' });
+      }
+    }
+
+    if (username) {
+      const existingUsernameUser = await User.findOne({ where: { username, id: { [Op.ne]: userId } } });
+      if (existingUsernameUser) {
+        return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
+      }
+    }
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: 'Dane użytkownika zaktualizowane pomyślnie',
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        image: user.image
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
+
 module.exports = {
   createUser,
   registerUser,
-  loginUser
+  loginUser,
+  updateUser
 };

@@ -3,7 +3,7 @@ import CreateTestManual from './CreateTestManual';
 import CreateTestAutomatic from './CreateTestAutomatic';
 import styles from '../../styles/PageSet.module.css';
 
-const CreateTest = ({ onClose }) => {
+const CreateTest = ({ setId, onClose }) => {
   const [activeTestType, setActiveTestType] = useState(null);
   
   const handleManualClick = () => {
@@ -20,8 +20,8 @@ const CreateTest = ({ onClose }) => {
       <button onClick={handleManualClick}>Utwórz test ręcznie</button>
       <button onClick={handleAutomaticClick}>Generuj test automatycznie</button>
       
-      {activeTestType === 'manual' && <CreateTestManual onClose={onClose} />}
-      {activeTestType === 'automatic' && <CreateTestAutomatic onClose={onClose} />}
+      {activeTestType === 'manual' && <CreateTestManual setId={setId} onClose={onClose} />}
+      {activeTestType === 'automatic' && <CreateTestAutomatic setId={setId} onClose={onClose} />}
     </div>
   );
 };

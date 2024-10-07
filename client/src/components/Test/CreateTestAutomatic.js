@@ -1,51 +1,86 @@
 import React, { useState } from 'react';
 import styles from '../../styles/PageSet.module.css';
 
-const CreateTestAutomatic = ({ onClose }) => {
+const CreateTestAutomatic = ({ setId, onClose }) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState('');
   const [totalTime, setTotalTime] = useState('');
-  const [error, setError] = useState('');
+  const [questionsError, setQuestionsError] = useState('');
+  const [timeError, setTimeError] = useState('');
+
+  const handleQuestionsChange = (e) => {
+    const value = e.target.value;
+
+    if (!/^[0-9]*$/.test(value)) {
+      setQuestionsError('Liczba pytań musi być dodatnią liczbą całkowitą.');
+      setNumberOfQuestions(''); 
+    } else {
+      setQuestionsError(''); 
+      setNumberOfQuestions(value);
+    }
+  };
+
+  const handleTimeChange = (e) => {
+    const value = e.target.value;
+
+    if (!/^[0-9]*$/.test(value)) {
+      setTimeError('Czas musi być dodatnią liczbą całkowitą.');
+      setTotalTime(''); 
+    } else {
+      setTimeError(''); 
+      setTotalTime(value);
+    }
+  };
 
   const handleGenerateTest = () => {
     const numQuestions = parseInt(numberOfQuestions, 10);
     const time = parseInt(totalTime, 10);
     
-    if (numQuestions <= 0 || time <= 0) {
-      setError('Liczba pytań i czas muszą być dodatnie.');
-      return;
+    if (!numQuestions || numQuestions <= 0) {
+      setQuestionsError('Liczba pytań musi być większa niż zero.');
     }
-    
-    console.log('Do generowanie testu automatycznego przekazuje:', numQuestions, 'Czas:', time);
-    setError(''); 
-    onClose(); 
+
+    if (!time || time <= 0) {
+      setTimeError('Czas musi być większy niż zero.');
+    }
+
+    if (numQuestions > 0 && time > 0) {
+      setQuestionsError('');
+      setTimeError('');
+
+      console.log('Generowanie testu automatycznego:');
+      console.log('ID zestawu:', setId);
+      console.log('Liczba pytań:', numQuestions, 'Czas:', time);
+
+      onClose(); 
+    }
   };
 
   return (
     <div className={styles.automaticPopup}>
       <button className={styles.popupClose} onClick={onClose}>X</button>
-      <h3>Generowanie testu automatycznie</h3>
-
+      <h3>Generowanie testu automatycznie </h3> 
+      
       <label>
         Liczba pytań:
         <input
-          type="number"
+          type="text"
           value={numberOfQuestions}
-          onChange={(e) => setNumberOfQuestions(e.target.value)}
-          min="1" 
+          onChange={handleQuestionsChange}
+          placeholder="Wprowadź liczbę pytań"
         />
       </label>
+      {questionsError && <p className={styles.error}>{questionsError}</p>} 
 
       <label>
         Czas na cały test (minuty):
         <input
-          type="number"
+          type="text"
           value={totalTime}
-          onChange={(e) => setTotalTime(e.target.value)}
-          min="1" 
+          onChange={handleTimeChange}
+          placeholder="Wprowadź czas"
         />
       </label>
-
-      {error && <p className={styles.error}>{error}</p>} 
+      {timeError && <p className={styles.error}>{timeError}</p>} 
 
       <button onClick={handleGenerateTest}>Generuj test</button>
     </div>

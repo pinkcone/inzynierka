@@ -121,7 +121,7 @@ const PageSet = () => {
 
           {activeSection === 'createTest' && (
             <div className={styles.popup}>
-              <CreateTest onClose={handleClosePopup} /> 
+              <CreateTest setId={id} onClose={handleClosePopup} /> 
             </div>
           )}
 
