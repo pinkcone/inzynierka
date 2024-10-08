@@ -46,6 +46,7 @@ const AddQuestion = ({ setId, onQuestionAdded }) => {
             className="form-control"
             value={formData.content}
             onChange={handleChange}
+            required={true}
           />
         </div>
         <button type="submit" className="btn btn-primary">Dodaj Pytanie</button>

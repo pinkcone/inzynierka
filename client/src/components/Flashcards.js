@@ -179,11 +179,11 @@ const Flashcards = () => {
                             <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
                                 <div className={styles.cardInner}>
                                     <div className={styles.cardFront}>
-                                        {/* Wyświetlamy pytanie */}
+                                        {/* Display question */}
                                         {question ? question.content : 'Brak fiszek do wyświetlenia'}
                                     </div>
                                     <div className={styles.cardBack}>
-                                        {/* Wyświetlamy odpowiedzi */}
+                                        {/* Display answer */}
                                         {answers.length > 0 ? (
                                             <ul>
                                                 {answers.map((answer) => (
