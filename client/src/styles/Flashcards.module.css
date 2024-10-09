@@ -114,7 +114,7 @@
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 5px;
+
 }
 
 .green {
@@ -158,5 +158,35 @@
         transform: translateX(0);
         opacity: 1;
     }
+}
+.progressBar {
+    width: 60%;
+    height: 10px; /* Wysokość paska */
+    display: flex; /* Flexbox pozwoli na lepsze dopasowanie elementów */
+    padding: 0;
+    margin: 0;
+}
+
+.progressTile {
+    height: 100%; /* Fragmenty zajmują pełną wysokość paska */
+    padding: 0;
+    margin: 0;
+    display: inline-block; /* Sprawia, że fragmenty będą obok siebie bez przerw */
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.gray {
+    background-color: gray;
 }
 

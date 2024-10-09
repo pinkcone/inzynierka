@@ -1,35 +1,14 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
+const Set = require('./Set');
+const Question = require('./Question');
+const User = require('./User');
 
 const Flashcards = sequelize.define('Flashcards', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
-  },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Users', // Powiązanie z tabelą użytkowników
-      key: 'id'
-    }
-  },
-  setId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Sets', // Powiązanie z tabelą zestawów
-      key: 'id'
-    }
-  },
-  questionId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Questions', // Powiązanie z tabelą pytań
-      key: 'id'
-    }
   },
   currentLevel: {
     type: DataTypes.INTEGER,
@@ -58,5 +37,8 @@ const Flashcards = sequelize.define('Flashcards', {
     defaultValue: 0 // Seria poprawnych odpowiedzi pod rząd
   }
 });
+Flashcards.belongsTo(User, { foreignKey: 'userId' });
+Flashcards.belongsTo(Set, { foreignKey: 'setId' });
+Flashcards.belongsTo(Question, { foreignKey: 'questionId' });
 
 module.exports = Flashcards;

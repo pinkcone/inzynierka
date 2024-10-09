@@ -77,8 +77,8 @@ const getFlashcardsBySet = async (req, res) => {
 };
 const updateFlashcardByUserRate = async (req, res) => {
   const { flashcardId } = req.params;
-  const { userRate } = req.body;  // 1 = poprawna, 0 = neutralna, -1 = niepoprawna
-  console.log(userRate);
+  const { currentLevel, streak, lastReviewed, lastEvaluation } = req.body;  // Przyjmujemy obliczone wartości z frontendu
+
   try {
     // Pobranie danych fiszki na podstawie flashcardId
     const flashcard = await Flashcards.findOne({ where: { id: flashcardId } });
@@ -87,36 +87,14 @@ const updateFlashcardByUserRate = async (req, res) => {
       return res.status(404).json({ message: 'Fiszka nie została znaleziona.' });
     }
 
-    // Przechowujemy aktualne wartości, które będziemy edytować
-    let { currentLevel, streak, lastEvaluation } = flashcard;
-    const currentDate = new Date(); // Ustawiamy lastReviewed na bieżącą datę
-
-    // Warunki na podstawie oceny użytkownika (userRate)
-    if (userRate === 1) {
-      currentLevel = Math.min(currentLevel + 1, 7); // Zwiększenie levelu o 1, max 7
-      streak += 1; // Zwiększenie streak
-    } else if (userRate === -1) {
-      currentLevel = Math.max(currentLevel - 1, 1); // Obniżenie levelu o 1, min 1
-      streak = 0; // Zerowanie streak
-    } else if (userRate === 0) {
-      streak = 0; // Zerowanie streak
-
-      // Sprawdzamy poprzednią ocenę (lastEvaluation)
-      if (lastEvaluation === 1) {
-        currentLevel = Math.max(currentLevel - 1, 1); // Obniżenie levelu o 1, min 1
-      } else if (lastEvaluation === -1) {
-        currentLevel = Math.min(currentLevel + 1, 7); // Zwiększenie levelu o 1, max 7
-      }
-      // Jeśli lastEvaluation było 0, nie zmieniamy currentLevel
-    }
-
-    // Zaktualizowanie fiszki w bazie danych
+    // Aktualizujemy fiszkę na podstawie otrzymanych wartości z frontendu
     flashcard.currentLevel = currentLevel;
     flashcard.streak = streak;
-    flashcard.lastEvaluation = userRate; // Ustawiamy nową ocenę
-    flashcard.lastReviewed = currentDate; // Ustawiamy datę ostatniego przeglądu
+    flashcard.lastReviewed = new Date(lastReviewed);  // Ustawiamy datę przeglądu
+    flashcard.lastEvaluation = lastEvaluation;        // Ustawiamy nową ocenę
 
-    await flashcard.save(); // Zapisujemy zmiany
+    // Zapisujemy zaktualizowaną fiszkę
+    await flashcard.save();
 
     res.status(200).json(flashcard); // Zwracamy zaktualizowaną fiszkę
   } catch (error) {
