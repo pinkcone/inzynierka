@@ -1,0 +1,5716 @@
+Macierz dla liczby pytañ = 10:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  5  0  0  0  0  0
+lvl 3: 4  4  4  0  0  0  0
+lvl 4: 4  4  7  5  0  0  0
+lvl 5: 6  4  7  9  9  0  0
+lvl 6: 6  7  8  5  6  9  0
+lvl 7: 9  9  9  9  9  9  9
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 7 razy
+Miejsce 5: 3 razy
+Miejsce 6: 3 razy
+Miejsce 7: 3 razy
+Miejsce 8: 1 razy
+Miejsce 9: 10 razy
+
+Macierz dla liczby pytañ = 11:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 4  5  4  0  0  0  0
+lvl 4: 4  7  4  5  0  0  0
+lvl 5: 4  4  6  4  10  0  0
+lvl 6: 5  4  4  7  6  9  0
+lvl 7: 10  10  10  10  10  10  10
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 11 razy
+Miejsce 5: 3 razy
+Miejsce 6: 2 razy
+Miejsce 7: 2 razy
+Miejsce 9: 1 razy
+Miejsce 10: 8 razy
+
+Macierz dla liczby pytañ = 12:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 4  4  4  0  0  0  0
+lvl 4: 4  4  8  5  0  0  0
+lvl 5: 4  4  4  7  5  0  0
+lvl 6: 6  4  10  10  11  11  0
+lvl 7: 11  11  11  11  11  11  11
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 11 razy
+Miejsce 5: 2 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 1 razy
+Miejsce 10: 2 razy
+Miejsce 11: 9 razy
+
+Macierz dla liczby pytañ = 13:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  5  0  0  0  0  0
+lvl 3: 4  4  5  0  0  0  0
+lvl 4: 4  7  6  5  0  0  0
+lvl 5: 4  8  7  4  7  0  0
+lvl 6: 4  4  9  7  6  12  0
+lvl 7: 12  12  12  12  12  12  12
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 8 razy
+Miejsce 5: 3 razy
+Miejsce 6: 2 razy
+Miejsce 7: 4 razy
+Miejsce 8: 1 razy
+Miejsce 9: 1 razy
+Miejsce 12: 8 razy
+
+Macierz dla liczby pytañ = 14:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  6  0  0  0  0  0
+lvl 3: 6  4  4  0  0  0  0
+lvl 4: 4  6  5  6  0  0  0
+lvl 5: 4  4  4  10  9  0  0
+lvl 6: 8  5  10  10  9  13  0
+lvl 7: 13  13  13  13  13  13  13
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 7 razy
+Miejsce 5: 2 razy
+Miejsce 6: 4 razy
+Miejsce 8: 1 razy
+Miejsce 9: 2 razy
+Miejsce 10: 3 razy
+Miejsce 13: 8 razy
+
+Macierz dla liczby pytañ = 15:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 4  6  4  0  0  0  0
+lvl 4: 4  5  9  8  0  0  0
+lvl 5: 4  4  6  11  8  0  0
+lvl 6: 4  4  8  11  13  9  0
+lvl 7: 14  14  14  14  14  14  14
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 9 razy
+Miejsce 5: 1 razy
+Miejsce 6: 2 razy
+Miejsce 8: 3 razy
+Miejsce 9: 2 razy
+Miejsce 11: 2 razy
+Miejsce 13: 1 razy
+Miejsce 14: 7 razy
+
+Macierz dla liczby pytañ = 16:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 5  4  9  0  0  0  0
+lvl 4: 4  4  7  9  0  0  0
+lvl 5: 4  9  10  12  10  0  0
+lvl 6: 7  6  11  10  15  10  0
+lvl 7: 15  15  15  15  15  15  15
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 6 razy
+Miejsce 5: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 2 razy
+Miejsce 9: 3 razy
+Miejsce 10: 4 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 15: 8 razy
+
+Macierz dla liczby pytañ = 17:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 4  4  8  0  0  0  0
+lvl 4: 4  4  7  10  0  0  0
+lvl 5: 9  4  6  11  11  0  0
+lvl 6: 7  9  10  14  9  15  0
+lvl 7: 16  16  16  16  16  16  16
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 7 razy
+Miejsce 6: 1 razy
+Miejsce 7: 2 razy
+Miejsce 8: 1 razy
+Miejsce 9: 3 razy
+Miejsce 10: 2 razy
+Miejsce 11: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 16: 7 razy
+
+Macierz dla liczby pytañ = 18:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 5  6  9  0  0  0  0
+lvl 4: 5  8  8  11  0  0  0
+lvl 5: 5  5  9  8  12  0  0
+lvl 6: 4  7  9  11  16  16  0
+lvl 7: 17  17  17  17  17  17  17
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 3 razy
+Miejsce 5: 4 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 3 razy
+Miejsce 9: 3 razy
+Miejsce 11: 2 razy
+Miejsce 12: 1 razy
+Miejsce 16: 2 razy
+Miejsce 17: 7 razy
+
+Macierz dla liczby pytañ = 19:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 7  8  10  0  0  0  0
+lvl 4: 5  5  11  9  0  0  0
+lvl 5: 7  7  9  9  14  0  0
+lvl 6: 6  9  9  11  14  14  0
+lvl 7: 18  18  18  18  18  18  18
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 5: 2 razy
+Miejsce 6: 1 razy
+Miejsce 7: 3 razy
+Miejsce 8: 1 razy
+Miejsce 9: 5 razy
+Miejsce 10: 1 razy
+Miejsce 11: 2 razy
+Miejsce 14: 3 razy
+Miejsce 18: 7 razy
+
+Macierz dla liczby pytañ = 20:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  6  0  0  0  0  0
+lvl 3: 4  4  10  0  0  0  0
+lvl 4: 4  7  11  8  0  0  0
+lvl 5: 10  11  13  14  16  0  0
+lvl 6: 10  12  13  11  18  14  0
+lvl 7: 19  19  19  19  19  19  19
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 4 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 1 razy
+Miejsce 10: 3 razy
+Miejsce 11: 3 razy
+Miejsce 12: 1 razy
+Miejsce 13: 2 razy
+Miejsce 14: 2 razy
+Miejsce 16: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 7 razy
+
+Macierz dla liczby pytañ = 21:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 5  6  10  0  0  0  0
+lvl 4: 5  8  7  11  0  0  0
+lvl 5: 6  11  10  12  15  0  0
+lvl 6: 6  9  9  13  14  18  0
+lvl 7: 20  20  20  20  20  20  20
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 5: 2 razy
+Miejsce 6: 3 razy
+Miejsce 7: 1 razy
+Miejsce 8: 1 razy
+Miejsce 9: 2 razy
+Miejsce 10: 2 razy
+Miejsce 11: 2 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 18: 1 razy
+Miejsce 20: 7 razy
+
+Macierz dla liczby pytañ = 22:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  5  0  0  0  0  0
+lvl 3: 4  9  6  0  0  0  0
+lvl 4: 9  10  10  12  0  0  0
+lvl 5: 5  7  10  12  17  0  0
+lvl 6: 8  8  10  12  15  18  0
+lvl 7: 21  21  21  21  21  21  21
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 2 razy
+Miejsce 6: 2 razy
+Miejsce 7: 1 razy
+Miejsce 8: 2 razy
+Miejsce 9: 2 razy
+Miejsce 10: 4 razy
+Miejsce 12: 3 razy
+Miejsce 15: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 21: 7 razy
+
+Macierz dla liczby pytañ = 23:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 4  4  7  0  0  0  0
+lvl 4: 6  5  9  13  0  0  0
+lvl 5: 8  12  10  16  16  0  0
+lvl 6: 9  13  13  13  16  22  0
+lvl 7: 22  22  22  22  22  22  22
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 4 razy
+Miejsce 5: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 1 razy
+Miejsce 9: 2 razy
+Miejsce 10: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 4 razy
+Miejsce 16: 3 razy
+Miejsce 22: 8 razy
+
+Macierz dla liczby pytañ = 24:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  5  0  0  0  0  0
+lvl 3: 5  6  8  0  0  0  0
+lvl 4: 5  7  10  15  0  0  0
+lvl 5: 10  9  14  11  16  0  0
+lvl 6: 8  11  17  15  19  18  0
+lvl 7: 23  23  23  23  23  23  23
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 3 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 2 razy
+Miejsce 9: 1 razy
+Miejsce 10: 2 razy
+Miejsce 11: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 2 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 23: 7 razy
+
+Macierz dla liczby pytañ = 25:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  5  0  0  0  0  0
+lvl 3: 4  9  12  0  0  0  0
+lvl 4: 9  8  13  16  0  0  0
+lvl 5: 8  12  15  16  16  0  0
+lvl 6: 10  13  11  13  18  24  0
+lvl 7: 24  24  24  24  24  24  24
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 5: 1 razy
+Miejsce 8: 2 razy
+Miejsce 9: 2 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 12: 2 razy
+Miejsce 13: 3 razy
+Miejsce 15: 1 razy
+Miejsce 16: 3 razy
+Miejsce 18: 1 razy
+Miejsce 24: 8 razy
+
+Macierz dla liczby pytañ = 26:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  7  0  0  0  0  0
+lvl 3: 4  7  10  0  0  0  0
+lvl 4: 10  7  9  14  0  0  0
+lvl 5: 10  10  10  17  19  0  0
+lvl 6: 11  13  18  19  18  19  0
+lvl 7: 25  25  25  25  25  25  25
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 7: 3 razy
+Miejsce 9: 1 razy
+Miejsce 10: 5 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 2 razy
+Miejsce 19: 3 razy
+Miejsce 25: 7 razy
+
+Macierz dla liczby pytañ = 27:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 5  5  9  0  0  0  0
+lvl 4: 9  9  15  15  0  0  0
+lvl 5: 12  14  16  15  21  0  0
+lvl 6: 11  15  14  17  18  20  0
+lvl 7: 26  26  26  26  26  26  26
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 5: 2 razy
+Miejsce 9: 3 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 14: 2 razy
+Miejsce 15: 4 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 26: 7 razy
+
+Macierz dla liczby pytañ = 28:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  4  0  0  0  0  0
+lvl 3: 6  9  7  0  0  0  0
+lvl 4: 11  8  15  15  0  0  0
+lvl 5: 8  11  12  16  20  0  0
+lvl 6: 14  14  17  18  21  20  0
+lvl 7: 27  27  27  27  27  27  27
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 6: 2 razy
+Miejsce 7: 1 razy
+Miejsce 8: 2 razy
+Miejsce 9: 1 razy
+Miejsce 11: 2 razy
+Miejsce 12: 1 razy
+Miejsce 14: 2 razy
+Miejsce 15: 2 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 20: 2 razy
+Miejsce 21: 1 razy
+Miejsce 27: 7 razy
+
+Macierz dla liczby pytañ = 29:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  4  0  0  0  0  0
+lvl 3: 5  5  13  0  0  0  0
+lvl 4: 8  13  11  18  0  0  0
+lvl 5: 7  11  15  17  23  0  0
+lvl 6: 14  12  16  22  19  22  0
+lvl 7: 28  28  28  28  28  28  28
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 5: 2 razy
+Miejsce 7: 1 razy
+Miejsce 8: 1 razy
+Miejsce 11: 2 razy
+Miejsce 12: 1 razy
+Miejsce 13: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 28: 7 razy
+
+Macierz dla liczby pytañ = 30:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 5  8  0  0  0  0  0
+lvl 3: 4  6  8  0  0  0  0
+lvl 4: 8  8  13  17  0  0  0
+lvl 5: 7  16  15  20  20  0  0
+lvl 6: 11  12  19  20  21  24  0
+lvl 7: 29  29  29  29  29  29  29
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 8: 4 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 3 razy
+Miejsce 21: 1 razy
+Miejsce 24: 1 razy
+Miejsce 29: 7 razy
+
+Macierz dla liczby pytañ = 31:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  4  0  0  0  0  0
+lvl 3: 6  8  11  0  0  0  0
+lvl 4: 8  8  13  19  0  0  0
+lvl 5: 8  15  17  20  19  0  0
+lvl 6: 15  12  21  18  24  24  0
+lvl 7: 30  30  30  30  30  30  30
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 6: 2 razy
+Miejsce 8: 4 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 15: 2 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 2 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 24: 2 razy
+Miejsce 30: 7 razy
+
+Macierz dla liczby pytañ = 32:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  7  0  0  0  0  0
+lvl 3: 4  6  14  0  0  0  0
+lvl 4: 6  13  12  16  0  0  0
+lvl 5: 9  14  16  16  23  0  0
+lvl 6: 11  19  19  18  26  29  0
+lvl 7: 31  31  31  31  31  31  31
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 2 razy
+Miejsce 6: 2 razy
+Miejsce 7: 1 razy
+Miejsce 9: 1 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 2 razy
+Miejsce 16: 3 razy
+Miejsce 18: 1 razy
+Miejsce 19: 2 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 7 razy
+
+Macierz dla liczby pytañ = 33:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 5  10  0  0  0  0  0
+lvl 3: 4  9  12  0  0  0  0
+lvl 4: 7  15  13  17  0  0  0
+lvl 5: 11  11  16  17  22  0  0
+lvl 6: 17  13  19  25  23  26  0
+lvl 7: 32  32  32  32  32  32  32
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 1 razy
+Miejsce 7: 1 razy
+Miejsce 9: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 2 razy
+Miejsce 12: 1 razy
+Miejsce 13: 2 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 3 razy
+Miejsce 19: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 32: 7 razy
+
+Macierz dla liczby pytañ = 34:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 5  4  0  0  0  0  0
+lvl 3: 9  7  11  0  0  0  0
+lvl 4: 7  13  15  19  0  0  0
+lvl 5: 13  15  17  22  25  0  0
+lvl 6: 13  15  23  21  22  25  0
+lvl 7: 33  33  33  33  33  33  33
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 1 razy
+Miejsce 7: 2 razy
+Miejsce 9: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 3 razy
+Miejsce 15: 3 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 21: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 25: 2 razy
+Miejsce 33: 7 razy
+
+Macierz dla liczby pytañ = 35:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 7  10  0  0  0  0  0
+lvl 3: 8  8  11  0  0  0  0
+lvl 4: 7  11  15  21  0  0  0
+lvl 5: 11  18  18  18  26  0  0
+lvl 6: 18  16  17  25  23  31  0
+lvl 7: 34  34  34  34  34  34  34
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 7: 2 razy
+Miejsce 8: 2 razy
+Miejsce 10: 1 razy
+Miejsce 11: 3 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 4 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 31: 1 razy
+Miejsce 34: 7 razy
+
+Macierz dla liczby pytañ = 36:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  11  0  0  0  0  0
+lvl 3: 10  11  10  0  0  0  0
+lvl 4: 7  14  18  18  0  0  0
+lvl 5: 15  17  18  18  22  0  0
+lvl 6: 16  15  22  22  30  28  0
+lvl 7: 35  35  35  35  35  35  35
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 10: 2 razy
+Miejsce 11: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 2 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 4 razy
+Miejsce 22: 3 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 35: 7 razy
+
+Macierz dla liczby pytañ = 37:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  6  0  0  0  0  0
+lvl 3: 7  11  16  0  0  0  0
+lvl 4: 12  12  16  20  0  0  0
+lvl 5: 10  13  19  20  23  0  0
+lvl 6: 17  21  20  28  30  29  0
+lvl 7: 36  36  36  36  36  36  36
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 12: 2 razy
+Miejsce 13: 1 razy
+Miejsce 16: 2 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 3 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 1 razy
+Miejsce 36: 7 razy
+
+Macierz dla liczby pytañ = 38:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 7  5  0  0  0  0  0
+lvl 3: 10  9  14  0  0  0  0
+lvl 4: 7  16  15  22  0  0  0
+lvl 5: 10  18  20  24  23  0  0
+lvl 6: 13  18  21  22  27  32  0
+lvl 7: 37  37  37  37  37  37  37
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 5: 1 razy
+Miejsce 7: 2 razy
+Miejsce 9: 1 razy
+Miejsce 10: 2 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 18: 2 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 37: 7 razy
+
+Macierz dla liczby pytañ = 39:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  5  0  0  0  0  0
+lvl 3: 7  12  12  0  0  0  0
+lvl 4: 12  14  14  20  0  0  0
+lvl 5: 15  14  22  25  24  0  0
+lvl 6: 14  19  23  27  27  33  0
+lvl 7: 38  38  38  38  38  38  38
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 5: 1 razy
+Miejsce 7: 1 razy
+Miejsce 12: 3 razy
+Miejsce 14: 4 razy
+Miejsce 15: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 2 razy
+Miejsce 33: 1 razy
+Miejsce 38: 7 razy
+
+Macierz dla liczby pytañ = 40:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  11  0  0  0  0  0
+lvl 3: 11  10  17  0  0  0  0
+lvl 4: 14  12  18  19  0  0  0
+lvl 5: 12  20  19  24  29  0  0
+lvl 6: 19  21  22  27  32  31  0
+lvl 7: 39  39  39  39  39  39  39
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 2 razy
+Miejsce 12: 2 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 3 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 39: 7 razy
+
+Macierz dla liczby pytañ = 41:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  10  0  0  0  0  0
+lvl 3: 6  10  15  0  0  0  0
+lvl 4: 8  14  21  23  0  0  0
+lvl 5: 15  16  22  21  28  0  0
+lvl 6: 15  21  24  29  32  37  0
+lvl 7: 40  40  40  40  40  40  40
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 6: 1 razy
+Miejsce 8: 1 razy
+Miejsce 10: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 3 razy
+Miejsce 16: 1 razy
+Miejsce 21: 3 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 37: 1 razy
+Miejsce 40: 7 razy
+
+Macierz dla liczby pytañ = 42:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 7  10  0  0  0  0  0
+lvl 3: 6  14  19  0  0  0  0
+lvl 4: 15  16  16  19  0  0  0
+lvl 5: 15  16  25  24  28  0  0
+lvl 6: 16  20  27  26  29  35  0
+lvl 7: 41  41  41  41  41  41  41
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 7: 1 razy
+Miejsce 10: 1 razy
+Miejsce 14: 1 razy
+Miejsce 15: 2 razy
+Miejsce 16: 4 razy
+Miejsce 19: 2 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 35: 1 razy
+Miejsce 41: 7 razy
+
+Macierz dla liczby pytañ = 43:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  6  0  0  0  0  0
+lvl 3: 6  13  15  0  0  0  0
+lvl 4: 13  13  18  26  0  0  0
+lvl 5: 17  18  23  27  30  0  0
+lvl 6: 21  22  28  30  34  33  0
+lvl 7: 42  42  42  42  42  42  42
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 3 razy
+Miejsce 13: 3 razy
+Miejsce 15: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 2 razy
+Miejsce 21: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 30: 2 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 42: 7 razy
+
+Macierz dla liczby pytañ = 44:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 9  11  0  0  0  0  0
+lvl 3: 11  13  13  0  0  0  0
+lvl 4: 9  13  17  22  0  0  0
+lvl 5: 17  20  21  27  32  0  0
+lvl 6: 18  25  25  28  31  38  0
+lvl 7: 43  43  43  43  43  43  43
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 2 razy
+Miejsce 11: 2 razy
+Miejsce 13: 3 razy
+Miejsce 17: 2 razy
+Miejsce 18: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 22: 1 razy
+Miejsce 25: 2 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 38: 1 razy
+Miejsce 43: 7 razy
+
+Macierz dla liczby pytañ = 45:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  13  0  0  0  0  0
+lvl 3: 8  11  19  0  0  0  0
+lvl 4: 15  18  21  21  0  0  0
+lvl 5: 14  17  23  30  32  0  0
+lvl 6: 20  25  27  30  35  36  0
+lvl 7: 44  44  44  44  44  44  44
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 8: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 2 razy
+Miejsce 23: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 30: 2 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 44: 7 razy
+
+Macierz dla liczby pytañ = 46:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  8  0  0  0  0  0
+lvl 3: 11  16  20  0  0  0  0
+lvl 4: 11  14  23  26  0  0  0
+lvl 5: 19  23  24  25  32  0  0
+lvl 6: 16  25  24  31  33  40  0
+lvl 7: 45  45  45  45  45  45  45
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 8: 1 razy
+Miejsce 11: 2 razy
+Miejsce 14: 1 razy
+Miejsce 16: 2 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 23: 2 razy
+Miejsce 24: 2 razy
+Miejsce 25: 2 razy
+Miejsce 26: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 40: 1 razy
+Miejsce 45: 7 razy
+
+Macierz dla liczby pytañ = 47:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  10  0  0  0  0  0
+lvl 3: 13  11  17  0  0  0  0
+lvl 4: 10  16  23  22  0  0  0
+lvl 5: 14  18  24  27  29  0  0
+lvl 6: 22  25  29  30  34  36  0
+lvl 7: 46  46  46  46  46  46  46
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 10: 2 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 2 razy
+Miejsce 30: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 46: 7 razy
+
+Macierz dla liczby pytañ = 48:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  10  0  0  0  0  0
+lvl 3: 13  11  17  0  0  0  0
+lvl 4: 14  18  21  22  0  0  0
+lvl 5: 19  19  22  32  31  0  0
+lvl 6: 18  21  29  32  37  43  0
+lvl 7: 47  47  47  47  47  47  47
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 2 razy
+Miejsce 19: 2 razy
+Miejsce 21: 2 razy
+Miejsce 22: 2 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 2 razy
+Miejsce 37: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 7 razy
+
+Macierz dla liczby pytañ = 49:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 5  13  0  0  0  0  0
+lvl 3: 12  13  20  0  0  0  0
+lvl 4: 14  15  23  23  0  0  0
+lvl 5: 19  21  28  30  32  0  0
+lvl 6: 20  25  32  35  36  38  0
+lvl 7: 48  48  48  48  48  48  48
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 5: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 2 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 2 razy
+Miejsce 21: 1 razy
+Miejsce 23: 2 razy
+Miejsce 25: 1 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 32: 2 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 48: 7 razy
+
+Macierz dla liczby pytañ = 50:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 7  12  0  0  0  0  0
+lvl 3: 7  15  22  0  0  0  0
+lvl 4: 11  18  21  27  0  0  0
+lvl 5: 16  19  26  32  31  0  0
+lvl 6: 23  22  28  36  37  43  0
+lvl 7: 49  49  49  49  49  49  49
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 7: 2 razy
+Miejsce 11: 1 razy
+Miejsce 12: 1 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 21: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 1 razy
+Miejsce 43: 1 razy
+Miejsce 49: 7 razy
+
+Macierz dla liczby pytañ = 51:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  9  0  0  0  0  0
+lvl 3: 11  15  20  0  0  0  0
+lvl 4: 16  15  23  28  0  0  0
+lvl 5: 16  21  24  29  37  0  0
+lvl 6: 18  26  28  33  37  46  0
+lvl 7: 50  50  50  50  50  50  50
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 15: 2 razy
+Miejsce 16: 2 razy
+Miejsce 18: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 28: 2 razy
+Miejsce 29: 1 razy
+Miejsce 33: 1 razy
+Miejsce 37: 2 razy
+Miejsce 46: 1 razy
+Miejsce 50: 7 razy
+
+Macierz dla liczby pytañ = 52:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  9  0  0  0  0  0
+lvl 3: 12  16  19  0  0  0  0
+lvl 4: 12  18  25  24  0  0  0
+lvl 5: 16  20  25  30  38  0  0
+lvl 6: 24  28  32  34  41  42  0
+lvl 7: 51  51  51  51  51  51  51
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 9: 1 razy
+Miejsce 12: 2 razy
+Miejsce 16: 2 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 24: 2 razy
+Miejsce 25: 2 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 32: 1 razy
+Miejsce 34: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 51: 7 razy
+
+Macierz dla liczby pytañ = 53:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  8  0  0  0  0  0
+lvl 3: 12  16  20  0  0  0  0
+lvl 4: 17  18  26  26  0  0  0
+lvl 5: 21  25  28  35  39  0  0
+lvl 6: 25  25  34  38  42  44  0
+lvl 7: 52  52  52  52  52  52  52
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 10: 1 razy
+Miejsce 12: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 25: 3 razy
+Miejsce 26: 2 razy
+Miejsce 28: 1 razy
+Miejsce 34: 1 razy
+Miejsce 35: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 52: 7 razy
+
+Macierz dla liczby pytañ = 54:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 8  11  0  0  0  0  0
+lvl 3: 9  19  19  0  0  0  0
+lvl 4: 17  16  24  25  0  0  0
+lvl 5: 20  26  26  34  34  0  0
+lvl 6: 25  28  33  37  38  42  0
+lvl 7: 53  53  53  53  53  53  53
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 9: 1 razy
+Miejsce 11: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 2 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 2 razy
+Miejsce 26: 2 razy
+Miejsce 28: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 2 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 42: 1 razy
+Miejsce 53: 7 razy
+
+Macierz dla liczby pytañ = 55:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 4  10  0  0  0  0  0
+lvl 3: 11  13  20  0  0  0  0
+lvl 4: 17  21  27  27  0  0  0
+lvl 5: 16  27  28  35  34  0  0
+lvl 6: 20  29  34  40  39  47  0
+lvl 7: 54  54  54  54  54  54  54
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 4: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 20: 2 razy
+Miejsce 21: 1 razy
+Miejsce 27: 3 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 34: 2 razy
+Miejsce 35: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 47: 1 razy
+Miejsce 54: 7 razy
+
+Macierz dla liczby pytañ = 56:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 7  12  0  0  0  0  0
+lvl 3: 14  17  18  0  0  0  0
+lvl 4: 13  19  25  32  0  0  0
+lvl 5: 20  21  31  36  37  0  0
+lvl 6: 23  27  32  37  41  50  0
+lvl 7: 55  55  55  55  55  55  55
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 7: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 2 razy
+Miejsce 36: 1 razy
+Miejsce 37: 2 razy
+Miejsce 41: 1 razy
+Miejsce 50: 1 razy
+Miejsce 55: 7 razy
+
+Macierz dla liczby pytañ = 57:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  10  0  0  0  0  0
+lvl 3: 14  14  20  0  0  0  0
+lvl 4: 17  18  22  30  0  0  0
+lvl 5: 18  22  31  35  36  0  0
+lvl 6: 27  28  31  38  41  48  0
+lvl 7: 56  56  56  56  56  56  56
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 10: 2 razy
+Miejsce 14: 2 razy
+Miejsce 17: 1 razy
+Miejsce 18: 2 razy
+Miejsce 20: 1 razy
+Miejsce 22: 2 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 31: 2 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 48: 1 razy
+Miejsce 56: 7 razy
+
+Macierz dla liczby pytañ = 58:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  10  0  0  0  0  0
+lvl 3: 10  15  22  0  0  0  0
+lvl 4: 16  18  26  29  0  0  0
+lvl 5: 18  22  33  34  41  0  0
+lvl 6: 25  26  31  36  43  49  0
+lvl 7: 57  57  57  57  57  57  57
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 10: 2 razy
+Miejsce 15: 1 razy
+Miejsce 16: 1 razy
+Miejsce 18: 2 razy
+Miejsce 22: 2 razy
+Miejsce 25: 1 razy
+Miejsce 26: 2 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 43: 1 razy
+Miejsce 49: 1 razy
+Miejsce 57: 7 razy
+
+Macierz dla liczby pytañ = 59:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  10  0  0  0  0  0
+lvl 3: 11  14  19  0  0  0  0
+lvl 4: 13  22  24  33  0  0  0
+lvl 5: 19  23  31  36  38  0  0
+lvl 6: 27  32  33  39  46  47  0
+lvl 7: 58  58  58  58  58  58  58
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 10: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 14: 1 razy
+Miejsce 19: 2 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 2 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 46: 1 razy
+Miejsce 47: 1 razy
+Miejsce 58: 7 razy
+
+Macierz dla liczby pytañ = 60:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  15  0  0  0  0  0
+lvl 3: 14  18  20  0  0  0  0
+lvl 4: 18  19  29  32  0  0  0
+lvl 5: 22  24  32  36  42  0  0
+lvl 6: 26  32  38  41  46  49  0
+lvl 7: 59  59  59  59  59  59  59
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 14: 1 razy
+Miejsce 15: 1 razy
+Miejsce 18: 2 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 3 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 59: 7 razy
+
+Macierz dla liczby pytañ = 61:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  10  0  0  0  0  0
+lvl 3: 13  15  26  0  0  0  0
+lvl 4: 17  23  25  31  0  0  0
+lvl 5: 22  25  28  36  44  0  0
+lvl 6: 27  33  35  43  45  48  0
+lvl 7: 60  60  60  60  60  60  60
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 10: 2 razy
+Miejsce 13: 1 razy
+Miejsce 15: 1 razy
+Miejsce 17: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 25: 2 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 31: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 48: 1 razy
+Miejsce 60: 7 razy
+
+Macierz dla liczby pytañ = 62:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 5  11  0  0  0  0  0
+lvl 3: 13  17  26  0  0  0  0
+lvl 4: 20  24  28  31  0  0  0
+lvl 5: 19  25  30  35  42  0  0
+lvl 6: 29  30  36  41  50  51  0
+lvl 7: 61  61  61  61  61  61  61
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 5: 1 razy
+Miejsce 11: 1 razy
+Miejsce 13: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 2 razy
+Miejsce 31: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 61: 7 razy
+
+Macierz dla liczby pytañ = 63:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  16  0  0  0  0  0
+lvl 3: 14  18  23  0  0  0  0
+lvl 4: 19  24  26  34  0  0  0
+lvl 5: 22  24  31  40  42  0  0
+lvl 6: 24  31  34  39  49  53  0
+lvl 7: 62  62  62  62  62  62  62
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 14: 1 razy
+Miejsce 16: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 3 razy
+Miejsce 26: 1 razy
+Miejsce 31: 2 razy
+Miejsce 34: 2 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 49: 1 razy
+Miejsce 53: 1 razy
+Miejsce 62: 7 razy
+
+Macierz dla liczby pytañ = 64:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  12  0  0  0  0  0
+lvl 3: 14  17  22  0  0  0  0
+lvl 4: 19  22  28  37  0  0  0
+lvl 5: 25  27  31  41  44  0  0
+lvl 6: 26  34  35  42  48  51  0
+lvl 7: 63  63  63  63  63  63  63
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 12: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 2 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 31: 1 razy
+Miejsce 34: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 63: 7 razy
+
+Macierz dla liczby pytañ = 65:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  17  0  0  0  0  0
+lvl 3: 15  19  27  0  0  0  0
+lvl 4: 17  21  29  32  0  0  0
+lvl 5: 24  26  33  40  44  0  0
+lvl 6: 30  35  36  44  51  51  0
+lvl 7: 64  64  64  64  64  64  64
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 15: 1 razy
+Miejsce 17: 2 razy
+Miejsce 19: 1 razy
+Miejsce 21: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 40: 1 razy
+Miejsce 44: 2 razy
+Miejsce 51: 2 razy
+Miejsce 64: 7 razy
+
+Macierz dla liczby pytañ = 66:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 6  13  0  0  0  0  0
+lvl 3: 12  22  24  0  0  0  0
+lvl 4: 21  21  27  34  0  0  0
+lvl 5: 22  32  34  41  43  0  0
+lvl 6: 31  31  38  47  52  57  0
+lvl 7: 65  65  65  65  65  65  65
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 6: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 21: 2 razy
+Miejsce 22: 2 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 2 razy
+Miejsce 32: 1 razy
+Miejsce 34: 2 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 65: 7 razy
+
+Macierz dla liczby pytañ = 67:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  13  0  0  0  0  0
+lvl 3: 16  20  23  0  0  0  0
+lvl 4: 16  21  31  37  0  0  0
+lvl 5: 23  31  32  40  47  0  0
+lvl 6: 30  37  41  42  49  58  0
+lvl 7: 66  66  66  66  66  66  66
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 16: 2 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 2 razy
+Miejsce 30: 1 razy
+Miejsce 31: 2 razy
+Miejsce 32: 1 razy
+Miejsce 37: 2 razy
+Miejsce 40: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 47: 1 razy
+Miejsce 49: 1 razy
+Miejsce 58: 1 razy
+Miejsce 66: 7 razy
+
+Macierz dla liczby pytañ = 68:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  12  0  0  0  0  0
+lvl 3: 13  17  24  0  0  0  0
+lvl 4: 21  28  33  36  0  0  0
+lvl 5: 24  30  33  42  45  0  0
+lvl 6: 31  34  41  49  52  60  0
+lvl 7: 67  67  67  67  67  67  67
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 10: 1 razy
+Miejsce 12: 1 razy
+Miejsce 13: 1 razy
+Miejsce 17: 1 razy
+Miejsce 21: 1 razy
+Miejsce 24: 2 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 31: 1 razy
+Miejsce 33: 2 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 45: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 60: 1 razy
+Miejsce 67: 7 razy
+
+Macierz dla liczby pytañ = 69:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 9  12  0  0  0  0  0
+lvl 3: 12  23  25  0  0  0  0
+lvl 4: 16  23  32  37  0  0  0
+lvl 5: 27  31  39  38  47  0  0
+lvl 6: 26  34  44  48  52  57  0
+lvl 7: 68  68  68  68  68  68  68
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 1 razy
+Miejsce 12: 2 razy
+Miejsce 16: 1 razy
+Miejsce 23: 2 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 44: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 68: 7 razy
+
+Macierz dla liczby pytañ = 70:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 8  16  0  0  0  0  0
+lvl 3: 16  19  24  0  0  0  0
+lvl 4: 20  28  34  37  0  0  0
+lvl 5: 26  29  37  44  45  0  0
+lvl 6: 30  38  42  48  52  57  0
+lvl 7: 69  69  69  69  69  69  69
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 16: 2 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 2 razy
+Miejsce 38: 1 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 48: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 69: 7 razy
+
+Macierz dla liczby pytañ = 71:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  15  0  0  0  0  0
+lvl 3: 13  19  28  0  0  0  0
+lvl 4: 21  26  33  40  0  0  0
+lvl 5: 25  30  34  44  47  0  0
+lvl 6: 27  34  43  47  51  62  0
+lvl 7: 70  70  70  70  70  70  70
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 2 razy
+Miejsce 15: 1 razy
+Miejsce 19: 1 razy
+Miejsce 21: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 2 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 47: 2 razy
+Miejsce 51: 1 razy
+Miejsce 62: 1 razy
+Miejsce 70: 7 razy
+
+Macierz dla liczby pytañ = 72:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  17  0  0  0  0  0
+lvl 3: 17  24  28  0  0  0  0
+lvl 4: 21  24  33  37  0  0  0
+lvl 5: 22  33  39  41  49  0  0
+lvl 6: 27  35  41  50  57  61  0
+lvl 7: 71  71  71  71  71  71  71
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 17: 2 razy
+Miejsce 21: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 2 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 33: 2 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 2 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 57: 1 razy
+Miejsce 61: 1 razy
+Miejsce 71: 7 razy
+
+Macierz dla liczby pytañ = 73:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 8  15  0  0  0  0  0
+lvl 3: 13  23  26  0  0  0  0
+lvl 4: 21  24  34  39  0  0  0
+lvl 5: 27  35  36  41  47  0  0
+lvl 6: 31  34  45  46  53  63  0
+lvl 7: 72  72  72  72  72  72  72
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 13: 1 razy
+Miejsce 15: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 34: 2 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 45: 1 razy
+Miejsce 46: 1 razy
+Miejsce 47: 1 razy
+Miejsce 53: 1 razy
+Miejsce 63: 1 razy
+Miejsce 72: 7 razy
+
+Macierz dla liczby pytañ = 74:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 8  18  0  0  0  0  0
+lvl 3: 17  22  28  0  0  0  0
+lvl 4: 20  25  34  38  0  0  0
+lvl 5: 23  34  35  42  50  0  0
+lvl 6: 32  39  41  51  53  62  0
+lvl 7: 73  73  73  73  73  73  73
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 20: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 25: 1 razy
+Miejsce 28: 1 razy
+Miejsce 32: 1 razy
+Miejsce 34: 2 razy
+Miejsce 35: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 62: 1 razy
+Miejsce 73: 7 razy
+
+Macierz dla liczby pytañ = 75:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  18  0  0  0  0  0
+lvl 3: 17  21  27  0  0  0  0
+lvl 4: 21  25  34  37  0  0  0
+lvl 5: 29  31  37  43  49  0  0
+lvl 6: 33  40  47  50  55  60  0
+lvl 7: 74  74  74  74  74  74  74
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 21: 2 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 2 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 1 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 55: 1 razy
+Miejsce 60: 1 razy
+Miejsce 74: 7 razy
+
+Macierz dla liczby pytañ = 76:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 8  14  0  0  0  0  0
+lvl 3: 17  19  25  0  0  0  0
+lvl 4: 19  27  37  41  0  0  0
+lvl 5: 27  30  36  43  53  0  0
+lvl 6: 34  37  46  52  56  64  0
+lvl 7: 75  75  75  75  75  75  75
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 8: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 2 razy
+Miejsce 25: 1 razy
+Miejsce 27: 2 razy
+Miejsce 30: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 2 razy
+Miejsce 41: 1 razy
+Miejsce 43: 1 razy
+Miejsce 46: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 56: 1 razy
+Miejsce 64: 1 razy
+Miejsce 75: 7 razy
+
+Macierz dla liczby pytañ = 77:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  14  0  0  0  0  0
+lvl 3: 17  19  27  0  0  0  0
+lvl 4: 20  25  33  40  0  0  0
+lvl 5: 27  31  38  47  51  0  0
+lvl 6: 34  38  48  52  58  68  0
+lvl 7: 76  76  76  76  76  76  76
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 2 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 20: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 2 razy
+Miejsce 31: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 38: 2 razy
+Miejsce 40: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 58: 1 razy
+Miejsce 68: 1 razy
+Miejsce 76: 7 razy
+
+Macierz dla liczby pytañ = 78:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  17  0  0  0  0  0
+lvl 3: 17  22  32  0  0  0  0
+lvl 4: 21  29  35  38  0  0  0
+lvl 5: 28  36  41  45  54  0  0
+lvl 6: 31  37  47  53  56  63  0
+lvl 7: 77  77  77  77  77  77  77
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 2 razy
+Miejsce 21: 1 razy
+Miejsce 22: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 53: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 63: 1 razy
+Miejsce 77: 7 razy
+
+Macierz dla liczby pytañ = 79:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 9  20  0  0  0  0  0
+lvl 3: 16  23  32  0  0  0  0
+lvl 4: 24  31  35  43  0  0  0
+lvl 5: 29  36  44  50  53  0  0
+lvl 6: 36  37  46  56  61  65  0
+lvl 7: 78  78  78  78  78  78  78
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 1 razy
+Miejsce 16: 1 razy
+Miejsce 20: 1 razy
+Miejsce 23: 1 razy
+Miejsce 24: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 2 razy
+Miejsce 37: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 50: 1 razy
+Miejsce 53: 1 razy
+Miejsce 56: 1 razy
+Miejsce 61: 1 razy
+Miejsce 65: 1 razy
+Miejsce 78: 7 razy
+
+Macierz dla liczby pytañ = 80:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  21  0  0  0  0  0
+lvl 3: 17  26  31  0  0  0  0
+lvl 4: 23  31  34  42  0  0  0
+lvl 5: 29  38  39  51  53  0  0
+lvl 6: 36  42  49  52  59  67  0
+lvl 7: 79  79  79  79  79  79  79
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 2 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 42: 2 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 59: 1 razy
+Miejsce 67: 1 razy
+Miejsce 79: 7 razy
+
+Macierz dla liczby pytañ = 81:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  19  0  0  0  0  0
+lvl 3: 19  27  28  0  0  0  0
+lvl 4: 21  26  37  45  0  0  0
+lvl 5: 29  32  44  47  58  0  0
+lvl 6: 32  43  50  56  64  71  0
+lvl 7: 80  80  80  80  80  80  80
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 19: 2 razy
+Miejsce 21: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 2 razy
+Miejsce 37: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 50: 1 razy
+Miejsce 56: 1 razy
+Miejsce 58: 1 razy
+Miejsce 64: 1 razy
+Miejsce 71: 1 razy
+Miejsce 80: 7 razy
+
+Macierz dla liczby pytañ = 82:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 9  17  0  0  0  0  0
+lvl 3: 16  22  33  0  0  0  0
+lvl 4: 24  32  35  40  0  0  0
+lvl 5: 32  36  44  49  59  0  0
+lvl 6: 38  43  48  52  64  70  0
+lvl 7: 81  81  81  81  81  81  81
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 1 razy
+Miejsce 16: 1 razy
+Miejsce 17: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 1 razy
+Miejsce 32: 2 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 59: 1 razy
+Miejsce 64: 1 razy
+Miejsce 70: 1 razy
+Miejsce 81: 7 razy
+
+Macierz dla liczby pytañ = 83:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 9  17  0  0  0  0  0
+lvl 3: 15  21  31  0  0  0  0
+lvl 4: 25  29  35  42  0  0  0
+lvl 5: 28  35  44  49  55  0  0
+lvl 6: 36  42  50  55  61  72  0
+lvl 7: 82  82  82  82  82  82  82
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 9: 1 razy
+Miejsce 15: 1 razy
+Miejsce 17: 1 razy
+Miejsce 21: 1 razy
+Miejsce 25: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 35: 2 razy
+Miejsce 36: 1 razy
+Miejsce 42: 2 razy
+Miejsce 44: 1 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 55: 2 razy
+Miejsce 61: 1 razy
+Miejsce 72: 1 razy
+Miejsce 82: 7 razy
+
+Macierz dla liczby pytañ = 84:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 10  19  0  0  0  0  0
+lvl 3: 18  22  33  0  0  0  0
+lvl 4: 26  30  40  46  0  0  0
+lvl 5: 32  37  42  53  58  0  0
+lvl 6: 35  46  51  55  64  70  0
+lvl 7: 83  83  83  83  83  83  83
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 10: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 1 razy
+Miejsce 26: 1 razy
+Miejsce 30: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 46: 2 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 55: 1 razy
+Miejsce 58: 1 razy
+Miejsce 64: 1 razy
+Miejsce 70: 1 razy
+Miejsce 83: 7 razy
+
+Macierz dla liczby pytañ = 85:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  18  0  0  0  0  0
+lvl 3: 16  28  35  0  0  0  0
+lvl 4: 24  28  39  47  0  0  0
+lvl 5: 33  40  45  52  55  0  0
+lvl 6: 37  40  48  54  63  72  0
+lvl 7: 84  84  84  84  84  84  84
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 16: 1 razy
+Miejsce 18: 1 razy
+Miejsce 24: 1 razy
+Miejsce 28: 2 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 2 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 1 razy
+Miejsce 63: 1 razy
+Miejsce 72: 1 razy
+Miejsce 84: 7 razy
+
+Macierz dla liczby pytañ = 86:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  19  0  0  0  0  0
+lvl 3: 17  26  35  0  0  0  0
+lvl 4: 27  29  41  43  0  0  0
+lvl 5: 32  37  43  51  57  0  0
+lvl 6: 33  41  49  60  65  71  0
+lvl 7: 85  85  85  85  85  85  85
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 41: 2 razy
+Miejsce 43: 2 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 57: 1 razy
+Miejsce 60: 1 razy
+Miejsce 65: 1 razy
+Miejsce 71: 1 razy
+Miejsce 85: 7 razy
+
+Macierz dla liczby pytañ = 87:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  21  0  0  0  0  0
+lvl 3: 15  25  32  0  0  0  0
+lvl 4: 26  34  41  47  0  0  0
+lvl 5: 29  38  47  50  59  0  0
+lvl 6: 37  42  48  56  66  73  0
+lvl 7: 86  86  86  86  86  86  86
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 15: 1 razy
+Miejsce 21: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 47: 2 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 56: 1 razy
+Miejsce 59: 1 razy
+Miejsce 66: 1 razy
+Miejsce 73: 1 razy
+Miejsce 86: 7 razy
+
+Macierz dla liczby pytañ = 88:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  22  0  0  0  0  0
+lvl 3: 18  23  32  0  0  0  0
+lvl 4: 22  30  38  47  0  0  0
+lvl 5: 29  35  43  55  58  0  0
+lvl 6: 40  45  53  57  64  73  0
+lvl 7: 87  87  87  87  87  87  87
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 18: 1 razy
+Miejsce 22: 2 razy
+Miejsce 23: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 53: 1 razy
+Miejsce 55: 1 razy
+Miejsce 57: 1 razy
+Miejsce 58: 1 razy
+Miejsce 64: 1 razy
+Miejsce 73: 1 razy
+Miejsce 87: 7 razy
+
+Macierz dla liczby pytañ = 89:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  19  0  0  0  0  0
+lvl 3: 18  25  35  0  0  0  0
+lvl 4: 26  35  39  45  0  0  0
+lvl 5: 29  38  43  53  63  0  0
+lvl 6: 37  42  52  62  64  73  0
+lvl 7: 88  88  88  88  88  88  88
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 18: 1 razy
+Miejsce 19: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 35: 2 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 42: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 64: 1 razy
+Miejsce 73: 1 razy
+Miejsce 88: 7 razy
+
+Macierz dla liczby pytañ = 90:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  17  0  0  0  0  0
+lvl 3: 19  23  37  0  0  0  0
+lvl 4: 27  34  41  46  0  0  0
+lvl 5: 32  40  47  51  61  0  0
+lvl 6: 35  46  55  59  69  77  0
+lvl 7: 89  89  89  89  89  89  89
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 17: 1 razy
+Miejsce 19: 1 razy
+Miejsce 23: 1 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 34: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 40: 1 razy
+Miejsce 41: 1 razy
+Miejsce 46: 2 razy
+Miejsce 47: 1 razy
+Miejsce 51: 1 razy
+Miejsce 55: 1 razy
+Miejsce 59: 1 razy
+Miejsce 61: 1 razy
+Miejsce 69: 1 razy
+Miejsce 77: 1 razy
+Miejsce 89: 7 razy
+
+Macierz dla liczby pytañ = 91:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  21  0  0  0  0  0
+lvl 3: 18  25  34  0  0  0  0
+lvl 4: 29  33  38  47  0  0  0
+lvl 5: 29  38  50  52  62  0  0
+lvl 6: 37  45  56  64  70  76  0
+lvl 7: 90  90  90  90  90  90  90
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 18: 1 razy
+Miejsce 21: 1 razy
+Miejsce 25: 1 razy
+Miejsce 29: 2 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 2 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 50: 1 razy
+Miejsce 52: 1 razy
+Miejsce 56: 1 razy
+Miejsce 62: 1 razy
+Miejsce 64: 1 razy
+Miejsce 70: 1 razy
+Miejsce 76: 1 razy
+Miejsce 90: 7 razy
+
+Macierz dla liczby pytañ = 92:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  22  0  0  0  0  0
+lvl 3: 18  24  34  0  0  0  0
+lvl 4: 26  34  43  52  0  0  0
+lvl 5: 30  42  50  56  60  0  0
+lvl 6: 36  46  52  65  71  80  0
+lvl 7: 91  91  91  91  91  91  91
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 18: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 30: 1 razy
+Miejsce 34: 2 razy
+Miejsce 36: 1 razy
+Miejsce 42: 1 razy
+Miejsce 43: 1 razy
+Miejsce 46: 1 razy
+Miejsce 50: 1 razy
+Miejsce 52: 2 razy
+Miejsce 56: 1 razy
+Miejsce 60: 1 razy
+Miejsce 65: 1 razy
+Miejsce 71: 1 razy
+Miejsce 80: 1 razy
+Miejsce 91: 7 razy
+
+Macierz dla liczby pytañ = 93:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  22  0  0  0  0  0
+lvl 3: 16  28  34  0  0  0  0
+lvl 4: 26  35  43  48  0  0  0
+lvl 5: 31  41  50  57  64  0  0
+lvl 6: 42  50  58  64  72  78  0
+lvl 7: 92  92  92  92  92  92  92
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 16: 1 razy
+Miejsce 22: 1 razy
+Miejsce 26: 1 razy
+Miejsce 28: 1 razy
+Miejsce 31: 1 razy
+Miejsce 34: 1 razy
+Miejsce 35: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 43: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 2 razy
+Miejsce 57: 1 razy
+Miejsce 58: 1 razy
+Miejsce 64: 2 razy
+Miejsce 72: 1 razy
+Miejsce 78: 1 razy
+Miejsce 92: 7 razy
+
+Macierz dla liczby pytañ = 94:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  21  0  0  0  0  0
+lvl 3: 21  28  35  0  0  0  0
+lvl 4: 24  37  41  49  0  0  0
+lvl 5: 32  40  48  59  65  0  0
+lvl 6: 39  46  56  60  71  80  0
+lvl 7: 93  93  93  93  93  93  93
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 21: 2 razy
+Miejsce 24: 1 razy
+Miejsce 28: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 41: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 56: 1 razy
+Miejsce 59: 1 razy
+Miejsce 60: 1 razy
+Miejsce 65: 1 razy
+Miejsce 71: 1 razy
+Miejsce 80: 1 razy
+Miejsce 93: 7 razy
+
+Macierz dla liczby pytañ = 95:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  23  0  0  0  0  0
+lvl 3: 17  31  37  0  0  0  0
+lvl 4: 26  32  39  49  0  0  0
+lvl 5: 32  43  47  60  63  0  0
+lvl 6: 38  49  58  63  72  81  0
+lvl 7: 94  94  94  94  94  94  94
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 31: 1 razy
+Miejsce 32: 2 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 1 razy
+Miejsce 49: 2 razy
+Miejsce 58: 1 razy
+Miejsce 60: 1 razy
+Miejsce 63: 2 razy
+Miejsce 72: 1 razy
+Miejsce 81: 1 razy
+Miejsce 94: 7 razy
+
+Macierz dla liczby pytañ = 96:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  20  0  0  0  0  0
+lvl 3: 17  31  35  0  0  0  0
+lvl 4: 29  35  45  48  0  0  0
+lvl 5: 33  40  48  55  69  0  0
+lvl 6: 44  50  58  68  76  83  0
+lvl 7: 95  95  95  95  95  95  95
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 20: 1 razy
+Miejsce 29: 1 razy
+Miejsce 31: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 2 razy
+Miejsce 40: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 48: 2 razy
+Miejsce 50: 1 razy
+Miejsce 55: 1 razy
+Miejsce 58: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 76: 1 razy
+Miejsce 83: 1 razy
+Miejsce 95: 7 razy
+
+Macierz dla liczby pytañ = 97:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  20  0  0  0  0  0
+lvl 3: 17  26  39  0  0  0  0
+lvl 4: 25  35  46  51  0  0  0
+lvl 5: 34  41  51  56  68  0  0
+lvl 6: 43  46  55  66  75  80  0
+lvl 7: 96  96  96  96  96  96  96
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 17: 1 razy
+Miejsce 20: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 34: 1 razy
+Miejsce 35: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 43: 1 razy
+Miejsce 46: 2 razy
+Miejsce 51: 2 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 66: 1 razy
+Miejsce 68: 1 razy
+Miejsce 75: 1 razy
+Miejsce 80: 1 razy
+Miejsce 96: 7 razy
+
+Macierz dla liczby pytañ = 98:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  25  0  0  0  0  0
+lvl 3: 24  29  36  0  0  0  0
+lvl 4: 26  33  43  53  0  0  0
+lvl 5: 34  46  50  59  67  0  0
+lvl 6: 45  52  58  64  76  79  0
+lvl 7: 97  97  97  97  97  97  97
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 29: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 46: 1 razy
+Miejsce 50: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 64: 1 razy
+Miejsce 67: 1 razy
+Miejsce 76: 1 razy
+Miejsce 79: 1 razy
+Miejsce 97: 7 razy
+
+Macierz dla liczby pytañ = 99:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  19  0  0  0  0  0
+lvl 3: 19  32  37  0  0  0  0
+lvl 4: 27  37  45  52  0  0  0
+lvl 5: 36  40  51  62  66  0  0
+lvl 6: 43  50  57  70  73  86  0
+lvl 7: 98  98  98  98  98  98  98
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 19: 2 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 2 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 62: 1 razy
+Miejsce 66: 1 razy
+Miejsce 70: 1 razy
+Miejsce 73: 1 razy
+Miejsce 86: 1 razy
+Miejsce 98: 7 razy
+
+Macierz dla liczby pytañ = 100:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  20  0  0  0  0  0
+lvl 3: 23  32  37  0  0  0  0
+lvl 4: 28  37  44  50  0  0  0
+lvl 5: 32  45  51  60  70  0  0
+lvl 6: 45  53  61  64  74  81  0
+lvl 7: 99  99  99  99  99  99  99
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 20: 1 razy
+Miejsce 23: 1 razy
+Miejsce 28: 1 razy
+Miejsce 32: 2 razy
+Miejsce 37: 2 razy
+Miejsce 44: 1 razy
+Miejsce 45: 2 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 60: 1 razy
+Miejsce 61: 1 razy
+Miejsce 64: 1 razy
+Miejsce 70: 1 razy
+Miejsce 74: 1 razy
+Miejsce 81: 1 razy
+Miejsce 99: 7 razy
+
+Macierz dla liczby pytañ = 101:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  22  0  0  0  0  0
+lvl 3: 19  29  38  0  0  0  0
+lvl 4: 28  39  42  56  0  0  0
+lvl 5: 36  43  53  60  71  0  0
+lvl 6: 40  51  62  67  77  85  0
+lvl 7: 100  100  100  100  100  100  100
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 1 razy
+Miejsce 28: 1 razy
+Miejsce 29: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 43: 1 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 56: 1 razy
+Miejsce 60: 1 razy
+Miejsce 62: 1 razy
+Miejsce 67: 1 razy
+Miejsce 71: 1 razy
+Miejsce 77: 1 razy
+Miejsce 85: 1 razy
+Miejsce 100: 7 razy
+
+Macierz dla liczby pytañ = 102:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 17  26  0  0  0  0  0
+lvl 3: 18  32  39  0  0  0  0
+lvl 4: 26  34  44  53  0  0  0
+lvl 5: 37  45  51  59  73  0  0
+lvl 6: 44  51  63  71  78  86  0
+lvl 7: 101  101  101  101  101  101  101
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 17: 1 razy
+Miejsce 18: 1 razy
+Miejsce 26: 2 razy
+Miejsce 32: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 44: 2 razy
+Miejsce 45: 1 razy
+Miejsce 51: 2 razy
+Miejsce 53: 1 razy
+Miejsce 59: 1 razy
+Miejsce 63: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 78: 1 razy
+Miejsce 86: 1 razy
+Miejsce 101: 7 razy
+
+Macierz dla liczby pytañ = 103:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 11  23  0  0  0  0  0
+lvl 3: 19  31  40  0  0  0  0
+lvl 4: 31  38  48  58  0  0  0
+lvl 5: 33  46  50  61  70  0  0
+lvl 6: 44  53  59  67  80  84  0
+lvl 7: 102  102  102  102  102  102  102
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 11: 1 razy
+Miejsce 19: 1 razy
+Miejsce 23: 1 razy
+Miejsce 31: 2 razy
+Miejsce 33: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 53: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 61: 1 razy
+Miejsce 67: 1 razy
+Miejsce 70: 1 razy
+Miejsce 80: 1 razy
+Miejsce 84: 1 razy
+Miejsce 102: 7 razy
+
+Macierz dla liczby pytañ = 104:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  24  0  0  0  0  0
+lvl 3: 22  31  42  0  0  0  0
+lvl 4: 27  36  47  57  0  0  0
+lvl 5: 39  43  55  65  71  0  0
+lvl 6: 41  56  61  71  82  90  0
+lvl 7: 103  103  103  103  103  103  103
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 22: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 36: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 57: 1 razy
+Miejsce 61: 1 razy
+Miejsce 65: 1 razy
+Miejsce 71: 2 razy
+Miejsce 82: 1 razy
+Miejsce 90: 1 razy
+Miejsce 103: 7 razy
+
+Macierz dla liczby pytañ = 105:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 15  21  0  0  0  0  0
+lvl 3: 20  29  42  0  0  0  0
+lvl 4: 30  40  46  53  0  0  0
+lvl 5: 35  46  54  66  70  0  0
+lvl 6: 47  56  65  71  78  88  0
+lvl 7: 104  104  104  104  104  104  104
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 15: 1 razy
+Miejsce 20: 1 razy
+Miejsce 21: 1 razy
+Miejsce 29: 1 razy
+Miejsce 30: 1 razy
+Miejsce 35: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 46: 2 razy
+Miejsce 47: 1 razy
+Miejsce 53: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 70: 1 razy
+Miejsce 71: 1 razy
+Miejsce 78: 1 razy
+Miejsce 88: 1 razy
+Miejsce 104: 7 razy
+
+Macierz dla liczby pytañ = 106:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  20  0  0  0  0  0
+lvl 3: 24  29  42  0  0  0  0
+lvl 4: 29  41  45  56  0  0  0
+lvl 5: 37  44  52  67  74  0  0
+lvl 6: 47  55  61  68  81  90  0
+lvl 7: 105  105  105  105  105  105  105
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 29: 2 razy
+Miejsce 37: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 52: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 61: 1 razy
+Miejsce 67: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 81: 1 razy
+Miejsce 90: 1 razy
+Miejsce 105: 7 razy
+
+Macierz dla liczby pytañ = 107:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 15  26  0  0  0  0  0
+lvl 3: 22  32  42  0  0  0  0
+lvl 4: 33  37  46  56  0  0  0
+lvl 5: 36  46  56  63  74  0  0
+lvl 6: 47  51  62  73  82  88  0
+lvl 7: 106  106  106  106  106  106  106
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 15: 1 razy
+Miejsce 22: 1 razy
+Miejsce 26: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 1 razy
+Miejsce 42: 1 razy
+Miejsce 46: 2 razy
+Miejsce 47: 1 razy
+Miejsce 51: 1 razy
+Miejsce 56: 2 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 73: 1 razy
+Miejsce 74: 1 razy
+Miejsce 82: 1 razy
+Miejsce 88: 1 razy
+Miejsce 106: 7 razy
+
+Macierz dla liczby pytañ = 108:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  25  0  0  0  0  0
+lvl 3: 24  33  39  0  0  0  0
+lvl 4: 27  36  50  54  0  0  0
+lvl 5: 37  48  56  63  73  0  0
+lvl 6: 46  57  62  70  82  90  0
+lvl 7: 107  107  107  107  107  107  107
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 33: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 57: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 70: 1 razy
+Miejsce 73: 1 razy
+Miejsce 82: 1 razy
+Miejsce 90: 1 razy
+Miejsce 107: 7 razy
+
+Macierz dla liczby pytañ = 109:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 15  23  0  0  0  0  0
+lvl 3: 22  31  43  0  0  0  0
+lvl 4: 30  37  52  58  0  0  0
+lvl 5: 40  47  56  65  72  0  0
+lvl 6: 44  58  63  70  81  90  0
+lvl 7: 108  108  108  108  108  108  108
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 15: 1 razy
+Miejsce 22: 1 razy
+Miejsce 23: 1 razy
+Miejsce 30: 1 razy
+Miejsce 31: 1 razy
+Miejsce 37: 1 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 47: 1 razy
+Miejsce 52: 1 razy
+Miejsce 56: 1 razy
+Miejsce 58: 2 razy
+Miejsce 63: 1 razy
+Miejsce 65: 1 razy
+Miejsce 70: 1 razy
+Miejsce 72: 1 razy
+Miejsce 81: 1 razy
+Miejsce 90: 1 razy
+Miejsce 108: 7 razy
+
+Macierz dla liczby pytañ = 110:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 12  21  0  0  0  0  0
+lvl 3: 23  35  40  0  0  0  0
+lvl 4: 32  39  51  57  0  0  0
+lvl 5: 37  48  58  66  76  0  0
+lvl 6: 48  58  68  74  80  90  0
+lvl 7: 109  109  109  109  109  109  109
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 12: 1 razy
+Miejsce 21: 1 razy
+Miejsce 23: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 48: 2 razy
+Miejsce 51: 1 razy
+Miejsce 57: 1 razy
+Miejsce 58: 2 razy
+Miejsce 66: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 76: 1 razy
+Miejsce 80: 1 razy
+Miejsce 90: 1 razy
+Miejsce 109: 7 razy
+
+Macierz dla liczby pytañ = 111:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 17  25  0  0  0  0  0
+lvl 3: 20  32  40  0  0  0  0
+lvl 4: 32  41  52  61  0  0  0
+lvl 5: 40  49  57  69  74  0  0
+lvl 6: 48  58  65  77  83  91  0
+lvl 7: 110  110  110  110  110  110  110
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 17: 1 razy
+Miejsce 20: 1 razy
+Miejsce 25: 1 razy
+Miejsce 32: 2 razy
+Miejsce 40: 2 razy
+Miejsce 41: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 58: 1 razy
+Miejsce 61: 1 razy
+Miejsce 65: 1 razy
+Miejsce 69: 1 razy
+Miejsce 74: 1 razy
+Miejsce 77: 1 razy
+Miejsce 83: 1 razy
+Miejsce 91: 1 razy
+Miejsce 110: 7 razy
+
+Macierz dla liczby pytañ = 112:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  26  0  0  0  0  0
+lvl 3: 23  36  44  0  0  0  0
+lvl 4: 34  41  48  59  0  0  0
+lvl 5: 38  50  57  67  78  0  0
+lvl 6: 47  54  68  74  87  91  0
+lvl 7: 111  111  111  111  111  111  111
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 41: 1 razy
+Miejsce 44: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 54: 1 razy
+Miejsce 57: 1 razy
+Miejsce 59: 1 razy
+Miejsce 67: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 78: 1 razy
+Miejsce 87: 1 razy
+Miejsce 91: 1 razy
+Miejsce 111: 7 razy
+
+Macierz dla liczby pytañ = 113:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  24  0  0  0  0  0
+lvl 3: 27  34  44  0  0  0  0
+lvl 4: 34  42  51  63  0  0  0
+lvl 5: 41  52  62  68  81  0  0
+lvl 6: 50  60  69  75  87  97  0
+lvl 7: 112  112  112  112  112  112  112
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 34: 2 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 60: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 75: 1 razy
+Miejsce 81: 1 razy
+Miejsce 87: 1 razy
+Miejsce 97: 1 razy
+Miejsce 112: 7 razy
+
+Macierz dla liczby pytañ = 114:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 16  25  0  0  0  0  0
+lvl 3: 25  36  41  0  0  0  0
+lvl 4: 32  43  48  62  0  0  0
+lvl 5: 43  49  57  71  80  0  0
+lvl 6: 45  57  68  78  89  99  0
+lvl 7: 113  113  113  113  113  113  113
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 16: 1 razy
+Miejsce 25: 2 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 43: 2 razy
+Miejsce 45: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 57: 2 razy
+Miejsce 62: 1 razy
+Miejsce 68: 1 razy
+Miejsce 71: 1 razy
+Miejsce 78: 1 razy
+Miejsce 80: 1 razy
+Miejsce 89: 1 razy
+Miejsce 99: 1 razy
+Miejsce 113: 7 razy
+
+Macierz dla liczby pytañ = 115:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  27  0  0  0  0  0
+lvl 3: 27  32  40  0  0  0  0
+lvl 4: 35  41  50  62  0  0  0
+lvl 5: 40  48  57  68  82  0  0
+lvl 6: 51  61  69  79  90  100  0
+lvl 7: 114  114  114  114  114  114  114
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 27: 2 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 40: 2 razy
+Miejsce 41: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 57: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 79: 1 razy
+Miejsce 82: 1 razy
+Miejsce 90: 1 razy
+Miejsce 100: 1 razy
+Miejsce 114: 7 razy
+
+Macierz dla liczby pytañ = 116:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  26  0  0  0  0  0
+lvl 3: 23  36  46  0  0  0  0
+lvl 4: 32  40  51  62  0  0  0
+lvl 5: 40  51  60  73  81  0  0
+lvl 6: 49  57  72  78  89  100  0
+lvl 7: 115  115  115  115  115  115  115
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 23: 1 razy
+Miejsce 26: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 40: 2 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 2 razy
+Miejsce 57: 1 razy
+Miejsce 60: 1 razy
+Miejsce 62: 1 razy
+Miejsce 72: 1 razy
+Miejsce 73: 1 razy
+Miejsce 78: 1 razy
+Miejsce 81: 1 razy
+Miejsce 89: 1 razy
+Miejsce 100: 1 razy
+Miejsce 115: 7 razy
+
+Macierz dla liczby pytañ = 117:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  24  0  0  0  0  0
+lvl 3: 27  34  45  0  0  0  0
+lvl 4: 36  41  49  59  0  0  0
+lvl 5: 40  52  58  72  81  0  0
+lvl 6: 53  62  68  79  90  101  0
+lvl 7: 116  116  116  116  116  116  116
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 24: 1 razy
+Miejsce 27: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 40: 1 razy
+Miejsce 41: 1 razy
+Miejsce 45: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 62: 1 razy
+Miejsce 68: 1 razy
+Miejsce 72: 1 razy
+Miejsce 79: 1 razy
+Miejsce 81: 1 razy
+Miejsce 90: 1 razy
+Miejsce 101: 1 razy
+Miejsce 116: 7 razy
+
+Macierz dla liczby pytañ = 118:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 13  26  0  0  0  0  0
+lvl 3: 27  34  44  0  0  0  0
+lvl 4: 31  46  54  65  0  0  0
+lvl 5: 40  50  60  74  83  0  0
+lvl 6: 48  58  68  77  88  96  0
+lvl 7: 117  117  117  117  117  117  117
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 13: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 31: 1 razy
+Miejsce 34: 1 razy
+Miejsce 40: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 54: 1 razy
+Miejsce 58: 1 razy
+Miejsce 60: 1 razy
+Miejsce 65: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 77: 1 razy
+Miejsce 83: 1 razy
+Miejsce 88: 1 razy
+Miejsce 96: 1 razy
+Miejsce 117: 7 razy
+
+Macierz dla liczby pytañ = 119:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 16  29  0  0  0  0  0
+lvl 3: 22  32  46  0  0  0  0
+lvl 4: 36  44  51  64  0  0  0
+lvl 5: 41  55  64  70  85  0  0
+lvl 6: 49  62  70  77  91  101  0
+lvl 7: 118  118  118  118  118  118  118
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 16: 1 razy
+Miejsce 22: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 55: 1 razy
+Miejsce 62: 1 razy
+Miejsce 64: 2 razy
+Miejsce 70: 2 razy
+Miejsce 77: 1 razy
+Miejsce 85: 1 razy
+Miejsce 91: 1 razy
+Miejsce 101: 1 razy
+Miejsce 118: 7 razy
+
+Macierz dla liczby pytañ = 120:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  30  0  0  0  0  0
+lvl 3: 24  33  44  0  0  0  0
+lvl 4: 37  43  54  61  0  0  0
+lvl 5: 41  52  64  75  79  0  0
+lvl 6: 54  64  71  84  93  100  0
+lvl 7: 119  119  119  119  119  119  119
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 24: 1 razy
+Miejsce 30: 1 razy
+Miejsce 33: 1 razy
+Miejsce 37: 1 razy
+Miejsce 41: 1 razy
+Miejsce 43: 1 razy
+Miejsce 44: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 2 razy
+Miejsce 61: 1 razy
+Miejsce 64: 2 razy
+Miejsce 71: 1 razy
+Miejsce 75: 1 razy
+Miejsce 79: 1 razy
+Miejsce 84: 1 razy
+Miejsce 93: 1 razy
+Miejsce 100: 1 razy
+Miejsce 119: 7 razy
+
+Macierz dla liczby pytañ = 121:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  30  0  0  0  0  0
+lvl 3: 22  37  48  0  0  0  0
+lvl 4: 37  45  54  61  0  0  0
+lvl 5: 44  53  60  71  84  0  0
+lvl 6: 51  64  72  81  95  104  0
+lvl 7: 120  120  120  120  120  120  120
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 22: 1 razy
+Miejsce 30: 1 razy
+Miejsce 37: 2 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 54: 1 razy
+Miejsce 60: 1 razy
+Miejsce 61: 1 razy
+Miejsce 64: 1 razy
+Miejsce 71: 1 razy
+Miejsce 72: 1 razy
+Miejsce 81: 1 razy
+Miejsce 84: 1 razy
+Miejsce 95: 1 razy
+Miejsce 104: 1 razy
+Miejsce 120: 7 razy
+
+Macierz dla liczby pytañ = 122:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 14  25  0  0  0  0  0
+lvl 3: 24  36  44  0  0  0  0
+lvl 4: 36  48  57  65  0  0  0
+lvl 5: 46  55  62  76  83  0  0
+lvl 6: 51  65  74  79  89  100  0
+lvl 7: 121  121  121  121  121  121  121
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 14: 1 razy
+Miejsce 24: 1 razy
+Miejsce 25: 1 razy
+Miejsce 36: 2 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 55: 1 razy
+Miejsce 57: 1 razy
+Miejsce 62: 1 razy
+Miejsce 65: 2 razy
+Miejsce 74: 1 razy
+Miejsce 76: 1 razy
+Miejsce 79: 1 razy
+Miejsce 83: 1 razy
+Miejsce 89: 1 razy
+Miejsce 100: 1 razy
+Miejsce 121: 7 razy
+
+Macierz dla liczby pytañ = 123:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  27  0  0  0  0  0
+lvl 3: 25  37  43  0  0  0  0
+lvl 4: 33  47  56  68  0  0  0
+lvl 5: 43  56  65  76  83  0  0
+lvl 6: 55  63  72  83  96  104  0
+lvl 7: 122  122  122  122  122  122  122
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 25: 1 razy
+Miejsce 27: 1 razy
+Miejsce 33: 1 razy
+Miejsce 37: 1 razy
+Miejsce 43: 2 razy
+Miejsce 47: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 2 razy
+Miejsce 63: 1 razy
+Miejsce 65: 1 razy
+Miejsce 68: 1 razy
+Miejsce 72: 1 razy
+Miejsce 76: 1 razy
+Miejsce 83: 2 razy
+Miejsce 96: 1 razy
+Miejsce 104: 1 razy
+Miejsce 122: 7 razy
+
+Macierz dla liczby pytañ = 124:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 15  25  0  0  0  0  0
+lvl 3: 25  36  47  0  0  0  0
+lvl 4: 38  47  53  67  0  0  0
+lvl 5: 43  51  63  75  86  0  0
+lvl 6: 52  61  72  83  92  101  0
+lvl 7: 123  123  123  123  123  123  123
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 15: 1 razy
+Miejsce 25: 2 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 2 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 61: 1 razy
+Miejsce 63: 1 razy
+Miejsce 67: 1 razy
+Miejsce 72: 1 razy
+Miejsce 75: 1 razy
+Miejsce 83: 1 razy
+Miejsce 86: 1 razy
+Miejsce 92: 1 razy
+Miejsce 101: 1 razy
+Miejsce 123: 7 razy
+
+Macierz dla liczby pytañ = 125:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  29  0  0  0  0  0
+lvl 3: 25  38  45  0  0  0  0
+lvl 4: 36  48  58  64  0  0  0
+lvl 5: 43  52  63  78  88  0  0
+lvl 6: 52  63  77  86  97  107  0
+lvl 7: 124  124  124  124  124  124  124
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 25: 1 razy
+Miejsce 29: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 48: 1 razy
+Miejsce 52: 2 razy
+Miejsce 58: 1 razy
+Miejsce 63: 2 razy
+Miejsce 64: 1 razy
+Miejsce 77: 1 razy
+Miejsce 78: 1 razy
+Miejsce 86: 1 razy
+Miejsce 88: 1 razy
+Miejsce 97: 1 razy
+Miejsce 107: 1 razy
+Miejsce 124: 7 razy
+
+Macierz dla liczby pytañ = 126:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  26  0  0  0  0  0
+lvl 3: 24  34  51  0  0  0  0
+lvl 4: 38  49  54  64  0  0  0
+lvl 5: 46  55  66  78  86  0  0
+lvl 6: 55  62  75  88  94  104  0
+lvl 7: 125  125  125  125  125  125  125
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 24: 1 razy
+Miejsce 26: 1 razy
+Miejsce 34: 1 razy
+Miejsce 38: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 2 razy
+Miejsce 62: 1 razy
+Miejsce 64: 1 razy
+Miejsce 66: 1 razy
+Miejsce 75: 1 razy
+Miejsce 78: 1 razy
+Miejsce 86: 1 razy
+Miejsce 88: 1 razy
+Miejsce 94: 1 razy
+Miejsce 104: 1 razy
+Miejsce 125: 7 razy
+
+Macierz dla liczby pytañ = 127:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  29  0  0  0  0  0
+lvl 3: 27  39  46  0  0  0  0
+lvl 4: 33  43  60  69  0  0  0
+lvl 5: 43  53  68  77  84  0  0
+lvl 6: 53  63  77  87  99  107  0
+lvl 7: 126  126  126  126  126  126  126
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 33: 1 razy
+Miejsce 39: 1 razy
+Miejsce 43: 2 razy
+Miejsce 46: 1 razy
+Miejsce 53: 2 razy
+Miejsce 60: 1 razy
+Miejsce 63: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 77: 2 razy
+Miejsce 84: 1 razy
+Miejsce 87: 1 razy
+Miejsce 99: 1 razy
+Miejsce 107: 1 razy
+Miejsce 126: 7 razy
+
+Macierz dla liczby pytañ = 128:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  27  0  0  0  0  0
+lvl 3: 30  39  46  0  0  0  0
+lvl 4: 39  44  54  70  0  0  0
+lvl 5: 42  55  70  77  87  0  0
+lvl 6: 55  65  75  85  96  105  0
+lvl 7: 127  127  127  127  127  127  127
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 27: 1 razy
+Miejsce 30: 1 razy
+Miejsce 39: 2 razy
+Miejsce 42: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 2 razy
+Miejsce 65: 1 razy
+Miejsce 70: 2 razy
+Miejsce 75: 1 razy
+Miejsce 77: 1 razy
+Miejsce 85: 1 razy
+Miejsce 87: 1 razy
+Miejsce 96: 1 razy
+Miejsce 105: 1 razy
+Miejsce 127: 7 razy
+
+Macierz dla liczby pytañ = 129:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 17  26  0  0  0  0  0
+lvl 3: 25  40  48  0  0  0  0
+lvl 4: 38  44  59  70  0  0  0
+lvl 5: 49  53  64  75  91  0  0
+lvl 6: 56  64  74  85  100  109  0
+lvl 7: 128  128  128  128  128  128  128
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 17: 1 razy
+Miejsce 25: 1 razy
+Miejsce 26: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 44: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 53: 1 razy
+Miejsce 56: 1 razy
+Miejsce 59: 1 razy
+Miejsce 64: 2 razy
+Miejsce 70: 1 razy
+Miejsce 74: 1 razy
+Miejsce 75: 1 razy
+Miejsce 85: 1 razy
+Miejsce 91: 1 razy
+Miejsce 100: 1 razy
+Miejsce 109: 1 razy
+Miejsce 128: 7 razy
+
+Macierz dla liczby pytañ = 130:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  27  0  0  0  0  0
+lvl 3: 26  35  49  0  0  0  0
+lvl 4: 39  44  57  71  0  0  0
+lvl 5: 46  59  67  75  89  0  0
+lvl 6: 52  63  75  91  100  112  0
+lvl 7: 129  129  129  129  129  129  129
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 26: 1 razy
+Miejsce 27: 1 razy
+Miejsce 35: 1 razy
+Miejsce 39: 1 razy
+Miejsce 44: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 59: 1 razy
+Miejsce 63: 1 razy
+Miejsce 67: 1 razy
+Miejsce 71: 1 razy
+Miejsce 75: 2 razy
+Miejsce 89: 1 razy
+Miejsce 91: 1 razy
+Miejsce 100: 1 razy
+Miejsce 112: 1 razy
+Miejsce 129: 7 razy
+
+Macierz dla liczby pytañ = 131:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 21  28  0  0  0  0  0
+lvl 3: 28  36  52  0  0  0  0
+lvl 4: 34  46  56  67  0  0  0
+lvl 5: 48  54  68  80  87  0  0
+lvl 6: 56  65  74  87  97  111  0
+lvl 7: 130  130  130  130  130  130  130
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 21: 1 razy
+Miejsce 28: 2 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 46: 1 razy
+Miejsce 48: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 2 razy
+Miejsce 65: 1 razy
+Miejsce 67: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 80: 1 razy
+Miejsce 87: 2 razy
+Miejsce 97: 1 razy
+Miejsce 111: 1 razy
+Miejsce 130: 7 razy
+
+Macierz dla liczby pytañ = 132:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 21  32  0  0  0  0  0
+lvl 3: 29  38  48  0  0  0  0
+lvl 4: 36  51  62  70  0  0  0
+lvl 5: 50  61  72  80  91  0  0
+lvl 6: 59  68  80  90  97  112  0
+lvl 7: 131  131  131  131  131  131  131
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 21: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 59: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 68: 1 razy
+Miejsce 70: 1 razy
+Miejsce 72: 1 razy
+Miejsce 80: 2 razy
+Miejsce 90: 1 razy
+Miejsce 91: 1 razy
+Miejsce 97: 1 razy
+Miejsce 112: 1 razy
+Miejsce 131: 7 razy
+
+Macierz dla liczby pytañ = 133:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 17  32  0  0  0  0  0
+lvl 3: 27  36  50  0  0  0  0
+lvl 4: 35  47  61  72  0  0  0
+lvl 5: 48  60  68  77  89  0  0
+lvl 6: 58  68  76  89  98  109  0
+lvl 7: 132  132  132  132  132  132  132
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 17: 1 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 50: 1 razy
+Miejsce 58: 1 razy
+Miejsce 60: 1 razy
+Miejsce 61: 1 razy
+Miejsce 68: 2 razy
+Miejsce 72: 1 razy
+Miejsce 76: 1 razy
+Miejsce 77: 1 razy
+Miejsce 89: 2 razy
+Miejsce 98: 1 razy
+Miejsce 109: 1 razy
+Miejsce 132: 7 razy
+
+Macierz dla liczby pytañ = 134:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  31  0  0  0  0  0
+lvl 3: 26  40  52  0  0  0  0
+lvl 4: 39  50  59  74  0  0  0
+lvl 5: 45  58  67  78  94  0  0
+lvl 6: 54  71  79  92  103  116  0
+lvl 7: 133  133  133  133  133  133  133
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 26: 1 razy
+Miejsce 31: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 45: 1 razy
+Miejsce 50: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 67: 1 razy
+Miejsce 71: 1 razy
+Miejsce 74: 1 razy
+Miejsce 78: 1 razy
+Miejsce 79: 1 razy
+Miejsce 92: 1 razy
+Miejsce 94: 1 razy
+Miejsce 103: 1 razy
+Miejsce 116: 1 razy
+Miejsce 133: 7 razy
+
+Macierz dla liczby pytañ = 135:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  27  0  0  0  0  0
+lvl 3: 29  38  51  0  0  0  0
+lvl 4: 36  51  58  74  0  0  0
+lvl 5: 49  56  69  81  94  0  0
+lvl 6: 54  70  82  94  105  116  0
+lvl 7: 134  134  134  134  134  134  134
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 27: 1 razy
+Miejsce 29: 1 razy
+Miejsce 36: 1 razy
+Miejsce 38: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 2 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 58: 1 razy
+Miejsce 69: 1 razy
+Miejsce 70: 1 razy
+Miejsce 74: 1 razy
+Miejsce 81: 1 razy
+Miejsce 82: 1 razy
+Miejsce 94: 2 razy
+Miejsce 105: 1 razy
+Miejsce 116: 1 razy
+Miejsce 134: 7 razy
+
+Macierz dla liczby pytañ = 136:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 16  32  0  0  0  0  0
+lvl 3: 29  40  49  0  0  0  0
+lvl 4: 35  53  61  72  0  0  0
+lvl 5: 46  58  68  85  91  0  0
+lvl 6: 55  66  80  95  103  116  0
+lvl 7: 135  135  135  135  135  135  135
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 16: 1 razy
+Miejsce 29: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 40: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 53: 1 razy
+Miejsce 55: 1 razy
+Miejsce 58: 1 razy
+Miejsce 61: 1 razy
+Miejsce 66: 1 razy
+Miejsce 68: 1 razy
+Miejsce 72: 1 razy
+Miejsce 80: 1 razy
+Miejsce 85: 1 razy
+Miejsce 91: 1 razy
+Miejsce 95: 1 razy
+Miejsce 103: 1 razy
+Miejsce 116: 1 razy
+Miejsce 135: 7 razy
+
+Macierz dla liczby pytañ = 137:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  31  0  0  0  0  0
+lvl 3: 26  41  51  0  0  0  0
+lvl 4: 42  53  62  71  0  0  0
+lvl 5: 48  61  73  81  92  0  0
+lvl 6: 60  69  82  93  107  118  0
+lvl 7: 136  136  136  136  136  136  136
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 26: 1 razy
+Miejsce 31: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 53: 1 razy
+Miejsce 60: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 69: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 81: 1 razy
+Miejsce 82: 1 razy
+Miejsce 92: 1 razy
+Miejsce 93: 1 razy
+Miejsce 107: 1 razy
+Miejsce 118: 1 razy
+Miejsce 136: 7 razy
+
+Macierz dla liczby pytañ = 138:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  32  0  0  0  0  0
+lvl 3: 32  38  51  0  0  0  0
+lvl 4: 39  49  61  74  0  0  0
+lvl 5: 48  57  70  86  92  0  0
+lvl 6: 57  70  79  94  106  116  0
+lvl 7: 137  137  137  137  137  137  137
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 32: 2 razy
+Miejsce 38: 1 razy
+Miejsce 39: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 57: 2 razy
+Miejsce 61: 1 razy
+Miejsce 70: 2 razy
+Miejsce 74: 1 razy
+Miejsce 79: 1 razy
+Miejsce 86: 1 razy
+Miejsce 92: 1 razy
+Miejsce 94: 1 razy
+Miejsce 106: 1 razy
+Miejsce 116: 1 razy
+Miejsce 137: 7 razy
+
+Macierz dla liczby pytañ = 139:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  28  0  0  0  0  0
+lvl 3: 27  44  49  0  0  0  0
+lvl 4: 36  48  60  72  0  0  0
+lvl 5: 52  60  75  83  96  0  0
+lvl 6: 57  68  81  95  104  115  0
+lvl 7: 138  138  138  138  138  138  138
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 27: 1 razy
+Miejsce 28: 1 razy
+Miejsce 36: 1 razy
+Miejsce 44: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 57: 1 razy
+Miejsce 60: 2 razy
+Miejsce 68: 1 razy
+Miejsce 72: 1 razy
+Miejsce 75: 1 razy
+Miejsce 81: 1 razy
+Miejsce 83: 1 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 104: 1 razy
+Miejsce 115: 1 razy
+Miejsce 138: 7 razy
+
+Macierz dla liczby pytañ = 140:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  30  0  0  0  0  0
+lvl 3: 30  42  56  0  0  0  0
+lvl 4: 42  48  66  73  0  0  0
+lvl 5: 48  58  71  86  99  0  0
+lvl 6: 59  68  82  98  106  115  0
+lvl 7: 139  139  139  139  139  139  139
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 30: 2 razy
+Miejsce 42: 2 razy
+Miejsce 48: 2 razy
+Miejsce 56: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 66: 1 razy
+Miejsce 68: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 82: 1 razy
+Miejsce 86: 1 razy
+Miejsce 98: 1 razy
+Miejsce 99: 1 razy
+Miejsce 106: 1 razy
+Miejsce 115: 1 razy
+Miejsce 139: 7 razy
+
+Macierz dla liczby pytañ = 141:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  32  0  0  0  0  0
+lvl 3: 27  40  51  0  0  0  0
+lvl 4: 43  50  65  76  0  0  0
+lvl 5: 49  59  71  88  97  0  0
+lvl 6: 61  73  83  94  110  118  0
+lvl 7: 140  140  140  140  140  140  140
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 51: 1 razy
+Miejsce 59: 1 razy
+Miejsce 61: 1 razy
+Miejsce 65: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 76: 1 razy
+Miejsce 83: 1 razy
+Miejsce 88: 1 razy
+Miejsce 94: 1 razy
+Miejsce 97: 1 razy
+Miejsce 110: 1 razy
+Miejsce 118: 1 razy
+Miejsce 140: 7 razy
+
+Macierz dla liczby pytañ = 142:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 21  33  0  0  0  0  0
+lvl 3: 29  43  54  0  0  0  0
+lvl 4: 39  55  66  73  0  0  0
+lvl 5: 52  65  72  88  100  0  0
+lvl 6: 60  72  81  97  108  120  0
+lvl 7: 141  141  141  141  141  141  141
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 21: 1 razy
+Miejsce 29: 1 razy
+Miejsce 33: 1 razy
+Miejsce 39: 1 razy
+Miejsce 43: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 1 razy
+Miejsce 60: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 72: 2 razy
+Miejsce 73: 1 razy
+Miejsce 81: 1 razy
+Miejsce 88: 1 razy
+Miejsce 97: 1 razy
+Miejsce 100: 1 razy
+Miejsce 108: 1 razy
+Miejsce 120: 1 razy
+Miejsce 141: 7 razy
+
+Macierz dla liczby pytañ = 143:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  30  0  0  0  0  0
+lvl 3: 28  43  57  0  0  0  0
+lvl 4: 39  55  61  75  0  0  0
+lvl 5: 53  63  74  87  100  0  0
+lvl 6: 62  74  86  94  109  122  0
+lvl 7: 142  142  142  142  142  142  142
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 28: 1 razy
+Miejsce 30: 1 razy
+Miejsce 39: 1 razy
+Miejsce 43: 1 razy
+Miejsce 53: 1 razy
+Miejsce 55: 1 razy
+Miejsce 57: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 74: 2 razy
+Miejsce 75: 1 razy
+Miejsce 86: 1 razy
+Miejsce 87: 1 razy
+Miejsce 94: 1 razy
+Miejsce 100: 1 razy
+Miejsce 109: 1 razy
+Miejsce 122: 1 razy
+Miejsce 142: 7 razy
+
+Macierz dla liczby pytañ = 144:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  32  0  0  0  0  0
+lvl 3: 27  39  52  0  0  0  0
+lvl 4: 44  53  63  75  0  0  0
+lvl 5: 51  65  77  84  97  0  0
+lvl 6: 63  71  86  94  108  121  0
+lvl 7: 143  143  143  143  143  143  143
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 27: 1 razy
+Miejsce 32: 1 razy
+Miejsce 39: 1 razy
+Miejsce 44: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 53: 1 razy
+Miejsce 63: 2 razy
+Miejsce 65: 1 razy
+Miejsce 71: 1 razy
+Miejsce 75: 1 razy
+Miejsce 77: 1 razy
+Miejsce 84: 1 razy
+Miejsce 86: 1 razy
+Miejsce 94: 1 razy
+Miejsce 97: 1 razy
+Miejsce 108: 1 razy
+Miejsce 121: 1 razy
+Miejsce 143: 7 razy
+
+Macierz dla liczby pytañ = 145:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  35  0  0  0  0  0
+lvl 3: 33  42  56  0  0  0  0
+lvl 4: 42  55  65  74  0  0  0
+lvl 5: 51  61  76  87  100  0  0
+lvl 6: 62  76  83  101  108  123  0
+lvl 7: 144  144  144  144  144  144  144
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 33: 1 razy
+Miejsce 35: 1 razy
+Miejsce 42: 2 razy
+Miejsce 51: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 65: 1 razy
+Miejsce 74: 1 razy
+Miejsce 76: 2 razy
+Miejsce 83: 1 razy
+Miejsce 87: 1 razy
+Miejsce 100: 1 razy
+Miejsce 101: 1 razy
+Miejsce 108: 1 razy
+Miejsce 123: 1 razy
+Miejsce 144: 7 razy
+
+Macierz dla liczby pytañ = 146:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  35  0  0  0  0  0
+lvl 3: 31  45  56  0  0  0  0
+lvl 4: 44  53  68  80  0  0  0
+lvl 5: 50  62  79  90  101  0  0
+lvl 6: 62  74  89  98  112  125  0
+lvl 7: 145  145  145  145  145  145  145
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 31: 1 razy
+Miejsce 35: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 50: 1 razy
+Miejsce 53: 1 razy
+Miejsce 56: 1 razy
+Miejsce 62: 2 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 79: 1 razy
+Miejsce 80: 1 razy
+Miejsce 89: 1 razy
+Miejsce 90: 1 razy
+Miejsce 98: 1 razy
+Miejsce 101: 1 razy
+Miejsce 112: 1 razy
+Miejsce 125: 1 razy
+Miejsce 145: 7 razy
+
+Macierz dla liczby pytañ = 147:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  36  0  0  0  0  0
+lvl 3: 34  41  54  0  0  0  0
+lvl 4: 39  57  65  80  0  0  0
+lvl 5: 49  66  78  88  99  0  0
+lvl 6: 64  72  85  99  112  123  0
+lvl 7: 146  146  146  146  146  146  146
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 34: 1 razy
+Miejsce 36: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 49: 1 razy
+Miejsce 54: 1 razy
+Miejsce 57: 1 razy
+Miejsce 64: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 72: 1 razy
+Miejsce 78: 1 razy
+Miejsce 80: 1 razy
+Miejsce 85: 1 razy
+Miejsce 88: 1 razy
+Miejsce 99: 2 razy
+Miejsce 112: 1 razy
+Miejsce 123: 1 razy
+Miejsce 146: 7 razy
+
+Macierz dla liczby pytañ = 148:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  33  0  0  0  0  0
+lvl 3: 34  46  58  0  0  0  0
+lvl 4: 42  54  63  77  0  0  0
+lvl 5: 54  64  80  90  105  0  0
+lvl 6: 62  73  85  100  112  124  0
+lvl 7: 147  147  147  147  147  147  147
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 33: 1 razy
+Miejsce 34: 1 razy
+Miejsce 42: 1 razy
+Miejsce 46: 1 razy
+Miejsce 54: 2 razy
+Miejsce 58: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 64: 1 razy
+Miejsce 73: 1 razy
+Miejsce 77: 1 razy
+Miejsce 80: 1 razy
+Miejsce 85: 1 razy
+Miejsce 90: 1 razy
+Miejsce 100: 1 razy
+Miejsce 105: 1 razy
+Miejsce 112: 1 razy
+Miejsce 124: 1 razy
+Miejsce 147: 7 razy
+
+Macierz dla liczby pytañ = 149:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  35  0  0  0  0  0
+lvl 3: 30  44  57  0  0  0  0
+lvl 4: 45  54  64  80  0  0  0
+lvl 5: 53  67  75  87  100  0  0
+lvl 6: 65  75  89  100  113  122  0
+lvl 7: 148  148  148  148  148  148  148
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 30: 1 razy
+Miejsce 35: 1 razy
+Miejsce 44: 1 razy
+Miejsce 45: 1 razy
+Miejsce 53: 1 razy
+Miejsce 54: 1 razy
+Miejsce 57: 1 razy
+Miejsce 64: 1 razy
+Miejsce 65: 1 razy
+Miejsce 67: 1 razy
+Miejsce 75: 2 razy
+Miejsce 80: 1 razy
+Miejsce 87: 1 razy
+Miejsce 89: 1 razy
+Miejsce 100: 2 razy
+Miejsce 113: 1 razy
+Miejsce 122: 1 razy
+Miejsce 148: 7 razy
+
+Macierz dla liczby pytañ = 150:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  33  0  0  0  0  0
+lvl 3: 30  46  55  0  0  0  0
+lvl 4: 39  54  70  82  0  0  0
+lvl 5: 50  65  80  90  101  0  0
+lvl 6: 62  75  90  103  112  125  0
+lvl 7: 149  149  149  149  149  149  149
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 30: 1 razy
+Miejsce 33: 1 razy
+Miejsce 39: 1 razy
+Miejsce 46: 1 razy
+Miejsce 50: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 1 razy
+Miejsce 62: 1 razy
+Miejsce 65: 1 razy
+Miejsce 70: 1 razy
+Miejsce 75: 1 razy
+Miejsce 80: 1 razy
+Miejsce 82: 1 razy
+Miejsce 90: 2 razy
+Miejsce 101: 1 razy
+Miejsce 103: 1 razy
+Miejsce 112: 1 razy
+Miejsce 125: 1 razy
+Miejsce 149: 7 razy
+
+Macierz dla liczby pytañ = 151:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  35  0  0  0  0  0
+lvl 3: 29  47  54  0  0  0  0
+lvl 4: 43  55  71  83  0  0  0
+lvl 5: 51  63  77  92  103  0  0
+lvl 6: 63  74  90  100  114  127  0
+lvl 7: 150  150  150  150  150  150  150
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 29: 1 razy
+Miejsce 35: 1 razy
+Miejsce 43: 1 razy
+Miejsce 47: 1 razy
+Miejsce 51: 1 razy
+Miejsce 54: 1 razy
+Miejsce 55: 1 razy
+Miejsce 63: 2 razy
+Miejsce 71: 1 razy
+Miejsce 74: 1 razy
+Miejsce 77: 1 razy
+Miejsce 83: 1 razy
+Miejsce 90: 1 razy
+Miejsce 92: 1 razy
+Miejsce 100: 1 razy
+Miejsce 103: 1 razy
+Miejsce 114: 1 razy
+Miejsce 127: 1 razy
+Miejsce 150: 7 razy
+
+Macierz dla liczby pytañ = 152:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 18  33  0  0  0  0  0
+lvl 3: 32  43  56  0  0  0  0
+lvl 4: 46  53  67  82  0  0  0
+lvl 5: 54  65  82  95  103  0  0
+lvl 6: 68  74  91  105  112  126  0
+lvl 7: 151  151  151  151  151  151  151
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 18: 1 razy
+Miejsce 32: 1 razy
+Miejsce 33: 1 razy
+Miejsce 43: 1 razy
+Miejsce 46: 1 razy
+Miejsce 53: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 65: 1 razy
+Miejsce 67: 1 razy
+Miejsce 68: 1 razy
+Miejsce 74: 1 razy
+Miejsce 82: 2 razy
+Miejsce 91: 1 razy
+Miejsce 95: 1 razy
+Miejsce 103: 1 razy
+Miejsce 105: 1 razy
+Miejsce 112: 1 razy
+Miejsce 126: 1 razy
+Miejsce 151: 7 razy
+
+Macierz dla liczby pytañ = 153:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 19  36  0  0  0  0  0
+lvl 3: 30  46  55  0  0  0  0
+lvl 4: 43  55  70  79  0  0  0
+lvl 5: 52  65  83  95  102  0  0
+lvl 6: 65  77  89  104  114  128  0
+lvl 7: 152  152  152  152  152  152  152
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 19: 1 razy
+Miejsce 30: 1 razy
+Miejsce 36: 1 razy
+Miejsce 43: 1 razy
+Miejsce 46: 1 razy
+Miejsce 52: 1 razy
+Miejsce 55: 2 razy
+Miejsce 65: 2 razy
+Miejsce 70: 1 razy
+Miejsce 77: 1 razy
+Miejsce 79: 1 razy
+Miejsce 83: 1 razy
+Miejsce 89: 1 razy
+Miejsce 95: 1 razy
+Miejsce 102: 1 razy
+Miejsce 104: 1 razy
+Miejsce 114: 1 razy
+Miejsce 128: 1 razy
+Miejsce 152: 7 razy
+
+Macierz dla liczby pytañ = 154:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  34  0  0  0  0  0
+lvl 3: 34  46  61  0  0  0  0
+lvl 4: 47  55  69  81  0  0  0
+lvl 5: 56  67  81  92  106  0  0
+lvl 6: 67  78  93  104  114  127  0
+lvl 7: 153  153  153  153  153  153  153
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 34: 2 razy
+Miejsce 46: 1 razy
+Miejsce 47: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 61: 1 razy
+Miejsce 67: 2 razy
+Miejsce 69: 1 razy
+Miejsce 78: 1 razy
+Miejsce 81: 2 razy
+Miejsce 92: 1 razy
+Miejsce 93: 1 razy
+Miejsce 104: 1 razy
+Miejsce 106: 1 razy
+Miejsce 114: 1 razy
+Miejsce 127: 1 razy
+Miejsce 153: 7 razy
+
+Macierz dla liczby pytañ = 155:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  36  0  0  0  0  0
+lvl 3: 30  44  62  0  0  0  0
+lvl 4: 44  58  73  80  0  0  0
+lvl 5: 52  65  84  92  109  0  0
+lvl 6: 69  78  92  104  120  132  0
+lvl 7: 154  154  154  154  154  154  154
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 30: 1 razy
+Miejsce 36: 1 razy
+Miejsce 44: 2 razy
+Miejsce 52: 1 razy
+Miejsce 58: 1 razy
+Miejsce 62: 1 razy
+Miejsce 65: 1 razy
+Miejsce 69: 1 razy
+Miejsce 73: 1 razy
+Miejsce 78: 1 razy
+Miejsce 80: 1 razy
+Miejsce 84: 1 razy
+Miejsce 92: 2 razy
+Miejsce 104: 1 razy
+Miejsce 109: 1 razy
+Miejsce 120: 1 razy
+Miejsce 132: 1 razy
+Miejsce 154: 7 razy
+
+Macierz dla liczby pytañ = 156:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  35  0  0  0  0  0
+lvl 3: 30  47  62  0  0  0  0
+lvl 4: 42  58  72  82  0  0  0
+lvl 5: 54  71  80  97  110  0  0
+lvl 6: 66  76  94  105  119  133  0
+lvl 7: 155  155  155  155  155  155  155
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 30: 1 razy
+Miejsce 35: 1 razy
+Miejsce 42: 1 razy
+Miejsce 47: 1 razy
+Miejsce 54: 1 razy
+Miejsce 58: 1 razy
+Miejsce 62: 1 razy
+Miejsce 66: 1 razy
+Miejsce 71: 1 razy
+Miejsce 72: 1 razy
+Miejsce 76: 1 razy
+Miejsce 80: 1 razy
+Miejsce 82: 1 razy
+Miejsce 94: 1 razy
+Miejsce 97: 1 razy
+Miejsce 105: 1 razy
+Miejsce 110: 1 razy
+Miejsce 119: 1 razy
+Miejsce 133: 1 razy
+Miejsce 155: 7 razy
+
+Macierz dla liczby pytañ = 157:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  36  0  0  0  0  0
+lvl 3: 35  47  62  0  0  0  0
+lvl 4: 45  57  71  84  0  0  0
+lvl 5: 56  69  85  93  105  0  0
+lvl 6: 70  78  96  107  116  134  0
+lvl 7: 156  156  156  156  156  156  156
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 35: 1 razy
+Miejsce 36: 1 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 56: 1 razy
+Miejsce 57: 1 razy
+Miejsce 62: 1 razy
+Miejsce 69: 1 razy
+Miejsce 70: 1 razy
+Miejsce 71: 1 razy
+Miejsce 78: 1 razy
+Miejsce 84: 1 razy
+Miejsce 85: 1 razy
+Miejsce 93: 1 razy
+Miejsce 96: 1 razy
+Miejsce 105: 1 razy
+Miejsce 107: 1 razy
+Miejsce 116: 1 razy
+Miejsce 134: 1 razy
+Miejsce 156: 7 razy
+
+Macierz dla liczby pytañ = 158:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 20  37  0  0  0  0  0
+lvl 3: 33  48  62  0  0  0  0
+lvl 4: 48  61  73  87  0  0  0
+lvl 5: 58  68  80  98  107  0  0
+lvl 6: 65  82  94  110  121  134  0
+lvl 7: 157  157  157  157  157  157  157
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 20: 1 razy
+Miejsce 33: 1 razy
+Miejsce 37: 1 razy
+Miejsce 48: 2 razy
+Miejsce 58: 1 razy
+Miejsce 61: 1 razy
+Miejsce 62: 1 razy
+Miejsce 65: 1 razy
+Miejsce 68: 1 razy
+Miejsce 73: 1 razy
+Miejsce 80: 1 razy
+Miejsce 82: 1 razy
+Miejsce 87: 1 razy
+Miejsce 94: 1 razy
+Miejsce 98: 1 razy
+Miejsce 107: 1 razy
+Miejsce 110: 1 razy
+Miejsce 121: 1 razy
+Miejsce 134: 1 razy
+Miejsce 157: 7 razy
+
+Macierz dla liczby pytañ = 159:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  34  0  0  0  0  0
+lvl 3: 37  49  63  0  0  0  0
+lvl 4: 42  60  71  82  0  0  0
+lvl 5: 59  68  85  95  106  0  0
+lvl 6: 69  80  96  106  122  134  0
+lvl 7: 158  158  158  158  158  158  158
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 34: 1 razy
+Miejsce 37: 1 razy
+Miejsce 42: 1 razy
+Miejsce 49: 1 razy
+Miejsce 59: 1 razy
+Miejsce 60: 1 razy
+Miejsce 63: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 71: 1 razy
+Miejsce 80: 1 razy
+Miejsce 82: 1 razy
+Miejsce 85: 1 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 106: 2 razy
+Miejsce 122: 1 razy
+Miejsce 134: 1 razy
+Miejsce 158: 7 razy
+
+Macierz dla liczby pytañ = 160:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  35  0  0  0  0  0
+lvl 3: 32  48  62  0  0  0  0
+lvl 4: 47  56  70  85  0  0  0
+lvl 5: 57  73  86  96  108  0  0
+lvl 6: 71  83  94  105  120  132  0
+lvl 7: 159  159  159  159  159  159  159
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 32: 1 razy
+Miejsce 35: 1 razy
+Miejsce 47: 1 razy
+Miejsce 48: 1 razy
+Miejsce 56: 1 razy
+Miejsce 57: 1 razy
+Miejsce 62: 1 razy
+Miejsce 70: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 83: 1 razy
+Miejsce 85: 1 razy
+Miejsce 86: 1 razy
+Miejsce 94: 1 razy
+Miejsce 96: 1 razy
+Miejsce 105: 1 razy
+Miejsce 108: 1 razy
+Miejsce 120: 1 razy
+Miejsce 132: 1 razy
+Miejsce 159: 7 razy
+
+Macierz dla liczby pytañ = 161:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  39  0  0  0  0  0
+lvl 3: 37  44  64  0  0  0  0
+lvl 4: 44  57  75  89  0  0  0
+lvl 5: 56  73  86  95  114  0  0
+lvl 6: 67  80  96  112  125  135  0
+lvl 7: 160  160  160  160  160  160  160
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 44: 2 razy
+Miejsce 56: 1 razy
+Miejsce 57: 1 razy
+Miejsce 64: 1 razy
+Miejsce 67: 1 razy
+Miejsce 73: 1 razy
+Miejsce 75: 1 razy
+Miejsce 80: 1 razy
+Miejsce 86: 1 razy
+Miejsce 89: 1 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 112: 1 razy
+Miejsce 114: 1 razy
+Miejsce 125: 1 razy
+Miejsce 135: 1 razy
+Miejsce 160: 7 razy
+
+Macierz dla liczby pytañ = 162:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  37  0  0  0  0  0
+lvl 3: 31  51  60  0  0  0  0
+lvl 4: 49  56  70  89  0  0  0
+lvl 5: 55  73  86  95  112  0  0
+lvl 6: 70  82  99  110  121  134  0
+lvl 7: 161  161  161  161  161  161  161
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 31: 1 razy
+Miejsce 37: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 55: 1 razy
+Miejsce 56: 1 razy
+Miejsce 60: 1 razy
+Miejsce 70: 2 razy
+Miejsce 73: 1 razy
+Miejsce 82: 1 razy
+Miejsce 86: 1 razy
+Miejsce 89: 1 razy
+Miejsce 95: 1 razy
+Miejsce 99: 1 razy
+Miejsce 110: 1 razy
+Miejsce 112: 1 razy
+Miejsce 121: 1 razy
+Miejsce 134: 1 razy
+Miejsce 161: 7 razy
+
+Macierz dla liczby pytañ = 163:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  36  0  0  0  0  0
+lvl 3: 33  47  59  0  0  0  0
+lvl 4: 46  59  70  84  0  0  0
+lvl 5: 56  68  82  95  114  0  0
+lvl 6: 70  80  95  108  121  135  0
+lvl 7: 162  162  162  162  162  162  162
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 33: 1 razy
+Miejsce 36: 1 razy
+Miejsce 46: 1 razy
+Miejsce 47: 1 razy
+Miejsce 56: 1 razy
+Miejsce 59: 2 razy
+Miejsce 68: 1 razy
+Miejsce 70: 2 razy
+Miejsce 80: 1 razy
+Miejsce 82: 1 razy
+Miejsce 84: 1 razy
+Miejsce 95: 2 razy
+Miejsce 108: 1 razy
+Miejsce 114: 1 razy
+Miejsce 121: 1 razy
+Miejsce 135: 1 razy
+Miejsce 162: 7 razy
+
+Macierz dla liczby pytañ = 164:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 24  40  0  0  0  0  0
+lvl 3: 38  50  63  0  0  0  0
+lvl 4: 46  61  74  89  0  0  0
+lvl 5: 57  70  87  100  111  0  0
+lvl 6: 68  82  98  113  124  136  0
+lvl 7: 163  163  163  163  163  163  163
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 24: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 46: 1 razy
+Miejsce 50: 1 razy
+Miejsce 57: 1 razy
+Miejsce 61: 1 razy
+Miejsce 63: 1 razy
+Miejsce 68: 1 razy
+Miejsce 70: 1 razy
+Miejsce 74: 1 razy
+Miejsce 82: 1 razy
+Miejsce 87: 1 razy
+Miejsce 89: 1 razy
+Miejsce 98: 1 razy
+Miejsce 100: 1 razy
+Miejsce 111: 1 razy
+Miejsce 113: 1 razy
+Miejsce 124: 1 razy
+Miejsce 136: 1 razy
+Miejsce 163: 7 razy
+
+Macierz dla liczby pytañ = 165:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  36  0  0  0  0  0
+lvl 3: 32  51  65  0  0  0  0
+lvl 4: 48  59  72  86  0  0  0
+lvl 5: 58  73  85  101  111  0  0
+lvl 6: 70  83  95  109  123  142  0
+lvl 7: 164  164  164  164  164  164  164
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 32: 1 razy
+Miejsce 36: 1 razy
+Miejsce 48: 1 razy
+Miejsce 51: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 65: 1 razy
+Miejsce 70: 1 razy
+Miejsce 72: 1 razy
+Miejsce 73: 1 razy
+Miejsce 83: 1 razy
+Miejsce 85: 1 razy
+Miejsce 86: 1 razy
+Miejsce 95: 1 razy
+Miejsce 101: 1 razy
+Miejsce 109: 1 razy
+Miejsce 111: 1 razy
+Miejsce 123: 1 razy
+Miejsce 142: 1 razy
+Miejsce 164: 7 razy
+
+Macierz dla liczby pytañ = 166:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 24  38  0  0  0  0  0
+lvl 3: 37  49  63  0  0  0  0
+lvl 4: 50  63  77  89  0  0  0
+lvl 5: 58  74  88  97  111  0  0
+lvl 6: 73  85  96  109  129  143  0
+lvl 7: 165  165  165  165  165  165  165
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 24: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 58: 1 razy
+Miejsce 63: 2 razy
+Miejsce 73: 1 razy
+Miejsce 74: 1 razy
+Miejsce 77: 1 razy
+Miejsce 85: 1 razy
+Miejsce 88: 1 razy
+Miejsce 89: 1 razy
+Miejsce 96: 1 razy
+Miejsce 97: 1 razy
+Miejsce 109: 1 razy
+Miejsce 111: 1 razy
+Miejsce 129: 1 razy
+Miejsce 143: 1 razy
+Miejsce 165: 7 razy
+
+Macierz dla liczby pytañ = 167:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  38  0  0  0  0  0
+lvl 3: 38  47  63  0  0  0  0
+lvl 4: 45  59  74  88  0  0  0
+lvl 5: 58  73  88  100  115  0  0
+lvl 6: 70  83  102  110  129  142  0
+lvl 7: 166  166  166  166  166  166  166
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 38: 2 razy
+Miejsce 45: 1 razy
+Miejsce 47: 1 razy
+Miejsce 58: 1 razy
+Miejsce 59: 1 razy
+Miejsce 63: 1 razy
+Miejsce 70: 1 razy
+Miejsce 73: 1 razy
+Miejsce 74: 1 razy
+Miejsce 83: 1 razy
+Miejsce 88: 2 razy
+Miejsce 100: 1 razy
+Miejsce 102: 1 razy
+Miejsce 110: 1 razy
+Miejsce 115: 1 razy
+Miejsce 129: 1 razy
+Miejsce 142: 1 razy
+Miejsce 166: 7 razy
+
+Macierz dla liczby pytañ = 168:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 27  39  0  0  0  0  0
+lvl 3: 35  51  64  0  0  0  0
+lvl 4: 49  59  75  88  0  0  0
+lvl 5: 60  72  88  104  117  0  0
+lvl 6: 73  88  98  112  130  145  0
+lvl 7: 167  167  167  167  167  167  167
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 27: 1 razy
+Miejsce 35: 1 razy
+Miejsce 39: 1 razy
+Miejsce 49: 1 razy
+Miejsce 51: 1 razy
+Miejsce 59: 1 razy
+Miejsce 60: 1 razy
+Miejsce 64: 1 razy
+Miejsce 72: 1 razy
+Miejsce 73: 1 razy
+Miejsce 75: 1 razy
+Miejsce 88: 3 razy
+Miejsce 98: 1 razy
+Miejsce 104: 1 razy
+Miejsce 112: 1 razy
+Miejsce 117: 1 razy
+Miejsce 130: 1 razy
+Miejsce 145: 1 razy
+Miejsce 167: 7 razy
+
+Macierz dla liczby pytañ = 169:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 21  37  0  0  0  0  0
+lvl 3: 38  49  67  0  0  0  0
+lvl 4: 46  64  77  93  0  0  0
+lvl 5: 63  76  87  99  115  0  0
+lvl 6: 75  87  97  117  128  139  0
+lvl 7: 168  168  168  168  168  168  168
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 21: 1 razy
+Miejsce 37: 1 razy
+Miejsce 38: 1 razy
+Miejsce 46: 1 razy
+Miejsce 49: 1 razy
+Miejsce 63: 1 razy
+Miejsce 64: 1 razy
+Miejsce 67: 1 razy
+Miejsce 75: 1 razy
+Miejsce 76: 1 razy
+Miejsce 77: 1 razy
+Miejsce 87: 2 razy
+Miejsce 93: 1 razy
+Miejsce 97: 1 razy
+Miejsce 99: 1 razy
+Miejsce 115: 1 razy
+Miejsce 117: 1 razy
+Miejsce 128: 1 razy
+Miejsce 139: 1 razy
+Miejsce 168: 7 razy
+
+Macierz dla liczby pytañ = 170:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  41  0  0  0  0  0
+lvl 3: 34  51  61  0  0  0  0
+lvl 4: 46  61  74  89  0  0  0
+lvl 5: 63  77  92  105  117  0  0
+lvl 6: 75  84  103  117  130  144  0
+lvl 7: 169  169  169  169  169  169  169
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 34: 1 razy
+Miejsce 41: 1 razy
+Miejsce 46: 1 razy
+Miejsce 51: 1 razy
+Miejsce 61: 2 razy
+Miejsce 63: 1 razy
+Miejsce 74: 1 razy
+Miejsce 75: 1 razy
+Miejsce 77: 1 razy
+Miejsce 84: 1 razy
+Miejsce 89: 1 razy
+Miejsce 92: 1 razy
+Miejsce 103: 1 razy
+Miejsce 105: 1 razy
+Miejsce 117: 2 razy
+Miejsce 130: 1 razy
+Miejsce 144: 1 razy
+Miejsce 169: 7 razy
+
+Macierz dla liczby pytañ = 171:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 27  41  0  0  0  0  0
+lvl 3: 33  52  65  0  0  0  0
+lvl 4: 51  66  75  94  0  0  0
+lvl 5: 63  72  87  103  120  0  0
+lvl 6: 75  90  101  114  130  144  0
+lvl 7: 170  170  170  170  170  170  170
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 27: 1 razy
+Miejsce 33: 1 razy
+Miejsce 41: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 63: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 72: 1 razy
+Miejsce 75: 2 razy
+Miejsce 87: 1 razy
+Miejsce 90: 1 razy
+Miejsce 94: 1 razy
+Miejsce 101: 1 razy
+Miejsce 103: 1 razy
+Miejsce 114: 1 razy
+Miejsce 120: 1 razy
+Miejsce 130: 1 razy
+Miejsce 144: 1 razy
+Miejsce 170: 7 razy
+
+Macierz dla liczby pytañ = 172:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  36  0  0  0  0  0
+lvl 3: 36  50  66  0  0  0  0
+lvl 4: 49  60  80  92  0  0  0
+lvl 5: 59  75  89  101  119  0  0
+lvl 6: 72  88  101  114  128  146  0
+lvl 7: 171  171  171  171  171  171  171
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 36: 2 razy
+Miejsce 49: 1 razy
+Miejsce 50: 1 razy
+Miejsce 59: 1 razy
+Miejsce 60: 1 razy
+Miejsce 66: 1 razy
+Miejsce 72: 1 razy
+Miejsce 75: 1 razy
+Miejsce 80: 1 razy
+Miejsce 88: 1 razy
+Miejsce 89: 1 razy
+Miejsce 92: 1 razy
+Miejsce 101: 2 razy
+Miejsce 114: 1 razy
+Miejsce 119: 1 razy
+Miejsce 128: 1 razy
+Miejsce 146: 1 razy
+Miejsce 171: 7 razy
+
+Macierz dla liczby pytañ = 173:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  42  0  0  0  0  0
+lvl 3: 34  49  65  0  0  0  0
+lvl 4: 49  62  81  92  0  0  0
+lvl 5: 62  73  91  106  120  0  0
+lvl 6: 74  86  105  119  129  146  0
+lvl 7: 172  172  172  172  172  172  172
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 34: 1 razy
+Miejsce 42: 1 razy
+Miejsce 49: 2 razy
+Miejsce 62: 2 razy
+Miejsce 65: 1 razy
+Miejsce 73: 1 razy
+Miejsce 74: 1 razy
+Miejsce 81: 1 razy
+Miejsce 86: 1 razy
+Miejsce 91: 1 razy
+Miejsce 92: 1 razy
+Miejsce 105: 1 razy
+Miejsce 106: 1 razy
+Miejsce 119: 1 razy
+Miejsce 120: 1 razy
+Miejsce 129: 1 razy
+Miejsce 146: 1 razy
+Miejsce 172: 7 razy
+
+Macierz dla liczby pytañ = 174:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 22  40  0  0  0  0  0
+lvl 3: 39  48  68  0  0  0  0
+lvl 4: 49  63  81  95  0  0  0
+lvl 5: 62  75  90  105  119  0  0
+lvl 6: 73  86  101  120  132  144  0
+lvl 7: 173  173  173  173  173  173  173
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 22: 1 razy
+Miejsce 39: 1 razy
+Miejsce 40: 1 razy
+Miejsce 48: 1 razy
+Miejsce 49: 1 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 68: 1 razy
+Miejsce 73: 1 razy
+Miejsce 75: 1 razy
+Miejsce 81: 1 razy
+Miejsce 86: 1 razy
+Miejsce 90: 1 razy
+Miejsce 95: 1 razy
+Miejsce 101: 1 razy
+Miejsce 105: 1 razy
+Miejsce 119: 1 razy
+Miejsce 120: 1 razy
+Miejsce 132: 1 razy
+Miejsce 144: 1 razy
+Miejsce 173: 7 razy
+
+Macierz dla liczby pytañ = 175:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  41  0  0  0  0  0
+lvl 3: 39  55  65  0  0  0  0
+lvl 4: 53  66  80  93  0  0  0
+lvl 5: 59  77  91  104  117  0  0
+lvl 6: 78  89  103  116  135  148  0
+lvl 7: 174  174  174  174  174  174  174
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 39: 1 razy
+Miejsce 41: 1 razy
+Miejsce 53: 1 razy
+Miejsce 55: 1 razy
+Miejsce 59: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 77: 1 razy
+Miejsce 78: 1 razy
+Miejsce 80: 1 razy
+Miejsce 89: 1 razy
+Miejsce 91: 1 razy
+Miejsce 93: 1 razy
+Miejsce 103: 1 razy
+Miejsce 104: 1 razy
+Miejsce 116: 1 razy
+Miejsce 117: 1 razy
+Miejsce 135: 1 razy
+Miejsce 148: 1 razy
+Miejsce 174: 7 razy
+
+Macierz dla liczby pytañ = 176:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  39  0  0  0  0  0
+lvl 3: 35  50  66  0  0  0  0
+lvl 4: 53  61  81  97  0  0  0
+lvl 5: 61  75  94  106  120  0  0
+lvl 6: 75  92  106  120  135  145  0
+lvl 7: 175  175  175  175  175  175  175
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 35: 1 razy
+Miejsce 39: 1 razy
+Miejsce 50: 1 razy
+Miejsce 53: 1 razy
+Miejsce 61: 2 razy
+Miejsce 66: 1 razy
+Miejsce 75: 2 razy
+Miejsce 81: 1 razy
+Miejsce 92: 1 razy
+Miejsce 94: 1 razy
+Miejsce 97: 1 razy
+Miejsce 106: 2 razy
+Miejsce 120: 2 razy
+Miejsce 135: 1 razy
+Miejsce 145: 1 razy
+Miejsce 175: 7 razy
+
+Macierz dla liczby pytañ = 177:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  37  0  0  0  0  0
+lvl 3: 36  53  64  0  0  0  0
+lvl 4: 49  65  80  92  0  0  0
+lvl 5: 63  79  94  105  124  0  0
+lvl 6: 77  88  103  117  137  150  0
+lvl 7: 176  176  176  176  176  176  176
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 36: 1 razy
+Miejsce 37: 1 razy
+Miejsce 49: 1 razy
+Miejsce 53: 1 razy
+Miejsce 63: 1 razy
+Miejsce 64: 1 razy
+Miejsce 65: 1 razy
+Miejsce 77: 1 razy
+Miejsce 79: 1 razy
+Miejsce 80: 1 razy
+Miejsce 88: 1 razy
+Miejsce 92: 1 razy
+Miejsce 94: 1 razy
+Miejsce 103: 1 razy
+Miejsce 105: 1 razy
+Miejsce 117: 1 razy
+Miejsce 124: 1 razy
+Miejsce 137: 1 razy
+Miejsce 150: 1 razy
+Miejsce 176: 7 razy
+
+Macierz dla liczby pytañ = 178:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 23  37  0  0  0  0  0
+lvl 3: 39  49  66  0  0  0  0
+lvl 4: 49  63  79  97  0  0  0
+lvl 5: 62  81  96  110  123  0  0
+lvl 6: 76  92  108  120  133  148  0
+lvl 7: 177  177  177  177  177  177  177
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 23: 1 razy
+Miejsce 37: 1 razy
+Miejsce 39: 1 razy
+Miejsce 49: 2 razy
+Miejsce 62: 1 razy
+Miejsce 63: 1 razy
+Miejsce 66: 1 razy
+Miejsce 76: 1 razy
+Miejsce 79: 1 razy
+Miejsce 81: 1 razy
+Miejsce 92: 1 razy
+Miejsce 96: 1 razy
+Miejsce 97: 1 razy
+Miejsce 108: 1 razy
+Miejsce 110: 1 razy
+Miejsce 120: 1 razy
+Miejsce 123: 1 razy
+Miejsce 133: 1 razy
+Miejsce 148: 1 razy
+Miejsce 177: 7 razy
+
+Macierz dla liczby pytañ = 179:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  40  0  0  0  0  0
+lvl 3: 38  56  67  0  0  0  0
+lvl 4: 51  69  78  96  0  0  0
+lvl 5: 61  80  93  107  121  0  0
+lvl 6: 77  93  106  123  137  154  0
+lvl 7: 178  178  178  178  178  178  178
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 51: 1 razy
+Miejsce 56: 1 razy
+Miejsce 61: 1 razy
+Miejsce 67: 1 razy
+Miejsce 69: 1 razy
+Miejsce 77: 1 razy
+Miejsce 78: 1 razy
+Miejsce 80: 1 razy
+Miejsce 93: 2 razy
+Miejsce 96: 1 razy
+Miejsce 106: 1 razy
+Miejsce 107: 1 razy
+Miejsce 121: 1 razy
+Miejsce 123: 1 razy
+Miejsce 137: 1 razy
+Miejsce 154: 1 razy
+Miejsce 178: 7 razy
+
+Macierz dla liczby pytañ = 180:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  43  0  0  0  0  0
+lvl 3: 38  54  71  0  0  0  0
+lvl 4: 54  63  78  98  0  0  0
+lvl 5: 67  80  96  112  125  0  0
+lvl 6: 78  95  110  122  140  150  0
+lvl 7: 179  179  179  179  179  179  179
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 38: 1 razy
+Miejsce 43: 1 razy
+Miejsce 54: 2 razy
+Miejsce 63: 1 razy
+Miejsce 67: 1 razy
+Miejsce 71: 1 razy
+Miejsce 78: 2 razy
+Miejsce 80: 1 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 98: 1 razy
+Miejsce 110: 1 razy
+Miejsce 112: 1 razy
+Miejsce 122: 1 razy
+Miejsce 125: 1 razy
+Miejsce 140: 1 razy
+Miejsce 150: 1 razy
+Miejsce 179: 7 razy
+
+Macierz dla liczby pytañ = 181:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  39  0  0  0  0  0
+lvl 3: 36  50  67  0  0  0  0
+lvl 4: 50  65  83  97  0  0  0
+lvl 5: 67  82  95  112  126  0  0
+lvl 6: 78  93  105  124  139  155  0
+lvl 7: 180  180  180  180  180  180  180
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 36: 1 razy
+Miejsce 39: 1 razy
+Miejsce 50: 2 razy
+Miejsce 65: 1 razy
+Miejsce 67: 2 razy
+Miejsce 78: 1 razy
+Miejsce 82: 1 razy
+Miejsce 83: 1 razy
+Miejsce 93: 1 razy
+Miejsce 95: 1 razy
+Miejsce 97: 1 razy
+Miejsce 105: 1 razy
+Miejsce 112: 1 razy
+Miejsce 124: 1 razy
+Miejsce 126: 1 razy
+Miejsce 139: 1 razy
+Miejsce 155: 1 razy
+Miejsce 180: 7 razy
+
+Macierz dla liczby pytañ = 182:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 29  43  0  0  0  0  0
+lvl 3: 38  52  72  0  0  0  0
+lvl 4: 49  68  82  94  0  0  0
+lvl 5: 67  82  98  110  126  0  0
+lvl 6: 75  92  111  122  141  156  0
+lvl 7: 181  181  181  181  181  181  181
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 29: 1 razy
+Miejsce 38: 1 razy
+Miejsce 43: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 67: 1 razy
+Miejsce 68: 1 razy
+Miejsce 72: 1 razy
+Miejsce 75: 1 razy
+Miejsce 82: 2 razy
+Miejsce 92: 1 razy
+Miejsce 94: 1 razy
+Miejsce 98: 1 razy
+Miejsce 110: 1 razy
+Miejsce 111: 1 razy
+Miejsce 122: 1 razy
+Miejsce 126: 1 razy
+Miejsce 141: 1 razy
+Miejsce 156: 1 razy
+Miejsce 181: 7 razy
+
+Macierz dla liczby pytañ = 183:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 28  40  0  0  0  0  0
+lvl 3: 38  52  67  0  0  0  0
+lvl 4: 49  65  79  100  0  0  0
+lvl 5: 63  78  95  111  126  0  0
+lvl 6: 78  96  108  123  141  153  0
+lvl 7: 182  182  182  182  182  182  182
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 28: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 49: 1 razy
+Miejsce 52: 1 razy
+Miejsce 63: 1 razy
+Miejsce 65: 1 razy
+Miejsce 67: 1 razy
+Miejsce 78: 2 razy
+Miejsce 79: 1 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 100: 1 razy
+Miejsce 108: 1 razy
+Miejsce 111: 1 razy
+Miejsce 123: 1 razy
+Miejsce 126: 1 razy
+Miejsce 141: 1 razy
+Miejsce 153: 1 razy
+Miejsce 182: 7 razy
+
+Macierz dla liczby pytañ = 184:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 27  41  0  0  0  0  0
+lvl 3: 36  52  70  0  0  0  0
+lvl 4: 54  66  81  100  0  0  0
+lvl 5: 62  79  97  113  129  0  0
+lvl 6: 77  96  110  125  140  157  0
+lvl 7: 183  183  183  183  183  183  183
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 27: 1 razy
+Miejsce 36: 1 razy
+Miejsce 41: 1 razy
+Miejsce 52: 1 razy
+Miejsce 54: 1 razy
+Miejsce 62: 1 razy
+Miejsce 66: 1 razy
+Miejsce 70: 1 razy
+Miejsce 77: 1 razy
+Miejsce 79: 1 razy
+Miejsce 81: 1 razy
+Miejsce 96: 1 razy
+Miejsce 97: 1 razy
+Miejsce 100: 1 razy
+Miejsce 110: 1 razy
+Miejsce 113: 1 razy
+Miejsce 125: 1 razy
+Miejsce 129: 1 razy
+Miejsce 140: 1 razy
+Miejsce 157: 1 razy
+Miejsce 183: 7 razy
+
+Macierz dla liczby pytañ = 185:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  42  0  0  0  0  0
+lvl 3: 40  52  67  0  0  0  0
+lvl 4: 51  66  80  99  0  0  0
+lvl 5: 65  84  94  111  128  0  0
+lvl 6: 80  94  113  127  140  153  0
+lvl 7: 184  184  184  184  184  184  184
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 65: 1 razy
+Miejsce 66: 1 razy
+Miejsce 67: 1 razy
+Miejsce 80: 2 razy
+Miejsce 84: 1 razy
+Miejsce 94: 2 razy
+Miejsce 99: 1 razy
+Miejsce 111: 1 razy
+Miejsce 113: 1 razy
+Miejsce 127: 1 razy
+Miejsce 128: 1 razy
+Miejsce 140: 1 razy
+Miejsce 153: 1 razy
+Miejsce 184: 7 razy
+
+Macierz dla liczby pytañ = 186:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 28  44  0  0  0  0  0
+lvl 3: 38  52  71  0  0  0  0
+lvl 4: 51  71  84  98  0  0  0
+lvl 5: 67  80  98  110  129  0  0
+lvl 6: 76  96  107  127  139  159  0
+lvl 7: 185  185  185  185  185  185  185
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 28: 1 razy
+Miejsce 38: 1 razy
+Miejsce 44: 1 razy
+Miejsce 51: 1 razy
+Miejsce 52: 1 razy
+Miejsce 67: 1 razy
+Miejsce 71: 2 razy
+Miejsce 76: 1 razy
+Miejsce 80: 1 razy
+Miejsce 84: 1 razy
+Miejsce 96: 1 razy
+Miejsce 98: 2 razy
+Miejsce 107: 1 razy
+Miejsce 110: 1 razy
+Miejsce 127: 1 razy
+Miejsce 129: 1 razy
+Miejsce 139: 1 razy
+Miejsce 159: 1 razy
+Miejsce 185: 7 razy
+
+Macierz dla liczby pytañ = 187:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 27  44  0  0  0  0  0
+lvl 3: 41  58  70  0  0  0  0
+lvl 4: 55  72  82  97  0  0  0
+lvl 5: 64  82  99  110  128  0  0
+lvl 6: 78  96  111  129  139  156  0
+lvl 7: 186  186  186  186  186  186  186
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 27: 1 razy
+Miejsce 41: 1 razy
+Miejsce 44: 1 razy
+Miejsce 55: 1 razy
+Miejsce 58: 1 razy
+Miejsce 64: 1 razy
+Miejsce 70: 1 razy
+Miejsce 72: 1 razy
+Miejsce 78: 1 razy
+Miejsce 82: 2 razy
+Miejsce 96: 1 razy
+Miejsce 97: 1 razy
+Miejsce 99: 1 razy
+Miejsce 110: 1 razy
+Miejsce 111: 1 razy
+Miejsce 128: 1 razy
+Miejsce 129: 1 razy
+Miejsce 139: 1 razy
+Miejsce 156: 1 razy
+Miejsce 186: 7 razy
+
+Macierz dla liczby pytañ = 188:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  44  0  0  0  0  0
+lvl 3: 40  57  74  0  0  0  0
+lvl 4: 50  67  82  99  0  0  0
+lvl 5: 66  82  95  115  129  0  0
+lvl 6: 80  96  111  130  141  160  0
+lvl 7: 187  187  187  187  187  187  187
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 40: 1 razy
+Miejsce 44: 1 razy
+Miejsce 50: 1 razy
+Miejsce 57: 1 razy
+Miejsce 66: 1 razy
+Miejsce 67: 1 razy
+Miejsce 74: 1 razy
+Miejsce 80: 1 razy
+Miejsce 82: 2 razy
+Miejsce 95: 1 razy
+Miejsce 96: 1 razy
+Miejsce 99: 1 razy
+Miejsce 111: 1 razy
+Miejsce 115: 1 razy
+Miejsce 129: 1 razy
+Miejsce 130: 1 razy
+Miejsce 141: 1 razy
+Miejsce 160: 1 razy
+Miejsce 187: 7 razy
+
+Macierz dla liczby pytañ = 189:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 30  44  0  0  0  0  0
+lvl 3: 37  59  73  0  0  0  0
+lvl 4: 57  72  87  104  0  0  0
+lvl 5: 64  82  98  114  128  0  0
+lvl 6: 83  93  110  130  141  161  0
+lvl 7: 188  188  188  188  188  188  188
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 30: 1 razy
+Miejsce 37: 1 razy
+Miejsce 44: 1 razy
+Miejsce 57: 1 razy
+Miejsce 59: 1 razy
+Miejsce 64: 1 razy
+Miejsce 72: 1 razy
+Miejsce 73: 1 razy
+Miejsce 82: 1 razy
+Miejsce 83: 1 razy
+Miejsce 87: 1 razy
+Miejsce 93: 1 razy
+Miejsce 98: 1 razy
+Miejsce 104: 1 razy
+Miejsce 110: 1 razy
+Miejsce 114: 1 razy
+Miejsce 128: 1 razy
+Miejsce 130: 1 razy
+Miejsce 141: 1 razy
+Miejsce 161: 1 razy
+Miejsce 188: 7 razy
+
+Macierz dla liczby pytañ = 190:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  40  0  0  0  0  0
+lvl 3: 38  59  70  0  0  0  0
+lvl 4: 54  71  84  101  0  0  0
+lvl 5: 69  85  100  113  132  0  0
+lvl 6: 80  98  110  131  142  163  0
+lvl 7: 189  189  189  189  189  189  189
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 38: 1 razy
+Miejsce 40: 1 razy
+Miejsce 54: 1 razy
+Miejsce 59: 1 razy
+Miejsce 69: 1 razy
+Miejsce 70: 1 razy
+Miejsce 71: 1 razy
+Miejsce 80: 1 razy
+Miejsce 84: 1 razy
+Miejsce 85: 1 razy
+Miejsce 98: 1 razy
+Miejsce 100: 1 razy
+Miejsce 101: 1 razy
+Miejsce 110: 1 razy
+Miejsce 113: 1 razy
+Miejsce 131: 1 razy
+Miejsce 132: 1 razy
+Miejsce 142: 1 razy
+Miejsce 163: 1 razy
+Miejsce 189: 7 razy
+
+Macierz dla liczby pytañ = 191:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  46  0  0  0  0  0
+lvl 3: 40  58  75  0  0  0  0
+lvl 4: 54  67  87  105  0  0  0
+lvl 5: 67  85  103  116  129  0  0
+lvl 6: 79  94  113  131  148  159  0
+lvl 7: 190  190  190  190  190  190  190
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 40: 1 razy
+Miejsce 46: 1 razy
+Miejsce 54: 1 razy
+Miejsce 58: 1 razy
+Miejsce 67: 2 razy
+Miejsce 75: 1 razy
+Miejsce 79: 1 razy
+Miejsce 85: 1 razy
+Miejsce 87: 1 razy
+Miejsce 94: 1 razy
+Miejsce 103: 1 razy
+Miejsce 105: 1 razy
+Miejsce 113: 1 razy
+Miejsce 116: 1 razy
+Miejsce 129: 1 razy
+Miejsce 131: 1 razy
+Miejsce 148: 1 razy
+Miejsce 159: 1 razy
+Miejsce 190: 7 razy
+
+Macierz dla liczby pytañ = 192:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 28  42  0  0  0  0  0
+lvl 3: 40  59  72  0  0  0  0
+lvl 4: 52  69  89  104  0  0  0
+lvl 5: 66  85  99  116  132  0  0
+lvl 6: 84  99  117  130  144  165  0
+lvl 7: 191  191  191  191  191  191  191
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 28: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 52: 1 razy
+Miejsce 59: 1 razy
+Miejsce 66: 1 razy
+Miejsce 69: 1 razy
+Miejsce 72: 1 razy
+Miejsce 84: 1 razy
+Miejsce 85: 1 razy
+Miejsce 89: 1 razy
+Miejsce 99: 2 razy
+Miejsce 104: 1 razy
+Miejsce 116: 1 razy
+Miejsce 117: 1 razy
+Miejsce 130: 1 razy
+Miejsce 132: 1 razy
+Miejsce 144: 1 razy
+Miejsce 165: 1 razy
+Miejsce 191: 7 razy
+
+Macierz dla liczby pytañ = 193:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 26  42  0  0  0  0  0
+lvl 3: 39  60  74  0  0  0  0
+lvl 4: 54  72  89  102  0  0  0
+lvl 5: 70  84  102  118  133  0  0
+lvl 6: 79  101  111  128  145  163  0
+lvl 7: 192  192  192  192  192  192  192
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 26: 1 razy
+Miejsce 39: 1 razy
+Miejsce 42: 1 razy
+Miejsce 54: 1 razy
+Miejsce 60: 1 razy
+Miejsce 70: 1 razy
+Miejsce 72: 1 razy
+Miejsce 74: 1 razy
+Miejsce 79: 1 razy
+Miejsce 84: 1 razy
+Miejsce 89: 1 razy
+Miejsce 101: 1 razy
+Miejsce 102: 2 razy
+Miejsce 111: 1 razy
+Miejsce 118: 1 razy
+Miejsce 128: 1 razy
+Miejsce 133: 1 razy
+Miejsce 145: 1 razy
+Miejsce 163: 1 razy
+Miejsce 192: 7 razy
+
+Macierz dla liczby pytañ = 194:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 24  40  0  0  0  0  0
+lvl 3: 42  59  71  0  0  0  0
+lvl 4: 53  73  90  106  0  0  0
+lvl 5: 66  86  101  119  133  0  0
+lvl 6: 82  96  115  134  149  162  0
+lvl 7: 193  193  193  193  193  193  193
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 24: 1 razy
+Miejsce 40: 1 razy
+Miejsce 42: 1 razy
+Miejsce 53: 1 razy
+Miejsce 59: 1 razy
+Miejsce 66: 1 razy
+Miejsce 71: 1 razy
+Miejsce 73: 1 razy
+Miejsce 82: 1 razy
+Miejsce 86: 1 razy
+Miejsce 90: 1 razy
+Miejsce 96: 1 razy
+Miejsce 101: 1 razy
+Miejsce 106: 1 razy
+Miejsce 115: 1 razy
+Miejsce 119: 1 razy
+Miejsce 133: 1 razy
+Miejsce 134: 1 razy
+Miejsce 149: 1 razy
+Miejsce 162: 1 razy
+Miejsce 193: 7 razy
+
+Macierz dla liczby pytañ = 195:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 30  43  0  0  0  0  0
+lvl 3: 40  56  77  0  0  0  0
+lvl 4: 54  69  87  106  0  0  0
+lvl 5: 68  88  99  119  131  0  0
+lvl 6: 80  97  119  131  148  161  0
+lvl 7: 194  194  194  194  194  194  194
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 30: 1 razy
+Miejsce 40: 1 razy
+Miejsce 43: 1 razy
+Miejsce 54: 1 razy
+Miejsce 56: 1 razy
+Miejsce 68: 1 razy
+Miejsce 69: 1 razy
+Miejsce 77: 1 razy
+Miejsce 80: 1 razy
+Miejsce 87: 1 razy
+Miejsce 88: 1 razy
+Miejsce 97: 1 razy
+Miejsce 99: 1 razy
+Miejsce 106: 1 razy
+Miejsce 119: 2 razy
+Miejsce 131: 2 razy
+Miejsce 148: 1 razy
+Miejsce 161: 1 razy
+Miejsce 194: 7 razy
+
+Macierz dla liczby pytañ = 196:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 25  47  0  0  0  0  0
+lvl 3: 41  60  72  0  0  0  0
+lvl 4: 56  72  89  103  0  0  0
+lvl 5: 68  88  105  119  134  0  0
+lvl 6: 86  103  115  132  151  168  0
+lvl 7: 195  195  195  195  195  195  195
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 25: 1 razy
+Miejsce 41: 1 razy
+Miejsce 47: 1 razy
+Miejsce 56: 1 razy
+Miejsce 60: 1 razy
+Miejsce 68: 1 razy
+Miejsce 72: 2 razy
+Miejsce 86: 1 razy
+Miejsce 88: 1 razy
+Miejsce 89: 1 razy
+Miejsce 103: 2 razy
+Miejsce 105: 1 razy
+Miejsce 115: 1 razy
+Miejsce 119: 1 razy
+Miejsce 132: 1 razy
+Miejsce 134: 1 razy
+Miejsce 151: 1 razy
+Miejsce 168: 1 razy
+Miejsce 195: 7 razy
+
+Macierz dla liczby pytañ = 197:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 27  41  0  0  0  0  0
+lvl 3: 42  61  76  0  0  0  0
+lvl 4: 53  70  86  105  0  0  0
+lvl 5: 73  89  104  118  134  0  0
+lvl 6: 81  102  120  136  152  166  0
+lvl 7: 196  196  196  196  196  196  196
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 27: 1 razy
+Miejsce 41: 1 razy
+Miejsce 42: 1 razy
+Miejsce 53: 1 razy
+Miejsce 61: 1 razy
+Miejsce 70: 1 razy
+Miejsce 73: 1 razy
+Miejsce 76: 1 razy
+Miejsce 81: 1 razy
+Miejsce 86: 1 razy
+Miejsce 89: 1 razy
+Miejsce 102: 1 razy
+Miejsce 104: 1 razy
+Miejsce 105: 1 razy
+Miejsce 118: 1 razy
+Miejsce 120: 1 razy
+Miejsce 134: 1 razy
+Miejsce 136: 1 razy
+Miejsce 152: 1 razy
+Miejsce 166: 1 razy
+Miejsce 196: 7 razy
+
+Macierz dla liczby pytañ = 198:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 28  41  0  0  0  0  0
+lvl 3: 44  61  76  0  0  0  0
+lvl 4: 59  74  90  106  0  0  0
+lvl 5: 69  84  104  121  138  0  0
+lvl 6: 85  103  119  135  150  164  0
+lvl 7: 197  197  197  197  197  197  197
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 28: 1 razy
+Miejsce 41: 1 razy
+Miejsce 44: 1 razy
+Miejsce 59: 1 razy
+Miejsce 61: 1 razy
+Miejsce 69: 1 razy
+Miejsce 74: 1 razy
+Miejsce 76: 1 razy
+Miejsce 84: 1 razy
+Miejsce 85: 1 razy
+Miejsce 90: 1 razy
+Miejsce 103: 1 razy
+Miejsce 104: 1 razy
+Miejsce 106: 1 razy
+Miejsce 119: 1 razy
+Miejsce 121: 1 razy
+Miejsce 135: 1 razy
+Miejsce 138: 1 razy
+Miejsce 150: 1 razy
+Miejsce 164: 1 razy
+Miejsce 197: 7 razy
+
+Macierz dla liczby pytañ = 199:
+Streak:  0  1  2  3  4  5  6
+lvl 1: 3  0  0  0  0  0  0
+lvl 2: 31  45  0  0  0  0  0
+lvl 3: 43  56  77  0  0  0  0
+lvl 4: 59  76  90  106  0  0  0
+lvl 5: 71  84  105  122  134  0  0
+lvl 6: 83  102  119  132  148  171  0
+lvl 7: 198  198  198  198  198  198  198
+Wyst¹pienia ka¿dego miejsca:
+Miejsce 3: 1 razy
+Miejsce 31: 1 razy
+Miejsce 43: 1 razy
+Miejsce 45: 1 razy
+Miejsce 56: 1 razy
+Miejsce 59: 1 razy
+Miejsce 71: 1 razy
+Miejsce 76: 1 razy
+Miejsce 77: 1 razy
+Miejsce 83: 1 razy
+Miejsce 84: 1 razy
+Miejsce 90: 1 razy
+Miejsce 102: 1 razy
+Miejsce 105: 1 razy
+Miejsce 106: 1 razy
+Miejsce 119: 1 razy
+Miejsce 122: 1 razy
+Miejsce 132: 1 razy
+Miejsce 134: 1 razy
+Miejsce 148: 1 razy
+Miejsce 171: 1 razy
+Miejsce 198: 7 razy
+

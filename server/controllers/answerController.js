@@ -123,7 +123,7 @@ const getAnswersByQuestionId = async (req, res) => {
         const answers = await Answer.findAll({
             where: { 
                 questionId: questionId,
-                isTrue: 0
+                isTrue: 1
             }
         });
 
@@ -140,9 +140,6 @@ const getAnswersByQuestionId = async (req, res) => {
     }
 };
 
-
-
-  
   module.exports = {
     addAnswer,
     editAnswer,

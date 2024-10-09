@@ -12,6 +12,7 @@ const Flashcards = () => {
     const [loading, setLoading] = useState(true);
     const [question, setQuestion] = useState(null);
     const [answers, setAnswers] = useState([]);
+    const [sortHistory, setSortHistory] = useState([]); // Tablica do historii sortowania
 
     // Funkcja do pobrania fiszek z serwera
     const fetchFlashcards = async () => {
@@ -29,7 +30,11 @@ const Flashcards = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                setCards(data);
+
+                // Sortowanie fiszek według currentLevel od najmniejszego do największego
+                const sortedCards = data.sort((a, b) => a.currentLevel - b.currentLevel);
+
+                setCards(sortedCards);
                 setLoading(false);
 
                 // Inicjalizujemy tablicę postępu na szaro (domyślny stan)
@@ -39,6 +44,7 @@ const Flashcards = () => {
                 if (data.length > 0) {
                     setCurrentCard(0);  // Ustawiamy na pierwszą fiszkę
                 }
+
             } else {
                 console.error('Błąd podczas pobierania fiszek:', response.statusText);
                 setLoading(false);
@@ -100,12 +106,12 @@ const Flashcards = () => {
     }, [currentCard, cards]);
 
     const nextCard = () => {
-        setCurrentCard((prevCard) => (prevCard + 1) % cards.length);
+        moveCard(currentCard);
         setFlipped(false);
     };
 
     const prevCard = () => {
-        setCurrentCard((prevCard) => (prevCard - 1 + cards.length) % cards.length);
+        moveCard(currentCard);
         setFlipped(false);
     };
 
@@ -113,7 +119,54 @@ const Flashcards = () => {
         setFlipped(!flipped);
     };
 
-    // Funkcja do wysyłania oceny na backend i aktualizacji postępu
+    // Zaktualizowana funkcja lokalna do obliczania nowego poziomu (levelu) z uwzględnieniem lastEvaluation
+    const calculateNewLevel = (evaluation, lastEvaluation) => {
+        let currentLevel = cards[currentCard].currentLevel;
+        if (evaluation === 1) {
+            return Math.min(currentLevel + 1, 7); // Zwiększenie levelu o 1, maksymalnie 7
+        } else if (evaluation === -1) {
+            return Math.max(currentLevel - 1, 1); // Obniżenie levelu o 1, minimalnie 1
+        } else if (evaluation === 0) {
+            if (lastEvaluation === 1) {
+                return Math.max(currentLevel - 1, 1);
+            } else {
+                return Math.min(currentLevel + 1, 7);
+            }
+        }
+        return currentLevel;
+    };
+
+    // Funkcja lokalna do obliczania nowego streaku
+    const calculateNewStreak = (evaluation) => {
+        let currentStreak = cards[currentCard].streak;
+        if (evaluation === 1) {
+            if (currentStreak < 0) return 0;
+            return currentStreak + 1
+        }
+        else if (evaluation == -1) {
+            if (currentStreak > 0) return 0;
+            return currentStreak - 1;
+        } else return 0;
+    };
+
+    // Funkcja do obliczania koloru paska postępu
+    const calculateProgressColor = (level) => {
+        if (level >= 6) return 'green'; // Zielony dla leveli 6-7
+        else if (level >= 4) return 'yellow'; // Żółty dla leveli 4-5
+        else return 'red'; // Czerwony dla leveli 1-3
+    };
+
+    // Funkcja do obliczania szerokości paska postępu
+    const calculateProgressWidth = (lastReviewed) => {
+        if (!lastReviewed) {
+            return '0%'; // Jeśli brak ostatniego przeglądu, pasek 0%
+        }
+        const timePassed = new Date() - new Date(lastReviewed);
+        const percentage = Math.min(100, Math.floor(timePassed / (1000 * 60 * 60 * 24 * 7) * 100)); // Procenty dla tygodnia
+        return `${percentage}%`;
+    };
+
+    // Funkcja do wysyłania oceny na backend i aktualizacji postępu oraz przesunięcia fiszki na koniec
     const handleFeedback = async (evaluation) => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -122,32 +175,44 @@ const Flashcards = () => {
         }
 
         try {
-            const flashcardId = cards[currentCard].id;
+            const flashcardId = cards[0].id; // Zawsze aktualizujemy pierwszą fiszkę
+            const lastEvaluation = cards[0].lastEvaluation;
+
+            // Obliczamy nowe wartości
+            const updatedLevel = calculateNewLevel(evaluation, lastEvaluation);
+            const updatedStreak = calculateNewStreak(evaluation);
+            const updatedEvaluation = evaluation;
+            const updatedReviewed = new Date();
+
+            // Wysyłamy zapytanie do serwera
             const response = await fetch(`/api/flashcards/update/${flashcardId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ userRate: evaluation })
+                body: JSON.stringify({
+                    currentLevel: updatedLevel,
+                    streak: updatedStreak,
+                    lastEvaluation: updatedEvaluation,
+                    lastReviewed: updatedReviewed
+                })
             });
 
             if (response.ok) {
-                const updatedFlashcard = await response.json();
-                console.log('Zaktualizowana fiszka:', updatedFlashcard);
+                // Zmieniamy tylko jeden element w tablicy `cards`
+                cards[0] = {
+                    ...cards[0],
+                    currentLevel: updatedLevel,
+                    streak: updatedStreak,
+                    lastEvaluation: updatedEvaluation,
+                    lastReviewed: updatedReviewed
+                };
+                // Tworzymy nową instancję tablicy z jednym zmodyfikowanym elementem
+                setCards([...cards]);
 
-                // Aktualizujemy postęp na podstawie oceny
-                const newProgress = [...progress];
-                if (evaluation === 1) {
-                    newProgress[currentCard] = 'green';
-                } else if (evaluation === 0) {
-                    newProgress[currentCard] = 'yellow';
-                } else if (evaluation === -1) {
-                    newProgress[currentCard] = 'red';
-                }
-                setProgress(newProgress);
-
-                nextCard(); // Przejście do następnej fiszki po ocenie
+                moveCard(0);
+                console.log('Fiszka zaktualizowana lokalnie');
             } else {
                 console.error('Błąd podczas aktualizacji fiszki:', response.statusText);
             }
@@ -156,6 +221,91 @@ const Flashcards = () => {
         }
     };
 
+    // Funkcja do obliczania miejsca wstawienia fiszki na podstawie algorytmu
+    const calculateInsertPosition = (card) => {
+        const totalCards = cards.length;
+        let targetIndex;
+        const cardLvl = card.currentLevel;
+
+        if (cardLvl === 7) {
+            targetIndex = totalCards - 1;
+        } else if (cardLvl === 1) {
+            targetIndex = 3;
+        }
+        else {
+            let levelFactor = (card.currentLevel) / 7;
+            let streakFactor = (card.streak) / 6;
+            let priorityScore = (levelFactor + streakFactor) / 2;
+            targetIndex = Math.floor(priorityScore * totalCards);
+            const rand = -3 + Math.random() * (3 - (-3)); // Losowy offset
+            targetIndex += rand;
+            if (targetIndex < 4) targetIndex = 4;
+            if (targetIndex >= totalCards) targetIndex = totalCards - 1;
+        }
+        return targetIndex;
+    };
+
+    // Przenoszenie fiszki na wyliczoną pozycję
+    const moveCard = (cardIndex) => {
+        const updatedCards = [...cards];
+        const [card] = updatedCards.splice(cardIndex, 1); // Wycinamy fiszkę
+
+        // Obliczamy nową pozycję na podstawie wyliczonego priorytetu
+        const targetIndex = calculateInsertPosition(card);
+
+        // Wstawiamy fiszkę na obliczoną pozycję
+        updatedCards.splice(targetIndex, 0, card);
+
+        // Aktualizujemy stan fiszek
+        setCards(updatedCards);
+        setCurrentCard(0); // Wracamy do pierwszej fiszki
+    };
+    const updateProgressBar = (cards) => {
+        const totalCards = cards.length;
+        
+        // Obliczamy, ile fiszek ma który level (przypisujemy im kolory)
+        const colorCounts = {
+            green: 0,
+            yellow: 0,
+            red: 0,
+            gray: 0
+        };
+    
+        // Zliczamy liczbę fiszek dla każdego koloru
+        cards.forEach(card => {
+            if (!card.lastReviewed) {
+                colorCounts.gray += 1; // Fiszka nie była jeszcze przeglądana
+            } else if (card.currentLevel >= 6) {
+                colorCounts.green += 1; // Level 6-7
+            } else if (card.currentLevel >= 4) {
+                colorCounts.yellow += 1; // Level 4-5
+            } else {
+                colorCounts.red += 1; // Level 1-3
+            }
+        });
+    
+        // Tworzymy pasek wypełniony odpowiednimi kolorami, bez przerw
+        const progressBarElements = [];
+    
+        // Dodajemy fragmenty paska zgodnie z wyliczonymi proporcjami i kolejnością kolorów
+        ['green', 'yellow', 'red', 'gray'].forEach(color => {
+            if (colorCounts[color] > 0) {
+                progressBarElements.push(
+                    <div
+                        key={color}
+                        className={`${styles.progressTile} ${styles[color]}`}
+                        style={{
+                            display: 'inline-block', // Dodajemy inline-block, żeby nie było przerw
+                            width: `${(colorCounts[color] / totalCards) * 100}%`
+                        }} // Proporcjonalna szerokość
+                    />
+                );
+            }
+        });
+    
+        return progressBarElements;
+    };
+    
     return (
         <div className={styles.appContainer}>
             <Navbar />
@@ -168,13 +318,9 @@ const Flashcards = () => {
                     ) : (
                         <>
                             <div className={styles.progressBar}>
-                                {Array.from({ length: cards.length }, (_, index) => (
-                                    <div
-                                        key={index}
-                                        className={`${styles.progressTile} ${progress[index] ? styles[progress[index]] : ''}`}
-                                    />
-                                ))}
+                                {updateProgressBar(cards)}
                             </div>
+
 
                             <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
                                 <div className={styles.cardInner}>
@@ -204,6 +350,17 @@ const Flashcards = () => {
                                 <span onClick={() => handleFeedback(0)}>&#128528;</span> {/* neutral */}
                                 <span onClick={() => handleFeedback(-1)}>&#128577;</span> {/* bad */}
                             </div>
+
+                            {/* Wyświetlanie aktualnej tablicy fiszek */}
+                            <div className={styles.sortHistory}>
+                                <h3>Aktualna tablica fiszek (ID, Index, Level, Streak):</h3>
+                                {cards.map((card, index) => (
+                                    <div key={index}>
+                                        <p>ID: {card.id}, Index: {index + 1}, Level: {card.currentLevel}, Streak: {card.streak}</p>
+                                    </div>
+                                ))}
+                            </div>
+
                         </>
                     )}
                 </div>
