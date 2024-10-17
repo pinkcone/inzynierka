@@ -108,7 +108,7 @@ const editSet = async (req, res) => {
       const sets = await Set.findAll({ where: { ownerId: req.user.id } });
   
       if (!sets.length) {
-        return res.status(404).json({ message: 'Nie znaleziono zestawów.' });
+        return res.status(200).json([]); 
       }
   
       res.status(200).json(sets);
@@ -116,6 +116,7 @@ const editSet = async (req, res) => {
       res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
     }
   };
+  
 
   const getSetById = async (req, res) => {
     try {

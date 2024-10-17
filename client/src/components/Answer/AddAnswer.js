@@ -3,7 +3,7 @@ import styles from '../../styles/AddAnswer.module.css';
 
 const AddAnswer = ({ questionId, onAnswerAdded }) => {
   const [content, setContent] = useState('');
-  const [isTrue, setIsTrue] = useState(true); 
+  const [isTrue, setIsTrue] = useState('true'); 
   const [error, setError] = useState('');
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,14 +46,15 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
         body: JSON.stringify({
           questionId,
           content,
-          isTrue: isTrue === 'true' // Zamiana stringu na boolean
-        })      });
+          isTrue: isTrue === 'true' 
+        })
+      });
 
       if (response.ok) {
         setContent('');
         setIsTrue('true');
-        await fetchAnswers(); 
-        onAnswerAdded();  
+        await fetchAnswers();
+        onAnswerAdded(); 
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się dodać odpowiedzi.');
@@ -76,7 +77,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
         {answers.length > 0 ? (
           answers.map((answer) => (
             <li key={answer.id} className={styles.answerItem}>
-            {answer.content} - {answer.isTrue ? 'Poprawna' : 'Fałszywa'}            
+              {answer.content} - {answer.isTrue ? 'Poprawna' : 'Fałszywa'}
             </li>
           ))
         ) : (
@@ -93,7 +94,7 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
             placeholder="Treść odpowiedzi"
             required
           />
-           <label className={styles.selectLabel}>
+          <label className={styles.selectLabel}>
             Czy to jest poprawna odpowiedź?
             <select
               value={isTrue}
@@ -104,7 +105,6 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
               <option value="false">Fałszywa</option>
             </select>
           </label>
-          
           <button type="submit" className={styles.button}>Dodaj odpowiedź</button>
         </form>
       </div>

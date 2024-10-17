@@ -37,3 +37,20 @@
     margin-bottom: 15px;
   }
   
+  .alertSuccess {
+    color: green;
+    background-color: #d4edda;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .alertDanger {
+    color: red;
+    background-color: #f8d7da;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  
+  

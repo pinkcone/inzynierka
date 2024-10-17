@@ -23,9 +23,14 @@ const MySets = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setSets(data);
+          if (data.length === 0) {
+            setError('Brak zestawów.'); 
+          } else {
+            setSets(data);
+            setError(''); 
+          }
         } else {
-          setError('Brak zestawów.');
+          setError('Błąd podczas pobierania zestawów.');
         }
       } catch (err) {
         setError('Wystąpił błąd podczas pobierania zestawów.');
@@ -37,6 +42,7 @@ const MySets = () => {
 
   const handleAddSet = (newSet) => {
     setSets((prevSets) => [...prevSets, newSet]);
+    setError(''); 
     setShowAddSetPopup(false);
   };
 

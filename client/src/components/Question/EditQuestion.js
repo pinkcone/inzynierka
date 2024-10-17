@@ -7,12 +7,12 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   const navigate = useNavigate(); 
   const [questionContent, setQuestionContent] = useState(''); 
   const [error, setError] = useState('');
+  const [message, setMessage] = useState(''); 
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchQuestion = async () => {
       if (!questionId) {
-        console.error('Brak id pytania do edycji');
         setError('Brak ID pytania do edycji.');
         setLoading(false);
         return;
@@ -33,7 +33,6 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
           setError(errorData.message || 'Nie udało się pobrać pytania.');
         }
       } catch (err) {
-        console.error('Błąd podczas pobierania pytania:', err);
         setError('Wystąpił błąd podczas pobierania pytania.');
       } finally {
         setLoading(false);
@@ -46,7 +45,6 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!questionId) {
-      console.error('Brak id pytania do edycji');
       setError('Brak ID pytania do edycji.');
       return;
     }
@@ -62,16 +60,18 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
       });
 
       if (response.ok) {
-        alert('Pytanie zostało zaktualizowane.');
+        setMessage('Pytanie zostało zaktualizowane.'); 
         onEditComplete();  
-        onClose(); 
-        navigate(`/editset/${id}`);
+        setTimeout(() => {
+          setMessage(''); 
+          onClose(); 
+          navigate(`/editset/${id}`);
+        }, 3000);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się zaktualizować pytania.');
       }
     } catch (err) {
-      console.error('Błąd podczas aktualizacji pytania:', err);
       setError('Wystąpił błąd podczas aktualizacji pytania.');
     }
   };
@@ -84,11 +84,15 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
     <div className={styles.appContainer}>
       <div className={styles.mainContent}>
         <h2>Edytuj Pytanie</h2>
-        {error && <div className={styles.alert}>{error}</div>}
+        
+        {message && <div className={styles.alertSuccess}>{message}</div>}
+        {error && <div className={styles.alertDanger}>{error}</div>}
+        
         <form onSubmit={handleSubmit}>
           <textarea 
             value={questionContent} 
             onChange={(e) => setQuestionContent(e.target.value)} 
+            placeholder="Edytuj treść pytania"
           />
           <button type="submit">Zapisz zmiany</button>
         </form>

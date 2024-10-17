@@ -10,6 +10,8 @@ const UserProfile = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState(''); 
   const [editingField, setEditingField] = useState(null); 
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('success');
 
   useEffect(() => {
     if (user) {
@@ -44,15 +46,22 @@ const UserProfile = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Dane zostały zaktualizowane!');
+        setMessage('Dane zostały zaktualizowane pomyślnie!');
+        setMessageType('success'); 
         setEditingField(null); 
       } else {
-        alert(data.message);
+        setMessage(data.message || 'Nie udało się zaktualizować danych');
+        setMessageType('error');
       }
     } catch (error) {
       console.error('Błąd:', error);
-      alert('Wystąpił błąd podczas aktualizacji danych');
+      setMessage('Wystąpił błąd podczas aktualizacji danych');
+      setMessageType('error');
     }
+
+    setTimeout(() => {
+      setMessage('');
+    }, 3000); 
   };
 
   if (!user) {
@@ -78,6 +87,13 @@ const UserProfile = () => {
                       className={styles.avatar} 
                     />
                   </div>
+
+                  {message && (
+                    <div className={messageType === 'success' ? styles.successMessage : styles.errorMessage}>
+                      {message}
+                    </div>
+                  )}
+
                   <table className="table">
                     <tbody>
                       <tr>

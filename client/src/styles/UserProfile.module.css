@@ -36,3 +36,20 @@
     border-radius: 50%;
     object-fit: cover;
   }
+
+  .successMessage {
+    color: green;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: #e6f4e6;
+    margin-bottom: 15px;
+  }
+  
+  .errorMessage {
+    color: red;
+    padding: 10px;
+    border: 1px solid red;
+    background-color: #f8d7da;
+    margin-bottom: 15px;
+  }
+  

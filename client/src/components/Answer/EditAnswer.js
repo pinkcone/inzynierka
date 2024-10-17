@@ -4,6 +4,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
   const [answer, setAnswer] = useState('');
   const [isTrue, setIsTrue] = useState('true'); 
   const [error, setError] = useState('');
+  const [message, setMessage] = useState(''); 
 
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -31,7 +32,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
     };
 
     fetchAnswer();
-  }, [answerId]); 
+  }, [answerId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,10 +48,14 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
           isTrue: isTrue === 'true'
         })
       });
+
       if (response.ok) {
-        alert('Odpowiedź została zaktualizowana.');
-        onAnswerEdited();
-        onClose();
+        setMessage('Odpowiedź została zaktualizowana.');
+        onAnswerEdited(); 
+        setTimeout(() => {
+          setMessage('');
+          onClose();
+        }, 3000);
       } else {
         setError('Nie udało się zaktualizować odpowiedzi.');
       }
@@ -62,7 +67,11 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
   return (
     <div>
       <h2>Edytuj Odpowiedź</h2>
+      
+      {message && <div className="alert alert-success">{message}</div>}
+      
       {error && <div className="alert alert-danger">{error}</div>}
+      
       <form onSubmit={handleSubmit}>
         <textarea 
           value={answer}
