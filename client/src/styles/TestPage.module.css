@@ -72,13 +72,19 @@
     cursor: not-allowed;
 }
 
-/* Styl dla mapki pytań */
+.sidebar {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .questionMap {
     display: flex;
-    flex-direction: row;  /* Wyświetlanie kafelków w rzędach */
-    flex-wrap: wrap;      /* Pozwala na zawijanie kafelków w kolejnych rzędach */
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-left: 20px;
-    max-width: 150px;     /* Ograniczenie szerokości, aby kafelki zawijały się w wiersze */
+    max-width: 200px;
 }
 
 .mapTile {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '../../styles/TestPage.module.css';
 import Navbar from '../Navbar/Navbar';
 
@@ -27,7 +27,7 @@ const TestPage = () => {
         },
         {
             question: 'Pytanie 5',
-            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4','Odpowiedź 2','Odpowiedź 2'],
+            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4', 'Odpowiedź 2', 'Odpowiedź 2'],
         },
 
 
@@ -84,12 +84,14 @@ const TestPage = () => {
 
     return (
         <div className={styles.appContainer}>
-            <Navbar />
+            <Navbar/>
             <div className={styles.testPage}>
-                <div className={styles.testContainer}>
+                <div className={styles.sidebar}>
                     <div className={styles.timer}>
                         Czas pozostały: {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
                     </div>
+                </div>
+                <div className={styles.testContainer}>
                     <div className={styles.questionContainer}>
                         <h3>{questions[currentQuestion].question}</h3>
                         <div className={styles.answers}>
@@ -130,16 +132,19 @@ const TestPage = () => {
                         )}
                     </div>
                 </div>
-                <div className={styles.questionMap}>
-                    {questions.map((_, index) => (
-                        <div
-                            key={index}
-                            className={`${styles.mapTile} ${selectedAnswers[index] !== undefined ? styles.answered : ''} ${currentQuestion === index ? styles.current : ''}`}
-                            onClick={() => goToQuestion(index)}
-                        >
-                            {index + 1}
-                        </div>
-                    ))}
+                <div className={styles.sidebar}>
+                    <p>Numer pytania:</p>
+                    <div className={styles.questionMap}>
+                        {questions.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`${styles.mapTile} ${selectedAnswers[index] !== undefined ? styles.answered : ''} ${currentQuestion === index ? styles.current : ''}`}
+                                onClick={() => goToQuestion(index)}
+                            >
+                                {index + 1}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
