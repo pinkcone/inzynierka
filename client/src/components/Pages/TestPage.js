@@ -50,7 +50,6 @@ const TestPage = () => {
 
     const endTest = () => {
         setTestFinished(true);
-
     };
 
     const handleNextQuestion = () => {
