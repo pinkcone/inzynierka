@@ -1,0 +1,33 @@
+.summaryPage {
+    padding: 20px;
+}
+
+.questionsSummary {
+    margin-top: 20px;
+}
+
+.questionBlock {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.answer {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.selected {
+    background-color: #ffeb3b;
+}
+
+.correct {
+    font-weight: bold;
+    color: green;
+}

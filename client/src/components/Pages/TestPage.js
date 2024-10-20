@@ -1,37 +1,52 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import styles from '../../styles/TestPage.module.css';
 import Navbar from '../Navbar/Navbar';
+import {useNavigate} from 'react-router-dom';
 
 const TestPage = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [timer, setTimer] = useState(300);
+    const [timer, setTimer] = useState(15);
     const [testFinished, setTestFinished] = useState(false);
 
-    const questions = [
+    const navigate = useNavigate();
+
+    const questions = useMemo(() => [
         {
             question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
             answers: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
+            correctAnswerIndex: 0,
         },
         {
             question: 'Pytanie 2',
             answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
+            correctAnswerIndex: 1,
         },
         {
             question: 'Pytanie 3',
             answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
+            correctAnswerIndex: 2,
         },
         {
             question: 'Pytanie 4',
             answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
+            correctAnswerIndex: 2,
         },
         {
             question: 'Pytanie 5',
             answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4', 'Odpowiedź 2', 'Odpowiedź 2'],
+            correctAnswerIndex: 4,
         },
 
+    ], []);
 
-    ];
+    const endTest = useCallback(() => {
+        setTestFinished(true);
+
+        setTimeout(() => {
+            navigate('/test-summary', {state: {selectedAnswers, questions}})
+        }, 0)
+    }, [selectedAnswers, questions, navigate]);
 
     useEffect(() => {
         const countdown = setInterval(() => {
@@ -46,12 +61,7 @@ const TestPage = () => {
         }, 1000);
 
         return () => clearInterval(countdown);
-    }, []);
-
-    const endTest = () => {
-        setTestFinished(true);
-
-    };
+    }, [endTest]);
 
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
