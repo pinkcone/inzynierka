@@ -1,9 +1,32 @@
 .summaryPage {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.questionsSummary h1 {
+    font-size: 36px;
+    padding-bottom: 20px;
+}
+
+.summaryHeader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    background-color: #20B2AA;
 }
 
 .questionsSummary {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .questionBlock {
@@ -11,6 +34,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 60%;
 }
 
 ul {
@@ -24,7 +48,7 @@ ul {
 }
 
 .selected {
-    background-color: #ffeb3b;
+    background-color: #cccccc;
 }
 
 .correct {

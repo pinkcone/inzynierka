@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 const TestPage = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [timer, setTimer] = useState(15);
+    const [timer, setTimer] = useState(30);
     const [testFinished, setTestFinished] = useState(false);
 
     const navigate = useNavigate();

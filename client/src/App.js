@@ -15,6 +15,7 @@ import Flashcards from './components/Flashcards';
 import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
 import TestSummaryPage from "./components/Pages/TestSummaryPage";
+import TestStartPage from "./components/Pages/TestStartPage";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/editset/:id" element={<EditPageSet />} /> 
         <Route path="/test" element={<TestPage />} />
         <Route path="/test-summary" element={<TestSummaryPage />} />
+        <Route path="/test-start" element={<TestStartPage />} />
 
       </Routes>
     </Router>
