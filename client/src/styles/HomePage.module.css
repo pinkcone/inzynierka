@@ -46,11 +46,11 @@
 }
 
 .searchInput:focus {
-  border-color: #007bff;
+  border-color: #20B2AA;
 }
 
 .searchButton {
-  background-color: #007bff; 
+  background-color: #20B2AA; 
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -61,7 +61,7 @@
 }
 
 .searchButton:hover {
-  background-color: #007bff;
+  background-color: #218188;
 }
 
 

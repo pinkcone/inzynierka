@@ -119,7 +119,7 @@ const AddSet = ({ onAddSet }) => {
           />
           {keyWordsError && <div className="alert alert-danger">{keyWordsError}</div>}
         </div>
-        <button type="submit" className={`${styles.btn} ${styles.btnPrimary}`}>Utwórz Zestaw</button>
+        <button type="submit" className={`${styles.button} ${styles.button}`}>Utwórz Zestaw</button>
       </form>
     </div>
   );

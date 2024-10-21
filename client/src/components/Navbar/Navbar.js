@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'; 
 import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import styles from '../../styles/Navbar.module.css';
 
 const Navbar = () => {
@@ -24,7 +25,8 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             {isAuthenticated ? (
-              <Dropdown>
+              <>
+              <Dropdown className='d-none d-lg-block'>
                 <Dropdown.Toggle variant="success" id="dropdown-basic" className={styles['dropdown-toggle-custom']}>
                   <img
                     src={user?.image || '/images/profile_pictures/picture_1.png'}
@@ -34,10 +36,16 @@ const Navbar = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/profile">Profil</Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">Ustawienia</Dropdown.Item>
                   <Dropdown.Item onClick={logout}>Wyloguj się</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+                <li className="nav-item d-lg-none">
+                  <Link className="nav-link" to="/profile">Profil</Link>
+                </li>
+                <li className="nav-item d-lg-none">
+                  <Link className="nav-link" onClick={logout}>Wyloguj się</Link>
+                </li>
+              </>
             ) : (
               <>
                 <li className="nav-item">
