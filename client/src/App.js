@@ -16,6 +16,8 @@ import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
 import MyTests from "./components/Pages/MyTests";
 
+import TestSummaryPage from "./components/Pages/TestSummaryPage";
+import TestStartPage from "./components/Pages/TestStartPage";
 
 const App = () => {
   return (
@@ -40,6 +42,8 @@ const App = () => {
         <Route path="/test" element={<TestPage />} />
         <Route path="/mytests" element={<MyTests />} />
 
+        <Route path="/test-summary" element={<TestSummaryPage />} />
+        <Route path="/test-start" element={<TestStartPage />} />
 
       </Routes>
     </Router>

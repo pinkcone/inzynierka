@@ -15,6 +15,7 @@ const Sidebar = () => {
       <Link to="/mysets" className={styles['sidebar-link']}>Moje Zestawy</Link> 
       <Link to="/flashcards" className={styles['sidebar-link']}>Fiszki</Link>
       <Link to="/mytests" className={styles['sidebar-link']}>Moje testy</Link>
+      <Link to="/test-start" className={styles['sidebar-link']}>Test</Link>
     </div>
   );
 };
