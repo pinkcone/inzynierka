@@ -81,7 +81,7 @@ const AddSet = ({ onAddSet }) => {
 
   return (
     <div className={styles.container}>
-      <h2>Utwórz Zestaw</h2>
+      <h2>Utwórz zestaw</h2>
       {message && <div className="alert alert-success">{message}</div>}
 
       <form onSubmit={handleSubmit}>
@@ -119,7 +119,7 @@ const AddSet = ({ onAddSet }) => {
           />
           {keyWordsError && <div className="alert alert-danger">{keyWordsError}</div>}
         </div>
-        <button type="submit" className={`${styles.button} ${styles.button}`}>Utwórz Zestaw</button>
+        <button type="submit" className={`${styles.button} ${styles.button}`}>Utwórz zestaw</button>
       </form>
     </div>
   );

@@ -21,11 +21,39 @@ const UserProfile = () => {
     }
   }, [user]);
 
+  const setMessageWithTimeout = (msg, type) => {
+    setMessage(msg);
+    setMessageType(type);
+    setTimeout(() => setMessage(''), 3000);
+  };
+
   const handleEdit = (field) => {
     setEditingField(field);
   };
 
   const handleSave = async (field) => {
+    if (field === 'email' && !email) {
+      setMessageWithTimeout('Email nie może być pusty.', 'error');
+      setEmail(user.email);
+      setUsername(user.username);
+      setPassword('');
+      return;
+    }
+    if (field === 'username' && !username) {
+      setMessageWithTimeout('Nazwa użytkownika nie może być pusta.', 'error');
+      setEmail(user.email);
+      setUsername(user.username);
+      setPassword('');
+      return;
+    }
+    if (field === 'password' && !password) {
+      setMessageWithTimeout('Hasło nie może być puste.', 'error');
+      setEmail(user.email);
+      setUsername(user.username);
+      setPassword('');
+      return;
+    }
+
     const token = localStorage.getItem('token');
     const updatedData = {};
 
@@ -46,22 +74,21 @@ const UserProfile = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Dane zostały zaktualizowane pomyślnie!');
-        setMessageType('success'); 
+        setMessageWithTimeout('Dane zostały zaktualizowane pomyślnie!', 'success'); 
         setEditingField(null); 
       } else {
-        setMessage(data.message || 'Nie udało się zaktualizować danych');
-        setMessageType('error');
+        setMessageWithTimeout(data.message || 'Nie udało się zaktualizować danych', 'error');
+        setEmail(user.email);
+        setUsername(user.username);
+        setPassword('');
       }
     } catch (error) {
       console.error('Błąd:', error);
-      setMessage('Wystąpił błąd podczas aktualizacji danych');
-      setMessageType('error');
+      setMessageWithTimeout('Wystąpił błąd podczas aktualizacji danych', 'error');
+      setEmail(user.email);
+      setUsername(user.username);
+      setPassword('');
     }
-
-    setTimeout(() => {
-      setMessage('');
-    }, 3000); 
   };
 
   if (!user) {

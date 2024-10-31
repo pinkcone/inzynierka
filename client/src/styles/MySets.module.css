@@ -122,16 +122,26 @@
   position: relative;
 }
 
-.closeButton {
+.popupClose {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
+  top: 10px;
+  right: 10px;
   border: none;
-  font-size: 20px;
+  background: none;
   cursor: pointer;
+  font-size: 20px;
+}
+.popup button {
+  width: auto;
+  background-color: #20B2AA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top
+  : 10px;
 }
 
-.closeButton:hover {
+.popup button:hover {
   background-color: #218188;
 }

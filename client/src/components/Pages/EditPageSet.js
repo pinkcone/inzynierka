@@ -14,6 +14,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
+
 const EditPageSet = () => {
   const { id } = useParams();
   const [set, setSet] = useState(null);
@@ -28,6 +29,9 @@ const EditPageSet = () => {
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const navigate = useNavigate();
   const [isOwner, setIsOwner] = useState(false); 
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [confirmPopupContent, setConfirmPopupContent] = useState('');
+  const [onConfirm, setOnConfirm] = useState(() => () => {});
 
   const fetchSet = async () => {
     try {
@@ -113,30 +117,6 @@ const EditPageSet = () => {
 
   const handleEditAnswerClick = (answer) => {
     setEditAnswerId(answer.id);
-  };
-
-  const handleDeleteAnswerClick = async (answerId) => {
-    const confirmDelete = window.confirm('Czy na pewno chcesz usunąć tę odpowiedź?');
-    
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`/api/answers/delete/${answerId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (response.ok) {
-          showMessage('Odpowiedź została usunięta.');
-          await refreshQuestions();
-        } else {
-          const errorData = await response.json();
-          setError(errorData.message || 'Nie udało się usunąć odpowiedzi.');
-        }
-      } catch (err) {
-        setError('Wystąpił błąd podczas usuwania odpowiedzi.');
-      }
-    }
   };
 
   const showMessage = (message) => {
@@ -225,29 +205,44 @@ const EditPageSet = () => {
     }, 2000);
   };
 
-  const handleDeleteQuestionClick = async (questionId) => {
-    const confirmDelete = window.confirm('Czy na pewno chcesz usunąć to pytanie?');
+  const handleDeleteQuestionClick = (questionId) => {
+    setConfirmPopupContent('Czy na pewno chcesz usunąć to pytanie?');
+    setOnConfirm(() => () => handleConfirmDelete('question', questionId));
+    setShowConfirmPopup(true);
+  };
   
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`/api/questions/delete/${questionId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (response.ok) {
-          showMessage('Pytanie zostało usunięte.');
-          await refreshQuestions();
-        } else {
-          const errorData = await response.json();
-          setError(errorData.message || 'Nie udało się usunąć pytania.');
+  const handleDeleteAnswerClick = (answerId) => {
+    setConfirmPopupContent('Czy na pewno chcesz usunąć tę odpowiedź?');
+    setOnConfirm(() => () => handleConfirmDelete('answer', answerId));
+    setShowConfirmPopup(true);
+  };
+  
+  
+  const handleConfirmDelete = async (type, id) => {
+    try {
+      const endpoint = type === 'question' ? `/api/questions/delete/${id}` : `/api/answers/delete/${id}`;
+      const response = await fetch(endpoint, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-      } catch (err) {
-        setError('Wystąpił błąd podczas usuwania pytania.');
+      });
+  
+      if (response.ok) {
+        showMessage(`${type === 'question' ? 'Pytanie' : 'Odpowiedź'} zostało usunięte.`);
+        await refreshQuestions();
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || `Nie udało się usunąć ${type === 'question' ? 'pytania' : 'odpowiedzi'}.`);
       }
+    } catch (err) {
+      setError(`Wystąpił błąd podczas usuwania ${type === 'question' ? 'pytania' : 'odpowiedzi'}.`);
+    } finally {
+      setShowConfirmPopup(false);
     }
   };
+  
+  
 
 
   return (
@@ -306,7 +301,15 @@ const EditPageSet = () => {
           ) : (
             <p>Brak pytań</p>
           )}
-  
+            {showConfirmPopup && (
+              <div className={styles.popup}>
+                <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
+                <p>{confirmPopupContent}</p>
+                <button onClick={() => { onConfirm(); }}>Potwierdź</button>
+                <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
+              </div>
+            )}
+
           {showAddAnswer && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => setShowAddAnswer(false)}>X</button>

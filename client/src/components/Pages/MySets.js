@@ -96,7 +96,7 @@ const MySets = () => {
           {showAddSetPopup && (
             <div className={styles.popupOverlay}>
               <div className={styles.popup}>
-                <button className={styles.closeButton} onClick={closePopup}>✖</button>
+                <button className={styles.popupClose} onClick={closePopup}>X</button>
                 <AddSet onAddSet={handleAddSet} />
               </div>
             </div>

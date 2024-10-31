@@ -5,7 +5,9 @@ import Sidebar from '../Sidebar/Sidebar';
 import styles from '../../styles/MySets.module.css';
 
 const MyTests = () => {
-  // Zdefiniowane na sztywno testy
+  // tymczasowo daje na sztywno testy zeby bylo widac jak to wyglada :D 
+  // poniżej w komentarzach wrzuciłam wersje z endpointami ktore przypuszczam ze takie będą ale mogą sie zmienic idk bo poki co dalej nie mamy backendu 
+  
   const [tests] = useState([
     { testId: 1, testName: 'klasa 4', setName: 'historia' },
     { testId: 2, testName: 'klasa4B', setName: 'historia' },
@@ -15,7 +17,6 @@ const MyTests = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  // Funkcja do otwierania testu
   const handleOpenTest = (testId) => {
     navigate(`/test/${testId}`);
   };
