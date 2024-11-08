@@ -77,6 +77,10 @@
   .registerMessage {
     text-align: center;
     margin-top: 15px;
-    color: #28a745; /* Success message color */
+    color: #28a745;
+  }
+
+  .loginLink {
+    text-align: center;
   }
   

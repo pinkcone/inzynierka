@@ -119,6 +119,18 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    return res.status(400).json({ message: 'Email jest wymagany' });
+  }
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: 'Nieprawidłowy format adresu e-mail' });
+  }
+
+  if (!password) {
+    return res.status(400).json({ message: 'Hasło jest wymagane' });
+  }
+
   try {
     const user = await User.findOne({ where: { email } });
 

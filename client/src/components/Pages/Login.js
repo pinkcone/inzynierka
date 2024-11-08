@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import styles from '../../styles/Login.module.css'; 
 
 const Login = ({ onLoginSuccess }) => {
@@ -17,6 +17,8 @@ const Login = ({ onLoginSuccess }) => {
 
   const navigate = useNavigate();
 
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -26,6 +28,7 @@ const Login = ({ onLoginSuccess }) => {
       ...errors,
       [e.target.name]: ''
     });
+    setMessage('');
   };
 
   const handleSubmit = async (e) => {
@@ -39,6 +42,9 @@ const Login = ({ onLoginSuccess }) => {
 
     if (!formData.email) {
       newErrors.email = 'Email jest wymagany';
+      valid = false;
+    } else if (!emailPattern.test(formData.email)) {
+      newErrors.email = 'Podaj poprawny adres email';
       valid = false;
     }
 
@@ -88,7 +94,7 @@ const Login = ({ onLoginSuccess }) => {
           <div className={styles.mb3}>
             <label htmlFor="email">Email:</label>
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               className={`${styles.formControl} ${errors.email ? styles.isInvalid : ''}`}
@@ -112,6 +118,7 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           <button type="submit" className={styles.btnPrimary}>Zaloguj się</button>
+          <p className={styles.registerLink}>Nie masz konta? <Link to={"/register"}>Zarejestruj się!</Link></p>
         </form>
 
         {message && <p className={styles.loginMessage}>{message}</p>}

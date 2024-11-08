@@ -79,4 +79,7 @@
     margin-top: 15px;
     color: #28a745; /* Success message color */
   }
-  
+
+  .registerLink {
+    text-align: center;
+  }
