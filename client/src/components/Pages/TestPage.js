@@ -96,9 +96,9 @@ const TestPage = () => {
         <div className={styles.appContainer}>
             <Navbar/>
             <div className={styles.testPage}>
-                <div className={styles.sidebar}>
+                <div className={styles.sidebarLeft}>
                     <div className={styles.timer}>
-                        Czas pozostały: {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
+                        Czas pozostały:<br/> {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
                     </div>
                 </div>
                 <div className={styles.testContainer}>
@@ -142,7 +142,7 @@ const TestPage = () => {
                         )}
                     </div>
                 </div>
-                <div className={styles.sidebar}>
+                <div className={styles.sidebarRight}>
                     <p>Numer pytania:</p>
                     <div className={styles.questionMap}>
                         {questions.map((_, index) => (

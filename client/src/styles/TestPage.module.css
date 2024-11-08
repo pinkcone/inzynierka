@@ -8,8 +8,6 @@
     background-color: #f9f9f9;
     height: 100vh;
     display: flex;
-    justify-content: center; /* Wyśrodkowanie poziome */
-    align-items: center;     /* Wyśrodkowanie pionowe */
 }
 
 .testContainer {
@@ -20,6 +18,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 .questionContainer {
@@ -48,7 +48,7 @@
 }
 
 .selected {
-    background-color: #007bff; /* Kolor dla zaznaczonej odpowiedzi */
+    background-color: #007bff;
     color: white;
 }
 
@@ -72,7 +72,15 @@
     cursor: not-allowed;
 }
 
-.sidebar {
+.sidebarRight {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebarLeft {
     width: 20%;
     display: flex;
     flex-direction: column;
@@ -105,21 +113,22 @@
 }
 
 .answered {
-    background-color: #007bff; /* Kolor dla pytania, na które udzielono odpowiedzi */
+    background-color: #007bff;
     color: white;
 }
 
 .current {
-    border: 2px solid #000000; /* Obrys dla aktualnego pytania */
+    border: 2px solid #000000;
 }
 
 .timer {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 35px;
+    text-align: center;
 }
 
 .finishButton {
-    background-color: #dc3545; /* Kolor dla przycisku zakończenia testu */
+    background-color: #dc3545;
     color: white;
 }
