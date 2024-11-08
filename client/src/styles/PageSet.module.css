@@ -48,38 +48,64 @@
   margin: 0;
 }
 
-/* Buttons */
-.buttonEdit {
-  background-color: #007bff;
+.crudbutton {
+  background-color: #20B2AA;
   color: white;
-  padding: 10px 20px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.crudbutton:hover {
+  background-color: #218188;
+}
+
+.buttonEdit {
+  background-color: #20B2AA;
+  color: white;
+  padding: 7px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
+}
+
+.buttonEdit:hover {
+  background-color: #218188;
 }
 
 
 .buttonDelete {
   background-color: #c41218;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
 }
 
+.buttonDelete:hover{
+  background-color: #b31016;
+}
 
 .buttonAdd {
-  background-color: #007bff;
+  background-color: #20B2AA;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
 }
+
+.buttonAdd:hover {
+  background-color: #218188;
+}
+
 
 button svg {
   margin-right: 5px;
@@ -142,10 +168,30 @@ button svg {
 
 .popup button {
   width: auto;
-  margin-top: 20px;
-  background-color: #007bff;
+  background-color: #20B2AA;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top
+  : 10px;
+}
+
+.popup button:hover {
+  background-color: #218188;
+}
+
+.button {
+  background-color: #20B2AA;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+
+.button:hover {
+  background-color: #218188;
 }

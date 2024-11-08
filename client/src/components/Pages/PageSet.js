@@ -113,7 +113,7 @@ const PageSet = () => {
 
           {isOwner && (
             <div className={styles.editSetButtonContainer}>
-              <button className={styles.editSetButton} onClick={handleEditSetClick}>
+              <button className={styles.crudbutton} onClick={handleEditSetClick}>
                 EDYTUJ ZESTAW
               </button>
             </div>

@@ -89,14 +89,14 @@ const MySets = () => {
           <h2 className={styles.textCenter}>Moje zestawy</h2>
           <button
             onClick={handleAddSetClick}
-            className={styles.buttonPrimary}
+            className={styles.crudbutton}
           >
             Dodaj zestaw
           </button>
           {showAddSetPopup && (
             <div className={styles.popupOverlay}>
               <div className={styles.popup}>
-                <button className={styles.closeButton} onClick={closePopup}>✖</button>
+                <button className={styles.popupClose} onClick={closePopup}>X</button>
                 <AddSet onAddSet={handleAddSet} />
               </div>
             </div>
@@ -112,13 +112,13 @@ const MySets = () => {
                   <div>
                     <button
                       onClick={() => handleOpen(set.id)}
-                      className={styles.btnPrimary}
+                      className={styles.button}
                     >
                       Otwórz
                     </button>
                     <button
                       onClick={() => handleStartFlashcards(set.id)}
-                      className={styles.btnSecondary} 
+                      className={styles.button} 
                     >
                       Uruchom fiszki
                     </button>

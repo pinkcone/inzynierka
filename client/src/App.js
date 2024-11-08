@@ -14,6 +14,8 @@ import EditAnswer from './components/Answer/EditAnswer';
 import Flashcards from './components/Flashcards';
 import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
+import MyTests from "./components/Pages/MyTests";
+
 import TestSummaryPage from "./components/Pages/TestSummaryPage";
 import TestStartPage from "./components/Pages/TestStartPage";
 
@@ -38,6 +40,8 @@ const App = () => {
         <Route path="/flashcards/:setId" element={<Flashcards />} />
         <Route path="/editset/:id" element={<EditPageSet />} /> 
         <Route path="/test" element={<TestPage />} />
+        <Route path="/mytests" element={<MyTests />} />
+
         <Route path="/test-summary" element={<TestSummaryPage />} />
         <Route path="/test-start" element={<TestStartPage />} />
 

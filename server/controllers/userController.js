@@ -2,6 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize'); // Upewnij się, że importujesz Op, jeśli go używasz
+const validator = require('validator'); // Upewnij się, że biblioteka validator jest zaimportowana
+
 
 // Lista dostępnych obrazków profilowych
 const profileImages = [
@@ -39,27 +41,46 @@ const createUser = (req, res) => {
     });
 };
 
+
 // Funkcja rejestracji użytkownika
 const registerUser = async (req, res) => {
   const { email, username, password, role } = req.body;
 
+  // Walidacja emaila
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ message: 'Niepoprawny format emaila' });
+  }
+
+  // Walidacja hasła (minimum 6 znaków, maksymalnie 20)
+  if (!validator.isLength(password, { min: 6, max: 20 })) {
+    return res.status(400).json({ message: 'Hasło musi mieć od 6 do 20 znaków' });
+  }
+
+  // Walidacja nazwy użytkownika (od 3 do 20 znaków)
+  if (!validator.isLength(username, { min: 3, max: 20 })) {
+    return res.status(400).json({ message: 'Nazwa użytkownika musi mieć od 3 do 20 znaków' });
+  }
+
   try {
+    // Sprawdzenie, czy użytkownik z podanym emailem już istnieje
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ message: 'Użytkownik z tym emailem już istnieje' });
     }
 
+    // Sprawdzenie, czy nazwa użytkownika jest już zajęta
     const existingUsernameUser = await User.findOne({ where: { username } });
     if (existingUsernameUser) {
       return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
     }
 
+    // Tworzenie nowego użytkownika
     const newUser = await User.create({
       email,
       username,
       password,
       role: role || 'user',
-      image: randImages()
+      image: randImages() // Losowy obrazek profilowy
     });
 
     // Generowanie tokenu JWT po rejestracji
@@ -69,15 +90,16 @@ const registerUser = async (req, res) => {
         email: newUser.email,
         username: newUser.username,
         role: newUser.role,
-        image: newUser.image // Dodanie obrazka do tokenu
+        image: newUser.image
       },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
+    // Odpowiedź po udanej rejestracji
     res.status(201).json({
       message: 'Rejestracja zakończona sukcesem!',
-      token, 
+      token,
       user: {
         id: newUser.id,
         email: newUser.email,
@@ -87,10 +109,11 @@ const registerUser = async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ message: 'Błąd serwera', error: error.message });
   }
 };
+
 
 // Funkcja logowania użytkownika
 const loginUser = async (req, res) => {
@@ -139,7 +162,6 @@ const loginUser = async (req, res) => {
 
 
 //Edycja danych użytkownika
-// Edycja danych użytkownika
 const updateUser = async (req, res) => {
   const { username, email, password } = req.body;
   const userId = req.params.id;
@@ -150,28 +172,45 @@ const updateUser = async (req, res) => {
       return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
     }
 
+    // Walidacja emaila
     if (email) {
+      if (!validator.isEmail(email)) {
+        return res.status(400).json({ message: 'Niepoprawny format emaila' });
+      }
+
       const existingEmailUser = await User.findOne({ where: { email, id: { [Op.ne]: userId } } });
       if (existingEmailUser) {
-        return res.status(400).json({ message: 'Email jest już zajęty' });
+        return res.status(400).json({ message: 'Email jest już używany' });
       }
+
+      user.email = email; // Aktualizacja emaila
     }
 
+    // Walidacja nazwy użytkownika
     if (username) {
+      if (!validator.isLength(username, { min: 3, max: 20 })) {
+        return res.status(400).json({ message: 'Nazwa użytkownika musi mieć od 3 do 20 znaków' });
+      }
+
       const existingUsernameUser = await User.findOne({ where: { username, id: { [Op.ne]: userId } } });
       if (existingUsernameUser) {
         return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
       }
+
+      user.username = username; // Aktualizacja nazwy użytkownika
     }
 
-    if (username) user.username = username;
-    if (email) user.email = email;
-
+    // Walidacja hasła
     if (password) {
+      if (!validator.isLength(password, { min: 6, max: 20 })) {
+        return res.status(400).json({ message: 'Hasło musi mieć od 6 do 20 znaków' });
+      }
+
       const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
+      user.password = await bcrypt.hash(password, salt); // Aktualizacja hasła
     }
 
+    // Zapisanie zmian
     await user.save();
 
     res.status(200).json({
@@ -188,6 +227,8 @@ const updateUser = async (req, res) => {
     res.status(500).json({ message: 'Błąd serwera', error: error.message });
   }
 };
+
+
 
 
 module.exports = {
