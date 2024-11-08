@@ -142,32 +142,43 @@ const editSet = async (req, res) => {
   };
   
 
-const getPublicSets = async (req, res) => {
-  try {
-    const { keyword } = req.query;  // Odczyt słowa kluczowego z parametrów zapytania, jeśli jest obecne
-
-    // Filtruj zestawy publiczne, opcjonalnie szukając po słowach kluczowych
-    const whereClause = {
-      isPublic: true,
-    };
-
-    if (keyword) {
-      whereClause.keyWords = { [Op.like]: `%${keyword}%` };  // Szukaj zestawów zawierających słowo kluczowe
+  const getPublicSets = async (req, res) => {
+    try {
+      const { keyword, page = 1, pageSize = 10 } = req.query; 
+  
+      const whereClause = {
+        isPublic: true,
+      };
+  
+      if (keyword) {
+        whereClause.keyWords = { [Op.like]: `%${keyword}%` }; 
+      }
+  
+      const offset = (page - 1) * pageSize;
+  
+      const { count, rows } = await Set.findAndCountAll({
+        where: whereClause,
+        limit: parseInt(pageSize),
+        offset: offset,
+      });
+  
+      if (rows.length === 0) {
+        return res.status(404).json({ message: 'Nie znaleziono żadnych publicznych zestawów.' });
+      }
+  
+      const totalPages = Math.ceil(count / pageSize);
+  
+      res.status(200).json({
+        sets: rows,
+        currentPage: page,
+        totalPages,
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Wystąpił błąd podczas pobierania publicznych zestawów.', error: error.message });
     }
-
-    const publicSets = await Set.findAll({
-      where: whereClause
-    });
-
-    if (publicSets.length === 0) {
-      return res.status(404).json({ message: 'Nie znaleziono żadnych publicznych zestawów.' });
-    }
-
-    res.status(200).json(publicSets);
-  } catch (error) {
-    res.status(500).json({ message: 'Wystąpił błąd podczas pobierania publicznych zestawów.', error: error.message });
-  }
-};
+  };
+  
+  
 
   module.exports = {
     addSet,

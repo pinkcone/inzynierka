@@ -12,14 +12,19 @@ const HomePage = () => {
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);  
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();  
 
-  const fetchPublicSets = async () => {
+  const fetchPublicSets = async (page = 1) => {
     try {
-      const response = await fetch(`/api/sets/public?keyword=${searchTerm}`);  
+      const response = await fetch(`/api/sets/public?keyword=${searchTerm}&page=${page}&pageSize=10`);  
       if (response.ok) {
         const data = await response.json();
-        setSets(data);
+    
+        setSets(data.sets);
+        setCurrentPage(parseInt(data.currentPage));
+        setTotalPages(parseInt(data.totalPages));
         setError(''); 
       } else {
         setError('Nie znaleziono żadnych zestawów.');
@@ -31,15 +36,15 @@ const HomePage = () => {
     }
   };
 
-  const debouncedFetchSets = debounce(() => {
-    fetchPublicSets();
+  const debouncedFetchSets = debounce((page) => {
+    fetchPublicSets(page);
   }, 500); 
 
   useEffect(() => {
-    debouncedFetchSets();
+    debouncedFetchSets(currentPage);
     const token = localStorage.getItem('token');  
     setIsLoggedIn(!!token);
-  }, [searchTerm]);
+  }, [searchTerm, currentPage]);
 
   useEffect(() => {
     return () => {
@@ -49,7 +54,8 @@ const HomePage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchPublicSets(); 
+    setCurrentPage(1); 
+    fetchPublicSets(1); 
   };
 
   const handleNavigate = (setId) => {
@@ -57,6 +63,12 @@ const HomePage = () => {
       navigate(`/page-set/${setId}`);  
     } else {
       navigate('/login');
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
     }
   };
 
@@ -108,6 +120,26 @@ const HomePage = () => {
               )
             )}
           </div>
+
+          {totalPages > 1 && (
+            <div className={styles.pagination}>
+              <button 
+                className={styles.pageButton} 
+                onClick={() => handlePageChange(currentPage - 1)} 
+                disabled={currentPage === 1}
+              >
+                &lt; Poprzednia
+              </button>
+              <span>{currentPage} z {totalPages}</span>
+              <button 
+                className={styles.pageButton} 
+                onClick={() => handlePageChange(currentPage + 1)} 
+                disabled={currentPage === totalPages}
+              >
+                Następna &gt;
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

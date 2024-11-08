@@ -84,8 +84,6 @@
   margin: 10px;
 }
 
-
-
 .setItem:hover {
   transform: translateY(-5px);
 }
@@ -116,6 +114,40 @@
 .setButton:hover {
   background-color: #218188;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; 
+}
+
+.pageButton {
+  padding: 5px 10px; 
+  font-size: 14px;  
+  background-color: #20B2AA; 
+  color: white; 
+  border: 1px solid #20B2AA;
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pageButton:hover {
+  background-color: #218188;  
+  transform: scale(1.1);  
+}
+
+.pageButton:disabled {
+  background-color: lightgray;  
+  color: darkgray; 
+  cursor: not-allowed; 
+}
+
+.pageButton:disabled:hover {
+  transform: none; 
+}
+
 
 /* Responsive styling */
 @media (max-width: 768px) {
