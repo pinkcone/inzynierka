@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
-const User = require('./User'); // Import modelu User
 
 const Set = sequelize.define('Set', {
   id: {
@@ -22,8 +21,5 @@ const Set = sequelize.define('Set', {
     allowNull: true
   }
 });
-
-// Relacja: Set należy do User
-Set.belongsTo(User, { foreignKey: 'ownerId' });  // ownerId jako klucz obcy
 
 module.exports = Set;

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt'); // Upewnij się, że zaimportowałeś bcrypt
-const sequelize = require('../config/sequelize'); // Import połączenia
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/sequelize');
 
 const User = sequelize.define('User', {
   id: {
@@ -18,7 +18,7 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true, // Walidacja emaila
+      isEmail: true,
     },
   },
   password: {
@@ -26,17 +26,16 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
   role: {
-    type: DataTypes.ENUM('user', 'admin'), // rola jest enumem: user lub admin
+    type: DataTypes.ENUM('user', 'admin'),
     defaultValue: 'user',
   },
   image: {
-    type: DataTypes.STRING, // obrazek jest losowany z dostępnej puli
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
   hooks: {
     beforeCreate: async (user) => {
-      // Sprawdzamy, czy hasło istnieje i haszujemy je
       if (user.password) {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);

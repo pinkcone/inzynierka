@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
-const Question = require('./Question'); // Import modelu Question
+const Question = require('./Question');
 
 const Answer = sequelize.define('Answer', {
   id: {
@@ -25,7 +25,6 @@ const Answer = sequelize.define('Answer', {
   }
 });
 
-// Relacja: Answer należy do Question
 Answer.belongsTo(Question, { foreignKey: 'questionId' });
 
 module.exports = Answer;

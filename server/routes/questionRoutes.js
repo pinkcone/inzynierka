@@ -7,5 +7,5 @@ router.post('/add', authMiddleware, addQuestion);
 router.put('/edit/:id', authMiddleware, editQuestion);
 router.delete('/delete/:id', authMiddleware, deleteQuestion);
 router.get('/set/:setId', authMiddleware, getQuestionsBySet);
-router.get('/:id', authMiddleware, getQuestionById);
+router.get('/:id', getQuestionById);
 module.exports = router;
