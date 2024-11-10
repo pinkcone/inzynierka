@@ -11,6 +11,10 @@ const Test = sequelize.define("Test", {
     duration: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     hooks: {
