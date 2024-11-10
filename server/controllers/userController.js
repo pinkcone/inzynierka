@@ -142,7 +142,7 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Nieprawidłowe hasło' });
     }
-  
+    
     // Generowanie tokenu JWT
     const token = jwt.sign(
       {
