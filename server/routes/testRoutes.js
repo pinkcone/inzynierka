@@ -5,3 +5,5 @@ const { createTestManual, createTestRandom } = require('../controllers/testContr
 
 router.put('/create-manual', authMiddleware, createTestManual);
 router.put('/create-random', authMiddleware, createTestRandom);
+
+module.exports = router;
