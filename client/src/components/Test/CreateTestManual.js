@@ -54,14 +54,42 @@ const CreateTestManual = ({ setId, onClose }) => {
     });
   };
 
-  const handleCreateTest = () => {
-    if (totalTime === '' || totalTime <= 0) {
-      setTimeError('Musisz wprowadzić poprawny czas większy niż zero.');
+  const handleCreateTest = async () => {
+    const time = parseInt(totalTime, 10);
+
+    if (selectedQuestions.length === 0) {
+      setError('Musisz wybrać co najmniej jedno pytanie.');
+      return;
+    }
+    if (!time || time <= 0) {
+      setTimeError('Czas musi być większy niż zero.');
       return;
     }
 
-    console.log('Tworzenie testu z pytaniami:', selectedQuestions, 'Czas:', totalTime);
-    navigate('/test-start');
+    try {
+      const response = await fetch('/api/tests/create-manual', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          duration: time,
+          questionIds: selectedQuestions,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Utworzono test:', data);
+        navigate('/mytests');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Błąd podczas tworzenia testu.');
+      }
+    } catch (error) {
+      setError('Wystąpił błąd podczas tworzenia testu.');
+    }
   };
 
   return (

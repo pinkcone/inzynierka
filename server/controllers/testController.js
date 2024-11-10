@@ -1,5 +1,5 @@
 const Test = require('../models/Test')
-const CompletedTest = require('../models/CompletedTest')
+const {Question} = require("../models/associations");
 
 
 const createTestManual = async (req, res) => {
@@ -10,9 +10,11 @@ const createTestManual = async (req, res) => {
     }
 
     try {
+        console.log("Zaczynamy tworzenie testu");
         const newTest = await createTestWithCode(duration);
-        await assignQuestionsToTest(newTest.code, questionIds);
-
+        console.log("Dodaję pytanka")
+        await assignQuestionsToTest(newTest, questionIds);
+        console.log("Pytanka dodane");
         res.status(201).json(newTest);
 
     } catch (error) {
@@ -21,8 +23,7 @@ const createTestManual = async (req, res) => {
 };
 
 const createTestRandom = async (req, res) => {
-    const { duration, questionCount } = req.body;
-    const setId = req.set.id;
+    const { duration, questionCount, setId } = req.body;
 
     if (typeof questionCount !== 'number' || questionCount <= 0) {
         return res.status(400).json({ error: 'Niepoprawna liczba pytań!' });
@@ -49,7 +50,7 @@ const createTestRandom = async (req, res) => {
 
         const questionIds = selectedQuestions.map(question => question.id);
         const newTest = await createTestWithCode(duration);
-        await assignQuestionsToTest(newTest.code, questionIds);
+        await assignQuestionsToTest(newTest, questionIds);
 
         res.status(201).json(newTest);
 
@@ -74,6 +75,7 @@ async function generateCode() {
 
     do {
         code = await generateCodeValue();
+        console.log("Szukam kodu w bazie danych");
         existingCode = await Test.findOne({ where: { code } });
     } while (existingCode);
 
@@ -83,6 +85,7 @@ async function generateCode() {
 
 async function createTestWithCode(duration) {
     const code = await generateCode();
+    console.log("Wygenerowano kod: ", code);
     return await Test.create({
         code,
         duration,
@@ -90,12 +93,8 @@ async function createTestWithCode(duration) {
 }
 
 
-async function assignQuestionsToTest(testCode, questionIds) {
-    const testQuestions = questionIds.map(questionId => ({
-        code: testCode,
-        questionId,
-    }));
-    await TestQuestion.bulkCreate(testQuestions);
+async function assignQuestionsToTest(test, questionIds) {
+    await test.addQuestions(questionIds);
 }
 
 module.exports = { createTestManual, createTestRandom, }
