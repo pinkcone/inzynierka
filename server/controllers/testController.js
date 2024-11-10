@@ -1,6 +1,5 @@
 const { Sequelize } = require('sequelize');
 const Test = require('../models/Test');
-
 const {Question} = require("../models/associations");
 const Answer = require('../models/Answer');
 
@@ -185,5 +184,4 @@ const getAllTests = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });
     }
 };
-module.exports = { createTestManual, createTestRandom, 
- }
+module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests }
