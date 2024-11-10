@@ -22,8 +22,9 @@ const addSet = async (req, res) => {
           keyWords,
           ownerId: userId
       });
-
       res.status(201).json(newSet);
+
+      
   } catch (error) {
       res.status(500).json({ message: 'Błąd podczas dodawania zestawu.', error: error.message });
   }

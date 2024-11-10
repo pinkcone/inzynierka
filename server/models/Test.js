@@ -11,7 +11,6 @@ const Test = sequelize.define("Test", {
     duration: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 3600,
     }
 }, {
     hooks: {
