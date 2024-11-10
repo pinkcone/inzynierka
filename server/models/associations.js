@@ -23,9 +23,9 @@ Question.hasMany(Flashcards, { foreignKey: 'questionId', onDelete: 'CASCADE' });
 // Relacje dla Test i CompletedTest
 Test.hasMany(CompletedTest, { foreignKey: 'testId' });
 Test.belongsToMany(Question, {through: 'TestQuestions', foreignKey: 'code'});
+Question.belongsToMany(Test, { through: 'TestQuestions', foreignKey: 'questionId' });
 CompletedTest.belongsTo(Test, { foreignKey: 'testId', onDelete: 'CASCADE' });
 CompletedTest.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-Question.belongsToMany(Test, { through: 'TestQuestions', foreignKey: 'questionId' });
 
 module.exports = {
   User,

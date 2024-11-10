@@ -100,7 +100,7 @@ async function assignQuestionsToTest(test, questionIds) {
 }
 
 const getTestInformation = async (req, res) => {
-    const { code } = req.body;
+    const { code } = req.params;
 
     try {
         const test = await Test.findOne({
@@ -132,53 +132,88 @@ const getTestInformation = async (req, res) => {
 };
 
 const getTestQuestion = async (req, res) => {
-    const { code } = req.body;
+    const { code } = req.params;
 
     try {
+        console.log("Kod testu: ", code);
         const test = await Test.findOne({
             where: { code },
             include: [
                 {
                     model: Question,
+                    through: { attributes: [] },
                     attributes: ['content', 'type'],
                     include: [
                         {
                             model: Answer,
-                            attributes: ['content']
+                            attributes: ['content'],
                         }
-                    ]
+                    ],
                 }
             ]
         });
-
+        console.log("Pytania testu: ", test.Questions);
         if (!test) {
             return res.status(404).json({ error: 'Test nie został znaleziony.' });
         }
+        res.status(200).json({ questions: test.Questions });
 
-        res.status(200).json(test.Questions);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas pobierania pytań testu.', error: error.message });
     }
 };
 
+
+// const getTestQuestion = async (req, res) => {
+//     const { code } = req.params;
+//
+//     try {
+//         const test = await Test.findOne({
+//             where: { code },
+//             include: [
+//                 {
+//                     model: Question,
+//                     attributes: ['content', 'type'],
+//                     include: [
+//                         {
+//                             model: Answer,
+//                             attributes: ['content']
+//                         }
+//                     ]
+//                 }
+//             ]
+//         });
+//
+//         if (!test) {
+//             return res.status(404).json({ error: 'Test nie został znaleziony.' });
+//         }
+//
+//         res.status(200).json(test.Questions);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Błąd podczas pobierania pytań testu.', error: error.message });
+//     }
+// };
+
 const getAllTests = async (req, res) => {
+    const userId = req.user.id;
     try {
+        console.log("UserID: ", userId);
         const tests = await Test.findAll({
             attributes: [
                 'code',
-                'name'
+                'name',
                 [Sequelize.fn('COUNT', Sequelize.col('Questions.id')), 'questionCount']
             ],
             include: [
                 {
                     model: Question,
-                    attributes: [], 
+                    attributes: [],
                     through: { attributes: [] }
                 }
             ],
             group: ['Test.code']
         });
-
+        // console.log("Testy: ", tests);
         res.status(200).json(tests);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });

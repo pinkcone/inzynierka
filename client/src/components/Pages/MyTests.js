@@ -1,166 +1,75 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from '../../styles/MySets.module.css';
 
 const MyTests = () => {
-  // tymczasowo daje na sztywno testy zeby bylo widac jak to wyglada :D 
-  // poniżej w komentarzach wrzuciłam wersje z endpointami ktore przypuszczam ze takie będą ale mogą sie zmienic idk bo poki co dalej nie mamy backendu 
-  
-  const [tests] = useState([
-    { testId: 1, testName: 'klasa 4', setName: 'historia' },
-    { testId: 2, testName: 'klasa4B', setName: 'historia' },
-    { testId: 3, testName: 'Test  1', setName: 'kolosPWO' },
-  ]);
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
-  const handleOpenTest = (testId) => {
-    navigate(`/test/${testId}`);
-  };
-
-  return (
-    <div className={styles.appContainer}>
-      <Navbar />
-      <div className={styles.mainContent}>
-        <Sidebar />
-        <div className={styles.content}>
-          <h2 className={styles.textCenter}>Moje testy</h2>
-
-          {error && <div className={styles.alertDanger}>{error}</div>}
-          {message && <div className={styles.alertSuccess}>{message}</div>}
-
-          {tests.length > 0 && (
-            <ul className={styles.listGroup}>
-              {tests.map((test) => (
-                <li key={test.testId} className={styles.listGroupItem}>
-                  <span>Test: {test.testName}</span>
-                  <span>Zestaw: {test.setName}</span>
-                  <div>
-                    <button
-                      onClick={() => handleOpenTest(test.testId)}
-                      className={styles.button}
-                    >
-                      Otwórz test
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default MyTests;
-
-
-/*
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import Sidebar from '../Sidebar/Sidebar';
-import styles from '../../styles/Sets.module.css';
-
-const MyTests = () => {
   const [tests, setTests] = useState([]);
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchTests = async () => {
+    const fetchUserTests = async () => {
       try {
-        const response = await fetch('/api/tests', {
+        const response = await fetch('http://localhost:5000/api/tests/get-all-tests', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
         });
 
         if (response.ok) {
           const data = await response.json();
-          if (data.length === 0) {
-            setError('Brak testów.');
-          } else {
-            setTests(data);
-            setError('');
-          }
+          setTests(data);
         } else {
-          setError('Błąd podczas pobierania testów.');
+          console.log(response);
+          setError('Nie udało się pobrać testów.');
         }
       } catch (err) {
-        setError('Wystąpił błąd podczas pobierania testów.');
+        setError('Wystąpił błąd podczas pobierania testów.' + err);
       }
     };
 
-    fetchTests();
+    fetchUserTests();
   }, []);
 
-  const handleOpenTest = (testId) => {
-    navigate(`/test/${testId}`);
-  };
-
-  const handleStartTest = async (testId) => {
-    try {
-      const response = await fetch(`/api/tests/start/${testId}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Test uruchomiony:', data);
-        navigate(`/test/${testId}`);
-      } else {
-        console.error('Błąd podczas uruchamiania testu:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Błąd podczas uruchamiania testu:', error);
-    }
+  const handleOpenTest = (code) => {
+    navigate(`/test-start/${code}`);
   };
 
   return (
-    <div className={styles.appContainer}>
-      <Navbar />
-      <div className={styles.mainContent}>
-        <Sidebar />
-        <div className={styles.content}>
-          <h2 className={styles.textCenter}>Moje testy</h2>
+      <div className={styles.appContainer}>
+        <Navbar />
+        <div className={styles.mainContent}>
+          <Sidebar />
+          <div className={styles.content}>
+            <h2 className={styles.textCenter}>Moje testy</h2>
+            {error && <div className={styles.alertDanger}>{error}</div>}
 
-          {error && <div className={styles.alertDanger}>{error}</div>}
-          {message && <div className={styles.alertSuccess}>{message}</div>}
-
-          {tests.length > 0 && (
-            <ul className={styles.listGroup}>
-              {tests.map((test) => (
-                <li key={test.testId} className={styles.listGroupItem}>
-                  <span>Test: {test.testName}</span>
-                  <span>Zestaw: {test.setName}</span>
-                  <div>
-                    <button
-                      onClick={() => handleOpenTest(test.testId)}
-                      className={styles.button}
-                    >
-                      Otwórz test
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+            {tests.length > 0 ? (
+                <ul className={styles.listGroup}>
+                  {tests.map((test) => (
+                      <li key={test.code} className={styles.listGroupItem}>
+                        <span>Test: {test.name}</span>
+                        <div>
+                          <button
+                              onClick={() => handleOpenTest(test.code)}
+                              className={styles.button}
+                          >
+                            Otwórz test
+                          </button>
+                        </div>
+                      </li>
+                  ))}
+                </ul>
+            ) : (
+                <p>Brak testów do wyświetlenia.</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 
 export default MyTests;
-
-*/

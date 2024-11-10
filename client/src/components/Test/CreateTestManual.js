@@ -3,10 +3,12 @@ import styles from '../../styles/PageSet.module.css';
 import {useNavigate} from "react-router-dom";
 
 const CreateTestManual = ({ setId, onClose }) => {
+  const [testName, setTestName] = useState('');
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [totalTime, setTotalTime] = useState('');
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState('');
+  const [testNameError, setTestNameError] = useState('');
   const [timeError, setTimeError] = useState('');
   const navigate = useNavigate();
 
@@ -54,6 +56,10 @@ const CreateTestManual = ({ setId, onClose }) => {
     });
   };
 
+  const handleTestNameChange = (e) => {
+    setTestName(e.target.value);
+  }
+
   const handleCreateTest = async () => {
     const time = parseInt(totalTime, 10);
 
@@ -76,6 +82,7 @@ const CreateTestManual = ({ setId, onClose }) => {
         body: JSON.stringify({
           duration: time,
           questionIds: selectedQuestions,
+          name: testName,
         }),
       });
 
@@ -95,8 +102,18 @@ const CreateTestManual = ({ setId, onClose }) => {
   return (
     <div className={styles.manualPopup}>
       <button className={styles.popupClose} onClick={onClose}>X</button>
-      <h3>Tworzenie testu ręcznie </h3> 
-      
+      <h3>Tworzenie testu ręcznie </h3>
+
+      <label>
+        Nazwa testu:
+        <input
+            type="text"
+            value={testName}
+            onChange={handleTestNameChange}
+            placeholder="Wprowadź nazwę testu"
+        />
+      </label>
+      {testNameError && <p className={styles.error}>{setTestNameError}</p>}
       <label>
         Czas na cały test (minuty):
         <input

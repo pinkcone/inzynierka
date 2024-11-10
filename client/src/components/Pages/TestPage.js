@@ -1,56 +1,69 @@
-import React, {useState, useEffect, useCallback, useMemo} from 'react';
-import styles from '../../styles/TestPage.module.css';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import {useNavigate} from 'react-router-dom';
+import styles from '../../styles/TestPage.module.css';
 
 const TestPage = () => {
+    const { code } = useParams();
+    const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(null);
     const [testFinished, setTestFinished] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [error, setError] = useState('');
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        const fetchTestDetails = async () => {
+            try {
+                const responseInfo = await fetch(`http://localhost:5000/api/tests/${code}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
 
-    const questions = useMemo(() => [
-        {
-            question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-            answers: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
-            correctAnswerIndex: 0,
-        },
-        {
-            question: 'Pytanie 2',
-            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
-            correctAnswerIndex: 1,
-        },
-        {
-            question: 'Pytanie 3',
-            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
-            correctAnswerIndex: 2,
-        },
-        {
-            question: 'Pytanie 4',
-            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4'],
-            correctAnswerIndex: 2,
-        },
-        {
-            question: 'Pytanie 5',
-            answers: ['Odpowiedź 1', 'Odpowiedź 2', 'Odpowiedź 3', 'Odpowiedź 4', 'Odpowiedź 2', 'Odpowiedź 2'],
-            correctAnswerIndex: 4,
-        },
+                if (responseInfo.ok) {
+                    const dataInfo = await responseInfo.json();
+                    setTimer(dataInfo.duration);
 
-    ], []);
+                    const responseQuestions = await fetch(`http://localhost:5000/api/tests/${code}/get-questions`, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        },
+                    });
+                    console.log("RESPONSE QUESTIONS: ", responseQuestions);
+
+                    if (responseQuestions.ok) {
+                        const dataQuestions = await responseQuestions.json();
+                        setQuestions(dataQuestions.questions);
+                        console.log("Questions data: ", dataQuestions.questions);
+                    } else {
+                        setError('Nie udało się pobrać pytań do testu.');
+                    }
+                } else {
+                    setError('Nie udało się pobrać danych testu.');
+                }
+            } catch (err) {
+                setError(`Wystąpił błąd: ${err.message}`);
+            }
+        };
+
+        fetchTestDetails();
+    }, [code]);
 
     const endTest = useCallback(() => {
         setTestFinished(true);
 
         setTimeout(() => {
-            navigate('/test-summary', {state: {selectedAnswers, questions}})
-        }, 0)
+            navigate('/test-summary', { state: { selectedAnswers, questions } });
+        }, 0);
     }, [selectedAnswers, questions, navigate]);
 
     useEffect(() => {
+        if (timer === null) return;
+
         const countdown = setInterval(() => {
-            setTimer(prev => {
+            setTimer((prev) => {
                 if (prev <= 1) {
                     clearInterval(countdown);
                     endTest();
@@ -61,7 +74,7 @@ const TestPage = () => {
         }, 1000);
 
         return () => clearInterval(countdown);
-    }, [endTest]);
+    }, [timer, endTest]);
 
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
@@ -78,7 +91,7 @@ const TestPage = () => {
     };
 
     const handleAnswerSelect = (answerIndex) => {
-        setSelectedAnswers(prev => ({
+        setSelectedAnswers((prev) => ({
             ...prev,
             [currentQuestion]: answerIndex,
         }));
@@ -94,28 +107,33 @@ const TestPage = () => {
 
     return (
         <div className={styles.appContainer}>
-            <Navbar/>
+            <Navbar />
             <div className={styles.testPage}>
                 <div className={styles.sidebarLeft}>
                     <div className={styles.timer}>
-                        Czas pozostały:<br/> {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
+                        Czas pozostały:<br /> {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
                     </div>
                 </div>
                 <div className={styles.testContainer}>
-                    <div className={styles.questionContainer}>
-                        <h3>{questions[currentQuestion].question}</h3>
-                        <div className={styles.answers}>
-                            {questions[currentQuestion].answers.map((answer, index) => (
-                                <button
-                                    key={index}
-                                    className={`${styles.answerButton} ${selectedAnswers[currentQuestion] === index ? styles.selected : ''}`}
-                                    onClick={() => handleAnswerSelect(index)}
-                                >
-                                    {answer}
-                                </button>
-                            ))}
+                    {error && <p className={styles.error}>{error}</p>}
+                    {questions && questions.length > 0 ? (
+                        <div className={styles.questionContainer}>
+                            <h3>{questions[currentQuestion].content}</h3>
+                            <div className={styles.answers}>
+                                {questions[currentQuestion].Answers.map((answer, index) => (
+                                    <button
+                                        key={index}
+                                        className={`${styles.answerButton} ${selectedAnswers[currentQuestion] === index ? styles.selected : ''}`}
+                                        onClick={() => handleAnswerSelect(index)}
+                                    >
+                                        {answer.content}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        !error && <p>Ładowanie pytań...</p>
+                    )}
                     <div className={styles.navigation}>
                         <button
                             className={styles.navButton}

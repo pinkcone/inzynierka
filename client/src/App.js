@@ -42,10 +42,10 @@ const App = () => {
         <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
         <Route path="/flashcards/:setId" element={<Flashcards />} />
         <Route path="/editset/:id" element={<EditPageSet />} /> 
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/test/:code" element={<TestPage />} />
         <Route path="/mytests" element={<MyTests />} />
         <Route path="/test-summary" element={<TestSummaryPage />} />
-        <Route path="/test-start" element={<TestStartPage />} />
+        <Route path="/test-start/:code" element={<TestStartPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/setlist" element={<SetList />} />

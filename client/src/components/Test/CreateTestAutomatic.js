@@ -3,8 +3,10 @@ import styles from '../../styles/PageSet.module.css';
 import {useNavigate} from "react-router-dom";
 
 const CreateTestAutomatic = ({setId, onClose}) => {
+    const [testName, setTestName] = useState('');
     const [numberOfQuestions, setNumberOfQuestions] = useState('');
     const [totalTime, setTotalTime] = useState('');
+    const [testNameError, setTestNameError] = useState('');
     const [questionsError, setQuestionsError] = useState('');
     const [timeError, setTimeError] = useState('');
     const navigate = useNavigate();
@@ -33,6 +35,10 @@ const CreateTestAutomatic = ({setId, onClose}) => {
         }
     };
 
+    const handleTestNameChange = (e) => {
+        setTestName(e.target.value);
+    }
+
     const handleGenerateTest = async () => {
         const numQuestions = parseInt(numberOfQuestions, 10);
         const time = parseInt(totalTime, 10);
@@ -49,10 +55,6 @@ const CreateTestAutomatic = ({setId, onClose}) => {
             setQuestionsError('');
             setTimeError('');
 
-            // console.log('Generowanie testu automatycznego:');
-            // console.log('ID zestawu:', setId);
-            // console.log('Liczba pytań:', numQuestions, 'Czas:', time);
-
             try {
                 const response = await fetch('/api/tests/create-random', {
                     method: 'PUT',
@@ -64,6 +66,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
                         duration: time,
                         questionCount: numQuestions,
                         setId: setId,
+                        name: testName,
                     }),
                 });
 
@@ -85,6 +88,16 @@ return (
         <button className={styles.popupClose} onClick={onClose}>X</button>
         <h3>Generowanie testu automatycznie </h3>
 
+        <label>
+            Nazwa testu:
+            <input
+                type="text"
+                value={testName}
+                onChange={handleTestNameChange}
+                placeholder="Wprowadź nazwę testu"
+            />
+        </label>
+        {testNameError && <p className={styles.error}>{setTestNameError}</p>}
         <label>
             Liczba pytań:
             <input
