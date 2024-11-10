@@ -5,6 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,12 +18,13 @@ const useAuth = () => {
         if (decodedToken.exp < currentTime) {
           logout('Twoja sesja wygasła. Zaloguj się ponownie.');
         } else {
-          setUser(decodedToken); 
+          setUser(decodedToken);
           setIsAuthenticated(true);
+
+          setIsAdmin(decodedToken.role === 'admin'); 
 
           const interval = setInterval(() => {
             const timeLeft = decodedToken.exp - Date.now() / 1000;
-
             if (timeLeft <= 0) {
               logout('Twoja sesja wygasła. Zaloguj się ponownie.');
             }
@@ -34,6 +36,7 @@ const useAuth = () => {
         console.error('Błąd dekodowania tokena:', error);
         setIsAuthenticated(false);
         setUser(null);
+        setIsAdmin(false);
       }
     }
   }, []);
@@ -42,19 +45,19 @@ const useAuth = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
     setUser(null);
+    setIsAdmin(false);
 
     if (message) {
       alert(message);
     }
 
     navigate('/');
-
     setTimeout(() => {
       window.location.reload();
     }, 100);
   };
 
-  return { isAuthenticated, user, logout };
+  return { isAuthenticated, user, isAdmin, logout };
 };
 
 export default useAuth;

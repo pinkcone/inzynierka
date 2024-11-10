@@ -1,0 +1,52 @@
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .actions {
+    margin-top: 20px;
+  }
+  
+  .confirm,
+  .cancel {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .confirm:hover{
+    background-color: #3e8d40;
+  }
+
+  .cancel {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .cancel:hover{
+    background-color: #cc3329;
+  }
+  

@@ -121,16 +121,14 @@ const editSet = async (req, res) => {
   const getSetById = async (req, res) => {
     try {
       const { id } = req.params;
-      const userId = req.user ? req.user.id : null;  // Sprawdź, czy użytkownik jest zalogowany
+      const userId = req.user ? req.user.id : null;  
   
-      // Szukaj zestawu po ID, bez względu na właściciela
       const set = await Set.findByPk(id);
   
       if (!set) {
         return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
       }
   
-      // Sprawdź, czy zestaw jest prywatny i użytkownik nie jest właścicielem
       if (!set.isPublic && set.ownerId !== userId) {
         return res.status(403).json({ message: 'Brak dostępu do tego zestawu.' });
       }
@@ -177,7 +175,80 @@ const editSet = async (req, res) => {
       res.status(500).json({ message: 'Wystąpił błąd podczas pobierania publicznych zestawów.', error: error.message });
     }
   };
+
+  const getAllSetsWithOwner = async (req, res) => {
+    try {
+      const { keyword = '', page = 1, pageSize = 10 } = req.query;
   
+      const whereClause = {
+        [Op.or]: [
+          { name: { [Op.like]: `%${keyword}%` } }, 
+          { keyWords: { [Op.like]: `%${keyword}%` } }
+        ]
+      };
+  
+      const offset = (page - 1) * pageSize;
+  
+      const { count, rows } = await Set.findAndCountAll({
+        where: whereClause,
+        include: [
+          {
+            model: User, 
+            attributes: ['id', 'username'],
+          },
+        ],
+        limit: parseInt(pageSize),
+        offset,
+      });
+  
+      if (rows.length === 0) {
+        return res.status(404).json({ message: 'Nie znaleziono żadnych zestawów.' });
+      }
+  
+      const totalPages = Math.ceil(count / pageSize);
+  
+      res.status(200).json({
+        sets: rows.map((set) => ({
+          id: set.id,
+          name: set.name,
+          isPublic: set.isPublic,
+          keyWords: set.keyWords,
+          ownerId: set.ownerId,
+          owner: set.user ? set.user.username : 'Nieznany', 
+        })),
+        currentPage: parseInt(page),
+        totalPages,
+      });
+    } catch (error) {
+      console.error('Błąd podczas pobierania zestawów:', error.message);
+      res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
+    }
+  };
+  
+  const forceDeleteSet = async (req, res) => {
+    try {
+      const { id } = req.params;  
+
+      const set = await Set.findOne({ where: { id} });
+      if (!set) {
+          return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
+      }
+
+      const questions = await Question.findAll({ where: { setId: set.id } });
+
+      for (const question of questions) {
+          await Answer.destroy({ where: { questionId: question.id } });
+      }
+
+      await Question.destroy({ where: { setId: set.id } });
+
+      await set.destroy();
+
+      res.status(200).json({ message: 'Zestaw i wszystkie powiązane pytania oraz odpowiedzi zostały usunięte.' });
+  } catch (error) {
+      res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
+  }
+  };
   
 
   module.exports = {
@@ -187,5 +258,7 @@ const editSet = async (req, res) => {
     changeSetOwner,
     getAllUserSets,
     getSetById,
-    getPublicSets
+    getPublicSets,
+    getAllSetsWithOwner,
+    forceDeleteSet
   };

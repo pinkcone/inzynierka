@@ -173,7 +173,6 @@ const loginUser = async (req, res) => {
 };
 
 
-//Edycja danych użytkownika
 const updateUser = async (req, res) => {
   const { username, email, password } = req.body;
   const userId = req.params.id;
@@ -184,7 +183,6 @@ const updateUser = async (req, res) => {
       return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
     }
 
-    // Walidacja emaila
     if (email) {
       if (!validator.isEmail(email)) {
         return res.status(400).json({ message: 'Niepoprawny format emaila' });
@@ -195,10 +193,9 @@ const updateUser = async (req, res) => {
         return res.status(400).json({ message: 'Email jest już używany' });
       }
 
-      user.email = email; // Aktualizacja emaila
+      user.email = email; 
     }
 
-    // Walidacja nazwy użytkownika
     if (username) {
       if (!validator.isLength(username, { min: 3, max: 20 })) {
         return res.status(400).json({ message: 'Nazwa użytkownika musi mieć od 3 do 20 znaków' });
@@ -209,20 +206,18 @@ const updateUser = async (req, res) => {
         return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
       }
 
-      user.username = username; // Aktualizacja nazwy użytkownika
+      user.username = username; 
     }
 
-    // Walidacja hasła
     if (password) {
       if (!validator.isLength(password, { min: 6, max: 20 })) {
         return res.status(400).json({ message: 'Hasło musi mieć od 6 do 20 znaków' });
       }
 
       const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt); // Aktualizacja hasła
+      user.password = await bcrypt.hash(password, salt); 
     }
 
-    // Zapisanie zmian
     await user.save();
 
     res.status(200).json({
@@ -241,11 +236,85 @@ const updateUser = async (req, res) => {
 };
 
 
+const getAllUsers = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+
+  try {
+    const users = await User.findAll({
+      attributes: ['id', 'username', 'email', 'role', 'image'] 
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Błąd serwera:', error);
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
+
+const updateUserRole = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+
+  const userId = req.params.id; 
+  const { role } = req.body; 
+
+  try {
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
+    }
+
+    user.role = role;
+    await user.save();
+
+    res.status(200).json({
+      message: 'Rola użytkownika została zaktualizowana pomyślnie',
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
+
+const deleteUser = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+  
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
+    }
+
+    await user.destroy();
+    res.status(200).json({ message: 'Użytkownik został usunięty pomyślnie' });
+  } catch (error) {
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
 
 
 module.exports = {
   createUser,
   registerUser,
   loginUser,
-  updateUser
+  updateUser,
+  getAllUsers,
+  updateUserRole,
+  deleteUser
 };
