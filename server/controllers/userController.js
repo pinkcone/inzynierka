@@ -237,6 +237,10 @@ const updateUser = async (req, res) => {
 
 
 const getAllUsers = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+
   try {
     const users = await User.findAll({
       attributes: ['id', 'username', 'email', 'role', 'image'] 
@@ -250,6 +254,10 @@ const getAllUsers = async (req, res) => {
 
 
 const updateUserRole = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+
   const userId = req.params.id; 
   const { role } = req.body; 
 
@@ -279,6 +287,10 @@ const updateUserRole = async (req, res) => {
 
 
 const deleteUser = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+  
   const userId = req.params.id;
 
   try {
