@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 const Test = require('../models/Test');
-const Question = require('../models/Question');
+
 const {Question} = require("../models/associations");
 const Answer = require('../models/Answer');
 
