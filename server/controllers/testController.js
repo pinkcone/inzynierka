@@ -1,9 +1,10 @@
-const Test = require('../models/Test')
+const { Sequelize } = require('sequelize');
+const Test = require('../models/Test');
 const {Question} = require("../models/associations");
-
+const Answer = require('../models/Answer');
 
 const createTestManual = async (req, res) => {
-    const { duration, questionIds } = req.body;
+    const { duration, questionIds, name } = req.body;
 
     if (!Array.isArray(questionIds) || questionIds.length === 0) {
         return res.status(400).json({ error: 'Nie wybrano żadnego pytania!' });
@@ -11,7 +12,7 @@ const createTestManual = async (req, res) => {
 
     try {
         console.log("Zaczynamy tworzenie testu");
-        const newTest = await createTestWithCode(duration);
+        const newTest = await createTestWithCode(duration, name);
         console.log("Dodaję pytanka")
         await assignQuestionsToTest(newTest, questionIds);
         console.log("Pytanka dodane");
@@ -23,7 +24,7 @@ const createTestManual = async (req, res) => {
 };
 
 const createTestRandom = async (req, res) => {
-    const { duration, questionCount, setId } = req.body;
+    const { duration, questionCount, setId, name } = req.body;
 
     if (typeof questionCount !== 'number' || questionCount <= 0) {
         return res.status(400).json({ error: 'Niepoprawna liczba pytań!' });
@@ -49,7 +50,7 @@ const createTestRandom = async (req, res) => {
         }
 
         const questionIds = selectedQuestions.map(question => question.id);
-        const newTest = await createTestWithCode(duration);
+        const newTest = await createTestWithCode(duration, name);
         await assignQuestionsToTest(newTest, questionIds);
 
         res.status(201).json(newTest);
@@ -83,12 +84,13 @@ async function generateCode() {
 }
 
 
-async function createTestWithCode(duration) {
+async function createTestWithCode(duration, name) {
     const code = await generateCode();
     console.log("Wygenerowano kod: ", code);
     return await Test.create({
         code,
         duration,
+        name
     });
 }
 
@@ -97,4 +99,89 @@ async function assignQuestionsToTest(test, questionIds) {
     await test.addQuestions(questionIds);
 }
 
-module.exports = { createTestManual, createTestRandom, }
+const getTestInformation = async (req, res) => {
+    const { code } = req.body;
+
+    try {
+        const test = await Test.findOne({
+            attributes: [
+                'name',
+                'code',
+                'duration',
+                [Sequelize.fn('COUNT', Sequelize.col('Questions.id')), 'questionCount']
+            ],
+            where: { code },
+            include: [
+                {
+                    model: Question,
+                    attributes: [],
+                    through: { attributes: [] }
+                }
+            ],
+            group: ['Test.code']
+        });
+
+        if (!test) {
+            return res.status(404).json({ error: 'Test nie został znaleziony.' });
+        }
+
+        res.status(200).json(test);
+    } catch (error) {
+        res.status(500).json({ message: 'Błąd podczas pobierania informacji o teście.', error: error.message });
+    }
+};
+
+const getTestQuestion = async (req, res) => {
+    const { code } = req.body;
+
+    try {
+        const test = await Test.findOne({
+            where: { code },
+            include: [
+                {
+                    model: Question,
+                    attributes: ['content', 'type'],
+                    include: [
+                        {
+                            model: Answer,
+                            attributes: ['content']
+                        }
+                    ]
+                }
+            ]
+        });
+
+        if (!test) {
+            return res.status(404).json({ error: 'Test nie został znaleziony.' });
+        }
+
+        res.status(200).json(test.Questions);
+    } catch (error) {
+        res.status(500).json({ message: 'Błąd podczas pobierania pytań testu.', error: error.message });
+    }
+};
+
+const getAllTests = async (req, res) => {
+    try {
+        const tests = await Test.findAll({
+            attributes: [
+                'code',
+                'name'
+                [Sequelize.fn('COUNT', Sequelize.col('Questions.id')), 'questionCount']
+            ],
+            include: [
+                {
+                    model: Question,
+                    attributes: [], 
+                    through: { attributes: [] }
+                }
+            ],
+            group: ['Test.code']
+        });
+
+        res.status(200).json(tests);
+    } catch (error) {
+        res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });
+    }
+};
+module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests }
