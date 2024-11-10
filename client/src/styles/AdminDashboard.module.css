@@ -1,0 +1,190 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dashboardContent {
+  padding-top: 25px;
+  padding-left: 60px;
+  padding-right: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #9fcdcf;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.activeTab {
+  background-color: #20B2AA;
+  color: white;
+}
+
+.tabContent {
+  margin-top: 20px;
+}
+
+.listContainer {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.actionButton {
+  background-color: #20B2AA;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #c4372d;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.saveButton {
+  background-color: #20B2AA;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.saveButton:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #218188;
+}
+
+.successMessage {
+  color: green;
+  padding: 10px;
+  border: 1px solid green;
+  background-color: #e6f4e6;
+  margin-bottom: 15px;
+}
+
+.errorMessage {
+  color: red;
+  padding: 10px;
+  border: 1px solid red;
+  background-color: #f8d7da;
+  margin-bottom: 15px;
+}
+
+.searchContainer {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 400px;
+  margin-right: 10px;
+}
+
+.searchInput:focus {
+  border-color: #20B2AA;
+}
+
+.searchButton {
+  background-color: #20B2AA;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.searchButton:hover {
+  background-color: #218188;
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #20B2AA;
+  color: white;
+  border: 1px solid #20B2AA;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pageButton:hover {
+  background-color: #218188;
+  transform: scale(1.1);
+}
+
+.pageButton:disabled {
+  background-color: lightgray;
+  color: darkgray;
+  cursor: not-allowed;
+}
+
+.pageButton:disabled:hover {
+  transform: none;
+}

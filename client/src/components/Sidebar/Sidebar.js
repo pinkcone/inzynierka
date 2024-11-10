@@ -13,7 +13,7 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <Link to="/mysets" className={styles['sidebar-link']}>MOJE ZESTAWY</Link> 
-      <Link to="/flashcards" className={styles['sidebar-link']}>FISZKI</Link>
+      <Link to="/admin" className={styles['admin']}>admin</Link>
       <Link to="/mytests" className={styles['sidebar-link']}>MOJE TESTY</Link>
       <Link to="/test-start" className={styles['sidebar-link']}>TEST tymczasowe</Link>
     </div>

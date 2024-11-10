@@ -18,6 +18,9 @@ import MyTests from "./components/Pages/MyTests";
 
 import TestSummaryPage from "./components/Pages/TestSummaryPage";
 import TestStartPage from "./components/Pages/TestStartPage";
+import AdminDashboard from './components/Admin/AdminDashboard';
+import UserList from './components/Admin/UserList';
+import SetList from './components/Admin/SetList';
 
 const App = () => {
   return (
@@ -41,9 +44,13 @@ const App = () => {
         <Route path="/editset/:id" element={<EditPageSet />} /> 
         <Route path="/test" element={<TestPage />} />
         <Route path="/mytests" element={<MyTests />} />
-
         <Route path="/test-summary" element={<TestSummaryPage />} />
         <Route path="/test-start" element={<TestStartPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/userlist" element={<UserList />} />
+        <Route path="/setlist" element={<SetList />} />
+
+
 
       </Routes>
     </Router>
