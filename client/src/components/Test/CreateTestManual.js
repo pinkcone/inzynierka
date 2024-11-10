@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/PageSet.module.css';
+import {useNavigate} from "react-router-dom";
 
 const CreateTestManual = ({ setId, onClose }) => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
@@ -7,6 +8,7 @@ const CreateTestManual = ({ setId, onClose }) => {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState('');
   const [timeError, setTimeError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -59,7 +61,7 @@ const CreateTestManual = ({ setId, onClose }) => {
     }
 
     console.log('Tworzenie testu z pytaniami:', selectedQuestions, 'Czas:', totalTime);
-    onClose();
+    navigate('/test-start');
   };
 
   return (

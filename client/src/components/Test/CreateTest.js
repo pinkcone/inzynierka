@@ -5,7 +5,7 @@ import styles from '../../styles/PageSet.module.css';
 
 const CreateTest = ({ setId, onClose }) => {
   const [activeTestType, setActiveTestType] = useState(null);
-  
+
   const handleManualClick = () => {
     setActiveTestType('manual');
   };
@@ -20,7 +20,7 @@ const CreateTest = ({ setId, onClose }) => {
       <button onClick={handleManualClick}>Utwórz test ręcznie</button>
       <button onClick={handleAutomaticClick}>Generuj test automatycznie</button>
       <button className={styles.popupClose} onClick={onClose}>X</button>
-      
+
       {activeTestType === 'manual' && <CreateTestManual setId={setId} onClose={onClose} />}
       {activeTestType === 'automatic' && <CreateTestAutomatic setId={setId} onClose={onClose} />}
     </div>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styles from '../../styles/PageSet.module.css';
+import {useNavigate} from "react-router-dom";
 
 const CreateTestAutomatic = ({ setId, onClose }) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState('');
   const [totalTime, setTotalTime] = useState('');
   const [questionsError, setQuestionsError] = useState('');
   const [timeError, setTimeError] = useState('');
+  const navigate = useNavigate();
 
   const handleQuestionsChange = (e) => {
     const value = e.target.value;
@@ -51,7 +53,7 @@ const CreateTestAutomatic = ({ setId, onClose }) => {
       console.log('ID zestawu:', setId);
       console.log('Liczba pytań:', numQuestions, 'Czas:', time);
 
-      onClose(); 
+      navigate('/test-start');
     }
   };
 
