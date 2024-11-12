@@ -51,9 +51,9 @@ const TestPage = () => {
         fetchTestDetails();
     }, [code]);
 
-    const submitTestResults = async () => {
+    const submitTestResults = async (finalAnswers) => {
         try {
-            console.log("ZAZNACZONE ODP: ", selectedAnswers);
+            console.log("ZAZNACZONE ODP: ", finalAnswers);
             const response = await fetch(`/api/completed-tests/create`, {
                 method: 'POST',
                 headers: {
@@ -61,7 +61,7 @@ const TestPage = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify({
-                    selectedAnswers,
+                    selectedAnswer: finalAnswers,
                     code,
                 }),
             });

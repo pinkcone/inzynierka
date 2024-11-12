@@ -4,9 +4,9 @@ const Question = require('../models/Question');
 const Answer = require('../models/Answer');
 
 const createCompletedTest = async (req, res) => {
-    const { code, selectedAnswer } = req.body;
+    const { code, selectedAnswer = {} } = req.body; // Domyślny pusty obiekt dla selectedAnswer
     const userId = req.user.id;
-
+    console.log("kutas wielki!!!!!!!!!!!!:",selectedAnswer)
     try {
         const test = await Test.findOne({ where: { code } });
         if (!test) {
@@ -32,11 +32,16 @@ const createCompletedTest = async (req, res) => {
         const questionScores = {};
 
         console.log("Zaczynam przetwarzanie pytań");
+        console.log("Selected Answer keys:", Object.keys(selectedAnswer));
+        console.log("Question IDs:", questions.map(q => q.id));
+
         for (const question of questions) {
             const questionId = question.id;
             const correctAnswers = question.Answers.map(answer => answer.id);
             console.log("Przetwarzanie odpowiedzi");
-            const userAnswers = selectedAnswer[questionId] || [];
+
+            // Sprawdzenie `selectedAnswer[questionId]`, aby upewnić się, że jest tablicą
+            const userAnswers = Array.isArray(selectedAnswer[questionId]) ? selectedAnswer[questionId] : [];
             let scoreForQuestion = 0;
 
             console.log("Sprawdzanie odpowiedzi");
@@ -51,8 +56,9 @@ const createCompletedTest = async (req, res) => {
 
             totalScore += scoreForQuestion;
             questionScores[questionId] = scoreForQuestion;
-            console.log("Sprawdzono pytanie")
+            console.log("Sprawdzono pytanie");
         }
+
         console.log("Total score: ", totalScore);
 
         const completedTest = await CompletedTest.create({
@@ -70,6 +76,7 @@ const createCompletedTest = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas zapisywania zakończonego testu.', error: error.message });
     }
 };
+;
 const getCompletedTest = async (req, res) => {
     const { id } = req.params;
 
@@ -136,4 +143,4 @@ const getAllCompletedTestsForTest = async (req, res) => {
     }
 }
 
-module.exports = {createCompletedTest, getCompletedTest, getAllCompletedTestsForTest}
+module.exports = { createCompletedTest, getCompletedTest, getAllCompletedTestsForTest }
