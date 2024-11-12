@@ -19,7 +19,6 @@ const TestSummaryPage = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    // Parsowanie JSON dla selectedAnswer i questionScores
                     data.completedTest.selectedAnswer = JSON.parse(data.completedTest.selectedAnswer);
                     data.completedTest.questionScores = JSON.parse(data.completedTest.questionScores);
                     setTestSummary(data);
@@ -46,29 +45,44 @@ const TestSummaryPage = () => {
     const { name, selectedAnswer, questionScores, score, Test: testDetails } = completedTest;
 
     return (
-        <div className={styles.summaryContainer}>
-            <h2>Podsumowanie Testu: {name}</h2>
-            <p>Kod testu: {testDetails.code}</p>
-            <p>Twój wynik: {score} / test</p>
-            <div className={styles.questionResults}>
+        <div className={styles.summaryPage}>
+            <div className={styles.summaryHeader}>
+                <h1>Podsumowanie Testu: {name}</h1>
+            </div>
+            <div className={styles.questionsSummary}>
+                <h2>Kod testu: {testDetails.code}</h2>
+                <p>Twój wynik: {score} / test</p>
                 {Object.keys(selectedAnswer).map((questionId) => {
                     const userAnswers = selectedAnswer[questionId];
                     const correct = correctAnswers[questionId] || [];
                     const scoreForQuestion = questionScores[questionId] || 0;
 
                     return (
-                        <div key={questionId} className={styles.questionItem}>
+                        <div key={questionId} className={styles.questionBlock}>
                             <h3>Pytanie {questionId}</h3>
-                            <p>Twoje odpowiedzi: {userAnswers.join(', ')}</p>
-                            <p>Prawidłowe odpowiedzi: {correct.join(', ')}</p>
-                            <p>
-                                Wynik pytania: {scoreForQuestion === 1 ? 'Prawidłowo' : scoreForQuestion > 0 ? 'Częściowo prawidłowo' : 'Błędnie'}
-                            </p>
+                            <ul>
+                                <li className={styles.answer}>
+                                    <strong>Twoje odpowiedzi:</strong>
+                                    <span className={styles.selected}>{userAnswers.join(', ')}</span>
+                                </li>
+                                <li className={styles.answer}>
+                                    <strong>Prawidłowe odpowiedzi:</strong>
+                                    <span className={styles.correct}>{correct.join(', ')}</span>
+                                </li>
+                                <li className={styles.answer}>
+                                    <strong>Wynik pytania:</strong>
+                                    {scoreForQuestion === 1
+                                        ? <span className={styles.correct}>Prawidłowo</span>
+                                        : scoreForQuestion > 0
+                                            ? 'Częściowo prawidłowo'
+                                            : 'Błędnie'}
+                                </li>
+                            </ul>
                         </div>
                     );
                 })}
+                <button onClick={() => navigate('/mytests')}>Powrót do testów</button>
             </div>
-            <button onClick={() => navigate('/mytests')}>Powrót do testów</button>
         </div>
     );
 };
