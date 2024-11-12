@@ -51,13 +51,45 @@ const TestPage = () => {
         fetchTestDetails();
     }, [code]);
 
+    const submitTestResults = async () => {
+        try {
+            console.log("ZAZNACZONE ODP: ", selectedAnswers);
+            const response = await fetch(`http://localhost:5000/api/tests/${code}/submit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({
+                    selectedAnswers,
+                    testId: code,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Nie udało się wysłać wyników testu.');
+            }
+        } catch (error) {
+            setError(`Wystąpił błąd podczas wysyłania wyników: ${error.message}`);
+        }
+    };
+
+    // Wywołaj przygotowanie i wysłanie wyników tylko po zakończeniu testu
+    useEffect(() => {
+        if (testFinished) {
+            const finalAnswers = prepareSelectedAnswers(); // Przekształć na { idPytania: idOdpowiedzi }
+            console.log("Final answers after test finished: ", finalAnswers);
+
+            submitTestResults(finalAnswers); // Przekazujemy finalne odpowiedzi
+            navigate('/test-summary', { state: { selectedAnswers: finalAnswers, questions } });
+        }
+    }, [testFinished, questions, navigate]);
+
+// Ustaw test jako zakończony w `endTest`
     const endTest = useCallback(() => {
         setTestFinished(true);
+    }, []);
 
-        setTimeout(() => {
-            navigate('/test-summary', { state: { selectedAnswers, questions } });
-        }, 0);
-    }, [selectedAnswers, questions, navigate]);
+
 
     useEffect(() => {
         if (timer === null) return;
@@ -76,6 +108,7 @@ const TestPage = () => {
         return () => clearInterval(countdown);
     }, [timer, endTest]);
 
+
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
@@ -90,12 +123,70 @@ const TestPage = () => {
         }
     };
 
+    // const prepareSelectedAnswers = () => {
+    //     const formattedAnswers = {};
+    //
+    //     // Iteracja przez zaznaczone odpowiedzi na podstawie indeksów
+    //     Object.entries(selectedAnswers).forEach(([questionIndex, answerIndex]) => {
+    //         const question = questions[questionIndex]; // Pytanie według indeksu
+    //         const answer = question?.Answers[answerIndex]; // Odpowiedź według indeksu
+    //
+    //         if (question && answer) {
+    //             formattedAnswers[question.id] = answer.id; // Ustaw { idPytania: idOdpowiedzi }
+    //         }
+    //     });
+    //
+    //     return formattedAnswers;
+    // };
+    //
+    // const handleAnswerSelect = (answerIndex) => {
+    //     setSelectedAnswers((prev) => ({
+    //         ...prev,
+    //         [currentQuestion]: answerIndex,
+    //     }));
+    // };
+
     const handleAnswerSelect = (answerIndex) => {
-        setSelectedAnswers((prev) => ({
-            ...prev,
-            [currentQuestion]: answerIndex,
-        }));
+        const question = questions[currentQuestion];
+
+        setSelectedAnswers((prev) => {
+            if (question.type === 'multiple') {
+                const currentAnswers = prev[currentQuestion] || [];
+                // Sprawdź, czy odpowiedź jest już zaznaczona
+                if (currentAnswers.includes(answerIndex)) {
+                    // Usuń zaznaczoną odpowiedź
+                    return {
+                        ...prev,
+                        [currentQuestion]: currentAnswers.filter((index) => index !== answerIndex),
+                    };
+                } else {
+                    // Dodaj odpowiedź
+                    return {
+                        ...prev,
+                        [currentQuestion]: [...currentAnswers, answerIndex],
+                    };
+                }
+            } else {
+                // Jeśli nie jest to pytanie wielokrotnego wyboru, zaznacz jedną odpowiedź
+                return {
+                    ...prev,
+                    [currentQuestion]: [answerIndex], // Użyj tablicy dla spójności formatu
+                };
+            }
+        });
     };
+
+    const prepareSelectedAnswers = () => {
+        const formattedAnswers = {};
+
+        Object.entries(selectedAnswers).forEach(([questionIndex, answerIndexes]) => {
+            const question = questions[questionIndex];
+            formattedAnswers[question.id] = answerIndexes.map((index) => question.Answers[index]?.id);
+        });
+
+        return formattedAnswers;
+    };
+
 
     const goToQuestion = (questionIndex) => {
         setCurrentQuestion(questionIndex);
@@ -123,11 +214,12 @@ const TestPage = () => {
                                 {questions[currentQuestion].Answers.map((answer, index) => (
                                     <button
                                         key={index}
-                                        className={`${styles.answerButton} ${selectedAnswers[currentQuestion] === index ? styles.selected : ''}`}
+                                        className={`${styles.answerButton} ${selectedAnswers[currentQuestion]?.includes(index) ? styles.selected : ''}`}
                                         onClick={() => handleAnswerSelect(index)}
                                     >
                                         {answer.content}
                                     </button>
+
                                 ))}
                             </div>
                         </div>

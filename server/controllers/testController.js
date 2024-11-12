@@ -142,11 +142,11 @@ const getTestQuestion = async (req, res) => {
                 {
                     model: Question,
                     through: { attributes: [] },
-                    attributes: ['content', 'type'],
+                    attributes: ['id', 'content', 'type'],
                     include: [
                         {
                             model: Answer,
-                            attributes: ['content'],
+                            attributes: ['id', 'content'],
                         }
                     ],
                 }
