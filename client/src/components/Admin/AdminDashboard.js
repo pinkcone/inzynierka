@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import UserList from './UserList';
 import SetList from './SetList';
+import ReportList from './ReportList';
 import styles from '../../styles/AdminDashboard.module.css';
 
 const AdminDashboard = () => {
@@ -24,11 +25,18 @@ const AdminDashboard = () => {
           >
             Zestawy
           </button>
+          <button
+            className={activeTab === 'reports' ? styles.activeTab : styles.tabButton}
+            onClick={() => setActiveTab('reports')}
+          >
+            Zgłoszenia
+          </button>
         </div>
 
         <div className={styles.tabContent}>
           {activeTab === 'users' && <UserList />}
           {activeTab === 'sets' && <SetList />}
+          {activeTab === 'reports' && <ReportList />} 
         </div>
       </div>
     </div>

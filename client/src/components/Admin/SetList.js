@@ -138,6 +138,7 @@ const SetList = () => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <th>ID</th> 
               <th>Nazwa</th>
               <th>Autor</th>
               <th>Publiczny</th>
@@ -149,8 +150,9 @@ const SetList = () => {
             {sets.length > 0 ? (
               sets.map((set, index) => (
                 <tr key={index}>
+                  <td>{set.id}</td> 
                   <td>{set.name}</td>
-                  <td>{set.ownerName || 'Nieznany'}</td>
+                  <td>{set.owner || 'Nieznany'}</td>
                   <td>{set.isPublic ? 'Tak' : 'Nie'}</td>
                   <td>{set.keyWords || 'Brak'}</td>
                   <td>

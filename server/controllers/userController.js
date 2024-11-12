@@ -236,16 +236,52 @@ const updateUser = async (req, res) => {
 };
 
 
+
 const getAllUsers = async (req, res) => {
+  // Sprawdzamy, czy użytkownik jest administratorem
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
   }
 
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'username', 'email', 'role', 'image'] 
+    // Pobieramy parametry zapytania
+    const { keyword = '', page = 1, pageSize = 10 } = req.query;
+
+    // Definiujemy klauzulę WHERE dla wyszukiwania
+    const whereClause = {
+      [Op.or]: [
+        { username: { [Op.like]: `%${keyword}%` } },
+        { email: { [Op.like]: `%${keyword}%` } }
+      ]
+    };
+
+    // Obliczamy offset i limit dla paginacji
+    const offset = (page - 1) * pageSize;
+    const limit = parseInt(pageSize);
+
+    // Pobieramy użytkowników z bazy danych z wyszukiwaniem i paginacją
+    const { count, rows } = await User.findAndCountAll({
+      where: whereClause,
+      attributes: ['id', 'username', 'email', 'role', 'image'],
+      limit,
+      offset
     });
-    res.status(200).json(users);
+
+    // Obliczamy liczbę stron
+    const totalPages = Math.ceil(count / pageSize);
+
+    // Sprawdzamy, czy są użytkownicy do wyświetlenia
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Nie znaleziono użytkowników.' });
+    }
+
+    // Zwracamy odpowiedź z paginacją
+    res.status(200).json({
+      users: rows,
+      currentPage: parseInt(page),
+      totalPages,
+      totalUsers: count
+    });
   } catch (error) {
     console.error('Błąd serwera:', error);
     res.status(500).json({ message: 'Błąd serwera', error: error.message });

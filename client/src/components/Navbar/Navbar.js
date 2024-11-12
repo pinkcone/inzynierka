@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import styles from '../../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, isAdmin, user, logout } = useAuth();
 
   return (
     <nav className={`navbar navbar-expand-lg navbar-light bg-light w-100 ${styles['navbar-custom']}`}>
@@ -26,22 +26,33 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             {isAuthenticated ? (
               <>
-              <Dropdown className='d-none d-lg-block'>
-                <Dropdown.Toggle variant="success" id="dropdown-basic" className={styles['dropdown-toggle-custom']}>
-                  <img
-                    src={user?.image || '/images/profile_pictures/picture_1.png'}
-                    alt="User Avatar"
-                    className={styles['user-avatar']}
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="/profile">Profil</Dropdown.Item>
-                  <Dropdown.Item onClick={logout}>Wyloguj się</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                <Dropdown className='d-none d-lg-block'>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic" className={styles['dropdown-toggle-custom']}>
+                    <img
+                      src={user?.image || '/images/profile_pictures/picture_1.png'}
+                      alt="User Avatar"
+                      className={styles['user-avatar']}
+                    />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={Link} to="/profile">Profil użytkownika</Dropdown.Item>
+
+                    {isAdmin && (
+                      <Dropdown.Item as={Link} to="/admin">Panel administratora</Dropdown.Item>
+                    )}
+
+                    <Dropdown.Item onClick={logout}>Wyloguj się</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
                 <li className="nav-item d-lg-none">
-                  <Link className="nav-link" to="/profile">Profil</Link>
+                  <Link className="nav-link" to="/profile">Profil użytkownika</Link>
                 </li>
+                {isAdmin && (
+                  <li className="nav-item d-lg-none">
+                    <Link className="nav-link" to="/admin">Panel administratora</Link>
+                  </li>
+                )}
                 <li className="nav-item d-lg-none">
                   <Link className="nav-link" onClick={logout}>Wyloguj się</Link>
                 </li>

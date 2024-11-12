@@ -189,7 +189,7 @@ const editSet = async (req, res) => {
       };
   
       const offset = (page - 1) * pageSize;
-  
+    
       const { count, rows } = await Set.findAndCountAll({
         where: whereClause,
         include: [
@@ -206,17 +206,23 @@ const editSet = async (req, res) => {
         return res.status(404).json({ message: 'Nie znaleziono żadnych zestawów.' });
       }
   
-      const totalPages = Math.ceil(count / pageSize);
+      // Iteracja po wierszach i dodanie logów
+      const sets = rows.map((set) => {
   
-      res.status(200).json({
-        sets: rows.map((set) => ({
+        return {
           id: set.id,
           name: set.name,
           isPublic: set.isPublic,
           keyWords: set.keyWords,
           ownerId: set.ownerId,
-          owner: set.user ? set.user.username : 'Nieznany', 
-        })),
+          owner: set.User ? set.User.username : 'Nieznany',
+        };
+      });
+  
+      const totalPages = Math.ceil(count / pageSize);
+    
+      res.status(200).json({
+        sets,
         currentPage: parseInt(page),
         totalPages,
       });
@@ -225,6 +231,7 @@ const editSet = async (req, res) => {
       res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
     }
   };
+  
   
   const forceDeleteSet = async (req, res) => {
     try {
