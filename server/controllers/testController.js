@@ -164,36 +164,6 @@ const getTestQuestion = async (req, res) => {
 };
 
 
-// const getTestQuestion = async (req, res) => {
-//     const { code } = req.params;
-//
-//     try {
-//         const test = await Test.findOne({
-//             where: { code },
-//             include: [
-//                 {
-//                     model: Question,
-//                     attributes: ['content', 'type'],
-//                     include: [
-//                         {
-//                             model: Answer,
-//                             attributes: ['content']
-//                         }
-//                     ]
-//                 }
-//             ]
-//         });
-//
-//         if (!test) {
-//             return res.status(404).json({ error: 'Test nie został znaleziony.' });
-//         }
-//
-//         res.status(200).json(test.Questions);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Błąd podczas pobierania pytań testu.', error: error.message });
-//     }
-// };
-
 const getAllTests = async (req, res) => {
     const userId = req.user.id;
     try {
