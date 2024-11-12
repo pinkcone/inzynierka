@@ -8,4 +8,5 @@ router.put('/create-random', authMiddleware, createTestRandom);
 router.get('/get-all-tests', authMiddleware, getAllTests);
 router.get('/:code', authMiddleware, getTestInformation);
 router.get('/:code/get-questions', authMiddleware, getTestQuestion);
+
 module.exports = router;
