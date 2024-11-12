@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/editset/:id" element={<EditPageSet />} /> 
         <Route path="/test/:code" element={<TestPage />} />
         <Route path="/mytests" element={<MyTests />} />
-        <Route path="/test-summary" element={<TestSummaryPage />} />
+        <Route path="/test-summary/:id" element={<TestSummaryPage />} />
         <Route path="/test-start/:code" element={<TestStartPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/userlist" element={<UserList />} />

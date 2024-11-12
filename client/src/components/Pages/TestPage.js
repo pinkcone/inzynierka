@@ -31,12 +31,10 @@ const TestPage = () => {
                             'Authorization': `Bearer ${localStorage.getItem('token')}`,
                         },
                     });
-                    console.log("RESPONSE QUESTIONS: ", responseQuestions);
 
                     if (responseQuestions.ok) {
                         const dataQuestions = await responseQuestions.json();
                         setQuestions(dataQuestions.questions);
-                        console.log("Questions data: ", dataQuestions.questions);
                     } else {
                         setError('Nie udało się pobrać pytań do testu.');
                     }
@@ -53,7 +51,6 @@ const TestPage = () => {
 
     const submitTestResults = async (finalAnswers) => {
         try {
-            console.log("ZAZNACZONE ODP: ", finalAnswers);
             const response = await fetch(`/api/completed-tests/create`, {
                 method: 'POST',
                 headers: {
@@ -65,26 +62,32 @@ const TestPage = () => {
                     code,
                 }),
             });
+
             if (!response.ok) {
                 throw new Error('Nie udało się wysłać wyników testu.');
             }
+
+            // Parsowanie odpowiedzi JSON, aby uzyskać completedTest.id
+            const responseData = await response.json();
+            const testId = responseData.completedTest.id;
+
+            // Przekierowanie na stronę podsumowania z id zakończonego testu
+            navigate(`/test-summary/${testId}`, { state: { selectedAnswers: finalAnswers, questions } });
         } catch (error) {
             setError(`Wystąpił błąd podczas wysyłania wyników: ${error.message}`);
         }
     };
 
-    // Wywołaj przygotowanie i wysłanie wyników tylko po zakończeniu testu
+// Wywołanie `submitTestResults` po zakończeniu testu
     useEffect(() => {
         if (testFinished) {
-            const finalAnswers = prepareSelectedAnswers(); // Przekształć na { idPytania: idOdpowiedzi }
+            const finalAnswers = prepareSelectedAnswers();
             console.log("Final answers after test finished: ", finalAnswers);
-
-            submitTestResults(finalAnswers); // Przekazujemy finalne odpowiedzi
-            navigate('/test-summary', { state: { selectedAnswers: finalAnswers, questions } });
+            submitTestResults(finalAnswers);
         }
     }, [testFinished, questions, navigate]);
 
-// Ustaw test jako zakończony w `endTest`
+
     const endTest = useCallback(() => {
         setTestFinished(true);
     }, []);

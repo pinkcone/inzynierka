@@ -4,9 +4,8 @@ const Question = require('../models/Question');
 const Answer = require('../models/Answer');
 
 const createCompletedTest = async (req, res) => {
-    const { code, selectedAnswer = {} } = req.body; // Domyślny pusty obiekt dla selectedAnswer
+    const { code, selectedAnswer = {} } = req.body;
     const userId = req.user.id;
-    console.log("kutas wielki!!!!!!!!!!!!:",selectedAnswer)
     try {
         const test = await Test.findOne({ where: { code } });
         if (!test) {
@@ -40,7 +39,7 @@ const createCompletedTest = async (req, res) => {
             const correctAnswers = question.Answers.map(answer => answer.id);
             console.log("Przetwarzanie odpowiedzi");
 
-            // Sprawdzenie `selectedAnswer[questionId]`, aby upewnić się, że jest tablicą
+
             const userAnswers = Array.isArray(selectedAnswer[questionId]) ? selectedAnswer[questionId] : [];
             let scoreForQuestion = 0;
 
@@ -76,7 +75,7 @@ const createCompletedTest = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas zapisywania zakończonego testu.', error: error.message });
     }
 };
-;
+
 const getCompletedTest = async (req, res) => {
     const { id } = req.params;
 
@@ -95,8 +94,12 @@ const getCompletedTest = async (req, res) => {
         }
 
         const questions = await Question.findAll({
-            where: { setId: completedTest.Test.setId },
             include: [
+                {
+                    model: Test,
+                    where: { code: completedTest.testId }, // Użycie testId (code) z CompletedTest
+                    attributes: []
+                },
                 {
                     model: Answer,
                     where: { isTrue: true },
@@ -105,12 +108,12 @@ const getCompletedTest = async (req, res) => {
             ]
         });
 
-        // Strukturyzacja poprawnych odpowiedzi w formacie `idPytania: [idPoprawnychOdpowiedzi]`
         const correctAnswers = {};
         questions.forEach(question => {
             correctAnswers[question.id] = question.Answers.map(answer => answer.id);
         });
 
+        console.log("Completed test: ", completedTest);
         res.status(200).json({
             completedTest,
             correctAnswers
