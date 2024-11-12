@@ -1,6 +1,7 @@
 const CompletedTest = require('../models/CompletedTest');
 const Test = require('../models/Test');
-
+const Question = require('../models/Question');
+const Answer = require('../models/Answer');
 
 const createCompletedTest = async (req, res) => {
     const { code, selectedAnswer } = req.body;
@@ -13,23 +14,32 @@ const createCompletedTest = async (req, res) => {
         }
 
         const questions = await Question.findAll({
-            where: { setId: test.setId },
-            include: [{
-                model: Answer,
-                where: { isTrue: true },
-                attributes: ['id', 'questionId']
-            }]
+            include: [
+                {
+                    model: Test,
+                    where: { code: test.code },
+                    attributes: []
+                },
+                {
+                    model: Answer,
+                    where: { isTrue: true },
+                    attributes: ['id', 'questionId']
+                }
+            ]
         });
 
         let totalScore = 0;
         const questionScores = {};
 
+        console.log("Zaczynam przetwarzanie pytań");
         for (const question of questions) {
             const questionId = question.id;
             const correctAnswers = question.Answers.map(answer => answer.id);
+            console.log("Przetwarzanie odpowiedzi");
             const userAnswers = selectedAnswer[questionId] || [];
             let scoreForQuestion = 0;
 
+            console.log("Sprawdzanie odpowiedzi");
             if (correctAnswers.length === 1) {
                 if (userAnswers.includes(correctAnswers[0])) {
                     scoreForQuestion = 1;
@@ -40,15 +50,17 @@ const createCompletedTest = async (req, res) => {
             }
 
             totalScore += scoreForQuestion;
-            questionScores[questionId] = scoreForQuestion; // Zapisanie wyniku dla danego pytania
+            questionScores[questionId] = scoreForQuestion;
+            console.log("Sprawdzono pytanie")
         }
+        console.log("Total score: ", totalScore);
 
         const completedTest = await CompletedTest.create({
             testId: test.code,
             userId,
             selectedAnswer,
             score: totalScore,
-            questionScores, // Zapisanie wyników dla poszczególnych pytań
+            questionScores,
             name: test.name
         });
 

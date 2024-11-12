@@ -54,7 +54,7 @@ const TestPage = () => {
     const submitTestResults = async () => {
         try {
             console.log("ZAZNACZONE ODP: ", selectedAnswers);
-            const response = await fetch(`http://localhost:5000/api/tests/${code}/submit`, {
+            const response = await fetch(`/api/completed-tests/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const TestPage = () => {
                 },
                 body: JSON.stringify({
                     selectedAnswers,
-                    testId: code,
+                    code,
                 }),
             });
             if (!response.ok) {
@@ -123,54 +123,27 @@ const TestPage = () => {
         }
     };
 
-    // const prepareSelectedAnswers = () => {
-    //     const formattedAnswers = {};
-    //
-    //     // Iteracja przez zaznaczone odpowiedzi na podstawie indeksów
-    //     Object.entries(selectedAnswers).forEach(([questionIndex, answerIndex]) => {
-    //         const question = questions[questionIndex]; // Pytanie według indeksu
-    //         const answer = question?.Answers[answerIndex]; // Odpowiedź według indeksu
-    //
-    //         if (question && answer) {
-    //             formattedAnswers[question.id] = answer.id; // Ustaw { idPytania: idOdpowiedzi }
-    //         }
-    //     });
-    //
-    //     return formattedAnswers;
-    // };
-    //
-    // const handleAnswerSelect = (answerIndex) => {
-    //     setSelectedAnswers((prev) => ({
-    //         ...prev,
-    //         [currentQuestion]: answerIndex,
-    //     }));
-    // };
-
     const handleAnswerSelect = (answerIndex) => {
         const question = questions[currentQuestion];
 
         setSelectedAnswers((prev) => {
             if (question.type === 'multiple') {
                 const currentAnswers = prev[currentQuestion] || [];
-                // Sprawdź, czy odpowiedź jest już zaznaczona
                 if (currentAnswers.includes(answerIndex)) {
-                    // Usuń zaznaczoną odpowiedź
                     return {
                         ...prev,
                         [currentQuestion]: currentAnswers.filter((index) => index !== answerIndex),
                     };
                 } else {
-                    // Dodaj odpowiedź
                     return {
                         ...prev,
                         [currentQuestion]: [...currentAnswers, answerIndex],
                     };
                 }
             } else {
-                // Jeśli nie jest to pytanie wielokrotnego wyboru, zaznacz jedną odpowiedź
                 return {
                     ...prev,
-                    [currentQuestion]: [answerIndex], // Użyj tablicy dla spójności formatu
+                    [currentQuestion]: [answerIndex],
                 };
             }
         });
