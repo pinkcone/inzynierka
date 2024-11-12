@@ -188,3 +188,9 @@
 .pageButton:disabled:hover {
   transform: none;
 }
+
+.setLink {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

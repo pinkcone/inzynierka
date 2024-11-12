@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import PopupConfirmation from './PopupConfirmation';  
 import styles from '../../styles/AdminDashboard.module.css';
-import { FaSearch, FaSort, FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { FaSearch, FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import debounce from 'lodash.debounce';
+import { Link } from 'react-router-dom'; 
 
 const ReportList = () => {
   const [reports, setReports] = useState([]);
   const [editedStatuses, setEditedStatuses] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-  const [reportIdToDelete, setReportIdToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState(''); // Filtr statusów
-  const [sortOrder, setSortOrder] = useState('asc'); // Sortowanie: rosnąco/malejąco
+  const [statusFilter, setStatusFilter] = useState(''); 
+  const [sortOrder, setSortOrder] = useState('asc'); 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -105,6 +103,8 @@ const ReportList = () => {
             return updated;
         });
 
+        fetchReports(currentPage);
+
         setMessage('Status zgłoszenia został zaktualizowany');
         setMessageType('success');
     } catch (error) {
@@ -119,7 +119,8 @@ const ReportList = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setCurrentPage(1);
+    setCurrentPage(1); 
+    fetchReports(1); 
   };
 
   const handlePageChange = (newPage) => {
@@ -128,15 +129,13 @@ const ReportList = () => {
     }
   };
 
-  // Zmiana sortowania
   const toggleSortOrder = () => {
     setSortOrder(prevOrder => (prevOrder === 'asc' ? 'desc' : 'asc'));
   };
 
-  // Zmiana filtru po statusie
   const handleStatusFilterChange = (e) => {
     setStatusFilter(e.target.value);
-    setCurrentPage(1); // Resetuj stronę przy zmianie filtru
+    setCurrentPage(1); 
   };
 
   return (
@@ -152,7 +151,7 @@ const ReportList = () => {
       <div className={styles.searchContainer}>
         <input
           type="text"
-          placeholder="Szukaj po nazwie zestawu lub opisie zgłoszenia"
+          placeholder="Szukaj po nazwie zestawu"
           className={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -210,7 +209,11 @@ const ReportList = () => {
           {reports.map(report => (
             <tr key={report.id}>
               <td>{report.id}</td>
-              <td>{report.setId}</td>
+              <td>
+                <Link to={`/page-set/${report.setId}`} className={styles.setLink}>
+                  {report.setId}
+                </Link>
+              </td>
               <td>{report.setName}</td>
               <td>{report.userName}</td>
               <td>{report.description}</td>

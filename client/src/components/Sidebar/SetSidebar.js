@@ -71,14 +71,6 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
                 Usuń zestaw
               </button>
             </li>
-            <li>
-              <button
-                className={`${styles.sidebarButton}`}
-                onClick={() => handleSectionClick('reportSet')}
-              >
-                Zgłoś zestaw
-              </button>
-            </li>
           </>
         )}
       </ul>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PopupConfirmation from './PopupConfirmation';  
 import styles from '../../styles/AdminDashboard.module.css';
 import { FaSearch } from 'react-icons/fa';
 import debounce from 'lodash.debounce';
@@ -7,10 +6,9 @@ import debounce from 'lodash.debounce';
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [editedRoles, setEditedRoles] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
+  const [editedActiveStatus, setEditedActiveStatus] = useState({});
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
-  const [userIdToDelete, setUserIdToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -66,6 +64,13 @@ const UserList = () => {
     }));
   };
 
+  const handleActiveSelect = (userId, newActiveStatus) => {
+    setEditedActiveStatus(prev => ({
+      ...prev,
+      [userId]: newActiveStatus,
+    }));
+  };
+
   const handleSaveRoleChange = async (userId) => {
     const token = localStorage.getItem('token');
     const newRole = editedRoles[userId];
@@ -102,44 +107,52 @@ const UserList = () => {
     }
   };
 
-  const handleDeleteUser = (userId) => {
-    setUserIdToDelete(userId);
-    setShowPopup(true);
-  };
-
-  const confirmDeleteUser = async () => {
+  const handleSaveActiveChange = async (userId) => {
     const token = localStorage.getItem('token');
-
+    const newActiveStatus = editedActiveStatus[userId];
+  
+    console.log(`Zmieniamy aktywność dla użytkownika ${userId} na ${newActiveStatus}`);
+  
     try {
-      const response = await fetch(`/api/users/admin/delete-user/${userIdToDelete}`, {
-        method: 'DELETE',
+      const response = await fetch(`/api/users/admin/update-active/${userId}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: JSON.stringify({ isActive: newActiveStatus }),
       });
-
+  
       if (!response.ok) {
-        throw new Error('Nie udało się usunąć użytkownika');
+        const errorData = await response.json();
+        console.error('Błąd odpowiedzi: ', errorData);
+        setMessage(errorData.message || 'Nie udało się zaktualizować aktywności użytkownika');
+        setMessageType('error');
+        setTimeout(() => setMessage(''), 5000);
+        return;
       }
-
-      setUsers(users.filter(user => user.id !== userIdToDelete));
-      setShowPopup(false);
-      setMessage('Użytkownik został usunięty pomyślnie');
+  
+      const data = await response.json();
+      console.log('Odpowiedź serwera: ', data);
+  
+      setUsers(users.map(user => user.id === userId ? { ...user, isActive: newActiveStatus } : user));
+      setEditedActiveStatus(prev => {
+        const updated = { ...prev };
+        delete updated[userId];
+        return updated;
+      });
+  
+      setMessage('Status aktywności użytkownika został zaktualizowany');
       setMessageType('success');
       setTimeout(() => setMessage(''), 5000);
     } catch (error) {
-      console.error('Błąd usuwania użytkownika:', error);
-      setMessage('Wystąpił błąd podczas usuwania użytkownika');
+      console.error('Błąd zmiany aktywności użytkownika:', error);
+      setMessage('Wystąpił błąd podczas zmiany aktywności użytkownika');
       setMessageType('error');
       setTimeout(() => setMessage(''), 5000);
     }
-  };
-
-  const cancelDeleteUser = () => {
-    setShowPopup(false);
-    setUserIdToDelete(null);
-  };
+  };  
+  
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -186,6 +199,7 @@ const UserList = () => {
             <th>Nazwa użytkownika</th>
             <th>Email</th>
             <th>Rola</th>
+            <th>Aktywność</th>
             <th>Akcje</th>
           </tr>
         </thead>
@@ -212,18 +226,28 @@ const UserList = () => {
                 </select>
               </td>
               <td>
+                <select
+                  value={editedActiveStatus[user.id] || user.isActive ? 'active' : 'inactive'}
+                  onChange={(e) => handleActiveSelect(user.id, e.target.value === 'active')}
+                >
+                  <option value="active">Aktywny</option>
+                  <option value="inactive">Nieaktywny</option>
+                </select>
+              </td>
+              <td>
                 <button
                   onClick={() => handleSaveRoleChange(user.id)}
                   className={styles.saveButton}
                   disabled={!editedRoles[user.id] || editedRoles[user.id] === user.role}
                 >
-                  Zapisz zmiany
+                  Zapisz rolę
                 </button>
                 <button
-                  onClick={() => handleDeleteUser(user.id)}
-                  className={styles.deleteButton}
+                  onClick={() => handleSaveActiveChange(user.id)}
+                  className={styles.saveButton}
+                  disabled={editedActiveStatus[user.id] === undefined || editedActiveStatus[user.id] === user.isActive}
                 >
-                  Usuń
+                  Zapisz aktywność
                 </button>
               </td>
             </tr>
@@ -248,8 +272,6 @@ const UserList = () => {
           Następna
         </button>
       </div>
-
-      {showPopup && <PopupConfirmation onConfirm={confirmDeleteUser} onCancel={cancelDeleteUser} />}
     </div>
   );
 };

@@ -21,13 +21,13 @@ const SetList = () => {
     try {
       setLoading(true);
       setError('');
-
-      const response = await fetch(`/api/sets/allsets?keyword=${encodeURIComponent(searchTerm)}&page=${page}&pageSize=10`, {
+  
+      const response = await fetch(`/api/sets/allsets?keyword=${encodeURIComponent(searchTerm.trim())}&page=${page}&pageSize=10`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         setSets(data.sets);
@@ -44,6 +44,7 @@ const SetList = () => {
       setLoading(false);
     }
   };
+  
 
   const debouncedFetchSets = debounce((page) => {
     fetchSets(page);
@@ -120,11 +121,11 @@ const SetList = () => {
 
       <div className={styles.searchContainer}>
         <input
-          type="text"
-          placeholder="Szukaj po nazwie zestawu lub słowach kluczowych"
-          className={styles.searchInput}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+            type="text"
+            placeholder="Szukaj po nazwie zestawu lub słowach kluczowych"
+            className={styles.searchInput}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value.trimStart())}
         />
         <button className={styles.searchButton} onClick={handleSearch}>
           <FaSearch />

@@ -10,7 +10,6 @@ const addSet = async (req, res) => {
       const { name, isPublic, keyWords } = req.body;
       const userId = req.user.id;
 
-      // Sprawdź, czy zestaw o danej nazwie już istnieje
       const existingSet = await Set.findOne({ where: { name, ownerId: userId } });
       if (existingSet) {
           return res.status(400).json({ message: 'Zestaw o tej nazwie już istnieje. Proszę podać inną nazwę.' });
@@ -123,22 +122,29 @@ const editSet = async (req, res) => {
     try {
       const { id } = req.params;
       const userId = req.user ? req.user.id : null;  
-  
+      const userRole = req.user ? req.user.role : null; 
+    
       const set = await Set.findByPk(id);
-  
+    
       if (!set) {
         return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
       }
-  
-      if (!set.isPublic && set.ownerId !== userId) {
-        return res.status(403).json({ message: 'Brak dostępu do tego zestawu.' });
+    
+      if (set.isPublic) {
+        return res.status(200).json(set);
       }
   
-      res.status(200).json(set);
+      if (set.ownerId === userId || userRole === 'admin') {
+        return res.status(200).json(set);
+      }
+  
+      return res.status(403).json({ message: 'Brak dostępu do tego zestawu.' });
+      
     } catch (error) {
       res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawu.', error: error.message });
     }
   };
+  
   
 
   const getPublicSets = async (req, res) => {
@@ -181,20 +187,22 @@ const editSet = async (req, res) => {
     try {
       const { keyword = '', page = 1, pageSize = 10 } = req.query;
   
-      const whereClause = {
-        [Op.or]: [
-          { name: { [Op.like]: `%${keyword}%` } }, 
-          { keyWords: { [Op.like]: `%${keyword}%` } }
-        ]
-      };
+      const whereClause = keyword
+        ? {
+            [Op.or]: [
+              { name: { [Op.like]: `%${keyword}%` } },
+              { keyWords: { [Op.like]: `%${keyword}%` } },
+            ],
+          }
+        : {};
   
       const offset = (page - 1) * pageSize;
-    
+  
       const { count, rows } = await Set.findAndCountAll({
         where: whereClause,
         include: [
           {
-            model: User, 
+            model: User,
             attributes: ['id', 'username'],
           },
         ],
@@ -202,25 +210,17 @@ const editSet = async (req, res) => {
         offset,
       });
   
-      if (rows.length === 0) {
-        return res.status(404).json({ message: 'Nie znaleziono żadnych zestawów.' });
-      }
-  
-      // Iteracja po wierszach i dodanie logów
-      const sets = rows.map((set) => {
-  
-        return {
-          id: set.id,
-          name: set.name,
-          isPublic: set.isPublic,
-          keyWords: set.keyWords,
-          ownerId: set.ownerId,
-          owner: set.User ? set.User.username : 'Nieznany',
-        };
-      });
+      const sets = rows.map((set) => ({
+        id: set.id,
+        name: set.name,
+        isPublic: set.isPublic,
+        keyWords: set.keyWords,
+        ownerId: set.ownerId,
+        owner: set.User ? set.User.username : 'Nieznany',
+      }));
   
       const totalPages = Math.ceil(count / pageSize);
-    
+  
       res.status(200).json({
         sets,
         currentPage: parseInt(page),
@@ -231,6 +231,7 @@ const editSet = async (req, res) => {
       res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
     }
   };
+  
   
   
   const forceDeleteSet = async (req, res) => {
