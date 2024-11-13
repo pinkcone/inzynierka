@@ -25,6 +25,7 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
           Powrót
         </button>
       </div>
+
       <ul>
         {isOwner && !isEditing && ( 
           <li>
@@ -73,6 +74,19 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
           </>
         )}
       </ul>
+
+      <ul>
+        <li>
+          <button
+            className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
+            onClick={() => handleSectionClick('reportSet')}
+          >
+            Zgłoś zestaw
+          </button>
+        </li>
+      </ul>
+
+
     </div>
   );
 };

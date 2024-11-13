@@ -5,6 +5,7 @@ const Answer = require('./Answer');
 const Flashcards = require('./Flashcards');
 const Test = require('./Test');
 const CompletedTest = require('./CompletedTest');
+const Report = require('./Report');
 
 // Ustalanie relacji
 User.hasMany(Set, { foreignKey: 'ownerId', onDelete: 'CASCADE' });
@@ -27,6 +28,11 @@ Question.belongsToMany(Test, { through: 'TestQuestions', foreignKey: 'questionId
 CompletedTest.belongsTo(Test, { foreignKey: 'testId', onDelete: 'CASCADE' });
 CompletedTest.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
+// Relacje raportu
+Report.belongsTo(User, { foreignKey: 'userId', as: 'user' });  
+Report.belongsTo(Set, { foreignKey: 'setId', as: 'set' });  
+Report.belongsTo(User, { foreignKey: 'checkedById', as: 'checkedBy' });
+
 module.exports = {
   User,
   Set,
@@ -34,5 +40,6 @@ module.exports = {
   Answer,
   Flashcards,
   Test,
-  CompletedTest
+  CompletedTest,
+  Report
 };

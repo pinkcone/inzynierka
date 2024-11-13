@@ -6,6 +6,7 @@ import styles from '../../styles/PageSet.module.css';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; 
 import CreateTest from '../Test/CreateTest';
+import ReportForm from '../Report/ReportForm';
 
 const PageSet = () => {
   const { id } = useParams();
@@ -110,7 +111,7 @@ const PageSet = () => {
 
         <div className={styles.content}>
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
-
+          
           {isOwner && (
             <div className={styles.editSetButtonContainer}>
               <button className={styles.crudbutton} onClick={handleEditSetClick}>
@@ -122,6 +123,12 @@ const PageSet = () => {
           {activeSection === 'createTest' && (
             <div className={styles.popup}>
               <CreateTest setId={id} onClose={handleClosePopup} /> 
+            </div>
+          )}
+
+          {activeSection === 'reportSet' && (
+            <div className={styles.popup}>
+              <ReportForm setId={id} onClose={handleClosePopup} />
             </div>
           )}
 

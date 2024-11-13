@@ -80,7 +80,8 @@ const registerUser = async (req, res) => {
       username,
       password,
       role: role || 'user',
-      image: randImages() // Losowy obrazek profilowy
+      image: randImages(), // Losowy obrazek profilowy
+      isActive: true // Ustawiamy isActive na true
     });
 
     // Generowanie tokenu JWT po rejestracji
@@ -141,6 +142,11 @@ const loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Nieprawidłowe hasło' });
+    }
+
+    // Sprawdzenie, czy użytkownik jest aktywny
+    if (!user.isActive) {
+      return res.status(403).json({ message: 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem.' });
     }
     
     // Generowanie tokenu JWT
@@ -236,16 +242,44 @@ const updateUser = async (req, res) => {
 };
 
 
+
 const getAllUsers = async (req, res) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
   }
 
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'username', 'email', 'role', 'image'] 
+    const { keyword = '', page = 1, pageSize = 10 } = req.query;
+
+    const whereClause = {
+      [Op.or]: [
+        { username: { [Op.like]: `%${keyword}%` } },
+        { email: { [Op.like]: `%${keyword}%` } }
+      ]
+    };
+
+    const offset = (page - 1) * pageSize;
+    const limit = parseInt(pageSize);
+
+    const { count, rows } = await User.findAndCountAll({
+      where: whereClause,
+      attributes: ['id', 'username', 'email', 'role', 'image', 'isActive'],
+      limit,
+      offset
     });
-    res.status(200).json(users);
+
+    const totalPages = Math.ceil(count / pageSize);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Nie znaleziono użytkowników.' });
+    }
+
+    res.status(200).json({
+      users: rows,
+      currentPage: parseInt(page),
+      totalPages,
+      totalUsers: count
+    });
   } catch (error) {
     console.error('Błąd serwera:', error);
     res.status(500).json({ message: 'Błąd serwera', error: error.message });
@@ -308,6 +342,43 @@ const deleteUser = async (req, res) => {
 };
 
 
+const changeActive = async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Brak dostępu. Musisz być administratorem.' });
+  }
+
+  const userId = req.params.id; 
+
+  try {
+    const user = await User.findByPk(userId); 
+
+    if (!user) {
+      return res.status(404).json({ message: 'Użytkownik nie został znaleziony' });
+    }
+
+    if (user.role === 'admin') {
+      return res.status(400).json({ message: 'Nie można zmienić statusu aktywności dla administratora.' });
+    }
+
+    user.isActive = !user.isActive;
+    await user.save(); 
+
+    res.status(200).json({
+      message: `Użytkownik został ${user.isActive ? 'aktywowany' : 'dezaktywowany'}`,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        isActive: user.isActive
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
+
 
 module.exports = {
   createUser,
@@ -316,5 +387,6 @@ module.exports = {
   updateUser,
   getAllUsers,
   updateUserRole,
-  deleteUser
+  deleteUser,
+  changeActive
 };

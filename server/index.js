@@ -1,6 +1,6 @@
 const app = require('./app');
 const sequelize = require('./config/sequelize');
-const { User, Set, Question, Answer } = require('./models/associations'); // Importujemy modele z relacjami
+const { User, Set, Question, Answer, Report } = require('./models/associations'); // Importujemy modele z relacjami
 
 sequelize.sync({ force: false })
   .then(() => {

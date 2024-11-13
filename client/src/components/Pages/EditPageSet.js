@@ -128,9 +128,14 @@ const EditPageSet = () => {
   };
 
   const handleQuestionAdded = async () => {
-    showMessage('Pytanie zostało dodane pomyślnie!');
-    await refreshQuestions();
+    try {
+      showMessage('Pytanie zostało dodane pomyślnie!');
+      await refreshSet();
+    } catch (err) {
+      setError('Wystąpił błąd podczas dodawania pytania.');
+    }
   };
+  
 
   const handleAnswerAdded = async () => {
     showMessage('Odpowiedź została dodana pomyślnie!');
@@ -180,6 +185,44 @@ const EditPageSet = () => {
       setError('Wystąpił błąd podczas pobierania pytań.');
     }
   };
+
+
+  const refreshSet = async () => {
+    try {
+      const response = await fetch(`/api/questions/set/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const questionsWithAnswers = await Promise.all(
+          data.map(async (question) => {
+            try {
+              const answersResponse = await fetch(`/api/answers/question/${question.id}`, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+              });
+              const answersData = answersResponse.ok ? await answersResponse.json() : [];
+              return { ...question, answers: answersData };
+            } catch (err) {
+              return { ...question, answers: [] };
+            }
+          })
+        );
+        setQuestions(questionsWithAnswers);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Nie udało się pobrać pytań.');
+      }
+    } catch (err) {
+      setError('Wystąpił błąd podczas pobierania pytań.');
+    }
+  };
+
+  
 
   const handleSidebarClick = (section) => {
     setActiveSection(section);
@@ -231,6 +274,7 @@ const EditPageSet = () => {
       if (response.ok) {
         showMessage(`${type === 'question' ? 'Pytanie' : 'Odpowiedź'} zostało usunięte.`);
         await refreshQuestions();
+        await refreshSet();
       } else {
         const errorData = await response.json();
         setError(errorData.message || `Nie udało się usunąć ${type === 'question' ? 'pytania' : 'odpowiedzi'}.`);

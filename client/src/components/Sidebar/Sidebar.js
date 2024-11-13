@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import styles from '../../styles/Sidebar.module.css'; 
 
 const Sidebar = () => {
-  const { isAuthenticated, isAdmin } = useAuth();
+  const { isAuthenticated} = useAuth();
 
   if (!isAuthenticated) {
     return null; 
@@ -15,11 +15,6 @@ const Sidebar = () => {
       <Link to="/mysets" className={styles['sidebar-link']}>MOJE ZESTAWY</Link> 
       <Link to="/mytests" className={styles['sidebar-link']}>MOJE TESTY</Link>
       <Link to="/test-start" className={styles['sidebar-link']}>TEST tymczasowe</Link>
-
-      {isAdmin && (
-        <Link to="/admin" className={styles['admin']}>Panel administratora</Link>
-      )}
-
     </div>
   );
 };

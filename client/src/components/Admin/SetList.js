@@ -21,13 +21,13 @@ const SetList = () => {
     try {
       setLoading(true);
       setError('');
-
-      const response = await fetch(`/api/sets/allsets?keyword=${encodeURIComponent(searchTerm)}&page=${page}&pageSize=10`, {
+  
+      const response = await fetch(`/api/sets/allsets?keyword=${encodeURIComponent(searchTerm.trim())}&page=${page}&pageSize=10`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         setSets(data.sets);
@@ -44,6 +44,7 @@ const SetList = () => {
       setLoading(false);
     }
   };
+  
 
   const debouncedFetchSets = debounce((page) => {
     fetchSets(page);
@@ -120,11 +121,11 @@ const SetList = () => {
 
       <div className={styles.searchContainer}>
         <input
-          type="text"
-          placeholder="Szukaj po nazwie zestawu lub słowach kluczowych"
-          className={styles.searchInput}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+            type="text"
+            placeholder="Szukaj po nazwie zestawu lub słowach kluczowych"
+            className={styles.searchInput}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value.trimStart())}
         />
         <button className={styles.searchButton} onClick={handleSearch}>
           <FaSearch />
@@ -138,6 +139,7 @@ const SetList = () => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <th>ID</th> 
               <th>Nazwa</th>
               <th>Autor</th>
               <th>Publiczny</th>
@@ -149,8 +151,9 @@ const SetList = () => {
             {sets.length > 0 ? (
               sets.map((set, index) => (
                 <tr key={index}>
+                  <td>{set.id}</td> 
                   <td>{set.name}</td>
-                  <td>{set.ownerName || 'Nieznany'}</td>
+                  <td>{set.owner || 'Nieznany'}</td>
                   <td>{set.isPublic ? 'Tak' : 'Nie'}</td>
                   <td>{set.keyWords || 'Brak'}</td>
                   <td>

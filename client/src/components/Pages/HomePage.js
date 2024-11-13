@@ -86,7 +86,7 @@ const HomePage = () => {
           <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="Szukaj..."
+              placeholder="Szukaj po słowach kluczowych"
               className={styles.searchInput}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}  
