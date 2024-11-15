@@ -56,7 +56,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
             setTimeError('');
 
             try {
-                const response = await fetch('/api/tests/create-random', {
+                const response = await fetch(`/api/tests/create-random/${setId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
