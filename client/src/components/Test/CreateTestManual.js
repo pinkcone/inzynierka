@@ -73,7 +73,7 @@ const CreateTestManual = ({ setId, onClose }) => {
     }
 
     try {
-      const response = await fetch('/api/tests/create-manual', {
+      const response = await fetch(`/api/tests/create-manual/${setId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

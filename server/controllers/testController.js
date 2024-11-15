@@ -5,14 +5,16 @@ const Answer = require('../models/Answer');
 
 const createTestManual = async (req, res) => {
     const { duration, questionIds, name } = req.body;
-
+    const userId = req.user.id;
+    const setId = req.params.setId;
+    console.log("uzytkownik probuje stworzyc test: ", userId);
     if (!Array.isArray(questionIds) || questionIds.length === 0) {
         return res.status(400).json({ error: 'Nie wybrano żadnego pytania!' });
     }
 
     try {
         console.log("Zaczynamy tworzenie testu");
-        const newTest = await createTestWithCode(duration, name);
+        const newTest = await createTestWithCode(duration, name, userId, setId);
         console.log("Dodaję pytanka")
         await assignQuestionsToTest(newTest, questionIds);
         console.log("Pytanka dodane");
@@ -24,8 +26,10 @@ const createTestManual = async (req, res) => {
 };
 
 const createTestRandom = async (req, res) => {
-    const { duration, questionCount, setId, name } = req.body;
-
+    const { duration, questionCount, name } = req.body;
+    const userId = req.user.id;
+    const setId = req.params.setId;
+    console.log("uzytkownik probuje stworzyc test: ", userId);
     if (typeof questionCount !== 'number' || questionCount <= 0) {
         return res.status(400).json({ error: 'Niepoprawna liczba pytań!' });
     }
@@ -34,7 +38,7 @@ const createTestRandom = async (req, res) => {
         const questions = await Question.findAll({
             where: { setId },
         });
-
+        console.log("pytaniaaaa: ", questions);
         if (questions.length < questionCount) {
             return res.status(400).json({ error: 'Nie ma wystarczającej liczby pytań w zestawie!' });
         }
@@ -50,7 +54,7 @@ const createTestRandom = async (req, res) => {
         }
 
         const questionIds = selectedQuestions.map(question => question.id);
-        const newTest = await createTestWithCode(duration, name);
+        const newTest = await createTestWithCode(duration, name, userId, setId);
         await assignQuestionsToTest(newTest, questionIds);
 
         res.status(201).json(newTest);
@@ -84,10 +88,12 @@ async function generateCode() {
 }
 
 
-async function createTestWithCode(duration, name) {
+async function createTestWithCode(duration, name, userId, setId) {
     const code = await generateCode();
     console.log("Wygenerowano kod: ", code);
     return await Test.create({
+        userId,
+        setId,
         code,
         duration,
         name
@@ -169,6 +175,7 @@ const getAllTests = async (req, res) => {
     try {
         console.log("UserID: ", userId);
         const tests = await Test.findAll({
+            where: { userId },
             attributes: [
                 'code',
                 'name',

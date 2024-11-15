@@ -98,12 +98,12 @@ const getCompletedTest = async (req, res) => {
                 {
                     model: Test,
                     where: { code: completedTest.testId }, // Użycie testId (code) z CompletedTest
-                    attributes: []
+                    attributes: ['content']
                 },
                 {
                     model: Answer,
                     where: { isTrue: true },
-                    attributes: ['id', 'questionId']
+                    attributes: ['id', 'questionId', 'content']
                 }
             ]
         });

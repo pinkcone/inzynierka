@@ -154,12 +154,11 @@ const TestPage = () => {
 
     const prepareSelectedAnswers = () => {
         const formattedAnswers = {};
-
+        
         Object.entries(selectedAnswers).forEach(([questionIndex, answerIndexes]) => {
             const question = questions[questionIndex];
             formattedAnswers[question.id] = answerIndexes.map((index) => question.Answers[index]?.id);
         });
-
         return formattedAnswers;
     };
 
