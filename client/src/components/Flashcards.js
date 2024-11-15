@@ -23,7 +23,7 @@ const Flashcards = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/flashcards/set/${setId}`, {
+            const response = await fetch(`/api/flashcards/set/${setId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -58,7 +58,7 @@ const Flashcards = () => {
     const fetchQuestion = async (questionId) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:5000/api/questions/${questionId}`, {
+            const response = await fetch(`/api/questions/${questionId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -78,7 +78,7 @@ const Flashcards = () => {
     const fetchAnswers = async (questionId) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:5000/api/answers/question/correct/${questionId}`, {
+            const response = await fetch(`/api/answers/question/correct/${questionId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

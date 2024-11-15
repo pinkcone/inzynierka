@@ -13,7 +13,7 @@ const MyTests = () => {
   useEffect(() => {
     const fetchUserTests = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/tests/get-all-tests', {
+        const response = await fetch('/api/tests/get-all-tests', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
