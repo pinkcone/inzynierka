@@ -11,7 +11,7 @@ const TestSummaryPage = () => {
     useEffect(() => {
         const fetchTestSummary = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/completed-tests/get-test/${id}`, {
+                const response = await fetch(`/api/completed-tests/get-test/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },

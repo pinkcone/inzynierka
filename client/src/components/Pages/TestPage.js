@@ -16,7 +16,7 @@ const TestPage = () => {
     useEffect(() => {
         const fetchTestDetails = async () => {
             try {
-                const responseInfo = await fetch(`http://localhost:5000/api/tests/${code}`, {
+                const responseInfo = await fetch(`/api/tests/${code}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
@@ -26,7 +26,7 @@ const TestPage = () => {
                     const dataInfo = await responseInfo.json();
                     setTimer(dataInfo.duration);
 
-                    const responseQuestions = await fetch(`http://localhost:5000/api/tests/${code}/get-questions`, {
+                    const responseQuestions = await fetch(`/api/tests/${code}/get-questions`, {
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('token')}`,
                         },
