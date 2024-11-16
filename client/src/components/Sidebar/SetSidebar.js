@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from '../../styles/SetSidebar.module.css';
 
-const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, isEditing }) => {
+const SetSidebar = ({ onSectionClick, activeSection, setName, isOwner, isEditing, setId, handleStartFlashcards }) => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -27,16 +27,6 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
       </div>
 
       <ul>
-        {isOwner && !isEditing && ( 
-          <li>
-            <button
-              className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
-              onClick={() => onSectionClick('createTest')}
-            >
-              Utwórz test
-            </button>
-          </li>
-        )}
         {isOwner && isEditing && (
           <>
             <li>
@@ -77,6 +67,26 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
 
       <ul>
         <li>
+            <button
+              className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
+              onClick={() => onSectionClick('createTest')}
+            >
+              Utwórz test
+            </button>
+          </li>
+
+        <li>
+          <button
+            className={styles.sidebarButton}
+            onClick={() => handleStartFlashcards(setId)} 
+          >
+            Uruchom fiszki
+          </button>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
           <button
             className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
             onClick={() => handleSectionClick('reportSet')}
@@ -85,8 +95,6 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, onClose, isOwner, 
           </button>
         </li>
       </ul>
-
-
     </div>
   );
 };
