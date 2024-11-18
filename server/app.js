@@ -15,7 +15,6 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.json());
-app.use('/images/profile_pictures', express.static(path.join(__dirname, 'images/profile_pictures')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/sets', setRoutes);
