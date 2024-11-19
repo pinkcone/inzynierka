@@ -1,8 +1,13 @@
 const { Sequelize } = require('sequelize');
 
-// Połączenie z bazą danych
-const sequelize = new Sequelize('inzynierka', 'root', '', {
-  host: 'localhost',
+// Połączenie z bazą danych na komputerze prywatnym
+// const sequelize = new Sequelize('inzynierka', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql'
+// });
+//dla serwera
+const sequelize = new Sequelize('inzynierka', 'dbusernew', 'tajnehaslo420', {
+  host: '127.0.0.1',
   dialect: 'mysql'
 });
 
