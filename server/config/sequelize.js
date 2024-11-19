@@ -10,7 +10,7 @@ const sequelize = new Sequelize('inzynierka', 'dbusernew', 'tajnehaslo420', {
   host: '127.0.0.1',
   dialect: 'mysql'
 });
-
+//test
 sequelize.authenticate()
   .then(() => {
     console.log('Połączono z bazą danych MySQL.');
