@@ -50,7 +50,10 @@ const createCompletedTest = async (req, res) => {
                 }
             } else {
                 const correctUserAnswers = userAnswers.filter(answerId => correctAnswers.includes(answerId)).length;
-                scoreForQuestion = correctUserAnswers / correctAnswers.length;
+                const incorrectUserAnswers = userAnswers.length - correctUserAnswers;
+                console.log("Incorrect user answers: ", incorrectUserAnswers);
+                scoreForQuestion = (correctUserAnswers - incorrectUserAnswers) / correctAnswers.length;
+                if (scoreForQuestion < 0) scoreForQuestion = 0;
             }
 
             totalScore += scoreForQuestion;
@@ -97,25 +100,36 @@ const getCompletedTest = async (req, res) => {
             include: [
                 {
                     model: Test,
-                    where: { code: completedTest.testId }, // Użycie testId (code) z CompletedTest
-                    attributes: ['content']
+                    where: { code: completedTest.testId },
+                    attributes: []
                 },
                 {
                     model: Answer,
-                    where: { isTrue: true },
-                    attributes: ['id', 'questionId', 'content']
+                    attributes: ['id', 'questionId', 'content', 'isTrue']
                 }
             ]
         });
 
+        // Przygotowanie struktury pytań z odpowiedziami
+        const formattedQuestions = questions.map((question) => ({
+            id: question.id,
+            content: question.content,
+            answers: question.Answers.map((answer) => ({
+                id: answer.id,
+                content: answer.content,
+                isTrue: answer.isTrue
+            }))
+        }));
+
+        // Wyciągnięcie poprawnych odpowiedzi
         const correctAnswers = {};
-        questions.forEach(question => {
-            correctAnswers[question.id] = question.Answers.map(answer => answer.id);
+        questions.forEach((question) => {
+            correctAnswers[question.id] = question.Answers.filter((a) => a.isTrue).map((a) => a.id);
         });
 
-        console.log("Completed test: ", completedTest);
         res.status(200).json({
             completedTest,
+            questions: formattedQuestions,
             correctAnswers
         });
     } catch (error) {
@@ -123,6 +137,7 @@ const getCompletedTest = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas pobierania zakończonego testu.', error: error.message });
     }
 };
+
 
 const getAllCompletedTestsForTest = async (req, res) => {
     const { testId } = req.params;

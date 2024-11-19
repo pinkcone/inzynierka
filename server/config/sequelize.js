@@ -1,16 +1,16 @@
 const { Sequelize } = require('sequelize');
 
 // Połączenie z bazą danych
-// const sequelize = new Sequelize('inzynierka', 'root', '', {
-//   host: 'localhost',
-//   dialect: 'mysql'
-// });
+const sequelize = new Sequelize('inzynierka', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
 
 //konfiguracja na serwerze
-const sequelize = new Sequelize('inzynierka', 'dbusernew', 'tajnehaslo420', {
-    host: '127.0.0.1',
-    dialect: 'mysql'
-});
+// const sequelize = new Sequelize('inzynierka', 'dbusernew', 'tajnehaslo420', {
+//     host: '127.0.0.1',
+//     dialect: 'mysql'
+// });
 
 sequelize.authenticate()
   .then(() => {

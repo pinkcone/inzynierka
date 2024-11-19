@@ -285,8 +285,28 @@ const EditPageSet = () => {
       setShowConfirmPopup(false);
     }
   };
-  
-  
+
+  const handleStartFlashcards = async (setId) => {
+    try {
+      const response = await fetch(`/api/flashcards/create-from-set/${setId}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Utworzono fiszki:', data);
+        navigate(`/flashcards/${setId}`);
+      } else {
+        console.error('Błąd podczas tworzenia fiszek:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Błąd podczas tworzenia fiszek:', error);
+    }
+  };
 
 
   return (
@@ -301,7 +321,8 @@ const EditPageSet = () => {
           onClose={handleSidebarClose}
           onSetUpdated={handleSetUpdated} 
           isOwner={isOwner} 
-          isEditing={true} 
+          isEditing={true}
+          handleStartFlashcards={handleStartFlashcards}
         />
         <div className={styles.content}>
           {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         

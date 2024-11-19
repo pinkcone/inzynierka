@@ -67,18 +67,15 @@ const TestPage = () => {
                 throw new Error('Nie udało się wysłać wyników testu.');
             }
 
-            // Parsowanie odpowiedzi JSON, aby uzyskać completedTest.id
             const responseData = await response.json();
             const testId = responseData.completedTest.id;
 
-            // Przekierowanie na stronę podsumowania z id zakończonego testu
             navigate(`/test-summary/${testId}`, { state: { selectedAnswers: finalAnswers, questions } });
         } catch (error) {
             setError(`Wystąpił błąd podczas wysyłania wyników: ${error.message}`);
         }
     };
 
-// Wywołanie `submitTestResults` po zakończeniu testu
     useEffect(() => {
         if (testFinished) {
             const finalAnswers = prepareSelectedAnswers();
@@ -154,13 +151,20 @@ const TestPage = () => {
 
     const prepareSelectedAnswers = () => {
         const formattedAnswers = {};
-        
-        Object.entries(selectedAnswers).forEach(([questionIndex, answerIndexes]) => {
-            const question = questions[questionIndex];
-            formattedAnswers[question.id] = answerIndexes.map((index) => question.Answers[index]?.id);
+
+        questions.forEach((question, questionIndex) => {
+            // Pobierz indeksy odpowiedzi użytkownika lub pustą tablicę
+            const userAnswers = selectedAnswers[questionIndex] || [];
+
+            // Jeśli brak odpowiedzi, przypisujemy automatycznie `0`
+            formattedAnswers[question.id] = userAnswers.length > 0
+                ? userAnswers.map((index) => question.Answers[index]?.id)
+                : [0]; // Domyślny brak odpowiedzi
         });
+
         return formattedAnswers;
     };
+
 
 
     const goToQuestion = (questionIndex) => {

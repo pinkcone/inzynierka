@@ -1,57 +1,96 @@
-.summaryPage {
+/* Style kontenera całej strony */
+.pageWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.questionsSummary h1 {
-    font-size: 36px;
-    padding-bottom: 20px;
-}
-
-.summaryHeader {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 80px;
-    align-items: center;
-    background-color: #20B2AA;
-}
-
-.questionsSummary {
+/* Kontener podsumowania */
+.summaryContainer {
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
     margin-top: 20px;
+}
+
+/* Nagłówek podsumowania */
+.summaryHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.summaryHeader h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.summaryHeader p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* Sekcja pytań */
+.questionsSummary {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
 }
 
+/* Pojedyncze pytanie */
 .questionBlock {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
     margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 60%;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
+/* Lista odpowiedzi */
 ul {
     list-style-type: none;
     padding-left: 0;
 }
 
 .answer {
-    padding: 5px;
+    padding: 10px;
     margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-.selected {
-    background-color: #cccccc;
-}
-
-.correct {
+/* Styl poprawnych odpowiedzi */
+.correctAnswer {
+    color: #4caf50;
     font-weight: bold;
-    color: green;
+}
+
+/* Styl odpowiedzi zaznaczonej przez użytkownika */
+.userAnswer {
+    background-color: #ccc;
+    font-style: italic;
+}
+
+/* Styl dla odpowiedzi zaznaczonej przez użytkownika i jednocześnie poprawnej */
+.correctAndUserAnswer {
+    background-color: #8df2a7;
+    font-weight: bold;
+    color: white;
+}
+
+/* Styl dla przycisku */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

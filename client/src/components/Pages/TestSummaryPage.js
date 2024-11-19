@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from '../Navbar/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from '../../styles/TestSummaryPage.module.css';
+
 
 const TestSummaryPage = () => {
     const [testSummary, setTestSummary] = useState(null);
@@ -37,47 +39,53 @@ const TestSummaryPage = () => {
         }
     }, [id]);
 
-    if (!testSummary) {
+    // Dodanie zabezpieczenia, że testSummary oraz questions są dostępne
+    if (!testSummary || !testSummary.questions) {
         return error ? <p>{error}</p> : <p>Ładowanie podsumowania...</p>;
     }
 
-    const { completedTest, correctAnswers } = testSummary;
-    const { name, selectedAnswer, questionScores, score, Test: testDetails } = completedTest;
+    const { completedTest, questions, correctAnswers } = testSummary;
+    const { selectedAnswer, questionScores, score, Test: testDetails } = completedTest;
+
+    const totalPoints = Array.isArray(questions) ? questions.length : 0; // Upewniamy się, że questions jest tablicą
 
     return (
         <div className={styles.summaryPage}>
+            <Navbar/>
             <div className={styles.summaryHeader}>
-                <h1>Podsumowanie Testu: {name}</h1>
+                <h1>Podsumowanie Testu: {testDetails.name}</h1>
+                <p>
+                    Twój wynik: {score} / {totalPoints}
+                </p>
             </div>
             <div className={styles.questionsSummary}>
-                <h2>Kod testu: {testDetails.code}</h2>
-                <p>Twój wynik: {score} / test</p>
-                {Object.keys(selectedAnswer).map((questionId) => {
-                    const userAnswers = selectedAnswer[questionId];
-                    const correct = correctAnswers[questionId] || [];
-                    const scoreForQuestion = questionScores[questionId] || 0;
+                {questions.map((question) => {
+                    const userAnswers = selectedAnswer[question.id] || [];
+                    const correct = correctAnswers[question.id] || [];
+                    const scoreForQuestion = questionScores[question.id] || 0;
 
                     return (
-                        <div key={questionId} className={styles.questionBlock}>
-                            <h3>Pytanie {questionId}</h3>
+                        <div key={question.id} className={styles.questionBlock}>
+                            <h3>{question.content}</h3>
                             <ul>
-                                <li className={styles.answer}>
-                                    <strong>Twoje odpowiedzi:</strong>
-                                    <span className={styles.selected}>{userAnswers.join(', ')}</span>
-                                </li>
-                                <li className={styles.answer}>
-                                    <strong>Prawidłowe odpowiedzi:</strong>
-                                    <span className={styles.correct}>{correct.join(', ')}</span>
-                                </li>
-                                <li className={styles.answer}>
-                                    <strong>Wynik pytania:</strong>
-                                    {scoreForQuestion === 1
-                                        ? <span className={styles.correct}>Prawidłowo</span>
-                                        : scoreForQuestion > 0
-                                            ? 'Częściowo prawidłowo'
-                                            : 'Błędnie'}
-                                </li>
+                                {question.answers.map((answer) => (
+                                    <li
+                                        key={answer.id}
+                                        className={`${styles.answer} ${
+                                            correct.includes(answer.id)
+                                                ? styles.correctAnswer
+                                                : userAnswers.includes(answer.id)
+                                                    ? styles.userAnswer
+                                                    : ''
+                                        }`}
+                                    >
+                                        {answer.content}
+                                    </li>
+                                ))}
                             </ul>
+                            <p>
+                                Wynik pytania: {scoreForQuestion} / 1
+                            </p>
                         </div>
                     );
                 })}
