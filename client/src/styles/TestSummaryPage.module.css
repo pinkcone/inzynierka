@@ -61,24 +61,23 @@ ul {
     border-radius: 5px;
 }
 
-/* Styl poprawnych odpowiedzi */
 .correctAnswer {
     color: #4caf50;
     font-weight: bold;
 }
 
-/* Styl odpowiedzi zaznaczonej przez użytkownika */
 .userAnswer {
-    background-color: #ccc;
-    font-style: italic;
+    background-color: #ffe4da;
+    color: #ff211a;
+    border: 2px solid #ff211a;
 }
 
-/* Styl dla odpowiedzi zaznaczonej przez użytkownika i jednocześnie poprawnej */
-.correctAndUserAnswer {
-    background-color: #8df2a7;
+.bothStyles {
+    background-color: #deffd9;
+    border: 2px solid #4caf50;
     font-weight: bold;
-    color: white;
 }
+
 
 /* Styl dla przycisku */
 button {

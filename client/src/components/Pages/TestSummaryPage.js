@@ -50,49 +50,54 @@ const TestSummaryPage = () => {
     const totalPoints = Array.isArray(questions) ? questions.length : 0; // Upewniamy się, że questions jest tablicą
 
     return (
-        <div className={styles.summaryPage}>
-            <Navbar/>
-            <div className={styles.summaryHeader}>
-                <h1>Podsumowanie Testu: {testDetails.name}</h1>
-                <p>
-                    Twój wynik: {score} / {totalPoints}
-                </p>
-            </div>
-            <div className={styles.questionsSummary}>
-                {questions.map((question) => {
-                    const userAnswers = selectedAnswer[question.id] || [];
-                    const correct = correctAnswers[question.id] || [];
-                    const scoreForQuestion = questionScores[question.id] || 0;
+        <div className={styles.pageWrapper}>
+            <Navbar />
+            <div className={styles.summaryContainer}>
+                <div className={styles.summaryHeader}>
+                    <h1>Podsumowanie Testu: {testDetails.name}</h1>
+                    <p>
+                        Twój wynik: {score} / {totalPoints}
+                    </p>
+                </div>
+                <div className={styles.questionsSummary}>
+                    {questions.map((question) => {
+                        const userAnswers = selectedAnswer[question.id] || [];
+                        const correct = correctAnswers[question.id] || [];
+                        const scoreForQuestion = questionScores[question.id] || 0;
 
-                    return (
-                        <div key={question.id} className={styles.questionBlock}>
-                            <h3>{question.content}</h3>
-                            <ul>
-                                {question.answers.map((answer) => (
-                                    <li
-                                        key={answer.id}
-                                        className={`${styles.answer} ${
-                                            correct.includes(answer.id)
-                                                ? styles.correctAnswer
-                                                : userAnswers.includes(answer.id)
-                                                    ? styles.userAnswer
-                                                    : ''
-                                        }`}
-                                    >
-                                        {answer.content}
-                                    </li>
-                                ))}
-                            </ul>
-                            <p>
-                                Wynik pytania: {scoreForQuestion} / 1
-                            </p>
-                        </div>
-                    );
-                })}
-                <button onClick={() => navigate('/mytests')}>Powrót do testów</button>
+                        return (
+                            <div key={question.id} className={styles.questionBlock}>
+                                <h3>{question.content}</h3>
+                                <ul>
+                                    {question.answers.map((answer) => {
+                                        const isCorrect = correct.includes(answer.id);
+                                        const isSelected = userAnswers.includes(answer.id);
+
+                                        return (
+                                            <li
+                                                key={answer.id}
+                                                className={`${styles.answer} 
+                                                        ${isCorrect ? styles.correctAnswer : ''} 
+                                                        ${isSelected && !isCorrect ? styles.userAnswer : ''} 
+                                                        ${isCorrect && isSelected ? styles.bothStyles : ''}`}
+                                            >
+                                                {answer.content}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                                <p>
+                                    Wynik pytania: {scoreForQuestion} / 1
+                                </p>
+                            </div>
+                        );
+                    })}
+                    <button onClick={() => navigate('/mytests')}>Powrót do testów</button>
+                </div>
             </div>
         </div>
     );
+
 };
 
 export default TestSummaryPage;
