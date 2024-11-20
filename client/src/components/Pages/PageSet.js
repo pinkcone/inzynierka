@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; 
 import CreateTest from '../Test/CreateTest';
 import ReportForm from '../Report/ReportForm';
+import CreateQuiz from "../Quiz/CreateQuiz";
 
 const PageSet = () => {
   const { id } = useParams();
@@ -149,6 +150,12 @@ const PageSet = () => {
             <div className={styles.popup}>
               <CreateTest setId={id} onClose={handleClosePopup} /> 
             </div>
+          )}
+
+          {activeSection === 'createQuiz' && (
+              <div className={styles.popup}>
+                <CreateQuiz setId={id} onClose={handleClosePopup} />
+              </div>
           )}
 
           {activeSection === 'reportSet' && (

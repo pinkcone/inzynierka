@@ -11,7 +11,7 @@ import AddSet from './components/Set/AddSet';
 import PageSet from './components/Pages/PageSet';
 import EditQuestion from './components/Question/EditQuestion';
 import EditAnswer from './components/Answer/EditAnswer';
-import Flashcards from './components/Flashcards';
+import Flashcards from './components/Pages/Flashcards';
 import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
 import MyTests from "./components/Pages/MyTests";

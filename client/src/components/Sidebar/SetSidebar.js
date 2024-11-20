@@ -65,32 +65,39 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, isOwner, isEditing
         )}
       </ul>
 
-      <ul>
-        <li>
-            <button
-              className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
-              onClick={() => onSectionClick('createTest')}
-            >
-              Utwórz test
-            </button>
-          </li>
+        <ul>
+            <li>
+                <button
+                    className={styles.sidebarButton}
+                    onClick={() => handleStartFlashcards(setId)}
+                >
+                    Uruchom fiszki
+                </button>
+            </li>
+            <li>
+                <button
+                    className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
+                    onClick={() => onSectionClick('createTest')}
+                >
+                    Utwórz test
+                </button>
+            </li>
+            <li>
+                <button
+                    className={`${styles.sidebarButton} ${activeSection === 'createQuiz' ? styles.active : ''}`}
+                    onClick={() => onSectionClick('createQuiz')}
+                >
+                    Utwórz quiz
+                </button>
+            </li>
+        </ul>
 
-        <li>
-          <button
-            className={styles.sidebarButton}
-            onClick={() => handleStartFlashcards(setId)} 
-          >
-            Uruchom fiszki
-          </button>
-        </li>
-      </ul>
-
-      <ul>
-        <li>
-          <button
-            className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
-            onClick={() => handleSectionClick('reportSet')}
-          >
+        <ul>
+            <li>
+                <button
+                    className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
+                    onClick={() => handleSectionClick('reportSet')}
+                >
             Zgłoś zestaw
           </button>
         </li>

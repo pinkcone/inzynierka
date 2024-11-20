@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from '../styles/Flashcards.module.css';
-import Navbar from './Navbar/Navbar';
+import styles from '../../styles/Flashcards.module.css';
+import Navbar from '../Navbar/Navbar';
 
 const Flashcards = () => {
     const { setId } = useParams();
