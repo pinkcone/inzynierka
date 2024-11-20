@@ -9,6 +9,7 @@ const flashcardRoutes = require('./routes/flashcardsRoutes');
 const testRoutes = require('./routes/testRoutes')
 const reportRoutes = require('./routes/reportRoutes')
 const completedTestRoutes = require('./routes/completedTestRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 require('dotenv').config();
 
 const cors = require('cors');
@@ -24,6 +25,6 @@ app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/completed-tests', completedTestRoutes);
 app.use('/api/report', reportRoutes);
-
+app.use('/api/quiz', quizRoutes);
 
 module.exports = app;
