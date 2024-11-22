@@ -25,6 +25,6 @@ app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/tests', testRoutes);
 app.use('/api/completed-tests', completedTestRoutes);
 app.use('/api/report', reportRoutes);
-app.use('/api/quiz', quizRoutes);
+app.use('/api/quizzes', quizRoutes);
 
 module.exports = app;

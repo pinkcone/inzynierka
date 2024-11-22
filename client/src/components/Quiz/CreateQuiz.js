@@ -77,13 +77,12 @@ const CreateQuiz = ({ setId, onClose }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify({
                     name: quizName,
                     questionTime: singleQuestionTime,
                     isPublic,
-                    userId: localStorage.getItem('userId'),
                     setId,
                     questionsIds: selectedQuestions,
                 }),
