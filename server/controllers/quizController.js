@@ -6,42 +6,61 @@ const Question = require('../models/Question');
 // Dodanie nowego quizu wraz z pytaniami
 const addQuiz = async (req, res) => {
   try {
-    const { name, time, questionTime, isPublic, userId, setId, questionsIds } = req.body;
-
-    // Walidacja wymaganych danych
-    if (!name || !time || !questionTime || !userId || !setId || !Array.isArray(questionsIds)) {
-      return res.status(400).json({ message: 'Brak wymaganych danych lub nieprawidłowa struktura questionsIds!' });
+    const { name, questionTime, isPublic, setId, questionsIds } = req.body;
+    const userId = req.user.id;
+    console.log("name: ", name);
+    console.log("q-time: ", questionTime);
+    console.log("isPublic: ", isPublic);
+    console.log("user: ", userId);
+    console.log("set: ", setId);
+    console.log("questionids: ", questionsIds);
+    // Walidacja danych wejściowych
+    if (!name || !questionTime || !userId || !setId || !Array.isArray(questionsIds)) {
+      console.log("puste dane chuju");
+      return res.status(400).json({
+        message: 'Brak wymaganych danych lub nieprawidłowa struktura questionsIds!',
+      });
     }
 
-    // Sprawdzenie, czy użytkownik i zestaw istnieją
+    // Sprawdzenie, czy użytkownik istnieje
     const user = await User.findByPk(userId);
+    if (!user) {
+      console.log("gdzie kurwa, nie istniejesz!");
+      return res.status(404).json({ message: 'Nie znaleziono użytkownika!' });
+    }
+
+    // Sprawdzenie, czy zestaw istnieje
     const set = await Set.findByPk(setId);
-    if (!user || !set) {
-      return res.status(404).json({ message: 'Nie znaleziono użytkownika lub zestawu!' });
+    if (!set) {
+      console.log("gdzie kurwa, zestaw nie istnieje!!!!!!!");
+      return res.status(404).json({ message: 'Nie znaleziono zestawu!' });
     }
 
     // Sprawdzenie, czy pytania istnieją i należą do zestawu
     const questions = await Question.findAll({
-      where: { id: questionsIds, setId },
+      where: { id: questionsIds},
     });
 
     if (questions.length !== questionsIds.length) {
-      return res.status(400).json({ message: 'Niektóre pytania nie istnieją lub nie należą do wybranego zestawu!' });
+      console.log("w chuja lecisz z id pytan smieciu");
+      return res.status(400).json({
+        message: 'Niektóre pytania nie istnieją lub nie należą do wybranego zestawu!',
+      });
     }
-
+    console.log("tworze quiz lamusie");
     // Tworzenie quizu
     const quiz = await Quiz.create({
       name,
-      time,
       questionTime,
       isPublic,
       userId,
       setId,
     });
-
+    console.log("dodaje pytanka smieciu");
     // Przypisanie pytań do quizu (poprzez tabelę pośrednią QuizQuestions)
     await quiz.addQuestions(questions);
 
+    // Zwrot danych quizu i przypisanych pytań
     return res.status(201).json({
       message: 'Quiz dodany pomyślnie wraz z pytaniami!',
       quiz,
@@ -49,7 +68,10 @@ const addQuiz = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Błąd serwera!', error: error.message });
+    return res.status(500).json({
+      message: 'Błąd serwera!',
+      error: error.message,
+    });
   }
 };
 const deleteQuiz = async (req, res) => {

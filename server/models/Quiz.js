@@ -11,10 +11,6 @@ const Quiz = sequelize.define('Quiz', {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      time:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       questionTime: {
         type: DataTypes.INTEGER,
         allowNull: false,
