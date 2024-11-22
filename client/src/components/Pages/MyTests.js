@@ -22,6 +22,7 @@ const MyTests = () => {
         if (response.ok) {
           const data = await response.json();
           setTests(data);
+          console.log(data);
         } else {
           console.log(response);
           setError('Nie udało się pobrać testów.');
@@ -51,7 +52,10 @@ const MyTests = () => {
                 <ul className={styles.listGroup}>
                   {tests.map((test) => (
                       <li key={test.code} className={styles.listGroupItem}>
-                        <span>Test: {test.name}</span>
+                        <span>{test.name}</span>
+                        <span>{test.Set.name}</span>
+                        <span>Liczba pytań: {test.questionCount}</span>
+                        <span>Czas trwania: {test.duration / 60} minut</span>
                         <div>
                           <button
                               onClick={() => handleOpenTest(test.code)}

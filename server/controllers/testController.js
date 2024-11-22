@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const Test = require('../models/Test');
 const {Question} = require("../models/associations");
 const Answer = require('../models/Answer');
+const Set = require('../models/Set');
 
 const createTestManual = async (req, res) => {
     const { duration, questionIds, name } = req.body;
@@ -173,12 +174,13 @@ const getTestQuestion = async (req, res) => {
 const getAllTests = async (req, res) => {
     const userId = req.user.id;
     try {
-        console.log("UserID: ", userId);
+        // console.log("UserID: ", userId);
         const tests = await Test.findAll({
             where: { userId },
             attributes: [
                 'code',
                 'name',
+                'duration',
                 [Sequelize.fn('COUNT', Sequelize.col('Questions.id')), 'questionCount']
             ],
             include: [
@@ -186,14 +188,20 @@ const getAllTests = async (req, res) => {
                     model: Question,
                     attributes: [],
                     through: { attributes: [] }
+                },
+                {
+                    model: Set,
+                    attributes: ['name']
                 }
             ],
-            group: ['Test.code']
+            group: ['Test.code', 'Set.id']
         });
         // console.log("Testy: ", tests);
         res.status(200).json(tests);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });
     }
+
+
 };
 module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests }

@@ -29,6 +29,8 @@ CompletedTest.belongsTo(Test, { foreignKey: 'testId', onDelete: 'CASCADE' });
 CompletedTest.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Test.belongsTo(User, {foreignKey: "userId", onDelete:"CASCADE"});
 Test.belongsTo(Set, {foreignKey: "setId", onDelete: "CASCADE"})
+Set.hasMany(Test, { foreignKey: "setId", onDelete: "CASCADE" });
+
 // Relacje raportu
 Report.belongsTo(User, { foreignKey: 'userId', as: 'user' });  
 Report.belongsTo(Set, { foreignKey: 'setId', as: 'set' });  

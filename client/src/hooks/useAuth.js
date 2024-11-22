@@ -55,7 +55,7 @@ const useAuth = () => {
     }
 
     localStorage.removeItem('token');
-    localStorage.setItem('logoutMessage', message); // Zapisanie wiadomości toast w localStorage
+    localStorage.setItem('logoutMessage', message);
     setIsAuthenticated(false);
     setUser(null);
     setIsAdmin(false);
