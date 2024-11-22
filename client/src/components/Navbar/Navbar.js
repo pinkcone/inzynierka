@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth'; 
+import useAuth from '../../hooks/useAuth';
 import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -8,15 +8,18 @@ import styles from '../../styles/Navbar.module.css';
 
 const Navbar = () => {
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
+  const handleLogout = () => {
+    logout('Zostałeś pomyślnie wylogowany!');
+  };
 
   return (
     <nav className={`navbar navbar-expand-lg navbar-light bg-light w-100 ${styles['navbar-custom']}`}>
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img 
+          <img
             src="/images/logo.png"
             alt="Logo"
-            className={styles['navbar-logo']} 
+            className={styles['navbar-logo']}
           />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +44,7 @@ const Navbar = () => {
                       <Dropdown.Item as={Link} to="/admin">Panel administratora</Dropdown.Item>
                     )}
 
-                    <Dropdown.Item onClick={logout}>Wyloguj się</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>Wyloguj się</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -54,7 +57,7 @@ const Navbar = () => {
                   </li>
                 )}
                 <li className="nav-item d-lg-none">
-                  <Link className="nav-link" onClick={logout}>Wyloguj się</Link>
+                  <Link className="nav-link" onClick={handleLogout}>Wyloguj się</Link>
                 </li>
               </>
             ) : (

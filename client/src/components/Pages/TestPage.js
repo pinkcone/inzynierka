@@ -153,13 +153,11 @@ const TestPage = () => {
         const formattedAnswers = {};
 
         questions.forEach((question, questionIndex) => {
-            // Pobierz indeksy odpowiedzi użytkownika lub pustą tablicę
             const userAnswers = selectedAnswers[questionIndex] || [];
 
-            // Jeśli brak odpowiedzi, przypisujemy automatycznie `0`
             formattedAnswers[question.id] = userAnswers.length > 0
                 ? userAnswers.map((index) => question.Answers[index]?.id)
-                : [0]; // Domyślny brak odpowiedzi
+                : [0];
         });
 
         return formattedAnswers;

@@ -110,7 +110,6 @@ const getCompletedTest = async (req, res) => {
             ]
         });
 
-        // Przygotowanie struktury pytań z odpowiedziami
         const formattedQuestions = questions.map((question) => ({
             id: question.id,
             content: question.content,
@@ -121,7 +120,6 @@ const getCompletedTest = async (req, res) => {
             }))
         }));
 
-        // Wyciągnięcie poprawnych odpowiedzi
         const correctAnswers = {};
         questions.forEach((question) => {
             correctAnswers[question.id] = question.Answers.filter((a) => a.isTrue).map((a) => a.id);

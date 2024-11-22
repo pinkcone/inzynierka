@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/Pages/HomePage';
 import Register from './components/Pages/Register';
@@ -15,6 +15,8 @@ import Flashcards from './components/Pages/Flashcards';
 import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
 import MyTests from "./components/Pages/MyTests";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TestSummaryPage from "./components/Pages/TestSummaryPage";
 import TestStartPage from "./components/Pages/TestStartPage";
@@ -23,8 +25,23 @@ import UserList from './components/Admin/UserList';
 import SetList from './components/Admin/SetList';
 
 const App = () => {
+
+  useEffect(() => {
+    const logoutMessage = localStorage.getItem('logoutMessage');
+    if (logoutMessage) {
+      // console.log("Toast message: ", logoutMessage);
+      toast.success(logoutMessage);
+      setTimeout(() => {
+        localStorage.removeItem('logoutMessage');
+      }, 500);
+    }
+  }, []);
+
+
+
   return (
-    <Router>
+      <Router>
+        <ToastContainer position="top-center" autoClose={3000} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
