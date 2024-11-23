@@ -1,11 +1,10 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Op } = require('sequelize'); // Upewnij się, że importujesz Op, jeśli go używasz
-const validator = require('validator'); // Upewnij się, że biblioteka validator jest zaimportowana
+const { Op } = require('sequelize');
+const validator = require('validator');
 
 
-// Lista dostępnych obrazków profilowych
 const profileImages = [
   '/images/profile_pictures/picture_1.png',
   '/images/profile_pictures/picture_2.png',
@@ -15,7 +14,6 @@ const profileImages = [
   '/images/profile_pictures/picture_6.png'
 ];
 
-// Funkcja losująca obrazek profilowy
 const randImages = () => {
   const randomIndex = Math.floor(Math.random() * profileImages.length);
   const selectedImage = profileImages[randomIndex];
@@ -25,7 +23,6 @@ const randImages = () => {
   return selectedImage;
 };
 
-// Funkcja tworzenia użytkownika
 const createUser = (req, res) => {
   User.create({
     email: req.body.email,
@@ -42,49 +39,41 @@ const createUser = (req, res) => {
 };
 
 
-// Funkcja rejestracji użytkownika
 const registerUser = async (req, res) => {
   const { email, username, password, role } = req.body;
 
-  // Walidacja emaila
   if (!validator.isEmail(email)) {
     return res.status(400).json({ message: 'Niepoprawny format emaila' });
   }
 
-  // Walidacja hasła (minimum 6 znaków, maksymalnie 20)
   if (!validator.isLength(password, { min: 6, max: 20 })) {
     return res.status(400).json({ message: 'Hasło musi mieć od 6 do 20 znaków' });
   }
 
-  // Walidacja nazwy użytkownika (od 3 do 20 znaków)
   if (!validator.isLength(username, { min: 3, max: 20 })) {
     return res.status(400).json({ message: 'Nazwa użytkownika musi mieć od 3 do 20 znaków' });
   }
 
   try {
-    // Sprawdzenie, czy użytkownik z podanym emailem już istnieje
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ message: 'Użytkownik z tym emailem już istnieje' });
     }
 
-    // Sprawdzenie, czy nazwa użytkownika jest już zajęta
     const existingUsernameUser = await User.findOne({ where: { username } });
     if (existingUsernameUser) {
       return res.status(400).json({ message: 'Nazwa użytkownika jest już zajęta' });
     }
 
-    // Tworzenie nowego użytkownika
     const newUser = await User.create({
       email,
       username,
       password,
       role: role || 'user',
-      image: randImages(), // Losowy obrazek profilowy
-      isActive: true // Ustawiamy isActive na true
+      image: randImages(),
+      isActive: true
     });
 
-    // Generowanie tokenu JWT po rejestracji
     const token = jwt.sign(
       {
         id: newUser.id,
@@ -94,10 +83,9 @@ const registerUser = async (req, res) => {
         image: newUser.image
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '8h' }
     );
 
-    // Odpowiedź po udanej rejestracji
     res.status(201).json({
       message: 'Rejestracja zakończona sukcesem!',
       token,
@@ -116,7 +104,6 @@ const registerUser = async (req, res) => {
 };
 
 
-// Funkcja logowania użytkownika
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -144,12 +131,10 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Nieprawidłowe hasło' });
     }
 
-    // Sprawdzenie, czy użytkownik jest aktywny
     if (!user.isActive) {
       return res.status(403).json({ message: 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem.' });
     }
-    
-    // Generowanie tokenu JWT
+
     const token = jwt.sign(
       {
         id: user.id,
@@ -159,7 +144,7 @@ const loginUser = async (req, res) => {
         image: user.image 
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '8h' }
     );
 
     res.status(200).json({
