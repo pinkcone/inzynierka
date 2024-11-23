@@ -123,7 +123,7 @@ const EditPageSet = () => {
     setSuccessMessage(message);
     const timeoutId = setTimeout(() => {
       setSuccessMessage('');
-    }, 1000);
+    }, 2000);
     return timeoutId;
   };
 

@@ -207,13 +207,17 @@ const ReportList = () => {
         </thead>
         <tbody>
           {reports.map(report => (
-            <tr key={report.id}>
-              <td>{report.id}</td>
-              <td>
-                <Link to={`/page-set/${report.setId}`} className={styles.setLink}>
-                  {report.setId}
-                </Link>
-              </td>
+            <tr key={report.id}> 
+        <td>{report.id}</td>
+        <td>
+          {report.setId ? (
+          <Link to={`/page-set/${report.setId}`} className={styles.setLink}>
+            {report.setId}
+          </Link>
+          ) : (
+        <span className={styles.deletedSet}>usunięty</span>
+        )}
+        </td> 
               <td>{report.setName}</td>
               <td>{report.userName}</td>
               <td>{report.description}</td>

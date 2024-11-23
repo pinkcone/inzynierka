@@ -64,44 +64,47 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, isOwner, isEditing
           </>
         )}
       </ul>
+      {!isEditing && (
+        <>
+          <ul>
+            <li>
+              <button
+                className={styles.sidebarButton}
+                onClick={() => handleStartFlashcards(setId)}
+              >
+                Uruchom fiszki
+              </button>
+            </li>
+            <li>
+              <button
+                className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
+                onClick={() => onSectionClick('createTest')}
+              >
+                Utwórz test
+              </button>
+            </li>
+            <li>
+              <button
+                className={`${styles.sidebarButton} ${activeSection === 'createQuiz' ? styles.active : ''}`}
+                onClick={() => onSectionClick('createQuiz')}
+              >
+                Utwórz quiz
+              </button>
+            </li>
+          </ul>
 
-        <ul>
+          <ul>
             <li>
-                <button
-                    className={styles.sidebarButton}
-                    onClick={() => handleStartFlashcards(setId)}
-                >
-                    Uruchom fiszki
-                </button>
+              <button
+                className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
+                onClick={() => handleSectionClick('reportSet')}
+              >
+                Zgłoś zestaw
+              </button>
             </li>
-            <li>
-                <button
-                    className={`${styles.sidebarButton} ${activeSection === 'createTest' ? styles.active : ''}`}
-                    onClick={() => onSectionClick('createTest')}
-                >
-                    Utwórz test
-                </button>
-            </li>
-            <li>
-                <button
-                    className={`${styles.sidebarButton} ${activeSection === 'createQuiz' ? styles.active : ''}`}
-                    onClick={() => onSectionClick('createQuiz')}
-                >
-                    Utwórz quiz
-                </button>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <button
-                    className={`${styles.sidebarButton} ${activeSection === 'reportSet' ? styles.active : ''}`}
-                    onClick={() => handleSectionClick('reportSet')}
-                >
-            Zgłoś zestaw
-          </button>
-        </li>
-      </ul>
+          </ul>
+        </>
+      )}
     </div>
   );
 };

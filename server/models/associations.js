@@ -33,7 +33,7 @@ Set.hasMany(Test, { foreignKey: "setId", onDelete: "CASCADE" });
 
 // Relacje raportu
 Report.belongsTo(User, { foreignKey: 'userId', as: 'user' });  
-Report.belongsTo(Set, { foreignKey: 'setId', as: 'set' });  
+Report.belongsTo(Set, { foreignKey: 'setId', as: 'set', onDelete: 'SET NULL' });  
 Report.belongsTo(User, { foreignKey: 'checkedById', as: 'checkedBy' });
 
 //Relacje testu

@@ -2,6 +2,8 @@ const Set = require('../models/Set');
 const User = require('../models/User'); 
 const Question = require('../models/Question');
 const Answer = require('../models/Answer'); 
+const Report = require('../models/Report'); 
+
 
 const { Op } = require('sequelize');
 
@@ -69,7 +71,7 @@ const editSet = async (req, res) => {
         }
 
         await Question.destroy({ where: { setId: set.id } });
-
+        await Report.update({ setId: null }, { where: { setId: set.id } });
         await set.destroy();
 
         res.status(200).json({ message: 'Zestaw i wszystkie powiązane pytania oraz odpowiedzi zostały usunięte.' });
@@ -233,31 +235,33 @@ const editSet = async (req, res) => {
   };
   
   
-  
   const forceDeleteSet = async (req, res) => {
     try {
-      const { id } = req.params;  
+        const { id } = req.params;
+        
+        const set = await Set.findOne({ where: { id } });
+        if (!set) {
+            console.warn(`Zestaw o ID ${id} nie został znaleziony.`);
+            return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
+        }
 
-      const set = await Set.findOne({ where: { id} });
-      if (!set) {
-          return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
-      }
+        const questions = await Question.findAll({ where: { setId: set.id } });
 
-      const questions = await Question.findAll({ where: { setId: set.id } });
+        for (const question of questions) {
+            await Answer.destroy({ where: { questionId: question.id } });
+        }
 
-      for (const question of questions) {
-          await Answer.destroy({ where: { questionId: question.id } });
-      }
+        await Question.destroy({ where: { setId: set.id } });
+        await Report.update({ setId: null }, { where: { setId: set.id } });
+        await set.destroy();
 
-      await Question.destroy({ where: { setId: set.id } });
+        res.status(200).json({ message: 'Zestaw i wszystkie powiązane pytania oraz odpowiedzi zostały usunięte.' });
+    } catch (error) {
+        console.error(`Błąd podczas usuwania zestawu: ${error.message}`, error);
+        res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
+    }
+};
 
-      await set.destroy();
-
-      res.status(200).json({ message: 'Zestaw i wszystkie powiązane pytania oraz odpowiedzi zostały usunięte.' });
-  } catch (error) {
-      res.status(500).json({ message: 'Błąd podczas usuwania zestawu.', error: error.message });
-  }
-  };
   
 
   module.exports = {

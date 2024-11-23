@@ -72,70 +72,70 @@ const checkIfReported = async (req, res) => {
 };
 
 const getAllReports = async (req, res) => {
-    try {
-      const { keyword = '', status = '', page = 1, pageSize = 10, sortOrder = 'asc' } = req.query;
-  
-      const parsedPage = isNaN(page) ? 1 : parseInt(page);
-      const parsedPageSize = isNaN(pageSize) ? 10 : parseInt(pageSize);
-      const offset = (parsedPage - 1) * parsedPageSize;
-  
-      const whereClause = {
-        '$set.name$': { [Op.like]: `%${keyword}%` }, 
-      };
-  
-      if (status) {
-        whereClause.status = status;
-      }
-  
-      const { count, rows } = await Report.findAndCountAll({
-        where: whereClause,
-        include: [
-          {
-            model: User,
-            as: 'user', 
-            attributes: ['id', 'username'], 
-          },
-          {
-            model: User,
-            as: 'checkedBy', 
-            attributes: ['id', 'username'],
-          },
-          {
-            model: Set,
-            as: 'set', 
-            attributes: ['id', 'name'], 
-          },
-        ],
-        limit: parsedPageSize,
-        offset,
-        order: [
-          ['createdAt', sortOrder], 
-        ],
-      });
-  
-      const totalPages = count > 0 ? Math.ceil(count / parsedPageSize) : 1;
-  
-      res.json({
-        reports: rows.map((report) => ({
-          id: report.id,
-          description: report.description,
-          setId: report.setId,
-          setName: report.set ? report.set.name : 'Brak nazwy zestawu',
-          userId: report.userId,
-          userName: report.user ? report.user.username : 'Brak użytkownika',
-          checkedById: report.checkedById,
-          checkedByName: report.checkedBy ? report.checkedBy.username : 'Brak użytkownika',
-          createdAt: report.createdAt,
-          status: report.status,
-        })),
-        currentPage: parsedPage,
-        totalPages,
-      });
-    } catch (error) {
-      console.error("Błąd podczas pobierania raportów:", error);
-      res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  try {
+    const { keyword = '', status = '', page = 1, pageSize = 10, sortOrder = 'asc' } = req.query;
+
+    const parsedPage = isNaN(page) ? 1 : parseInt(page);
+    const parsedPageSize = isNaN(pageSize) ? 10 : parseInt(pageSize);
+    const offset = (parsedPage - 1) * parsedPageSize;
+
+    const whereClause = {};
+    
+    if(keyword) {
+    	whereClause['$set.name$'] = { [Op.like]: `%${keyword}%` } 
     }
-  };  
+
+    if (status) {
+      whereClause.status = status;
+    }
+
+    const { count, rows } = await Report.findAndCountAll({
+      where: whereClause,
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'username'],
+        },
+        {
+          model: User,
+          as: 'checkedBy',
+          attributes: ['id', 'username'],
+        },
+        {
+          model: Set,
+          as: 'set',
+          attributes: ['id', 'name'],
+        },
+      ],
+      limit: parsedPageSize,
+      offset,
+      order: [['createdAt', sortOrder]],
+    });
+
+    const totalPages = count > 0 ? Math.ceil(count / parsedPageSize) : 1;
+
+    res.json({
+      reports: rows.map((report) => ({
+        id: report.id,
+        description: report.description,
+        setId: report.setId,
+        setName: report.set ? report.set.name : '-',
+        userId: report.userId,
+        userName: report.user ? report.user.username : 'Brak użytkownika',
+        checkedById: report.checkedById,
+        checkedByName: report.checkedBy ? report.checkedBy.username : 'Brak użytkownika',
+        createdAt: report.createdAt,
+        status: report.status,
+      })),
+      currentPage: parsedPage,
+      totalPages,
+    });
+  } catch (error) {
+    console.error('Błąd podczas pobierania raportów:', error);
+    res.status(500).json({ message: 'Błąd serwera', error: error.message });
+  }
+};
 
 const updateReportStatus = async (req, res) => {
     const { reportId } = req.params;
