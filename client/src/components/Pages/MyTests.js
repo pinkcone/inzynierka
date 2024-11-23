@@ -7,6 +7,7 @@ import styles from '../../styles/MySets.module.css';
 const MyTests = () => {
 
   const [tests, setTests] = useState([]);
+  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -35,6 +36,33 @@ const MyTests = () => {
     fetchUserTests();
   }, []);
 
+  const handleDeleteTest = async (code) => {
+    if (!window.confirm('Czy na pewno chcesz usunąć ten test?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/tests/delete/${code}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.ok) {
+        setMessage('Test został pomyślnie usunięty.');
+
+        setTests((prevTests) => prevTests.filter((test) => test.code !== code));
+      } else {
+        const data = await response.json();
+        setError(data.message || 'Nie udało się usunąć testu.');
+      }
+    } catch (error) {
+      console.error('Error deleting test:', error);
+      setError('Wystąpił błąd podczas usuwania testu.');
+    }
+  };
+
   const handleOpenTest = (code) => {
     navigate(`/test-start/${code}`);
   };
@@ -47,6 +75,7 @@ const MyTests = () => {
           <div className={styles.content}>
             <h2 className={styles.textCenter}>Moje testy</h2>
             {error && <div className={styles.alertDanger}>{error}</div>}
+            {message && <div className={styles.alertSuccess}>{message}</div>}
 
             {tests.length > 0 ? (
                 <ul className={styles.listGroup}>
@@ -62,6 +91,12 @@ const MyTests = () => {
                               className={styles.button}
                           >
                             Otwórz test
+                          </button>
+                          <button
+                              onClick={() => handleDeleteTest(test.code)}
+                              className={`${styles.button} ${styles.deleteButton}`}
+                          >
+                            Usuń test
                           </button>
                         </div>
                       </li>
