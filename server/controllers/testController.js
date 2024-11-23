@@ -201,7 +201,28 @@ const getAllTests = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });
     }
-
-
 };
-module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests }
+
+const deleteTest = async (req, res) => {
+    const { code } = req.params; // Pobieramy kod testu z parametrów URL
+    const userId = req.user.id; // Zakładamy, że middleware autoryzacyjny doda `req.user`
+
+    try {
+        // Sprawdzenie, czy test istnieje i należy do użytkownika
+        const test = await Test.findOne({ where: { code, userId } });
+        if (!test) {
+            return res.status(404).json({ message: 'Test nie został znaleziony lub nie należy do tego użytkownika.' });
+        }
+
+        // Usunięcie testu
+        await test.destroy();
+        res.status(200).json({ message: 'Test został pomyślnie usunięty.' });
+    } catch (error) {
+        console.error('Error deleting test:', error);
+        res.status(500).json({ message: 'Wystąpił błąd podczas usuwania testu.', error: error.message });
+    }
+};
+
+module.exports = { deleteTest };
+
+module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests, deleteTest }
