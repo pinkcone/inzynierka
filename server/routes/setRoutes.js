@@ -10,7 +10,6 @@ router.get('/allsets', authMiddleware, adminAuthMiddleware, getAllSetsWithOwner)
 
 router.get('/public', getPublicSets);
 router.get('/:id', authMiddleware, getSetById);
-
 router.post('/add', authMiddleware, addSet);
 router.put('/edit/:id', authMiddleware, editSet);
 router.delete('/delete/:id', authMiddleware, deleteSet);

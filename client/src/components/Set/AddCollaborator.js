@@ -7,7 +7,7 @@ const AddCollaborator = ({ setId, onClose, onCollaboratorAdded }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/collaborators/add`, {
+      const response = await fetch(`/api/sets/add-collabolator`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

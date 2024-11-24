@@ -10,6 +10,7 @@ import ReportForm from '../Report/ReportForm';
 import CreateQuiz from "../Quiz/CreateQuiz";
 
 const PageSet = () => {
+  const [flashcardsError, setFlashcardsError] = useState('');
   const { id } = useParams();
   const [set, setSet] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -114,7 +115,8 @@ const PageSet = () => {
         console.log('Utworzono fiszki:', data);
         navigate(`/flashcards/${setId}`);
       } else {
-        console.error('Błąd podczas tworzenia fiszek:', response.statusText);
+        const data = await response.json();
+        setFlashcardsError(data.error);
       }
     } catch (error) {
       console.error('Błąd podczas tworzenia fiszek:', error);
@@ -163,7 +165,7 @@ const PageSet = () => {
               <ReportForm setId={id} onClose={handleClosePopup} />
             </div>
           )}
-
+          {flashcardsError && <p className={styles.error}>{flashcardsError}</p>}
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
               {questions.map((question) => (

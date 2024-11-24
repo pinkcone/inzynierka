@@ -1,9 +1,9 @@
 const { Sequelize } = require('sequelize');
 const Test = require('../models/Test');
-const {Question} = require("../models/associations");
+const { Question } = require("../models/associations");
 const Answer = require('../models/Answer');
 const Set = require('../models/Set');
-
+const { checkQuestionEligibility } = require('./questionController');
 const createTestManual = async (req, res) => {
     const { duration, questionIds, name } = req.body;
     const userId = req.user.id;
@@ -12,7 +12,14 @@ const createTestManual = async (req, res) => {
     if (!Array.isArray(questionIds) || questionIds.length === 0) {
         return res.status(400).json({ error: 'Nie wybrano żadnego pytania!' });
     }
-
+    for (const id of questionIds) {
+        const isEligible = await checkQuestionEligibility(id);
+        if (!isEligible) {
+            return res.status(400).json({
+                error: 'Wybrane pytania nie mają poprawnej odpowiedzi lub liczba wszystkich odpowiedzi jest mniejsza niż 2.',
+            });
+        }
+    }
     try {
         console.log("Zaczynamy tworzenie testu");
         const newTest = await createTestWithCode(duration, name, userId, setId);
@@ -48,8 +55,8 @@ const createTestRandom = async (req, res) => {
         while (selectedQuestions.length < questionCount) {
             const randomIndex = Math.floor(Math.random() * questions.length);
             const question = questions[randomIndex];
-
-            if (!selectedQuestions.includes(question)) {
+            const isEligible = await checkQuestionEligibility(id);
+            if (!selectedQuestions.includes(question) && isEligible) {
                 selectedQuestions.push(question);
             }
         }

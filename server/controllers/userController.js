@@ -25,21 +25,7 @@ const randImages = () => {
   return selectedImage;
 };
 
-// Funkcja tworzenia użytkownika
-const createUser = (req, res) => {
-  User.create({
-    email: req.body.email,
-    password: req.body.password,
-    username: req.body.username,
-    image: randImages(),
-  })
-    .then(user => {
-      res.json(user);
-    })
-    .catch(err => {
-      res.status(500).send('Błąd podczas dodawania użytkownika.');
-    });
-};
+
 
 
 // Funkcja rejestracji użytkownika
@@ -381,7 +367,7 @@ const changeActive = async (req, res) => {
 
 
 module.exports = {
-  createUser,
+
   registerUser,
   loginUser,
   updateUser,
