@@ -10,6 +10,9 @@ const MyTests = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [confirmPopupContent, setConfirmPopupContent] = useState('');
+  const [onConfirm, setOnConfirm] = useState(() => () => {});
 
   useEffect(() => {
     const fetchUserTests = async () => {
@@ -36,11 +39,13 @@ const MyTests = () => {
     fetchUserTests();
   }, []);
 
-  const handleDeleteTest = async (code) => {
-    if (!window.confirm('Czy na pewno chcesz usunąć ten test?')) {
-      return;
-    }
-
+  const handleDeleteTest = (code) => {
+    setConfirmPopupContent('Czy na pewno chcesz usunąć ten test?');
+    setOnConfirm(() => () => confirmDeleteTest(code));
+    setShowConfirmPopup(true);
+  };
+  
+  const confirmDeleteTest = async (code) => {
     try {
       const response = await fetch(`/api/tests/delete/${code}`, {
         method: 'DELETE',
@@ -48,20 +53,25 @@ const MyTests = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
       });
-
+  
       if (response.ok) {
         setMessage('Test został pomyślnie usunięty.');
-
+        setTimeout(() => setMessage(''), 3000);
         setTests((prevTests) => prevTests.filter((test) => test.code !== code));
       } else {
         const data = await response.json();
         setError(data.message || 'Nie udało się usunąć testu.');
+        setTimeout(() => setError(''), 3000);
       }
     } catch (error) {
       console.error('Error deleting test:', error);
       setError('Wystąpił błąd podczas usuwania testu.');
+      setTimeout(() => setError(''), 3000);
+    } finally {
+      setShowConfirmPopup(false);
     }
   };
+  
 
   const handleOpenTest = (code) => {
     navigate(`/test-start/${code}`);
@@ -105,6 +115,16 @@ const MyTests = () => {
             ) : (
                 <p>Brak testów do wyświetlenia.</p>
             )}
+            {showConfirmPopup && (
+            <div className={styles.popupOverlay}>
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
+              <p>{confirmPopupContent}</p>
+              <button onClick={() => { onConfirm(); }}>Potwierdź</button>
+              <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
+            </div>
+            </div>
+          )}
           </div>
         </div>
       </div>
