@@ -57,12 +57,24 @@ const CreateTestManual = ({ setId, onClose }) => {
   };
 
   const handleTestNameChange = (e) => {
-    setTestName(e.target.value);
-  }
+    const value = e.target.value;
+
+    if (value.length < 3 || value.length > 20) {
+      setTestNameError('Nazwa testu musi mieć od 3 do 20 znaków.');
+    } else {
+      setTestNameError('');
+    }
+
+    setTestName(value);
+  };
 
   const handleCreateTest = async () => {
     const time = parseInt(totalTime, 10);
 
+    if (!testName || testName.length < 3 || testName.length > 20) {
+      setTestNameError('Nazwa testu musi mieć od 3 do 20 znaków.');
+      return;
+    }
     if (selectedQuestions.length === 0) {
       setError('Musisz wybrać co najmniej jedno pytanie.');
       return;
@@ -113,7 +125,7 @@ const CreateTestManual = ({ setId, onClose }) => {
             placeholder="Wprowadź nazwę testu"
         />
       </label>
-      {testNameError && <p className={styles.error}>{setTestNameError}</p>}
+      {testNameError && <p className={styles.error}>{testNameError}</p>}
       <label>
         Czas na cały test (minuty):
         <input

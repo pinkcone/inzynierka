@@ -214,6 +214,11 @@ button svg {
   border-radius: 4px;
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
 
 .answerCorrect {
   border-left: 4px solid #20c997; 

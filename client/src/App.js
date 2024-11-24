@@ -23,6 +23,7 @@ import TestStartPage from "./components/Pages/TestStartPage";
 import AdminDashboard from './components/Admin/AdminDashboard';
 import UserList from './components/Admin/UserList';
 import SetList from './components/Admin/SetList';
+import MyQuizzes from "./components/Pages/MyQuizzes";
 
 const App = () => {
 
@@ -66,7 +67,7 @@ const App = () => {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/setlist" element={<SetList />} />
-
+        <Route path="/myquizzes" element={<MyQuizzes />} />
 
 
       </Routes>

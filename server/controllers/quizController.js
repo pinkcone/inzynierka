@@ -104,7 +104,8 @@ const deleteQuiz = async (req, res) => {
           attributes: ['id', 'name'], // Pobieramy tylko ID i nazwę zestawu
         },
       });
-  
+
+      console.log("Znalezione quizy:", quizzes);
       return res.status(200).json({ quizzes });
     } catch (error) {
       console.error(error);

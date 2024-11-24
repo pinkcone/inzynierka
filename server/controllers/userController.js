@@ -94,7 +94,7 @@ const registerUser = async (req, res) => {
         image: newUser.image
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '8h' }
     );
 
     // Odpowiedź po udanej rejestracji
@@ -159,7 +159,7 @@ const loginUser = async (req, res) => {
         image: user.image 
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '8h' }
     );
 
     res.status(200).json({

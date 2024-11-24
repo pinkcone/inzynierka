@@ -36,54 +36,69 @@ const CreateTestAutomatic = ({setId, onClose}) => {
     };
 
     const handleTestNameChange = (e) => {
-        setTestName(e.target.value);
-    }
+        const value = e.target.value;
+
+        if (value.length < 3 || value.length > 20) {
+            setTestNameError('Nazwa testu musi mieć od 3 do 20 znaków.');
+        } else {
+            setTestNameError('');
+        }
+
+        setTestName(value);
+    };
 
     const handleGenerateTest = async () => {
         const numQuestions = parseInt(numberOfQuestions, 10);
         const time = parseInt(totalTime, 10);
 
+        if (!testName || testName.length < 3 || testName.length > 20) {
+            setTestNameError('Nazwa testu musi mieć od 3 do 20 znaków.');
+            return;
+        }
+
         if (!numQuestions || numQuestions <= 0) {
             setQuestionsError('Liczba pytań musi być większa niż zero.');
+            return;
         }
 
         if (!time || time <= 0) {
             setTimeError('Czas musi być większy niż zero.');
+            return;
         }
 
-        if (numQuestions > 0 && time > 0) {
-            setQuestionsError('');
-            setTimeError('');
+        setTestNameError('');
+        setQuestionsError('');
+        setTimeError('');
 
-            try {
-                const response = await fetch(`/api/tests/create-random/${setId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: JSON.stringify({
-                        duration: time,
-                        questionCount: numQuestions,
-                        setId: setId,
-                        name: testName,
-                    }),
-                });
+        try {
+            const response = await fetch(`/api/tests/create-random/${setId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({
+                    duration: time,
+                    questionCount: numQuestions,
+                    setId: setId,
+                    name: testName,
+                }),
+            });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Utworzono test:', data);
-                    navigate('/mytests');
-                } else {
-                    const errorData = await response.json();
-                    setQuestionsError(errorData.error || 'Błąd podczas tworzenia testu.');
-                }
-            } catch (error) {
-                setQuestionsError('Wystąpił błąd podczas tworzenia testu.');
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Utworzono test:', data);
+                navigate('/mytests');
+            } else {
+                const errorData = await response.json();
+                setQuestionsError(errorData.error || 'Błąd podczas tworzenia testu.');
             }
+        } catch (error) {
+            setQuestionsError('Wystąpił błąd podczas tworzenia testu.');
         }
-    }
-return (
+    };
+
+    return (
     <div className={styles.automaticPopup}>
         <button className={styles.popupClose} onClick={onClose}>X</button>
         <h3>Generowanie testu automatycznie </h3>
@@ -97,7 +112,7 @@ return (
                 placeholder="Wprowadź nazwę testu"
             />
         </label>
-        {testNameError && <p className={styles.error}>{setTestNameError}</p>}
+        {testNameError && <p className={styles.error}>{testNameError}</p>}
         <label>
             Liczba pytań:
             <input

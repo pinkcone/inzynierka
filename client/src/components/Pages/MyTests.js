@@ -88,43 +88,57 @@ const MyTests = () => {
             {message && <div className={styles.alertSuccess}>{message}</div>}
 
             {tests.length > 0 ? (
-                <ul className={styles.listGroup}>
+                <table className={styles.table}>
+                  <thead>
+                  <tr>
+                    <th>Nazwa testu</th>
+                    <th>Nazwa zestawu</th>
+                    <th>Liczba pytań</th>
+                    <th>Czas trwania</th>
+                    <th>Akcje</th>
+                  </tr>
+                  </thead>
+                  <tbody>
                   {tests.map((test) => (
-                      <li key={test.code} className={styles.listGroupItem}>
-                        <span>{test.name}</span>
-                        <span>{test.Set.name}</span>
-                        <span>Liczba pytań: {test.questionCount}</span>
-                        <span>Czas trwania: {test.duration / 60} minut</span>
-                        <div>
+                      <tr key={test.code}>
+                        <td>{test.name}</td>
+                        <td>{test.Set.name}</td>
+                        <td>{test.questionCount}</td>
+                        <td>{test.duration / 60} minut</td>
+                        <td>
                           <button
                               onClick={() => handleOpenTest(test.code)}
                               className={styles.button}
                           >
-                            Otwórz test
+                            Otwórz
                           </button>
                           <button
                               onClick={() => handleDeleteTest(test.code)}
                               className={`${styles.button} ${styles.deleteButton}`}
                           >
-                            Usuń test
+                            Usuń
                           </button>
-                        </div>
-                      </li>
+                        </td>
+                      </tr>
                   ))}
-                </ul>
+                  </tbody>
+                </table>
             ) : (
                 <p>Brak testów do wyświetlenia.</p>
             )}
             {showConfirmPopup && (
-            <div className={styles.popupOverlay}>
-            <div className={styles.popup}>
-              <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
-              <p>{confirmPopupContent}</p>
-              <button onClick={() => { onConfirm(); }}>Potwierdź</button>
-              <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
-            </div>
-            </div>
-          )}
+                <div className={styles.popupOverlay}>
+                  <div className={styles.popup}>
+                    <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
+                    <p>{confirmPopupContent}</p>
+                    <button onClick={() => {
+                      onConfirm();
+                    }}>Potwierdź
+                    </button>
+                    <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
+                  </div>
+                </div>
+            )}
           </div>
         </div>
       </div>
