@@ -170,15 +170,18 @@ const PageSet = () => {
                 <div key={question.id} className={styles.questionItem}>
                   <h4>{question.content}</h4>
                   <div className={styles.answersList}>
-                    {question.answers && question.answers.length > 0 ? (
-                      question.answers.map((answer) => (
-                        <div key={answer.id} className={styles.answerItem}>
-                          <p>{answer.content}</p>
-                        </div>
-                      ))
-                    ) : (
-                      <p>Brak odpowiedzi</p>
-                    )}
+                  {question.answers && question.answers.length > 0 ? (
+                    question.answers.map((answer) => (
+                      <div 
+                        key={answer.id} 
+                        className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}
+                      >
+                        <p>{answer.content}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>Brak odpowiedzi</p>
+                  )}
                   </div>
                 </div>
               ))}

@@ -175,7 +175,6 @@ const SetList = () => {
         </table>
       )}
 
-      {totalPages > 1 && (
         <div className={styles.pagination}>
           <button
             className={styles.pageButton}
@@ -193,7 +192,6 @@ const SetList = () => {
             Następna &gt;
           </button>
         </div>
-      )}
 
       {showPopup && (
         <PopupConfirmation

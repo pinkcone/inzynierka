@@ -21,14 +21,23 @@
 .tabButton {
   padding: 10px 20px;
   cursor: pointer;
-  background-color: #9fcdcf;
+  background-color: #20B2AA;
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  color: white;
+}
+
+.tabButton:hover {
+  background-color: #218188;
 }
 
 .activeTab {
-  background-color: #20B2AA;
+  padding: 10px 20px;
+  background-color: #218188;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
   color: white;
 }
 

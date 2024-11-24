@@ -213,3 +213,12 @@ button svg {
   margin-bottom: 15px;
   border-radius: 4px;
 }
+
+
+.answerCorrect {
+  border-left: 4px solid #20c997; 
+}
+
+.answerIncorrect {
+  border-left: 4px solid #dc3545; 
+}

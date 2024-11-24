@@ -345,8 +345,11 @@ const EditPageSet = () => {
                   <div className={styles.answersList}>
                     {question.answers && question.answers.length > 0 ? (
                       question.answers.map((answer) => (
-                        <div key={answer.id} className={styles.answerItem}>
-                          <p>{answer.content}</p>
+                        <div 
+                        key={answer.id} 
+                        className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}                        >
+                        
+                        <p>{answer.content}</p>
   
                           {isOwner && (
                               <div className={styles.answerActions}>
