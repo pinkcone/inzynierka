@@ -1,5 +1,6 @@
 const Flashcards = require('../models/Flashcards');
 const Question = require('../models/Question');
+const Answer = require('../models/Answer');
 
 // Tworzenie fiszek na podstawie zestawu pytań i użytkownika
 const createFlashcardsForSet = async (req, res) => {
@@ -15,10 +16,32 @@ const createFlashcardsForSet = async (req, res) => {
     if (!questions.length) {
       return res.status(404).json({ message: 'Brak pytań w zestawie.' });
     }
+    const filteredQuestions = [];
+    for (const question of questions) {
+      const trueAnswersCount = await Answer.count({
+        where: {
+          questionId: question.id,
+          isTrue: true,
+        },
+      });
 
+      if (trueAnswersCount > 0) {
+        filteredQuestions.push(question);
+      } else {
+        console.log(
+          `Pomijamy pytanie ${question.id}, brak poprawnych odpowiedzi.`
+        );
+      }
+    }
+
+    if (!filteredQuestions.length) {
+      return res.status(404).json({
+        error: 'Brak pytań w zestawie z poprawnymi odpowiedziami.',
+      });
+    }
     // Tworzymy fiszki lub sprawdzamy, czy już istnieją
     const flashcards = await Promise.all(
-      questions.map(async (question) => {
+      filteredQuestions.map(async (question) => {
         // Sprawdzamy, czy fiszka już istnieje dla danego użytkownika, pytania i zestawu
         let flashcard = await Flashcards.findOne({
           where: {
