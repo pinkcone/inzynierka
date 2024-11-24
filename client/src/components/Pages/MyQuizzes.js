@@ -90,12 +90,20 @@ const MyQuizzes = () => {
                     {isLoading ? (
                         <p>Ładowanie quizów...</p>
                     ) : quizzes.length > 0 ? (
-                        <ul className={styles.listGroup}>
+                        <table className={styles.table}>
+                            <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Czas na pytanie</th>
+                                <th>Akcje</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {quizzes.map((quiz) => (
-                                <li key={quiz.id} className={styles.listGroupItem}>
-                                    <span>{quiz.name}</span>
-                                    <span>Czas na pytanie: {quiz.questionTime}</span>
-                                    <div>
+                                <tr key={quiz.id}>
+                                    <td>{quiz.name}</td>
+                                    <td>{quiz.questionTime} sekund</td>
+                                    <td>
                                         <button
                                             onClick={() => handleOpenQuiz(quiz.id)}
                                             className={styles.button}
@@ -106,21 +114,26 @@ const MyQuizzes = () => {
                                             onClick={() => handleDeleteQuiz(quiz.id)}
                                             className={`${styles.button} ${styles.deleteButton}`}
                                         >
-                                            Usuń quiz
+                                            Usuń
                                         </button>
-                                    </div>
-                                </li>
+                                    </td>
+                                </tr>
                             ))}
-                        </ul>
+                            </tbody>
+                        </table>
                     ) : (
                         <p>Brak quizów do wyświetlenia.</p>
                     )}
                     {showConfirmPopup && (
                         <div className={styles.popupOverlay}>
                             <div className={styles.popup}>
-                                <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
+                                <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X
+                                </button>
                                 <p>{confirmPopupContent}</p>
-                                <button onClick={() => { onConfirm(); }}>Potwierdź</button>
+                                <button onClick={() => {
+                                    onConfirm();
+                                }}>Potwierdź
+                                </button>
                                 <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
                             </div>
                         </div>
