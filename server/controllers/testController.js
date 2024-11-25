@@ -46,7 +46,6 @@ const createTestRandom = async (req, res) => {
         const questions = await Question.findAll({
             where: { setId },
         });
-        console.log("pytaniaaaa: ", questions);
         if (questions.length < questionCount) {
             return res.status(400).json({ error: 'Nie ma wystarczającej liczby pytań w zestawie!' });
         }
@@ -55,7 +54,7 @@ const createTestRandom = async (req, res) => {
         while (selectedQuestions.length < questionCount) {
             const randomIndex = Math.floor(Math.random() * questions.length);
             const question = questions[randomIndex];
-            const isEligible = await checkQuestionEligibility(id);
+            const isEligible = await checkQuestionEligibility(question.id);
             if (!selectedQuestions.includes(question) && isEligible) {
                 selectedQuestions.push(question);
             }

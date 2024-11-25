@@ -204,7 +204,7 @@ async function checkQuestionEligibility(id, type) {
     if (counts && counts[0]) {
         const { totalAnswers, correctAnswers } = counts[0].dataValues;
         // Dla innych typów sprawdzaj oba warunki
-        return totalAnswers > 1 && correctAnswers > 2; // Zwraca true, jeśli oba warunki są spełnione
+        return totalAnswers > 1 && correctAnswers > 0; // Zwraca true, jeśli oba warunki są spełnione
     }
 
     return false; // Jeśli brak odpowiedzi, zwróć false
