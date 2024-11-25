@@ -112,9 +112,27 @@ const deleteQuiz = async (req, res) => {
       return res.status(500).json({ message: 'Błąd serwera!', error: error.message });
     }
   };
-  
+  const startQuiz = async (req, res) => {
+    try {
+      const { quizId } = req.body;
+      const userId = req.user.id;
+      // Sprawdź, czy quiz istnieje i czy użytkownik ma do niego dostęp
+      const quiz = await Quiz.findByPk(quizId);
+      if (!quiz) {
+        return res.status(404).json({ message: 'Quiz nie został znaleziony.' });
+      }
+      
+      if(!quiz.userId == userId) return res.status(404).json({ message: 'Nie jestes wlascicielem tego quizu!!' });
+      // Zwróć pozytywną odpowiedź
+      res.status(200).json({ message: 'Quiz może zostać rozpoczęty.' });
+    } catch (error) {
+      console.error('Błąd podczas rozpoczynania quizu:', error);
+      res.status(500).json({ message: 'Błąd serwera podczas rozpoczynania quizu.' });
+    }
+  };
   module.exports = {
     addQuiz,
     deleteQuiz,
-    getAllQuizzes, // Eksport nowej funkcji
+    getAllQuizzes,
+    startQuiz, // Eksport nowej funkcji
   };

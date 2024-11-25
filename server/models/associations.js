@@ -39,7 +39,7 @@ Report.belongsTo(User, { foreignKey: 'checkedById', as: 'checkedBy' });
 //Relacje testu
 Quiz.belongsTo(User, {foreignKey: 'userId',onDelete: 'CASCADE' });
 Quiz.belongsTo(Set, {foreignKey: "setId", onDelete: "CASCADE"});
-Quiz.belongsToMany(Question, {through: 'QuizQuestions', foreignKey: 'id'});
+Quiz.belongsToMany(Question, {through: 'QuizQuestions', foreignKey: 'quizId'});
 Question.belongsToMany(Quiz, { through: 'QuizQuestions', foreignKey: 'questionId' });
 module.exports = {
   User,
