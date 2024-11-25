@@ -26,6 +26,7 @@ import SetList from './components/Admin/SetList';
 import MyQuizzes from "./components/Pages/MyQuizzes";
 import WaitingPage from './components/Quiz/WaitingPage';
 import QuizSummaryPage from './components/Quiz/QuizSummaryPage';
+import MyFlashcards from './components/Flashcards/MyFlashcards';
 
 const App = () => {
 
@@ -72,7 +73,7 @@ const App = () => {
         <Route path="/myquizzes" element={<MyQuizzes />} />
         <Route path="/waiting" element={<WaitingPage />} />
         <Route path="/quiz-summary" element={<QuizSummaryPage />} />
-
+        <Route path="/myflashcards" element={<MyFlashcards/>}/>
       </Routes>
     </Router>
   );

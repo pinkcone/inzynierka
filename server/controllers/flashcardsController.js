@@ -1,6 +1,9 @@
 const Flashcards = require('../models/Flashcards');
 const Question = require('../models/Question');
 const Answer = require('../models/Answer');
+const { Op } = require('sequelize');
+const sequelize = require('../config/sequelize');
+const Set = require('../models/Set');
 
 // Tworzenie fiszek na podstawie zestawu pytań i użytkownika
 const createFlashcardsForSet = async (req, res) => {
@@ -125,8 +128,107 @@ const updateFlashcardByUserRate = async (req, res) => {
     res.status(500).json({ message: 'Błąd podczas aktualizacji fiszki.', error: error.message });
   }
 };
+
+const getUserFlashcardSets = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    console.log('Fetching flashcard sets for userId:', userId);
+
+    // Query to find all sets that have flashcards for the user
+    const sets = await Flashcards.findAll({
+      where: { userId },
+      attributes: [
+        'setId',
+        [sequelize.fn('COUNT', sequelize.col('Flashcards.id')), 'flashcardsNumber']
+      ],
+      include: [
+        {
+          model: Set,
+          attributes: ['name']
+        }
+      ],
+      group: ['Flashcards.setId', 'Set.id']
+    });
+
+    if (!sets.length) {
+      return res.status(404).json({ message: 'No flashcards found for this user.' });
+    }
+
+    // Map the results to the desired format
+    const result = sets.map(flashcard => ({
+      setId: flashcard.setId,
+      setName: flashcard.Set.name,
+      flashcardsNumber: flashcard.get('flashcardsNumber')
+    }));
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching flashcard sets:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+const deleteFlashcardsBySet = async (req, res) => {
+  try {
+    const { setId } = req.params;
+    const userId = req.user.id;
+
+    console.log('Deleting flashcards for userId:', userId, 'and setId:', setId);
+
+    const deletedCount = await Flashcards.destroy({
+      where: {
+        setId,
+        userId,
+      },
+    });
+    if (deletedCount === 0) {
+      return res.status(404).json({ message: 'Brak fiszek do usunięcia dla tego użytkownika i zestawu.' });
+    }
+
+    res.status(200).json({ message: 'Fiszki zostały pomyślnie usunięte.', deletedCount });
+  } catch (error) {
+    console.error('Błąd podczas usuwania fiszek:', error);
+    res.status(500).json({ message: 'Błąd serwera podczas usuwania fiszek.', error: error.message });
+  }
+};
+
+const resetFlashcardsBySet = async (req, res) => {
+  try {
+    const { setId } = req.params;
+    const userId = req.user.id;
+
+    console.log('Resetting flashcards for userId:', userId, 'and setId:', setId);
+
+    const [updatedCount] = await Flashcards.update(
+      {
+        currentLevel: 4,
+        lastEvaluation: 0,
+        streak: 0,
+        lastReviewed: null,
+      },
+      {
+        where: {
+          setId,
+          userId,
+        },
+      }
+    );
+
+    if (updatedCount === 0) {
+      return res.status(404).json({ message: 'Brak fiszek do zresetowania dla tego użytkownika i zestawu.' });
+    }
+
+    res.status(200).json({ message: 'Postęp fiszek został pomyślnie zresetowany.', updatedCount });
+  } catch (error) {
+    console.error('Błąd podczas resetowania fiszek:', error);
+    res.status(500).json({ message: 'Błąd serwera podczas resetowania fiszek.', error: error.message });
+  }
+};
 module.exports = {
   createFlashcardsForSet,
   getFlashcardsBySet,
   updateFlashcardByUserRate,
+  getUserFlashcardSets,
+  deleteFlashcardsBySet,
+  resetFlashcardsBySet,
 };
