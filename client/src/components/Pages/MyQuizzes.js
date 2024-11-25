@@ -12,7 +12,7 @@ const MyQuizzes = () => {
     const navigate = useNavigate();
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [confirmPopupContent, setConfirmPopupContent] = useState('');
-    const [onConfirm, setOnConfirm] = useState(() => () => {});
+    const [onConfirm, setOnConfirm] = useState(() => () => { });
 
     useEffect(() => {
         const fetchUserQuizzes = async () => {
@@ -73,8 +73,30 @@ const MyQuizzes = () => {
         }
     };
 
-    const handleOpenQuiz = (id) => {
-        navigate(`#`);
+    const handleStartQuiz = async (quizId) => {
+        try {
+            const response = await fetch('/api/quizzes/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({ quizId }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                navigate(`/quiz/lobby/${quizId}`);
+            } else {
+                const data = await response.json();
+                setError(data.message || 'Nie udało się rozpocząć quizu.');
+                setTimeout(() => setError(''), 3000);
+            }
+        } catch (error) {
+            console.error('Błąd podczas rozpoczynania quizu:', error);
+            setError('Wystąpił błąd podczas rozpoczynania quizu.');
+            setTimeout(() => setError(''), 3000);
+        }
     };
 
     return (
@@ -92,33 +114,33 @@ const MyQuizzes = () => {
                     ) : quizzes.length > 0 ? (
                         <table className={styles.table}>
                             <thead>
-                            <tr>
-                                <th>Nazwa</th>
-                                <th>Czas na pytanie</th>
-                                <th>Akcje</th>
-                            </tr>
+                                <tr>
+                                    <th>Nazwa</th>
+                                    <th>Czas na pytanie</th>
+                                    <th>Akcje</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {quizzes.map((quiz) => (
-                                <tr key={quiz.id}>
-                                    <td>{quiz.name}</td>
-                                    <td>{quiz.questionTime} sekund</td>
-                                    <td>
-                                        <button
-                                            onClick={() => handleOpenQuiz(quiz.id)}
-                                            className={styles.button}
-                                        >
-                                            Otwórz quiz
-                                        </button>
-                                        <button
-                                            onClick={() => handleDeleteQuiz(quiz.id)}
-                                            className={`${styles.button} ${styles.deleteButton}`}
-                                        >
-                                            Usuń
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                                {quizzes.map((quiz) => (
+                                    <tr key={quiz.id}>
+                                        <td>{quiz.name}</td>
+                                        <td>{quiz.questionTime} sekund</td>
+                                        <td>
+                                            <button
+                                                onClick={() => handleStartQuiz(quiz.id)}
+                                                className={styles.button}
+                                            >
+                                                Rozpocznij quiz
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteQuiz(quiz.id)}
+                                                className={`${styles.button} ${styles.deleteButton}`}
+                                            >
+                                                Usuń
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     ) : (

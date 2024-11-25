@@ -27,6 +27,9 @@ import MyQuizzes from "./components/Pages/MyQuizzes";
 import WaitingPage from './components/Quiz/WaitingPage';
 import QuizSummaryPage from './components/Quiz/QuizSummaryPage';
 import MyFlashcards from './components/Flashcards/MyFlashcards';
+import QuizLobby from './components/Quiz/QuizLobby';
+import JoinQuiz from './components/Quiz/JoinQuiz';
+import QuizPlay from './components/Quiz/QuizPlay';
 
 const App = () => {
 
@@ -74,6 +77,12 @@ const App = () => {
         <Route path="/waiting" element={<WaitingPage />} />
         <Route path="/quiz-summary" element={<QuizSummaryPage />} />
         <Route path="/myflashcards" element={<MyFlashcards/>}/>
+
+
+        <Route path="/quiz/lobby/:quizId" element={<QuizLobby />} />
+        <Route path="/join-quiz" element={<JoinQuiz />} />
+        <Route path="/quiz/play/:code" element={<QuizPlay />} />
+
       </Routes>
     </Router>
   );
