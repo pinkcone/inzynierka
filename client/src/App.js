@@ -24,6 +24,8 @@ import AdminDashboard from './components/Admin/AdminDashboard';
 import UserList from './components/Admin/UserList';
 import SetList from './components/Admin/SetList';
 import MyQuizzes from "./components/Pages/MyQuizzes";
+import WaitingPage from './components/Quiz/WaitingPage';
+import QuizSummaryPage from './components/Quiz/QuizSummaryPage';
 
 const App = () => {
 
@@ -68,7 +70,8 @@ const App = () => {
         <Route path="/userlist" element={<UserList />} />
         <Route path="/setlist" element={<SetList />} />
         <Route path="/myquizzes" element={<MyQuizzes />} />
-
+        <Route path="/waiting" element={<WaitingPage />} />
+        <Route path="/quiz-summary" element={<QuizSummaryPage />} />
 
       </Routes>
     </Router>

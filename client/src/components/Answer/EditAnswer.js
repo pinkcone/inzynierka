@@ -66,7 +66,7 @@ const EditAnswer = ({ answerId, onClose, onAnswerEdited }) => {
 
   return (
     <div>
-      <h2>Edytuj Odpowiedź</h2>
+      <h2>Edytuj odpowiedź</h2>
       
       {message && <div className="alert alert-success">{message}</div>}
       

@@ -347,6 +347,88 @@ const addCollaborator = async (req, res) => {
 };
 
 
+const getCollaborators = async (req, res) => {
+  const { setId } = req.params;
+
+  try {
+    console.log("Szukam zestawu");
+    const set = await Set.findByPk(setId);
+
+    if (!set) {
+      return res.status(404).json({ message: 'Zestaw nie został odnaleziony' });
+    }
+
+    let collaboratorsList = set.collaboratorsList;
+    if (!collaboratorsList || typeof collaboratorsList !== 'object') {
+      try {
+        collaboratorsList = JSON.parse(collaboratorsList);
+      } catch {
+        collaboratorsList = {};
+      }
+    }
+
+    console.log('Lista współtwórców:', collaboratorsList);
+
+    const collaboratorIds = Object.keys(collaboratorsList);
+    if (collaboratorIds.length === 0) {
+      return res.status(200).json({ message: 'Brak współtwórców', collaborators: [] });
+    }
+
+    console.log("Pobieram dane współtwórców");
+
+    const collaborators = await User.findAll({
+      where: { id: collaboratorIds },
+      attributes: ['id', 'email', 'username'], 
+    });
+
+    if (collaborators.length === 0) {
+      return res.status(404).json({ message: 'Nie znaleziono współtwórców dla podanych ID.' });
+    }
+
+    const detailedCollaborators = collaborators.map((collaborator) => ({
+      ...collaborator.toJSON(),
+      addedAt: collaboratorsList[collaborator.id]?.addedAt || null,
+    }));
+
+    res.status(200).json({
+      message: 'Lista współtwórców została pobrana pomyślnie',
+      collaborators: detailedCollaborators,
+    });
+  } catch (error) {
+    console.error('Błąd podczas pobierania współtwórców:', error);
+    res.status(500).json({ message: 'Błąd podczas pobierania współtwórców.', error: error.message });
+  }
+};
+
+const removeCollaborator = async (req, res) => {
+  const { setId, userId } = req.params; 
+
+  try {
+    const set = await Set.findByPk(setId);
+    if (!set) {
+      return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
+    }
+
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Użytkownik nie został znaleziony.' });
+    }
+
+    if (!set.collaboratorsList || !set.collaboratorsList[userId]) {
+      return res.status(400).json({ message: 'Użytkownik nie jest współtwórcą tego zestawu.' });
+    }
+
+    delete set.collaboratorsList[userId]; 
+
+    await set.save();
+
+    res.status(200).json({ message: 'Współtwórca został pomyślnie usunięty.' });
+  } catch (error) {
+    console.error('Błąd podczas usuwania współtwórcy:', error);
+    res.status(500).json({ message: 'Błąd podczas usuwania współtwórcy.', error: error.message });
+  }
+};
+
 module.exports = {
   addSet,
   editSet,
@@ -358,4 +440,6 @@ module.exports = {
   getAllSetsWithOwner,
   forceDeleteSet, 
   addCollaborator,
+  getCollaborators,
+  removeCollaborator
 };

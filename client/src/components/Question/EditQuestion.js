@@ -83,7 +83,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   return (
     <div className={styles.appContainer}>
       <div className={styles.mainContent}>
-        <h2>Edytuj Pytanie</h2>
+        <h2>Edytuj pytanie</h2>
         
         {message && <div className={styles.alertSuccess}>{message}</div>}
         {error && <div className={styles.alertDanger}>{error}</div>}

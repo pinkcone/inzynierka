@@ -55,6 +55,14 @@ const SetSidebar = ({ onSectionClick, activeSection, setName, isOwner, isEditing
             </li>
             <li>
               <button
+                className={`${styles.sidebarButton} ${activeSection === 'manageCollaborators' ? styles.active : ''}`}
+                onClick={() => handleSectionClick('manageCollaborators')}
+              >
+                Zarządzaj współtwórcami
+              </button>
+            </li>
+            <li>
+              <button
                 className={`${styles.sidebarButton} ${activeSection === 'deleteSet' ? styles.active : ''}`}
                 onClick={() => handleSectionClick('deleteSet')}
               >

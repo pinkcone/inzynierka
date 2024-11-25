@@ -35,7 +35,7 @@ const AddQuestion = ({ setId, onQuestionAdded }) => {
 
   return (
     <div className="container">
-      <h2>Dodaj Pytanie</h2>
+      <h2>Dodaj pytanie</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="content">Treść pytania:</label>

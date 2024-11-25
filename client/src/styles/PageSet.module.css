@@ -227,3 +227,53 @@ button svg {
 .answerIncorrect {
   border-left: 4px solid #dc3545; 
 }
+
+
+/* CollaboratorsList*/
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.removeButton:focus {
+  outline: none;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+/* modal z pytaniem do usuwania */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 500px;
+}
+
+

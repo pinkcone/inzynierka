@@ -10,6 +10,7 @@ import EditAnswer from '../Answer/EditAnswer';
 import ManageSet from '../Set/ManageSet';
 import AddCollaborator from '../Set/AddCollaborator';
 import DeleteSet from '../Set/DeleteSet';
+import CollaboratorsList from '../Set/CollaboratorsList';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -249,8 +250,10 @@ const EditPageSet = () => {
   };
 
   const handleDeleteQuestionClick = (questionId) => {
-    setConfirmPopupContent('Czy na pewno chcesz usunąć to pytanie?');
-    setOnConfirm(() => () => handleConfirmDelete('question', questionId));
+    setConfirmPopupContent(
+      <>Czy na pewno chcesz usunąć to pytanie?<br />Usunięcie pytania wiąże się z usunięciem go z powiązanych testów i quizów.</>
+    );
+        setOnConfirm(() => () => handleConfirmDelete('question', questionId));
     setShowConfirmPopup(true);
   };
   
@@ -327,7 +330,6 @@ const EditPageSet = () => {
         <div className={styles.content}>
           {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
-  
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
               {questions.map((question) => (
@@ -449,6 +451,17 @@ const EditPageSet = () => {
               />
             </div>
           )}
+
+          {activeSection === 'manageCollaborators' && (
+            <div className={styles.popup}>
+              <button className={styles.popupClose} onClick={() => setActiveSection('')}>X</button>
+              <CollaboratorsList 
+                setId={id} 
+                onClose={() => setActiveSection('')} 
+              />
+            </div>
+          )}
+
         </div>
       </div>
     </div>

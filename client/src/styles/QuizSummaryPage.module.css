@@ -1,0 +1,141 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    background: linear-gradient(to right, #00bcd4, #009688);
+    color: white;
+    padding: 20px;
+}
+
+.summaryContent {
+    margin-left: 50px;
+    width: 70%; 
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.participantsList {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+}
+
+.participant {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #fff;
+}
+
+.participant:last-child {
+    border-bottom: none;
+}
+
+.span {
+    font-size: 1.1rem;
+}
+
+.countdown {
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+.timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffe600;
+    background-color: #1d3c6b;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+
+.lightningGold {
+    width: 50px;
+    height: 50px;
+    background: url('https://img.icons8.com/ios/452/lightning-bolt.png') no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    left: -70px;
+    top: -10px;
+    animation: blink 1s infinite;
+  }
+  
+  .lightningSilver {
+    width: 50px;
+    height: 50px;
+    background: url('https://img.icons8.com/ios/452/lightning-bolt.png') no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    left: -70px;
+    top: -10px;
+    filter: grayscale(100%);
+    animation: blink 1s infinite;
+  }
+  
+  .lightningBronze {
+    width: 50px;
+    height: 50px;
+    background: url('https://img.icons8.com/ios/452/lightning-bolt.png') no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    left: -70px;
+    top: -10px;
+    filter: sepia(100%);
+    animation: blink 1s infinite;
+  }
+  
+  .participant {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 18px;
+  }
+  
+  .participant span {
+    margin-left: 10px;
+  }
+  
+  .countdown {
+    text-align: right;
+  }
+  
+  .timer {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+  
