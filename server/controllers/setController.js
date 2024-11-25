@@ -3,7 +3,7 @@ const User = require('../models/User');
 const Question = require('../models/Question');
 const Answer = require('../models/Answer');
 const Report = require('../models/Report');
-const  sequelize  = require('../config/sequelize'); // lub odpowiednia ścieżka
+const  sequelize  = require('../config/sequelize');
 const { Sequelize } = require('sequelize');
 const { Op } = require('sequelize');
 
@@ -38,12 +38,11 @@ const editSet = async (req, res) => {
     const { name, isPublic, keyWords } = req.body;
     const userId = req.user.id;
 
-    // Pobieramy zestaw, sprawdzając, czy użytkownik jest właścicielem lub współtwórcą
     const set = await Set.findOne({
       where: {
         id,
         [Op.or]: [
-          { ownerId: userId }, // Właściciel
+          { ownerId: userId },
           Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
         ],
       },
@@ -53,12 +52,10 @@ const editSet = async (req, res) => {
       return res.status(403).json({ message: 'Brak uprawnień do edycji tego zestawu lub zestaw nie istnieje.' });
     }
 
-    // Aktualizujemy tylko przesłane pola
     set.name = name || set.name;
     set.isPublic = typeof isPublic === 'boolean' ? isPublic : set.isPublic;
     set.keyWords = keyWords || set.keyWords;
 
-    // Zapisujemy zmiany
     await set.save();
     res.status(200).json(set);
   } catch (error) {
@@ -145,9 +142,6 @@ const getAllUserSets = async (req, res) => {
   }
 };
 
-
-
-
 const getSetById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -158,9 +152,9 @@ const getSetById = async (req, res) => {
       where: {
         id,
         [Op.or]: [
-          { isPublic: true }, // Zestaw publiczny
-          { ownerId: userId }, // Właściciel
-          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`), // Współtwórca
+          { isPublic: true },
+          { ownerId: userId },
+          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
         ],
       },
     });
@@ -306,13 +300,10 @@ const addCollaborator = async (req, res) => {
 
     console.log("Sprawdzam czy użytkownik jest już współtwórcą");
 
-    // Sprawdź i popraw `collaboratorsList`, jeśli jest błędne
     if (!set.collaboratorsList || typeof set.collaboratorsList !== 'object') {
       try {
-        // Spróbuj sparsować, jeśli jest stringiem
         set.collaboratorsList = JSON.parse(set.collaboratorsList);
       } catch {
-        // Jeśli parsowanie się nie uda, ustaw jako pusty obiekt
         set.collaboratorsList = {};
       }
     }
@@ -325,14 +316,14 @@ const addCollaborator = async (req, res) => {
 
     console.log("Dodaję współtwórcę");
     set.collaboratorsList = {
-      ...set.collaboratorsList, // Zachowujemy istniejące klucze
-      [user.id]: { addedAt: new Date() }, // Dodajemy nowego użytkownika
+      ...set.collaboratorsList,
+      [user.id]: { addedAt: new Date() },
     };
 
     console.log('collaboratorsList przed zapisem:', set.collaboratorsList);
 
     console.log("Zapisuję zmiany");
-    set.changed('collaboratorsList', true); // Wymuszamy zapis zmian
+    set.changed('collaboratorsList', true);
     await set.save();
 
     console.log("Współtwórca dodany");
@@ -401,28 +392,35 @@ const getCollaborators = async (req, res) => {
 };
 
 const removeCollaborator = async (req, res) => {
-  const { setId, userId } = req.params; 
+  const { setId, userId } = req.params;
 
   try {
     const set = await Set.findByPk(setId);
+
     if (!set) {
       return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
     }
 
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'Użytkownik nie został znaleziony.' });
+    let collaboratorsList = set.collaboratorsList;
+    if (!collaboratorsList || typeof collaboratorsList !== 'object') {
+      try {
+        collaboratorsList = JSON.parse(collaboratorsList);
+      } catch {
+        collaboratorsList = {};
+      }
     }
 
-    if (!set.collaboratorsList || !set.collaboratorsList[userId]) {
+    if (!collaboratorsList[userId]) {
       return res.status(400).json({ message: 'Użytkownik nie jest współtwórcą tego zestawu.' });
     }
 
-    delete set.collaboratorsList[userId]; 
+    delete collaboratorsList[userId];
 
+    set.collaboratorsList = collaboratorsList;
+    set.changed('collaboratorsList', true);
     await set.save();
 
-    res.status(200).json({ message: 'Współtwórca został pomyślnie usunięty.' });
+    res.status(200).json({ message: 'Współtwórca został pomyślnie usunięty.', collaboratorsList });
   } catch (error) {
     console.error('Błąd podczas usuwania współtwórcy:', error);
     res.status(500).json({ message: 'Błąd podczas usuwania współtwórcy.', error: error.message });
