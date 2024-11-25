@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { SocketContext } from '../../contexts/SocketContext';
 import styles from '../../styles/QuizPlay.module.css';
 
 const QuizPlay = () => {
-  const navigate = useNavigate();
+  const { code } = useParams();
   const location = useLocation();
-  const { code } = location.state || {};
-  const socketRef = useRef(null);
+  const { name } = location.state || {};
+  const socket = useContext(SocketContext);
+  const navigate = useNavigate();
 
-  const [screen, setScreen] = useState('countdown'); // 'countdown', 'question', 'waiting', 'leaderboard', 'results'
+  const [screen, setScreen] = useState('waiting'); // 'waiting', 'countdown', 'question', 'leaderboard', 'results'
   const [countdown, setCountdown] = useState(0);
   const [question, setQuestion] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -17,24 +18,21 @@ const QuizPlay = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!code) {
+    if (!code || !name) {
       navigate('/join-quiz');
       return;
     }
 
-    socketRef.current = io('http://localhost:5000');
+    // Dołącz do pokoju quizu
+    socket.emit('joinQuizRoom', { code, name });
 
-    // Dołącz do pokoju
-    socketRef.current.emit('joinQuizRoom', { code });
-
-    // Odbieraj ekran odliczania
-    socketRef.current.on('showCountdown', ({ countdown }) => {
+    // Nasłuchuj na zdarzenia
+    socket.on('showCountdown', ({ countdown }) => {
       setScreen('countdown');
       setCountdown(countdown);
 
-      // Odliczanie
       const interval = setInterval(() => {
-        setCountdown(prev => {
+        setCountdown((prev) => {
           if (prev <= 1) {
             clearInterval(interval);
             return 0;
@@ -44,42 +42,41 @@ const QuizPlay = () => {
       }, 1000);
     });
 
-    // Odbieraj pytanie
-    socketRef.current.on('showQuestion', ({ question }) => {
+    socket.on('showQuestion', ({ question }) => {
       setScreen('question');
       setQuestion(question);
     });
 
-    // Odbieraj tablicę rankingową
-    socketRef.current.on('showLeaderboard', ({ leaderboard }) => {
+    socket.on('showLeaderboard', ({ leaderboard }) => {
       setScreen('leaderboard');
       setLeaderboard(leaderboard);
     });
 
-    // Odbieraj wyniki końcowe
-    socketRef.current.on('quizEnded', ({ results }) => {
+    socket.on('quizEnded', ({ results }) => {
       setScreen('results');
       setResults(results);
     });
 
-    // Obsługa błędów
-    socketRef.current.on('error', (data) => {
-      console.error(data.message);
+    socket.on('error', (data) => {
       setError(data.message);
     });
 
+    // Czyszczenie
     return () => {
-      socketRef.current.disconnect();
+      socket.off('showCountdown');
+      socket.off('showQuestion');
+      socket.off('showLeaderboard');
+      socket.off('quizEnded');
+      socket.off('error');
     };
-  }, [code, navigate]);
+  }, [code, name, navigate, socket]);
 
   const handleAnswerClick = (answerId) => {
-    // Wyślij odpowiedź do serwera
-    socketRef.current.emit('submitAnswer', {
+    socket.emit('submitAnswer', {
       code,
       questionId: question.id,
       answerId,
-      time: new Date().getTime(), // Możesz użyć do pomiaru czasu odpowiedzi
+      time: new Date().getTime(),
     });
     setScreen('waiting');
   };
