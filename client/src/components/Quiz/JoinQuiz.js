@@ -1,47 +1,44 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import { SocketContext } from '../../contexts/SocketContext';
 import styles from '../../styles/JoinQuiz.module.css';
 
 const JoinQuiz = () => {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
-  const codeRef = useRef('');
-  const nameRef = useRef('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const socketRef = useRef(null);
+  const socket = useContext(SocketContext);
+  const codeRef = useRef('');
+  const nameRef = useRef('');
 
-  // Aktualizujemy refs za każdym razem, gdy code lub name się zmieni
   useEffect(() => {
     codeRef.current = code;
     nameRef.current = name;
   }, [code, name]);
 
   useEffect(() => {
-    // Inicjalizujemy socket tylko raz, gdy komponent jest montowany
-    socketRef.current = io('http://localhost:5000');
-
     // Nasłuchujemy na zdarzenie 'joinedQuiz'
-    socketRef.current.on('joinedQuiz', () => {
-        console.log('Otrzymano joinedQuiz, przekierowuję na QuizPlay');
+    socket.on('joinedQuiz', () => {
+      console.log('Otrzymano joinedQuiz, przekierowuję na QuizPlay');
       navigate(`/quiz/play/${codeRef.current}`, { state: { name: nameRef.current } });
     });
 
     // Nasłuchujemy na zdarzenie 'error'
-    socketRef.current.on('error', (data) => {
+    socket.on('error', (data) => {
       setError(data.message);
     });
 
     // Czyszczenie po odłączeniu komponentu
     return () => {
-      socketRef.current.disconnect();
+      socket.off('joinedQuiz');
+      socket.off('error');
     };
-  }, [navigate]);
+  }, [navigate, socket]);
 
   const handleJoinQuiz = () => {
     console.log('Emituje joinQuiz z kodem:', code, 'i nazwą:', name);
-    socketRef.current.emit('joinQuiz', { code, name });
+    socket.emit('joinQuiz', { code, name });
   };
 
   return (
