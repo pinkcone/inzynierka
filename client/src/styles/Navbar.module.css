@@ -1,5 +1,6 @@
 .navbar-custom {
-  background-color: #20B2AA !important;; 
+  background-color: #20B2AA !important;
+  z-index: 100;
 }
 
 .navbar-logo {
@@ -27,4 +28,22 @@
     font-size: 14px; 
     padding: 8px 12px; 
   }
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  color: white;
+  background-color: #007988;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+}
+.li-custom{
+  text-align: center;
+  padding: 10px;
+  margin: 3px;
+  border: 1px solid #fafafa;
+  border-radius: 10px;
 }

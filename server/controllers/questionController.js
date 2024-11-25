@@ -8,21 +8,33 @@ const addQuestion = async (req, res) => {
         const { content, type, setId } = req.body;
         const userId = req.user.id;
 
-        const set = await Set.findOne({ where: { id: setId, ownerId: userId } });
+        // Sprawdzamy, czy użytkownik jest właścicielem lub współtwórcą zestawu
+        const set = await Set.findOne({
+            where: {
+                id: setId,
+                [Sequelize.Op.or]: [
+                    { ownerId: userId },
+                    Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+                ],
+            },
+        });
+
         if (!set) {
-            return res.status(404).json({ message: 'Zestaw nie został odnaleziony!' });
+            return res.status(404).json({ message: 'Zestaw nie został odnaleziony lub brak uprawnień!' });
         }
 
         const newQuestion = await Question.create({
             content,
             type,
-            setId
+            setId,
         });
+
         res.status(201).json(newQuestion);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas dodawania pytania.', error: error.message });
     }
 };
+
 
 const editQuestion = async (req, res) => {
     try {
@@ -34,8 +46,14 @@ const editQuestion = async (req, res) => {
             where: { id },
             include: {
                 model: Set,
-                where: { ownerId: userId }
-            }
+                required: true,
+                where: {
+                    [Sequelize.Op.or]: [
+                        { ownerId: userId },
+                        Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+                    ],
+                },
+            },
         });
 
         if (!question) {
@@ -62,8 +80,14 @@ const deleteQuestion = async (req, res) => {
             where: { id },
             include: {
                 model: Set,
-                where: { ownerId: userId }
-            }
+                required: true,
+                where: {
+                    [Sequelize.Op.or]: [
+                        { ownerId: userId },
+                        Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+                    ],
+                },
+            },
         });
 
         if (!question) {
@@ -79,27 +103,32 @@ const deleteQuestion = async (req, res) => {
     }
 };
 
+
 const getQuestionsBySet = async (req, res) => {
     try {
         const { setId } = req.params;
         const userId = req.user ? req.user.id : null;
         const userRole = req.user ? req.user.role : null;
 
-        const set = await Set.findByPk(setId);
+        const set = await Set.findOne({
+            where: {
+                id: setId,
+                [Sequelize.Op.or]: [
+                    { ownerId: userId },
+                    Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+                ],
+            },
+        });
 
         if (!set) {
-            return res.status(404).json({ message: 'Zestaw nie został znaleziony.' });
-        }
-
-        if (!set.isPublic && (set.ownerId !== userId && userRole !== 'admin')) {
             return res.status(403).json({ message: 'Brak dostępu do pytań tego zestawu.' });
         }
 
         const questions = await Question.findAll({
-            where: { setId }
+            where: { setId },
         });
 
-        if (!questions || questions.length === 0) {
+        if (!questions.length) {
             return res.status(404).json({ message: 'Brak pytań dla tego zestawu.' });
         }
 
@@ -108,6 +137,7 @@ const getQuestionsBySet = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas pobierania pytań.', error: error.message });
     }
 };
+
 
 // Pobieranie pytania na podstawie ID
 const getQuestionById = async (req, res) => {

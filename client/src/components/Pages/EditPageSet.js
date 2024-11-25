@@ -48,7 +48,7 @@ const EditPageSet = () => {
         const decodedToken = jwtDecode(token);
         const userId = decodedToken.userId || decodedToken.id || decodedToken.sub; 
 
-        if (userId.toString() === data.ownerId.toString()) {
+        if (userId.toString() === data.ownerId.toString() || data.collaboratorsList?.[userId]) {
           setIsOwner(true); 
         } else {
           setIsOwner(false); 

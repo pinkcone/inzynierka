@@ -1,21 +1,60 @@
-.sidebar {
+/* Kontener całego paska bocznego */
+.sidebar-container {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  height: 90vh;
   width: 250px;
-  background-color: #f4f4f4;
+  transform: translateX(-230px);
+  transition: transform 0.3s ease;
+  z-index: 99;
+}
+
+.sidebar-tab {
+  position: absolute;
+  top: 50%;
+  right: -40px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 100px;
+  background-color: #01a6a0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode:vertical-rl;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sidebar {
+  background-color: #a6f6f4;
+  height: 100%;
   padding: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sidebar-link {
   display: block;
   padding: 10px;
   margin: 10px 0;
-  color: #333;
+  color: #fff;
   text-decoration: none;
+  background-color: #01a6a0;
   transition: background-color 0.3s ease;
+  text-align: center;
+  border-radius:20px;
 }
 
 .sidebar-link:hover {
-  background-color: #ddd;
+  background-color: #007988;
 }
 
-
-
+.sidebar-container:hover {
+  transform: translateX(0);
+}
