@@ -1,5 +1,9 @@
 import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './components/PrivateRoute';
+
 import HomePage from './components/Pages/HomePage';
 import Register from './components/Pages/Register';
 import Login from './components/Pages/Login';
@@ -15,9 +19,6 @@ import Flashcards from './components/Pages/Flashcards';
 import EditPageSet from './components/Pages/EditPageSet';
 import TestPage from "./components/Pages/TestPage";
 import MyTests from "./components/Pages/MyTests";
-import {toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 import TestSummaryPage from "./components/Pages/TestSummaryPage";
 import TestStartPage from "./components/Pages/TestStartPage";
 import AdminDashboard from './components/Admin/AdminDashboard';
@@ -53,30 +54,175 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/addset" element={<AddSet />} />
-        <Route path="/add-question/:setId" element={<AddQuestion />} />
-        <Route path="/add-answer/:questionId" element={<AddAnswer />} />
-        <Route path="/mysets" element={<MySets />} />
-        <Route path="/page-set/:id" element={<PageSet />} />
-        <Route path="/edit-question/:id" element={<EditQuestion />} />
-        <Route path="/edit-answer/:id" element={<EditAnswer />} />
-        <Route path="/edit-question/:questionId" element={<EditQuestion />} />
-        <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
-        <Route path="/edit-answer/:answerId" element={<EditAnswer />} />
-        <Route path="/flashcards/:setId" element={<Flashcards />} />
-        <Route path="/editset/:id" element={<EditPageSet />} /> 
-        <Route path="/test/:code" element={<TestPage />} />
-        <Route path="/mytests" element={<MyTests />} />
-        <Route path="/test-summary/:id" element={<TestSummaryPage />} />
-        <Route path="/test-start/:code" element={<TestStartPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/userlist" element={<UserList />} />
-        <Route path="/setlist" element={<SetList />} />
-        <Route path="/myquizzes" element={<MyQuizzes />} />
-        <Route path="/waiting" element={<WaitingPage />} />
-        <Route path="/quiz-summary" element={<QuizSummaryPage />} />
-        <Route path="/myflashcards" element={<MyFlashcards/>}/>
+
+        <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/addset"
+            element={
+              <PrivateRoute>
+                <AddSet />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/add-question/:setId"
+            element={
+              <PrivateRoute>
+                <AddQuestion />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/add-answer/:questionId"
+            element={
+              <PrivateRoute>
+                <AddAnswer />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/mysets"
+            element={
+              <PrivateRoute>
+                <MySets />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/page-set/:id"
+            element={
+              <PrivateRoute>
+                <PageSet />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/edit-question/:id"
+            element={
+              <PrivateRoute>
+                <EditQuestion />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/edit-answer/:id"
+            element={
+              <PrivateRoute>
+                <EditAnswer />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/flashcards/:setId"
+            element={
+              <PrivateRoute>
+                <Flashcards />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/editset/:id"
+            element={
+              <PrivateRoute>
+                <EditPageSet />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/test/:code"
+            element={
+              <PrivateRoute>
+                <TestPage />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/mytests"
+            element={
+              <PrivateRoute>
+                <MyTests />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/test-summary/:id"
+            element={
+              <PrivateRoute>
+                <TestSummaryPage />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/test-start/:code"
+            element={
+              <PrivateRoute>
+                <TestStartPage />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/userlist"
+            element={
+              <PrivateRoute>
+                <UserList />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/setlist"
+            element={
+              <PrivateRoute>
+                <SetList />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/myquizzes"
+            element={
+              <PrivateRoute>
+                <MyQuizzes />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/waiting"
+            element={
+              <PrivateRoute>
+                <WaitingPage />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/quiz-summary"
+            element={
+              <PrivateRoute>
+                <QuizSummaryPage />
+              </PrivateRoute>
+            }
+        />
+        <Route
+            path="/myflashcards"
+            element={
+              <PrivateRoute>
+                <MyFlashcards />
+              </PrivateRoute>
+            }
+        />
 
 
         <Route path="/quiz/lobby/:quizId" element={<QuizLobby />} />
