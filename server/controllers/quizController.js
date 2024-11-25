@@ -16,7 +16,6 @@ const addQuiz = async (req, res) => {
     console.log("questionids: ", questionsIds);
     // Walidacja danych wejściowych
     if (!name || !questionTime || !userId || !setId || !Array.isArray(questionsIds)) {
-      console.log("puste dane chuju");
       return res.status(400).json({
         message: 'Brak wymaganych danych lub nieprawidłowa struktura questionsIds!',
       });
@@ -25,14 +24,12 @@ const addQuiz = async (req, res) => {
     // Sprawdzenie, czy użytkownik istnieje
     const user = await User.findByPk(userId);
     if (!user) {
-      console.log("gdzie kurwa, nie istniejesz!");
       return res.status(404).json({ message: 'Nie znaleziono użytkownika!' });
     }
 
     // Sprawdzenie, czy zestaw istnieje
     const set = await Set.findByPk(setId);
     if (!set) {
-      console.log("gdzie kurwa, zestaw nie istnieje!!!!!!!");
       return res.status(404).json({ message: 'Nie znaleziono zestawu!' });
     }
 
@@ -42,12 +39,10 @@ const addQuiz = async (req, res) => {
     });
 
     if (questions.length !== questionsIds.length) {
-      console.log("w chuja lecisz z id pytan smieciu");
       return res.status(400).json({
         message: 'Niektóre pytania nie istnieją lub nie należą do wybranego zestawu!',
       });
     }
-    console.log("tworze quiz lamusie");
     // Tworzenie quizu
     const quiz = await Quiz.create({
       name,
@@ -56,7 +51,6 @@ const addQuiz = async (req, res) => {
       userId,
       setId,
     });
-    console.log("dodaje pytanka smieciu");
     // Przypisanie pytań do quizu (poprzez tabelę pośrednią QuizQuestions)
     await quiz.addQuestions(questions);
 
