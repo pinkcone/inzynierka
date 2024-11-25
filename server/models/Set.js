@@ -19,7 +19,12 @@ const Set = sequelize.define('Set', {
   keyWords: {
     type: DataTypes.STRING,
     allowNull: true
-  }
+  },
+  collaboratorsList: {
+    type: DataTypes.JSON, // Przechowuje tablicę ID użytkowników
+    allowNull: false,
+    defaultValue: {}, // Domyślnie pusta lista
+},
 });
 
 module.exports = Set;

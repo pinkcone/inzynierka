@@ -2,7 +2,7 @@ const Answer = require('../models/Answer');
 const Question = require('../models/Question');
 const Set = require('../models/Set');
 const { updateQuestionType } = require('./questionController');
-
+const { Sequelize } = require('sequelize');
 
 const addAnswer = async (req, res) => {
   try {
@@ -14,7 +14,15 @@ const addAnswer = async (req, res) => {
       return res.status(404).json({ message: 'Pytanie nie zostało znalezione.' });
     }
 
-    const set = await Set.findOne({ where: { id: question.setId, ownerId: userId } });
+    const set = await Set.findOne({
+      where: {
+        id: question.setId,
+        [Sequelize.Op.or]: [
+          { ownerId: userId },
+          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+        ],
+      },
+    });
     if (!set) {
       return res.status(403).json({ message: 'Brak uprawnień do dodawania odpowiedzi.' });
     }
@@ -44,7 +52,15 @@ const editAnswer = async (req, res) => {
     }
 
     const question = await Question.findByPk(answer.questionId);
-    const set = await Set.findOne({ where: { id: question.setId, ownerId: userId } });
+    const set = await Set.findOne({
+      where: {
+        id: question.setId,
+        [Sequelize.Op.or]: [
+          { ownerId: userId },
+          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+        ],
+      },
+    });
     if (!set) {
       return res.status(403).json({ message: 'Brak uprawnień do edycji odpowiedzi.' });
     }
@@ -72,7 +88,15 @@ const deleteAnswer = async (req, res) => {
     }
 
     const question = await Question.findByPk(answer.questionId);
-    const set = await Set.findOne({ where: { id: question.setId, ownerId: userId } });
+    const set = await Set.findOne({
+      where: {
+        id: question.setId,
+        [Sequelize.Op.or]: [
+          { ownerId: userId },
+          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+        ],
+      },
+    });
     if (!set) {
       return res.status(403).json({ message: 'Brak uprawnień do usunięcia odpowiedzi.' });
     }

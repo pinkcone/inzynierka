@@ -7,17 +7,22 @@ const AddCollaborator = ({ setId, onClose, onCollaboratorAdded }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/sets/add-collabolator`, {
-        method: 'POST',
+      console.log(email);
+      console.log(setId);
+      const response = await fetch(`/api/sets/add-collabolator/${setId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ setId, email }),
+        body: JSON.stringify({ email }),
       });
-
-      if (!response.ok) throw new Error('Nie udało się dodać współtwórcy.');
-
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        throw new Error(errorData.message);
+      }
+      console.log("dobra odp");
       onCollaboratorAdded();
       setMessage('Współtwórca został dodany!');
       onClose();
@@ -31,11 +36,11 @@ const AddCollaborator = ({ setId, onClose, onCollaboratorAdded }) => {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="collaboratorEmail">Email współtwórcy:</label>
-        <input 
+        <input
           id="collaboratorEmail"
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </div>

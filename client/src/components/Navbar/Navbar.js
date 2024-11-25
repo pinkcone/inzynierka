@@ -48,16 +48,16 @@ const Navbar = () => {
                   </Dropdown.Menu>
                 </Dropdown>
 
-                <li className="nav-item d-lg-none">
-                  <Link className="nav-link" to="/profile">Profil użytkownika</Link>
+                <li className={`nav-item d-lg-none ${styles['li-custom']}`}>
+                  <Link className={styles['nav-link']} to="/profile">Profil użytkownika</Link>
                 </li>
                 {isAdmin && (
-                  <li className="nav-item d-lg-none">
-                    <Link className="nav-link" to="/admin">Panel administratora</Link>
+                  <li className={`nav-item d-lg-none ${styles['li-custom']}`}>
+                    <Link className={styles['nav-link']} to="/admin">Panel administratora</Link>
                   </li>
                 )}
-                <li className="nav-item d-lg-none">
-                  <Link className="nav-link" onClick={handleLogout}>Wyloguj się</Link>
+                <li className={`nav-item d-lg-none ${styles['li-custom']}`}>
+                  <Link className={styles['nav-link']} onClick={handleLogout}>Wyloguj się</Link>
                 </li>
               </>
             ) : (
