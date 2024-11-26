@@ -89,10 +89,12 @@ const deleteQuiz = async (req, res) => {
   
 
   const getAllQuizzes = async (req, res) => {
+   const userId = req.user.id; 
     try {
       // Pobranie quizów z powiązanym zestawem
       const quizzes = await Quiz.findAll({
-        attributes: ['id', 'name', 'questionTime'], // Tylko potrzebne kolumny
+        attributes: ['id', 'name', 'questionTime'], 
+        where: { userId }, 
         include: {
           model: Set,
           attributes: ['id', 'name'], // Pobieramy tylko ID i nazwę zestawu

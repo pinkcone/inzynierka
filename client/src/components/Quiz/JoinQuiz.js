@@ -1,3 +1,4 @@
+// JoinQuiz.js
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SocketContext } from '../../contexts/SocketContext';
@@ -28,11 +29,15 @@ const JoinQuiz = () => {
     socket.on('error', (data) => {
       setError(data.message);
     });
-
-    // Czyszczenie po odłączeniu komponentu
+    socket.on('quizCanceled', (data) => {
+      alert(data.message);
+      navigate('/join-quiz');
+    });
+    // Czyszczenie nasłuchiwaczy
     return () => {
       socket.off('joinedQuiz');
       socket.off('error');
+      socket.off('quizCanceled');
     };
   }, [navigate, socket]);
 

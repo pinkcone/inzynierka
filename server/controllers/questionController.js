@@ -116,6 +116,7 @@ const getQuestionsBySet = async (req, res) => {
                 [Sequelize.Op.or]: [
                     { ownerId: userId },
                     Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+                    {isPublic: true},
                 ],
             },
         });
