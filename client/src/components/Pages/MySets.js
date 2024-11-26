@@ -24,10 +24,10 @@ const MySets = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.length === 0) {
-            setError('Brak zestawów.'); 
+            setError('Brak zestawów.');
           } else {
             setSets(data);
-            setError(''); 
+            setError('');
           }
         } else {
           setError('Błąd podczas pobierania zestawów.');
@@ -42,7 +42,7 @@ const MySets = () => {
 
   const handleAddSet = (newSet) => {
     setSets((prevSets) => [...prevSets, newSet]);
-    setError(''); 
+    setError('');
     setShowAddSetPopup(false);
   };
 
@@ -83,21 +83,13 @@ const MySets = () => {
           {message && <div className={styles.alertSuccess}>{message}</div>}
 
           {sets.length > 0 && (
-            <ul className={styles.listGroup}>
+            <div className={styles.setsGroup}>
               {sets.map((set) => (
-                <li key={set.id} className={styles.listGroupItem}>
-                  <span>{set.name}</span>
-                  <div>
-                    <button
-                      onClick={() => handleOpen(set.id)}
-                      className={styles.button}
-                    >
-                      Otwórz
-                    </button>
-                  </div>
-                </li>
+                <div onClick={() => handleOpen(set.id)} key={set.id} className={styles.setItem}>
+                  <h3>{set.name}</h3>
+                </div>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </div>

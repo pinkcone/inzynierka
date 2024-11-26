@@ -79,8 +79,8 @@ const HomePage = () => {
         <Sidebar />
         <div className={styles.mainContent}>
           <div className={styles.welcomeText}>
-            <h1>Witamy na stronie głównej!</h1>
-            <p>Poniżej możesz wyszukać publiczne zestawy na podstawie słów kluczowych.</p>
+            <h1>Witamy&nbsp;w&nbsp;Learnify</h1>
+            <p>Skorzystaj z publicznych zestawów lub stwórz własne.</p>
           </div>
 
           <div className={styles.searchContainer}>
