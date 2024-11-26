@@ -1,60 +1,72 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { io } from 'socket.io-client';
+// QuizLobby.js
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from '../../styles/QuizLobby.module.css';
+import { SocketContext } from '../../contexts/SocketContext'; // Upewnij się, że ścieżka jest poprawna
 
 const QuizLobby = () => {
-    const { quizId } = useParams();
-    const [quizCode, setQuizCode] = useState('');
-    const [quizName, setQuizName] = useState('');
-    const [questionTime, setQuestionTime] = useState(0);
-    const [participants, setParticipants] = useState([]);
-    const [error, setError] = useState('');
-    const socketRef = useRef(null);
-  
-    useEffect(() => {
-      socketRef.current = io('http://localhost:5000'); // Upewnij się, że adres jest poprawny
-  
-      console.log('quizId:', quizId);
-  
-      // Po załadowaniu komponentu, wywołujemy zdarzenie createQuiz
-      socketRef.current.emit('createQuiz', {
-        quizId
-      });
-  
-      // Odbieramy kod i nazwę quizu z serwera
-      socketRef.current.on('quizCreated', ({ code, name, questionTime }) => {
-        setQuizCode(code);
-        setQuizName(name);
-        setQuestionTime(questionTime);
-      });
+  const { quizId } = useParams();
+  const [quizCode, setQuizCode] = useState('');
+  const [quizName, setQuizName] = useState('');
+  const [questionTime, setQuestionTime] = useState(0);
+  const [participants, setParticipants] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [quizStarted, setQuizStarted] = useState(false);
+  const socket = useContext(SocketContext);
 
-    // Odbieramy informacje o nowych uczestnikach
-    socketRef.current.on('newParticipant', ({ name }) => {
-      setParticipants((prevParticipants) => [...prevParticipants, { name }]);
+  useEffect(() => {
+    console.log('wysylam zadnie stworzenia quizu: ', quizId);
+
+    // Emituj zdarzenie 'createQuiz'
+    socket.emit('createQuiz', { quizId });
+    console.log('wysylano zadnie stworzenia quizu: ', quizId);
+    // Nasłuchuj na zdarzenie 'quizCreated'
+    socket.on('quizCreated', ({ code, name, questionTime }) => {
+      console.log('stworzono quiz:  ', code);
+      setQuizCode(code);
+      setQuizName(name);
+      setQuestionTime(questionTime);
     });
 
-    // Odbieramy aktualną listę uczestników (na wypadek odświeżenia strony)
-    socketRef.current.on('participantsList', (participantsList) => {
+    // Nasłuchuj na aktualizacje listy uczestników
+    socket.on('participantsList', (participantsList) => {
       setParticipants(participantsList);
     });
 
     // Obsługa błędów
-    socketRef.current.on('error', (data) => {
+    socket.on('error', (data) => {
       console.error(data.message);
       setError(data.message);
     });
 
-    // Czyszczenie po odłączeniu
+    // Czyszczenie nasłuchiwaczy
     return () => {
-        socketRef.current.disconnect();
-      };
-    }, [quizId]);
-    const handleStartQuiz = () => {
-        socketRef.current.emit('startQuiz', { code: quizCode });
-      };
+      if (!quizStarted) {
+        socket.emit('cancelQuiz', { code: quizCode });
+      }
+      socket.off('quizCreated');
+      socket.off('participantsList');
+      socket.off('error');
+    };
+  }, [quizId, socket]);
+
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
+    const organizerName = localStorage.getItem('username') || 'Host';
+
+    // Host dołącza do quizu jako uczestnik
+    socket.emit('joinQuiz', { code: quizCode, name: organizerName });
+
+    // Emituj zdarzenie 'startQuiz'
+    socket.emit('startQuiz', { code: quizCode });
+
+    // Przekieruj hosta do 'QuizPlay'
+    navigate(`/quiz/play/${quizCode}`, { state: { name: organizerName } });
+  };
+
   return (
     <div className={styles.appContainer}>
       <Navbar />
@@ -63,8 +75,12 @@ const QuizLobby = () => {
         <div className={styles.content}>
           <h2>Lobby Quizu: {quizName}</h2>
           {error && <div className={styles.alertDanger}>{error}</div>}
-          <p>Kod quizu: <strong>{quizCode}</strong></p>
-          <p>Czas na pytanie: <strong>{questionTime} sekund</strong></p>
+          <p>
+            Kod quizu: <strong>{quizCode}</strong>
+          </p>
+          <p>
+            Czas na pytanie: <strong>{questionTime} sekund</strong>
+          </p>
 
           <h3>Uczestnicy:</h3>
           {participants.length > 0 ? (
@@ -77,8 +93,7 @@ const QuizLobby = () => {
             <p>Brak uczestników.</p>
           )}
 
-          {/* Możesz dodać przycisk do rozpoczęcia quizu */}
-          <button className={styles.button} onClick={() => handleStartQuiz()}>
+          <button className={styles.button} onClick={handleStartQuiz}>
             Rozpocznij quiz
           </button>
         </div>
