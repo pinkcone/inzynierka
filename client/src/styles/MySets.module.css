@@ -1,3 +1,4 @@
+
 .appContainer {
   display: flex;
   flex-direction: column;
@@ -15,11 +16,15 @@
   margin-top: 60px;
   margin-left: 100px;
   margin-right: 100px;
+
 }
 
 .textCenter {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 50px;
+  text-transform: uppercase;
+  color: black;
 }
 
 .alertSuccess {
@@ -40,35 +45,49 @@
   border-radius: 4px;
 }
 
-.listGroup {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.setsGroup{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex:1;
+  
 }
 
-.listGroupItem {
-  padding: 10px 20px;
-  margin-bottom: 10px;
+.setItem {
+  padding: 20px;
+  width: 350px;
+  margin: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #f9f9f9;
-  border-radius: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
-
+.setItem:focus{
+  padding: 30px;
+}
+.setItem h3{
+  color: black;
+  margin:0;
+}
 .crudbutton {
-  background-color: #20B2AA;
+  background-color: #9b59b6;
   color: white;
-  padding: 5px 10px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   margin-right: 10px;
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .crudbutton:hover {
-  background-color: #218188;
+  background-color: #734f8b;
 }
 
 .table {
@@ -95,23 +114,6 @@
 
 .table tr:hover {
   background-color: #f1f1f1;
-}
-
-
-
-.button {
-  background-color: #20B2AA;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-
-}
-
-.button:hover {
-  background-color: #218188;
 }
 
 .deleteButton {
@@ -181,4 +183,10 @@
 
 .popup button:hover {
   background-color: #218188;
+}
+@media(max-width: 640px){
+  .textCenter{font-size: 30px;}
+  .setItem{
+    width: 200px;
+  }
 }

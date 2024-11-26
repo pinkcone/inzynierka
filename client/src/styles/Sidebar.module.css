@@ -17,7 +17,7 @@
   transform: translateY(-50%);
   width: 40px;
   height: 100px;
-  background-color: #01a6a0;
+  background-color: #2e1a47;
   color: #fff;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@
 }
 
 .sidebar {
-  background-color: #a6f6f4;
+  background-color: #2e1a47;
   height: 100%;
   padding: 20px;
   border-top-right-radius: 20px;
@@ -43,16 +43,16 @@
   display: block;
   padding: 10px;
   margin: 10px 0;
-  color: #fff;
+  color: #f2e6fe;
   text-decoration: none;
-  background-color: #01a6a0;
+  background-color: #734f8b;
   transition: background-color 0.3s ease;
   text-align: center;
   border-radius:20px;
 }
 
 .sidebar-link:hover {
-  background-color: #007988;
+  background-color: #4a2c91;
 }
 
 .sidebar-container:hover {
