@@ -179,6 +179,9 @@ const EditPageSet = () => {
         );
         setQuestions(questionsWithAnswers);
       } else {
+        if(response.status === 404)
+          setQuestions([]);
+
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się pobrać pytań.');
       }
@@ -214,6 +217,7 @@ const EditPageSet = () => {
           })
         );
         setQuestions(questionsWithAnswers);
+        setError("")
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Nie udało się pobrać pytań.');
