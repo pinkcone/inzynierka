@@ -38,29 +38,28 @@
     background-color: #d4edda;
     color: #155724;
   }
-  
-  .button {
-    background-color: #20B2AA;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .button:hover {
-    background-color: #218188;
-  }
-  
-  .btn-primary {
-    background-color: #218188;
-  }
- 
 
   .error {
     color: red;
     font-size: 14px;
     margin-top: 5px;
   }
-  
+  input{
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: #db88f0 1px solid;
+    margin: 3px 0;
+  }
+  .row{
+    display: flex;
+    flex-direction: row;
+  }
+  .row input{
+    margin-left: 10px;
+    width: 15px;
+  }
+  .tips{
+    font-size: 13px;
+    margin: 0;
+  }
