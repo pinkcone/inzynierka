@@ -42,16 +42,6 @@ const SetSidebar = ({
               <li>
                 <button
                   className={`${styles.sidebarButton} ${
-                    activeSection === 'addQuestion' ? styles.active : ''
-                  }`}
-                  onClick={() => handleSectionClick('addQuestion')}
-                >
-                  Dodaj pytanie
-                </button>
-              </li>
-              <li>
-                <button
-                  className={`${styles.sidebarButton} ${
                     activeSection === 'manageSet' ? styles.active : ''
                   }`}
                   onClick={() => handleSectionClick('manageSet')}

@@ -110,15 +110,19 @@ const getQuestionsBySet = async (req, res) => {
         const userId = req.user ? req.user.id : null;
         const userRole = req.user ? req.user.role : null;
 
-        const set = await Set.findOne({
-            where: {
+        const whereCondition = userRole === 'admin'
+            ? { id: setId } 
+            : {
                 id: setId,
                 [Sequelize.Op.or]: [
-                    { ownerId: userId },
-                    Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
-                    {isPublic: true},
+                    { ownerId: userId }, 
+                    Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`), 
+                    { isPublic: true },
                 ],
-            },
+            };
+
+        const set = await Set.findOne({
+            where: whereCondition,
         });
 
         if (!set) {
@@ -138,6 +142,7 @@ const getQuestionsBySet = async (req, res) => {
         res.status(500).json({ message: 'Błąd podczas pobierania pytań.', error: error.message });
     }
 };
+
 
 
 // Pobieranie pytania na podstawie ID

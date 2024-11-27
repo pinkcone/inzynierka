@@ -334,6 +334,16 @@ const EditPageSet = () => {
         <div className={styles.content}>
           {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
+
+          {isOwner && (
+            <button
+              className={styles.buttonAdd}
+              onClick={() => setActiveSection('addQuestion')}
+            >
+              Dodaj pytanie
+            </button>
+          )}
+
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
               {questions.map((question) => (

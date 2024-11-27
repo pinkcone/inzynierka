@@ -119,28 +119,46 @@ const changeSetOwner = async (req, res) => {
 
 
 
-
 const getAllUserSets = async (req, res) => {
   try {
     const userId = req.user.id;
-    const sets = await Set.findAll({
-      where: {
-        [Op.or]: [
-          { ownerId: userId },
-          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
-        ],
-      },
-    });
-    if (!sets.length) {
-      console.log('Brak zestawów dla użytkownika', userId);
-      console.log('Wynik zapytania:', sets);
+    const { keyword = '', page = 1, pageSize = 10, sortOrder = 'asc' } = req.query;
+
+    const parsedPage = isNaN(page) ? 1 : parseInt(page);
+    const parsedPageSize = isNaN(pageSize) ? 10 : parseInt(pageSize);
+    const offset = (parsedPage - 1) * parsedPageSize;
+
+    const whereClause = {
+      [Op.or]: [
+        { ownerId: userId },
+        Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
+      ],
+    };
+
+    if (keyword) {
+      whereClause.name = { [Op.like]: `%${keyword}%` };
     }
-    res.status(200).json(sets);
+
+    const { count, rows } = await Set.findAndCountAll({
+      where: whereClause,
+      limit: parsedPageSize,
+      offset,
+      order: [['createdAt', sortOrder]],
+    });
+
+    const totalPages = count > 0 ? Math.ceil(count / parsedPageSize) : 1;
+
+    res.status(200).json({
+      sets: rows,
+      currentPage: parsedPage,
+      totalPages,
+    });
   } catch (error) {
     console.error('Błąd podczas pobierania zestawów:', error);
     res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawów.', error: error.message });
   }
 };
+
 
 const getSetById = async (req, res) => {
   try {
@@ -148,15 +166,19 @@ const getSetById = async (req, res) => {
     const userId = req.user ? req.user.id : null;
     const userRole = req.user ? req.user.role : null;
 
+    const whereCondition = userRole === 'admin'
+      ? { id } 
+      : {
+          id,
+          [Op.or]: [
+            { isPublic: true }, 
+            { ownerId: userId },
+            Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`), 
+          ],
+        };
+
     const set = await Set.findOne({
-      where: {
-        id,
-        [Op.or]: [
-          { isPublic: true },
-          { ownerId: userId },
-          Sequelize.literal(`JSON_CONTAINS_PATH(collaboratorsList, 'one', '$."${userId}"')`),
-        ],
-      },
+      where: whereCondition,
     });
 
     if (!set) {
@@ -168,6 +190,7 @@ const getSetById = async (req, res) => {
     res.status(500).json({ message: 'Wystąpił błąd podczas pobierania zestawu.', error: error.message });
   }
 };
+
 
 
 

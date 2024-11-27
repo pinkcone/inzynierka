@@ -4,41 +4,58 @@ import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import AddSet from '../Set/AddSet';
 import styles from '../../styles/MySets.module.css';
+import debounce from 'lodash.debounce';
 
 const MySets = () => {
   const [sets, setSets] = useState([]);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [showAddSetPopup, setShowAddSetPopup] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchSets = async () => {
-      try {
-        const response = await fetch('/api/sets', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.length === 0) {
-            setError('Brak zestawów.');
-          } else {
-            setSets(data);
-            setError('');
-          }
-        } else {
-          setError('Błąd podczas pobierania zestawów.');
+  const fetchSets = async (page = 1) => {
+    try {
+      const response = await fetch(`/api/sets?keyword=${encodeURIComponent(searchTerm)}&page=${page}&pageSize=9`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-      } catch (err) {
-        setError('Wystąpił błąd podczas pobierania zestawów.');
-      }
-    };
+      });
 
-    fetchSets();
-  }, []);
+      if (response.ok) {
+        const data = await response.json();
+        setSets(data.sets);
+        setTotalPages(data.totalPages);
+        setCurrentPage(data.currentPage);
+        if (data.sets.length === 0) setError('Brak zestawów.');
+        else setError('');
+      } else {
+        setError('Błąd podczas pobierania zestawów.');
+      }
+    } catch (err) {
+      setError('Wystąpił błąd podczas pobierania zestawów.');
+    }
+  };
+
+  const debouncedFetchSets = debounce(fetchSets, 500);
+
+  useEffect(() => {
+    debouncedFetchSets(currentPage);
+    return () => debouncedFetchSets.cancel();
+  }, [searchTerm, currentPage]);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   const handleAddSet = (newSet) => {
     setSets((prevSets) => [...prevSets, newSet]);
@@ -65,16 +82,24 @@ const MySets = () => {
         <Sidebar />
         <div className={styles.content}>
           <h2 className={styles.textCenter}>Moje zestawy</h2>
-          <button
-            onClick={handleAddSetClick}
-            className={styles.crudbutton}
-          >
-            Dodaj zestaw
-          </button>
+          <div className={styles.actionSection}>
+            <button onClick={handleAddSetClick} className={styles.crudbutton}>
+              Dodaj zestaw
+            </button>
+            <input
+              type="text"
+              placeholder="Wyszukaj zestaw po nazwie..."
+              value={searchTerm}
+              onChange={handleSearch}
+              className={styles.searchInput}
+            />
+          </div>
           {showAddSetPopup && (
             <div className={styles.popupOverlay}>
               <div className={styles.popup}>
-                <button className={styles.popupClose} onClick={closePopup}>X</button>
+                <button className={styles.popupClose} onClick={closePopup}>
+                  X
+                </button>
                 <AddSet onAddSet={handleAddSet} />
               </div>
             </div>
@@ -91,6 +116,16 @@ const MySets = () => {
               ))}
             </div>
           )}
+
+          <div className={styles.pagination}>
+            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+              Poprzednia
+            </button>
+            <span>{currentPage} z {totalPages}</span>
+            <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+              Następna
+            </button>
+          </div>
         </div>
       </div>
     </div>
