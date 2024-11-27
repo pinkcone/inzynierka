@@ -86,18 +86,32 @@ const AddSet = ({ onAddSet }) => {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.mb3}>
-          <label htmlFor="name">Nazwa:</label>
           <input
             type="text"
             id="name"
             name="name"
+            placeholder='Nazwa'
             className={styles.formControl}
             value={formData.name}
             onChange={handleChange}
           />
           {nameError && <div className="alert alert-danger">{nameError}</div>}
         </div>
+        
         <div className={styles.mb3}>
+          <input
+            type="text"
+            id="keyWords"
+            name="keyWords"
+            placeholder='Słowa kluczowe'
+            className={styles.formControl}
+            value={formData.keyWords}
+            onChange={handleChange}
+          />
+          <p className={styles.tips}>*Słowa kluczowe mówią, o czym będzie zestaw :D<br/>wpisz je po przecinku</p>
+          {keyWordsError && <div className="alert alert-danger">{keyWordsError}</div>}
+        </div>
+        <div className={styles.row}>
           <label htmlFor="isPublic">Publiczny:</label>
           <input
             type="checkbox"
@@ -106,18 +120,6 @@ const AddSet = ({ onAddSet }) => {
             checked={formData.isPublic}
             onChange={(e) => setFormData({ ...formData, isPublic: e.target.checked })}
           />
-        </div>
-        <div className={styles.mb3}>
-          <label htmlFor="keyWords">Słowa kluczowe:</label>
-          <input
-            type="text"
-            id="keyWords"
-            name="keyWords"
-            className={styles.formControl}
-            value={formData.keyWords}
-            onChange={handleChange}
-          />
-          {keyWordsError && <div className="alert alert-danger">{keyWordsError}</div>}
         </div>
         <button type="submit" className={`${styles.button} ${styles.button}`}>Utwórz zestaw</button>
       </form>
