@@ -81,14 +81,16 @@ const MySets = () => {
       <div className={styles.mainContent}>
         <Sidebar />
         <div className={styles.content}>
-          <h2 className={styles.textCenter}>Moje zestawy</h2>
           <div className={styles.actionSection}>
-            <button onClick={handleAddSetClick} className={styles.crudbutton}>
-              Dodaj zestaw
-            </button>
+            <div className={styles.addbtn}>
+              <button onClick={handleAddSetClick} className={styles.crudbutton}>
+                Dodaj zestaw
+              </button>
+            </div>
+            <h2 className={styles.textCenter}>Moje zestawy</h2>
             <input
               type="text"
-              placeholder="Wyszukaj zestaw po nazwie..."
+              placeholder="Wyszukaj zestaw..."
               value={searchTerm}
               onChange={handleSearch}
               className={styles.searchInput}
@@ -121,7 +123,7 @@ const MySets = () => {
             <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
               Poprzednia
             </button>
-            <span>{currentPage} z {totalPages}</span>
+            <span>{currentPage}/{totalPages}</span>
             <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
               Następna
             </button>

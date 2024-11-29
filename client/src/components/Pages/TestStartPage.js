@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import styles from '../../styles/TestStartPage.module.css';
-
+import Navbar from '../Navbar/Navbar';
 const TestStartPage = () => {
     const {code} = useParams();
     const navigate = useNavigate();
@@ -34,7 +34,10 @@ const TestStartPage = () => {
     };
 
     return (
+        <div className={styles.appContainer}>
+            <Navbar/>
         <div className={styles.startPageContainer}>
+            
             <h1>Rozpocznij Test</h1>
             {error && <p className={styles.error}>{error}</p>}
             {test ? (
@@ -45,10 +48,12 @@ const TestStartPage = () => {
                     <button className={styles.startButton} onClick={startTest}>
                         Rozpocznij test
                     </button>
+                    <p className={styles.red}>TESTY SA PRZYSTOSOWANE TYLKO DO ROZWIĄZYWANIA NA URZĄRZENIACH O SZEROKOŚCI EKRANY WIĘKSZEJ NIŻ 1000PX [LAPTOPY/KOMPUTERY]</p>
                 </>
             ) : (
                 !error && <p>Ładowanie szczegółów testu...</p>
             )}
+        </div>
         </div>
     );
 };

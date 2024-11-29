@@ -56,7 +56,7 @@ const TestSummaryPage = () => {
                 <div className={styles.summaryHeader}>
                     <h1>Podsumowanie Testu: {testDetails.name}</h1>
                     <p>
-                        Twój wynik: {score} / {totalPoints}
+                        Twój wynik: {Math.round(score * 100) / 100} / {totalPoints}
                     </p>
                 </div>
                 <div className={styles.questionsSummary}>
@@ -87,12 +87,12 @@ const TestSummaryPage = () => {
                                     })}
                                 </ul>
                                 <p>
-                                    Wynik pytania: {scoreForQuestion} / 1
+                                    Wynik pytania: {Math.round(scoreForQuestion * 100) / 100} / 1
                                 </p>
                             </div>
                         );
                     })}
-                    <button onClick={() => navigate('/mytests')}>Powrót do testów</button>
+                    <button className={styles.crudbutton}onClick={() => navigate('/mytests')}>Powrót do testów</button>
                 </div>
             </div>
         </div>

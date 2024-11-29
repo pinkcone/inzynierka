@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from '../../styles/MySets.module.css';
@@ -12,7 +12,7 @@ const MyTests = () => {
   const navigate = useNavigate();
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [confirmPopupContent, setConfirmPopupContent] = useState('');
-  const [onConfirm, setOnConfirm] = useState(() => () => {});
+  const [onConfirm, setOnConfirm] = useState(() => () => { });
 
   useEffect(() => {
     const fetchUserTests = async () => {
@@ -44,7 +44,7 @@ const MyTests = () => {
     setOnConfirm(() => () => confirmDeleteTest(code));
     setShowConfirmPopup(true);
   };
-  
+
   const confirmDeleteTest = async (code) => {
     try {
       const response = await fetch(`/api/tests/delete/${code}`, {
@@ -53,7 +53,7 @@ const MyTests = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
       });
-  
+
       if (response.ok) {
         setMessage('Test został pomyślnie usunięty.');
         setTimeout(() => setMessage(''), 3000);
@@ -71,77 +71,74 @@ const MyTests = () => {
       setShowConfirmPopup(false);
     }
   };
-  
+
 
   const handleOpenTest = (code) => {
     navigate(`/test-start/${code}`);
   };
 
+  const handleOpenSet = (setId) => {
+    window.location.href =`page-set/${setId}`;
+  };
   return (
-      <div className={styles.appContainer}>
-        <Navbar />
-        <div className={styles.mainContent}>
-          <Sidebar />
-          <div className={styles.content}>
-            <h2 className={styles.textCenter}>Moje testy</h2>
-            {error && <div className={styles.alertDanger}>{error}</div>}
-            {message && <div className={styles.alertSuccess}>{message}</div>}
+    <div className={styles.appContainer}>
+      <Navbar />
+      <div className={styles.mainContent}>
+        <Sidebar />
+        <div className={styles.content}>
+          <h2 className={styles.textCenter}>Moje testy</h2>
+          {error && <div className={styles.alertDanger}>{error}</div>}
+          {message && <div className={styles.alertSuccess}>{message}</div>}
 
-            {tests.length > 0 ? (
-                <table className={styles.table}>
-                  <thead>
-                  <tr>
-                    <th>Nazwa testu</th>
-                    <th>Nazwa zestawu</th>
-                    <th>Liczba pytań</th>
-                    <th>Czas trwania</th>
-                    <th>Akcje</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {tests.map((test) => (
-                      <tr key={test.code}>
-                        <td>{test.name}</td>
-                        <td>{test.Set.name}</td>
-                        <td>{test.questionCount}</td>
-                        <td>{test.duration / 60} minut</td>
-                        <td>
-                          <button
-                              onClick={() => handleOpenTest(test.code)}
-                              className={styles.button}
-                          >
-                            Otwórz
-                          </button>
-                          <button
-                              onClick={() => handleDeleteTest(test.code)}
-                              className={`${styles.button} ${styles.deleteButton}`}
-                          >
-                            Usuń
-                          </button>
-                        </td>
-                      </tr>
-                  ))}
-                  </tbody>
-                </table>
-            ) : (
-                <p>Brak testów do wyświetlenia.</p>
-            )}
-            {showConfirmPopup && (
-                <div className={styles.popupOverlay}>
-                  <div className={styles.popup}>
-                    <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
-                    <p>{confirmPopupContent}</p>
-                    <button onClick={() => {
-                      onConfirm();
-                    }}>Potwierdź
+          {tests.length > 0 ? (
+            <div className={styles.testList}>
+              {tests.map((test) => (
+                <div key={test.code} className={styles.testCard}>
+                  <h3 className={styles.testName}>{test.name}</h3>
+                  <p onClick={() => handleOpenSet(test.Set.id)}><strong>Zestaw:</strong> {test.Set.name}</p>
+                  <p><strong>Liczba pytań:</strong> {test.questionCount}</p>
+                  <p><strong>Czas trwania:</strong> {test.duration / 60} minut</p>
+                  <div className={styles.actions}>
+                    <button
+                      onClick={() => handleOpenTest(test.code)}
+                      className={styles.button}
+                    >
+                      Rozwiąż
                     </button>
-                    <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
+                    <button
+                      onClick={() => handleDeleteTest(test.code)}
+                      className={`${styles.button} ${styles.deleteButton}`}
+                    >
+                      Usuń
+                    </button>
+                    <button
+                      className={styles.button}
+                    >
+                      Historia
+                    </button>
                   </div>
                 </div>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p>Brak testów do wyświetlenia.</p>
+          )}
+          {showConfirmPopup && (
+            <div className={styles.popupOverlay}>
+              <div className={styles.popup}>
+                <button className={styles.popupClose} onClick={() => setShowConfirmPopup(false)}>X</button>
+                <p>{confirmPopupContent}</p>
+                <button onClick={() => {
+                  onConfirm();
+                }}>Potwierdź
+                </button>
+                <button onClick={() => setShowConfirmPopup(false)}>Anuluj</button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+    </div>
   );
 };
 

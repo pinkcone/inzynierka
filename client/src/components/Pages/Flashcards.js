@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../styles/Flashcards.module.css';
 import Navbar from '../Navbar/Navbar';
-
+import { useSwipeable } from 'react-swipeable'; // Import biblioteki do obsługi swipe
 const Flashcards = () => {
     const { setId } = useParams();
     const [currentCard, setCurrentCard] = useState(0);
@@ -13,7 +13,7 @@ const Flashcards = () => {
     const [question, setQuestion] = useState(null);
     const [answers, setAnswers] = useState([]);
     const [sortHistory, setSortHistory] = useState([]); // Tablica do historii sortowania
-
+    const [visitedCards, setVisitedCards] = useState([]);
     // Funkcja do pobrania fiszek z serwera
     const fetchFlashcards = async () => {
         const token = localStorage.getItem('token');
@@ -106,12 +106,32 @@ const Flashcards = () => {
     }, [currentCard, cards]);
 
     const nextCard = () => {
+        // Dodaj aktualne ID karty do historii
+        setVisitedCards((prevHistory) => [...prevHistory, cards[currentCard].id]);
+    
+        // Przesuń kartę zgodnie z algorytmem
         moveCard(currentCard);
         setFlipped(false);
     };
-
+    
     const prevCard = () => {
-        moveCard(currentCard);
+        if (visitedCards.length > 0) {
+            // Pobierz ostatnie ID z historii
+            const lastId = visitedCards[visitedCards.length - 1];
+    
+            // Znajdź indeks karty na podstawie ID
+            const lastIndex = cards.findIndex((card) => card.id === lastId);
+            if (lastIndex !== -1) {
+                setCurrentCard(lastIndex); // Ustaw ostatnio przeglądaną kartę
+            } else {
+                console.warn('Nie znaleziono karty w tablicy.');
+            }
+    
+            // Usuń ostatnie ID z historii
+            setVisitedCards((prevHistory) => prevHistory.slice(0, -1));
+        } else {
+            console.warn('Brak poprzednich kart w historii.');
+        }
         setFlipped(false);
     };
 
@@ -173,45 +193,58 @@ const Flashcards = () => {
             console.error('Brak tokenu autoryzacyjnego przy aktualizacji fiszki!');
             return;
         }
-
+    
         try {
-            const flashcardId = cards[0].id; // Zawsze aktualizujemy pierwszą fiszkę
-            const lastEvaluation = cards[0].lastEvaluation;
-
+            const flashcardId = cards[currentCard].id; // Aktualizujemy obecną fiszkę
+            const lastEvaluation = cards[currentCard].lastEvaluation;
+    
             // Obliczamy nowe wartości
             const updatedLevel = calculateNewLevel(evaluation, lastEvaluation);
             const updatedStreak = calculateNewStreak(evaluation);
             const updatedEvaluation = evaluation;
             const updatedReviewed = new Date();
-
+    
             // Wysyłamy zapytanie do serwera
             const response = await fetch(`/api/flashcards/update/${flashcardId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     currentLevel: updatedLevel,
                     streak: updatedStreak,
                     lastEvaluation: updatedEvaluation,
-                    lastReviewed: updatedReviewed
-                })
+                    lastReviewed: updatedReviewed,
+                }),
             });
-
+    
             if (response.ok) {
                 // Zmieniamy tylko jeden element w tablicy `cards`
-                cards[0] = {
-                    ...cards[0],
+                const updatedCard = {
+                    ...cards[currentCard],
                     currentLevel: updatedLevel,
                     streak: updatedStreak,
                     lastEvaluation: updatedEvaluation,
-                    lastReviewed: updatedReviewed
+                    lastReviewed: updatedReviewed,
                 };
-                // Tworzymy nową instancję tablicy z jednym zmodyfikowanym elementem
-                setCards([...cards]);
-
-                moveCard(0);
+    
+                const updatedCards = [...cards];
+                updatedCards[currentCard] = updatedCard;
+    
+                // Dodajemy aktualne ID do historii
+                setVisitedCards((prevHistory) => [...prevHistory, updatedCard.id]);
+    
+                // Przenosimy kartę na nowe miejsce
+                const newCards = [...updatedCards];
+                const [cardToMove] = newCards.splice(currentCard, 1); // Usuń aktualną kartę z bieżącej pozycji
+                const newPosition = calculateInsertPosition(cardToMove); // Oblicz nową pozycję
+                newCards.splice(newPosition, 0, cardToMove); // Wstaw kartę na obliczoną pozycję
+    
+                // Aktualizujemy tablicę fiszek i ustawiamy pierwszą kartę
+                setCards(newCards);
+                setCurrentCard(0); // Wyświetl pierwszą kartę po przestawieniu
+    
                 console.log('Fiszka zaktualizowana lokalnie');
             } else {
                 console.error('Błąd podczas aktualizacji fiszki:', response.statusText);
@@ -247,6 +280,7 @@ const Flashcards = () => {
 
     // Przenoszenie fiszki na wyliczoną pozycję
     const moveCard = (cardIndex) => {
+        setFlipped(false);
         const updatedCards = [...cards];
         const [card] = updatedCards.splice(cardIndex, 1); // Wycinamy fiszkę
 
@@ -262,7 +296,7 @@ const Flashcards = () => {
     };
     const updateProgressBar = (cards) => {
         const totalCards = cards.length;
-        
+
         // Obliczamy, ile fiszek ma który level (przypisujemy im kolory)
         const colorCounts = {
             green: 0,
@@ -270,7 +304,7 @@ const Flashcards = () => {
             red: 0,
             gray: 0
         };
-    
+
         // Zliczamy liczbę fiszek dla każdego koloru
         cards.forEach(card => {
             if (!card.lastReviewed) {
@@ -283,10 +317,10 @@ const Flashcards = () => {
                 colorCounts.red += 1; // Level 1-3
             }
         });
-    
+
         // Tworzymy pasek wypełniony odpowiednimi kolorami, bez przerw
         const progressBarElements = [];
-    
+
         // Dodajemy fragmenty paska zgodnie z wyliczonymi proporcjami i kolejnością kolorów
         ['green', 'yellow', 'red', 'gray'].forEach(color => {
             if (colorCounts[color] > 0) {
@@ -302,34 +336,31 @@ const Flashcards = () => {
                 );
             }
         });
-    
+
         return progressBarElements;
     };
-    
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: () => prevCard(),
+        onSwipedRight: () => nextCard(),
+    });
     return (
         <div className={styles.appContainer}>
             <Navbar />
             <div className={styles.mainContent}>
                 <div className={styles.content}>
-                    <h2>Aktualny Zestaw Fiszek</h2>
-
+                    <div className={styles.progressBar}>
+                        {updateProgressBar(cards)}
+                    </div>
                     {loading ? (
                         <p>Ładowanie fiszek...</p>
                     ) : (
                         <>
-                            <div className={styles.progressBar}>
-                                {updateProgressBar(cards)}
-                            </div>
-
-
-                            <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
-                                <div className={styles.cardInner}>
+                            <div {...swipeHandlers} className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
+                                <div  className={styles.cardInner}>
                                     <div className={styles.cardFront}>
-                                        {/* Display question */}
                                         {question ? question.content : 'Brak fiszek do wyświetlenia'}
                                     </div>
                                     <div className={styles.cardBack}>
-                                        {/* Display answer */}
                                         {answers.length > 0 ? (
                                             <ul>
                                                 {answers.map((answer) => (
@@ -341,8 +372,8 @@ const Flashcards = () => {
                                         )}
                                     </div>
                                 </div>
-                                <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}>&#9664;</button>
-                                <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}>&#9654;</button>
+                                <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}><img src="/images/arrow.svg"/></button>
+                                <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}><img src="/images/arrow.svg"/></button>
                             </div>
 
                             <div className={styles.emotions}>
@@ -351,7 +382,7 @@ const Flashcards = () => {
                                 <span onClick={() => handleFeedback(-1)}>&#128577;</span> {/* bad */}
                             </div>
 
-                            {/* Wyświetlanie aktualnej tablicy fiszek */}
+                            {/* Wyświetlanie aktualnej tablicy fiszek
                             <div className={styles.sortHistory}>
                                 <h3>Aktualna tablica fiszek (ID, Index, Level, Streak):</h3>
                                 {cards.map((card, index) => (
@@ -359,7 +390,7 @@ const Flashcards = () => {
                                         <p>ID: {card.id}, Index: {index + 1}, Level: {card.currentLevel}, Streak: {card.streak}</p>
                                     </div>
                                 ))}
-                            </div>
+                            </div> */}
 
                         </>
                     )}

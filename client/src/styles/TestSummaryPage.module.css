@@ -49,8 +49,8 @@
 }
 
 /* Lista odpowiedzi */
-.ul {
-    list-style-type: none;
+ul {
+    list-style: none;
     padding-left: 0;
 }
 
@@ -80,16 +80,19 @@
 
 
 /* Styl dla przycisku */
-.button {
-    padding: 10px 20px;
-    background-color: #007bff;
+.crudbutton {
+    background-color: #9b59b6;
     color: white;
+    padding: 15px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-top: 20px;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    border: 1px white solid;
+  }
+  
+  .crudbutton:hover {
+    background-color: #734f8b;
+  }
