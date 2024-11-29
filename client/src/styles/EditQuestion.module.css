@@ -1,56 +1,45 @@
-.app-container {
-    padding: 20px;
-  }
-  
-  .main-content {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-  }
-  
-  .h2 {
-    margin-bottom: 15px;
-  }
-  
-  .textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .button {
-    padding: 10px 15px;
-    background-color: #218188;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  .alert {
-    color: red;
-    margin-bottom: 15px;
-  }
-  
-  .alertSuccess {
-    color: green;
-    background-color: #d4edda;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-  
-  .alertDanger {
-    color: red;
-    background-color: #f8d7da;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-  
-  
+.mainContent {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.h2 {
+  margin-bottom: 15px;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.alert {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.alertSuccess {
+  color: green;
+  background-color: #d4edda;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.alertDanger {
+  color: red;
+  background-color: #f8d7da;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+textarea{
+  height: 5em;
+  margin-bottom: 5px;
+}

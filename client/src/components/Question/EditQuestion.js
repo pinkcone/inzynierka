@@ -81,7 +81,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   }
 
   return (
-    <div className={styles.appContainer}>
+
       <div className={styles.mainContent}>
         <h2>Edytuj pytanie</h2>
         
@@ -97,7 +97,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
           <button type="submit">Zapisz zmiany</button>
         </form>
       </div>
-    </div>
+
   );
 };
 
