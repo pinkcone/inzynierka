@@ -120,43 +120,34 @@ const MyFlashcards = () => {
                     {message && <div className={styles.alertSuccess}>{message}</div>}
 
                     {flashcardSets.length > 0 ? (
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Nazwa zestawu</th>
-                                    <th>Liczba fiszek</th>
-                                    <th>Akcje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {flashcardSets.map((set) => (
-                                    <tr key={set.setId}>
-                                        <td>{set.setName}</td>
-                                        <td>{set.flashcardsNumber}</td>
-                                        <td>
-                                            <button
-                                                onClick={() => handleStartFlashcards(set.setId)}
-                                                className={styles.button}
-                                            >
-                                                WZNÓW NAUKĘ
-                                            </button>
-                                            <button
-                                                onClick={() => handleResetFlashcards(set.setId)}
-                                                className={styles.button}
-                                            >
-                                                RESETUJ POSTĘP
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteFlashcards(set.setId)}
-                                                className={`${styles.button} ${styles.deleteButton}`}
-                                            >
-                                                USUŃ
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <div className={styles.flashcardList}>
+                            {flashcardSets.map((set) => (
+                                <div key={set.setId} className={styles.flashcardCard}>
+                                    <h3 className={styles.flashcardName}>{set.setName}</h3>
+                                    <p><strong>Liczba fiszek:</strong> {set.flashcardsNumber}</p>
+                                    <div className={styles.actions}>
+                                        <button
+                                            onClick={() => handleStartFlashcards(set.setId)}
+                                            className={styles.button}
+                                        >
+                                            WZNÓW NAUKĘ
+                                        </button>
+                                        <button
+                                            onClick={() => handleResetFlashcards(set.setId)}
+                                            className={styles.button}
+                                        >
+                                            RESETUJ POSTĘP
+                                        </button>
+                                        <button
+                                            onClick={() => handleDeleteFlashcards(set.setId)}
+                                            className={`${styles.button} ${styles.deleteButton}`}
+                                        >
+                                            USUŃ
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     ) : (
                         <p>Brak fiszek do wyświetlenia. Odwiedź swoje zestawy i utwórz pierwsze fiszki!</p>
                     )}

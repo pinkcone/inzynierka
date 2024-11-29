@@ -197,7 +197,7 @@ const getAllTests = async (req, res) => {
                 },
                 {
                     model: Set,
-                    attributes: ['name']
+                    attributes: ['id', 'name']
                 }
             ],
             group: ['Test.code', 'Set.id']

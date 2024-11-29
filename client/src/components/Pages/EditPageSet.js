@@ -337,7 +337,7 @@ const EditPageSet = () => {
 
           {isOwner && (
             <button
-              className={styles.buttonAdd}
+              className={styles.crudbutton}
               onClick={() => setActiveSection('addQuestion')}
             >
               Dodaj pytanie

@@ -112,38 +112,29 @@ const MyQuizzes = () => {
                     {isLoading ? (
                         <p>Ładowanie quizów...</p>
                     ) : quizzes.length > 0 ? (
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Nazwa</th>
-                                    <th>Czas na pytanie</th>
-                                    <th>Akcje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {quizzes.map((quiz) => (
-                                    <tr key={quiz.id}>
-                                        <td>{quiz.name}</td>
-                                        <td>{quiz.questionTime} sekund</td>
-                                        <td>
-                                            <button
-                                                onClick={() => handleStartQuiz(quiz.id)}
-                                                className={styles.button}
-                                            >
-                                                Rozpocznij quiz
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteQuiz(quiz.id)}
-                                                className={`${styles.button} ${styles.deleteButton}`}
-                                            >
-                                                Usuń
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
+                        <div className={styles.quizList}>
+                          {quizzes.map((quiz) => (
+                            <div key={quiz.id} className={styles.quizCard}>
+                              <h3 className={styles.quizName}>{quiz.name}</h3>
+                              <p><strong>Czas na pytanie:</strong> {quiz.questionTime} sekund</p>
+                              <div className={styles.actions}>
+                                <button
+                                  onClick={() => handleStartQuiz(quiz.id)}
+                                  className={styles.button}
+                                >
+                                  Rozpocznij quiz
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteQuiz(quiz.id)}
+                                  className={`${styles.button} ${styles.deleteButton}`}
+                                >
+                                  Usuń
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
                         <p>Brak quizów do wyświetlenia.</p>
                     )}
                     {showConfirmPopup && (

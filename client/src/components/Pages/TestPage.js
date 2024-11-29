@@ -203,31 +203,7 @@ const TestPage = () => {
                     ) : (
                         !error && <p>Ładowanie pytań...</p>
                     )}
-                    <div className={styles.navigation}>
-                        <button
-                            className={styles.navButton}
-                            onClick={handlePrevQuestion}
-                            disabled={currentQuestion === 0}
-                        >
-                            Poprzednie pytanie
-                        </button>
-                        {currentQuestion === questions.length - 1 ? (
-                            <button
-                                className={`${styles.navButton} ${styles.finishButton}`}
-                                onClick={handleFinishTest}
-                            >
-                                Zakończ test
-                            </button>
-                        ) : (
-                            <button
-                                className={styles.navButton}
-                                onClick={handleNextQuestion}
-                                disabled={currentQuestion === questions.length - 1}
-                            >
-                                Następne pytanie
-                            </button>
-                        )}
-                    </div>
+
                 </div>
                 <div className={styles.sidebarRight}>
                     <p>Numer pytania:</p>
@@ -242,6 +218,13 @@ const TestPage = () => {
                             </div>
                         ))}
                     </div>
+
+                    <button
+                        className={`${styles.navButton} ${styles.finishButton}`}
+                        onClick={handleFinishTest}>
+                        Zakończ test
+                    </button>
+
                 </div>
             </div>
         </div>
