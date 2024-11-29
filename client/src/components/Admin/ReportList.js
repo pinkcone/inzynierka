@@ -69,52 +69,50 @@ const ReportList = () => {
   const handleSaveStatusChange = async (reportId) => {
     const token = localStorage.getItem('token');
     const newStatus = editedStatuses[reportId];
-    
+
     try {
-      const response = await fetch(`/api/report/admin/update-status/${reportId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ status: newStatus }), 
-      });
-    
+        const response = await fetch(`/api/report/admin/update-status/${reportId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status: newStatus }),
+        });
+
+        const responseData = await response.json();
 
         if (!response.ok) {
-            const errorMsg = await response.text();
-            console.error('Błąd serwera:', errorMsg);
-            throw new Error('Nie udało się zaktualizować statusu zgłoszenia');
+            throw new Error(responseData.message || 'Nie udało się zaktualizować statusu zgłoszenia');
         }
 
-        const updatedReport = await response.json();
-        setReports(reports.map(report => 
-            report.id === reportId ? { 
-                ...report, 
-                status: newStatus,
-                checked: newStatus === 'rozpatrzony' ? true : report.checked,
-                checkedByName: newStatus === 'rozpatrzony' ? updatedReport.report.checkedByName : report.checkedByName
-            } : report
+        setReports(reports.map(report =>
+            report.id === reportId
+                ? {
+                    ...report,
+                    status: newStatus,
+                    checked: newStatus === 'rozpatrzony',
+                    checkedByName: responseData.report.checkedByName || report.checkedByName
+                }
+                : report
         ));
-        
+
         setEditedStatuses(prev => {
             const updated = { ...prev };
             delete updated[reportId];
             return updated;
         });
 
-        fetchReports(currentPage);
-
         setMessage('Status zgłoszenia został zaktualizowany');
         setMessageType('success');
     } catch (error) {
         console.error('Błąd zmiany statusu zgłoszenia:', error);
-        setMessage('Wystąpił błąd podczas zmiany statusu zgłoszenia');
+        setMessage(error.message);
         setMessageType('error');
     } finally {
         setTimeout(() => setMessage(''), 5000);
     }
-  };
+};
 
 
   const handleSearch = (e) => {

@@ -3,6 +3,7 @@ import styles from '../../styles/AdminDashboard.module.css';
 import { FaSearch } from 'react-icons/fa';
 import debounce from 'lodash.debounce';
 import PopupConfirmation from './PopupConfirmation';
+import { Link } from 'react-router-dom';
 
 const SetList = () => {
   const [sets, setSets] = useState([]);
@@ -152,7 +153,11 @@ const SetList = () => {
               sets.map((set, index) => (
                 <tr key={index}>
                   <td>{set.id}</td> 
-                  <td>{set.name}</td>
+                  <td>
+                    <Link to={`/page-set/${set.id}`} className={styles.setLink}>
+                      {set.name}
+                    </Link>
+                  </td>
                   <td>{set.owner || 'Nieznany'}</td>
                   <td>{set.isPublic ? 'Tak' : 'Nie'}</td>
                   <td>{set.keyWords || 'Brak'}</td>

@@ -152,6 +152,10 @@ const updateReportStatus = async (req, res) => {
             return res.status(404).json({ message: 'Zgłoszenie nie istnieje.' });
         }
 
+        if (report.status === 'rozpatrzony' && status !== report.status) {
+            return res.status(400).json({ message: 'Nie można zmienić statusu zgłoszenia, które zostało już rozpatrzone.' });
+        }
+
         if (status === 'rozpatrzony') {
             report.checked = true;
             report.checkedById = userId;
@@ -160,9 +164,13 @@ const updateReportStatus = async (req, res) => {
         report.status = status;
         await report.save();
 
+        const checkedByUser = await User.findByPk(userId);
         return res.status(200).json({
             message: 'Status zgłoszenia został zaktualizowany.',
-            report,
+            report: {
+                ...report.toJSON(),
+                checkedByName: checkedByUser ? checkedByUser.username : null
+            },
         });
     } catch (error) {
         console.error('Błąd podczas aktualizacji statusu zgłoszenia:', error);
@@ -172,7 +180,6 @@ const updateReportStatus = async (req, res) => {
         });
     }
 };
-
 
 
 module.exports = {
