@@ -169,23 +169,6 @@ const Flashcards = () => {
         } else return 0;
     };
 
-    // Funkcja do obliczania koloru paska postępu
-    const calculateProgressColor = (level) => {
-        if (level >= 6) return 'green'; // Zielony dla leveli 6-7
-        else if (level >= 4) return 'yellow'; // Żółty dla leveli 4-5
-        else return 'red'; // Czerwony dla leveli 1-3
-    };
-
-    // Funkcja do obliczania szerokości paska postępu
-    const calculateProgressWidth = (lastReviewed) => {
-        if (!lastReviewed) {
-            return '0%'; // Jeśli brak ostatniego przeglądu, pasek 0%
-        }
-        const timePassed = new Date() - new Date(lastReviewed);
-        const percentage = Math.min(100, Math.floor(timePassed / (1000 * 60 * 60 * 24 * 7) * 100)); // Procenty dla tygodnia
-        return `${percentage}%`;
-    };
-
     // Funkcja do wysyłania oceny na backend i aktualizacji postępu oraz przesunięcia fiszki na koniec
     const handleFeedback = async (evaluation) => {
         const token = localStorage.getItem('token');
@@ -243,6 +226,7 @@ const Flashcards = () => {
     
                 // Aktualizujemy tablicę fiszek i ustawiamy pierwszą kartę
                 setCards(newCards);
+                setFlipped(false);
                 setCurrentCard(0); // Wyświetl pierwszą kartę po przestawieniu
     
                 console.log('Fiszka zaktualizowana lokalnie');
