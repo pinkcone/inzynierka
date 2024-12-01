@@ -48,7 +48,7 @@ const TestStartPage = () => {
                     <button className={styles.startButton} onClick={startTest}>
                         Rozpocznij test
                     </button>
-                    <p className={styles.red}>TESTY SA PRZYSTOSOWANE TYLKO DO ROZWIĄZYWANIA NA URZĄRZENIACH O SZEROKOŚCI EKRANY WIĘKSZEJ NIŻ 1000PX [LAPTOPY/KOMPUTERY]</p>
+                    <p className={styles.red}>TESTY SA PRZYSTOSOWANE TYLKO DO ROZWIĄZYWANIA NA URZĄRZENIACH O SZEROKOŚCI EKRANU WIĘKSZEJ NIŻ 1000PX [LAPTOPY/KOMPUTERY]</p>
                 </>
             ) : (
                 !error && <p>Ładowanie szczegółów testu...</p>
