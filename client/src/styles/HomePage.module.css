@@ -4,7 +4,7 @@ body{
 .homeContainer {
   display: flex;
   flex-direction: column;
-  flex: 1;
+
 }
 
 .contentWrapper {
@@ -24,6 +24,7 @@ body{
   margin-left: 100px;
   margin-right: 100px;
   box-shadow: 10px 10px 18px 15px #000000;
+  border-radius: 10px;
 }
 
 .welcomeText {
