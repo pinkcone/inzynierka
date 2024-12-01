@@ -39,7 +39,6 @@ const TestSummaryPage = () => {
         }
     }, [id]);
 
-    // Dodanie zabezpieczenia, że testSummary oraz questions są dostępne
     if (!testSummary || !testSummary.questions) {
         return error ? <p>{error}</p> : <p>Ładowanie podsumowania...</p>;
     }
@@ -47,7 +46,7 @@ const TestSummaryPage = () => {
     const { completedTest, questions, correctAnswers } = testSummary;
     const { selectedAnswer, questionScores, score, Test: testDetails } = completedTest;
 
-    const totalPoints = Array.isArray(questions) ? questions.length : 0; // Upewniamy się, że questions jest tablicą
+    const totalPoints = Array.isArray(questions) ? questions.length : 0;
 
     return (
         <div className={styles.pageWrapper}>

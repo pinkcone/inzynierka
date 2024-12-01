@@ -139,6 +139,8 @@ const getCompletedTest = async (req, res) => {
 
 const getAllCompletedTestsForTest = async (req, res) => {
     const { testId } = req.params;
+    const userId = req.user.id;
+    console.log("TestId: DUPA: ", testId);
 
     try {
         const test = await Test.findOne({ where: { code: testId } });
@@ -147,7 +149,7 @@ const getAllCompletedTestsForTest = async (req, res) => {
         }
 
         const completedTests = await CompletedTest.findAll({
-            where: { testId: testId },
+            where: { testId: testId, userId: userId },
             attributes: ['id', 'score', 'createdAt'],
             order: [['createdAt', 'DESC']]
         });

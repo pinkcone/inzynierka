@@ -5,5 +5,5 @@ const { createCompletedTest, getCompletedTest, getAllCompletedTestsForTest} = re
 
 router.post('/create', authMiddleware, createCompletedTest);
 router.get('/get-test/:id', getCompletedTest);
-router.get('/get-tests/', authMiddleware, getAllCompletedTestsForTest);
+router.get('/history/:id', authMiddleware, getAllCompletedTestsForTest);
 module.exports = router;

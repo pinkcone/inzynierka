@@ -109,6 +109,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
                 type="text"
                 value={testName}
                 onChange={handleTestNameChange}
+                maxLength={50}
                 placeholder="Wprowadź nazwę testu"
             />
         </label>

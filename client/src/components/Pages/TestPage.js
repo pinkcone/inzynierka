@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import styles from '../../styles/TestPage.module.css';
 
 const TestPage = () => {
-    const { code } = useParams();
+    const {code} = useParams();
     const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -70,7 +70,7 @@ const TestPage = () => {
             const responseData = await response.json();
             const testId = responseData.completedTest.id;
 
-            navigate(`/test-summary/${testId}`, { state: { selectedAnswers: finalAnswers, questions } });
+            navigate(`/test-summary/${testId}`, {state: {selectedAnswers: finalAnswers, questions}});
         } catch (error) {
             setError(`Wystąpił błąd podczas wysyłania wyników: ${error.message}`);
         }
@@ -88,7 +88,6 @@ const TestPage = () => {
     const endTest = useCallback(() => {
         setTestFinished(true);
     }, []);
-
 
 
     useEffect(() => {
@@ -163,8 +162,6 @@ const TestPage = () => {
         return formattedAnswers;
     };
 
-
-
     const goToQuestion = (questionIndex) => {
         setCurrentQuestion(questionIndex);
     };
@@ -175,11 +172,11 @@ const TestPage = () => {
 
     return (
         <div className={styles.appContainer}>
-            <Navbar />
+            <Navbar/>
             <div className={styles.testPage}>
                 <div className={styles.sidebarLeft}>
                     <div className={styles.timer}>
-                        Czas pozostały:<br /> {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
+                        Czas pozostały:<br/> {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
                     </div>
                 </div>
                 <div className={styles.testContainer}>

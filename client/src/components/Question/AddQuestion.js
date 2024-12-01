@@ -24,7 +24,7 @@ const AddQuestion = ({ setId, onQuestionAdded }) => {
         const result = await response.json();
         setMessage('Pytanie zostało dodane!');
         setFormData({ content: '' });
-        onQuestionAdded(result.id); 
+        onQuestionAdded(result.id, formData.content);
       } else {
         setMessage('Wystąpił błąd podczas dodawania pytania.');
       }

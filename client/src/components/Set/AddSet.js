@@ -91,6 +91,7 @@ const AddSet = ({ onAddSet }) => {
             id="name"
             name="name"
             placeholder='Nazwa'
+            maxLength={50}
             className={styles.formControl}
             value={formData.name}
             onChange={handleChange}

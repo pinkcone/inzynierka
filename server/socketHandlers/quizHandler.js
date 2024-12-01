@@ -1,16 +1,14 @@
-const Quiz = require('../models/Quiz'); // Import modeli
+const Quiz = require('../models/Quiz');
 const Question = require('../models/Question');
 const Answer = require('../models/Answer');
 const { v4: uuidv4 } = require('uuid');
 
-const activeQuizzes = {}; // Centralne przechowywanie aktywnych quizów
+const activeQuizzes = {};
 
 module.exports = (io, socket) => {
-  // Obsługa zdarzenia 'createQuiz'
   socket.on('createQuiz', async ({ quizId }) => {
     console.log('Otrzymano quizId:', quizId);
     try {
-      // Sprawdź, czy quiz z danym quizId już istnieje
       let existingQuizCode = null;
       for (const code in activeQuizzes) {
         const quiz = activeQuizzes[code];
@@ -21,13 +19,10 @@ module.exports = (io, socket) => {
       }
 
       if (existingQuizCode) {
-        // Quiz już istnieje, zwróć istniejący kod i dane
         const existingQuiz = activeQuizzes[existingQuizCode];
 
-        // Dołącz organizatora do pokoju
         socket.join(existingQuizCode);
 
-        // Wyślij kod, nazwę quizu i czas na pytanie do organizatora
         socket.emit('quizCreated', {
           code: existingQuizCode,
           name: existingQuiz.name,
@@ -37,14 +32,12 @@ module.exports = (io, socket) => {
         return;
       }
 
-      // Jeśli quiz nie istnieje, utwórz nowy
       let code;
       do {
         code = uuidv4().slice(0, 6).toUpperCase();
         console.log('Wygenerowany kod quizu:', code);
       } while (activeQuizzes[code]);
 
-      // Pobierz quiz z bazy danych wraz z powiązanymi pytaniami i odpowiedziami
       const quiz = await Quiz.findOne({
         where: { id: quizId },
         include: [
@@ -65,7 +58,6 @@ module.exports = (io, socket) => {
         return;
       }
 
-      // Utwórz nowy aktywny quiz
       activeQuizzes[code] = {
         code,
         name: quiz.name,
@@ -78,10 +70,8 @@ module.exports = (io, socket) => {
         organizerSocketId: socket.id,
       };
 
-      // Dołącz organizatora do pokoju
       socket.join(code);
 
-      // Wyślij kod, nazwę quizu i czas na pytanie do organizatora
       socket.emit('quizCreated', {
         code,
         name: quiz.name,
@@ -93,7 +83,6 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Obsługa zdarzenia 'joinQuiz'
   socket.on('joinQuiz', ({ code, name }) => {
     console.log(
       'Otrzymano joinQuiz od socket.id:',
@@ -105,7 +94,6 @@ module.exports = (io, socket) => {
     );
     const quiz = activeQuizzes[code];
     if (quiz) {
-      // Sprawdź, czy nazwa uczestnika jest unikalna
       const nameExists = Object.values(quiz.participants).some(
         (p) => p.name === name
       );
@@ -116,7 +104,6 @@ module.exports = (io, socket) => {
         return;
       }
 
-      // Dodaj uczestnika do quizu
       quiz.participants[socket.id] = {
         name,
         lastAnswer: null,
@@ -129,7 +116,6 @@ module.exports = (io, socket) => {
       socket.emit('joinedQuiz', { message: 'Dołączyłeś do quizu.' });
       console.log('Wysłano joinedQuiz do socket.id:', socket.id);
 
-      // Wyślij aktualną listę uczestników do wszystkich w pokoju
       const participantsList = Object.values(quiz.participants).map((p) => ({
         name: p.name,
       }));
@@ -141,13 +127,10 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Obsługa zdarzenia 'joinQuizRoom'
   socket.on('joinQuizRoom', ({ code, name }) => {
     const quiz = activeQuizzes[code];
     if (quiz) {
-      // Dodaj uczestnika, jeśli jeszcze nie istnieje
       if (!quiz.participants[socket.id]) {
-        // Sprawdź, czy nazwa uczestnika jest unikalna
         const nameExists = Object.values(quiz.participants).some(
           (p) => p.name === name
         );
@@ -165,7 +148,6 @@ module.exports = (io, socket) => {
           time: 0,
           streak: 0,
         };
-        // Wyślij zaktualizowaną listę uczestników
         const participantsList = Object.values(quiz.participants).map((p) => ({
           name: p.name,
         }));
@@ -179,13 +161,11 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Obsługa zdarzenia 'startQuiz'
   socket.on('startQuiz', ({ code }) => {
     const quiz = activeQuizzes[code];
     if (quiz && quiz.organizerSocketId === socket.id) {
       quiz.isStarted = true;
       io.to(code).emit('quizStarted');
-      // Rozpocznij wysyłanie pytań
       sendQuestionToParticipants(quiz);
     } else {
       socket.emit('error', {
@@ -194,23 +174,18 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Funkcja do wysyłania pytań do uczestników
   function sendQuestionToParticipants(quiz) {
     const code = quiz.code;
     const questionIndex = quiz.currentQuestionIndex;
 
     if (questionIndex >= quiz.questions.length) {
-      // Brak więcej pytań, zakończ quiz
       return;
     }
 
-    // Wyślij odliczanie przed pytaniem
-    io.to(code).emit('showCountdown', { countdown: 5 }); // 5 sekund odliczania
+    io.to(code).emit('showCountdown', { countdown: 5 });
 
-    // Po 5 sekundach wyślij pytanie
     setTimeout(() => {
       const question = quiz.questions[questionIndex];
-      // Wyślij pytanie do uczestników
       io.to(code).emit('showQuestion', {
         question: {
           id: question.id,
@@ -222,23 +197,19 @@ module.exports = (io, socket) => {
         },
       });
 
-      // Inicjalizuj obiekt przechowujący odpowiedzi uczestników
       quiz.currentAnswers = {};
-    }, 5000); // 5 sekund
+    }, 5000);
   }
 
-  // Obsługa zdarzenia 'submitAnswer'
   socket.on('submitAnswer', ({ code, questionId, answerId, time }) => {
     const quiz = activeQuizzes[code];
     if (quiz && quiz.isStarted) {
-      // Sprawdź, czy pytanie jest aktualne
       const currentQuestion = quiz.questions[quiz.currentQuestionIndex];
       if (currentQuestion.id !== questionId) {
         socket.emit('error', { message: 'To pytanie nie jest już aktywne.' });
         return;
       }
 
-      // Zapisz odpowiedź uczestnika
       quiz.currentAnswers[socket.id] = {
         answerId,
         time,
@@ -248,7 +219,6 @@ module.exports = (io, socket) => {
       const totalAnswers = Object.keys(quiz.currentAnswers).length;
 
       if (totalAnswers === totalParticipants) {
-        // Wszyscy uczestnicy odpowiedzieli, przejdź do następnego etapu
         calculateResultsAndProceed(quiz);
       }
     } else {
@@ -256,17 +226,14 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Funkcja do obliczania wyników i przechodzenia do kolejnego pytania
   function calculateResultsAndProceed(quiz) {
     const code = quiz.code;
     const currentQuestion = quiz.questions[quiz.currentQuestionIndex];
 
-    // Pobierz poprawne odpowiedzi
     const correctAnswers = currentQuestion.Answers.filter(
       (answer) => answer.isTrue
     ).map((answer) => answer.id);
 
-    // Oblicz wyniki uczestników
     for (const socketId in quiz.currentAnswers) {
       const participant = quiz.participants[socketId];
       const answer = quiz.currentAnswers[socketId];
@@ -278,37 +245,30 @@ module.exports = (io, socket) => {
           Math.max(0, Math.round(((maxTime - timeTaken) * 500) / maxTime)) +
           500;
         participant.score = (participant.score || 0) + points;
-        participant.streak = (participant.streak || 0) + 1; // Dodaj do streak
+        participant.streak = (participant.streak || 0) + 1;
       } else {
-        // Odpowiedź niepoprawna
-        participant.streak = 0; // Zresetuj streak
+        participant.streak = 0;
       }
     }
 
     const leaderboard = getLeaderboard(quiz);
 
-    // Sprawdź, czy to było ostatnie pytanie
     if (quiz.currentQuestionIndex + 1 >= quiz.questions.length) {
-      // Zamiast wysyłać tablicę wyników, wyślij końcowe odliczanie
       io.to(code).emit('startFinalCountdown', { countdown: 10 });
 
-      // Po 10 sekundach wyślij ostateczne wyniki
       setTimeout(() => {
         io.to(code).emit('quizEnded', { results: getQuizResults(quiz) });
-        // Usuń quiz z aktywnych quizów
         delete activeQuizzes[code];
-      }, 10000); // 10 sekund
+      }, 10000);
     } else {
-      // Wyślij tablicę wyników z 5 najlepszymi uczestnikami
       io.to(code).emit('showLeaderboard', {
         leaderboard: leaderboard.slice(0, 5),
       });
 
-      // Przejdź do następnego pytania po 5 sekundach
       quiz.currentQuestionIndex += 1;
       setTimeout(() => {
         sendQuestionToParticipants(quiz);
-      }, 5000); // 5 sekund na wyświetlenie tablicy wyników
+      }, 5000);
     }
   }
 

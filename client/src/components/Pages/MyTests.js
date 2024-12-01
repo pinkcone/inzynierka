@@ -72,7 +72,6 @@ const MyTests = () => {
     }
   };
 
-
   const handleOpenTest = (code) => {
     navigate(`/test-start/${code}`);
   };
@@ -80,6 +79,11 @@ const MyTests = () => {
   const handleOpenSet = (setId) => {
     window.location.href =`page-set/${setId}`;
   };
+
+  const handleViewHistory = (testCode) => {
+    navigate(`/test-history/${testCode}`);
+  };
+
   return (
     <div className={styles.appContainer}>
       <Navbar />
@@ -112,7 +116,8 @@ const MyTests = () => {
                       Usuń
                     </button>
                     <button
-                      className={styles.button}
+                        onClick={() => handleViewHistory(test.code)}
+                        className={styles.button}
                     >
                       Historia
                     </button>
@@ -121,7 +126,7 @@ const MyTests = () => {
               ))}
             </div>
           ) : (
-            <p>Brak testów do wyświetlenia.</p>
+              <p>Brak testów do wyświetlenia.</p>
           )}
           {showConfirmPopup && (
             <div className={styles.popupOverlay}>

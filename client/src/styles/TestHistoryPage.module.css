@@ -1,0 +1,40 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.historyContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.historyTable th, .historyTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.historyTable th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.viewButton, .backButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.viewButton:hover, .backButton:hover {
+    background-color: #0056b3;
+}

@@ -33,7 +33,6 @@ const EditPageSet = () => {
   const [confirmPopupContent, setConfirmPopupContent] = useState('');
   const [onConfirm, setOnConfirm] = useState(() => () => {});
 
-  // Funkcja zamykająca wszystkie popupy
   const closeAllPopups = () => {
     setActiveSection('');
     setShowAddAnswer(false);
@@ -140,14 +139,19 @@ const EditPageSet = () => {
     return timeoutId;
   };
 
-  const handleQuestionAdded = async () => {
+  const handleQuestionAdded = async (newQuestionId) => {
     try {
+      closeAllPopups();
       showMessage('Pytanie zostało dodane pomyślnie!');
       await refreshSet();
+
+      setSelectedQuestionId(newQuestionId);
+      setShowAddAnswer(true);
     } catch (err) {
       setError('Wystąpił błąd podczas dodawania pytania.');
     }
   };
+
 
   const handleAnswerAdded = async () => {
     showMessage('Odpowiedź została dodana pomyślnie!');
@@ -410,7 +414,10 @@ const EditPageSet = () => {
                 setShowAddAnswer(false);
                 setSelectedQuestionId(null);
               }}>X</button>
-              <AddAnswer questionId={selectedQuestionId} onAnswerAdded={handleAnswerAdded} />
+              <AddAnswer
+                  questionId={selectedQuestionId}
+                  questionContent={questions.find(q => q.id === selectedQuestionId)?.content || ''}
+                  onAnswerAdded={handleAnswerAdded} />
             </div>
           )}
   

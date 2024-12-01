@@ -54,6 +54,15 @@ const CreateQuiz = ({ setId, onClose }) => {
         );
     };
 
+    const handleSelectAll = (e) => {
+        const isChecked = e.target.checked;
+        if (isChecked) {
+            setSelectedQuestions(questions.map((q) => q.id));
+        } else {
+            setSelectedQuestions([]);
+        }
+    };
+
     const handleCreateQuiz = async () => {
         const singleQuestionTime = parseInt(questionTime, 10);
 
@@ -91,7 +100,7 @@ const CreateQuiz = ({ setId, onClose }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Utworzono quiz:', data);
-                // navigate('/myquizzes');
+                navigate('/myquizzes');
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || 'Błąd podczas tworzenia quizu.');
@@ -116,6 +125,7 @@ const CreateQuiz = ({ setId, onClose }) => {
                     value={quizName}
                     onChange={(e) => setQuizName(e.target.value)}
                     placeholder="Wprowadź nazwę quizu"
+                    maxLength={50}
                 />
             </label>
 
@@ -142,17 +152,27 @@ const CreateQuiz = ({ setId, onClose }) => {
             {error && <p className={styles.error}>{error}</p>}
 
             <h4>Wybierz pytania:</h4>
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        onChange={handleSelectAll}
+                        checked={selectedQuestions.length === questions.length && questions.length > 0}
+                    />
+                    Zaznacz wszystkie
+                </label>
+            </div>
 
             {questions.length > 0 ? (
                 questions.map((question) => (
-                    <div key={question.id}>
+                    <label key={question.id}>
                         <input
                             type="checkbox"
                             checked={selectedQuestions.includes(question.id)}
                             onChange={() => handleQuestionSelect(question.id)}
                         />
                         {question.content}
-                    </div>
+                    </label>
                 ))
             ) : (
                 <p>Brak pytań w zestawie.</p>

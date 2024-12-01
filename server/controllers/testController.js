@@ -180,7 +180,6 @@ const getTestQuestion = async (req, res) => {
 const getAllTests = async (req, res) => {
     const userId = req.user.id;
     try {
-        // console.log("UserID: ", userId);
         const tests = await Test.findAll({
             where: { userId },
             attributes: [
@@ -202,7 +201,6 @@ const getAllTests = async (req, res) => {
             ],
             group: ['Test.code', 'Set.id']
         });
-        // console.log("Testy: ", tests);
         res.status(200).json(tests);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas pobierania testów.', error: error.message });
@@ -210,17 +208,15 @@ const getAllTests = async (req, res) => {
 };
 
 const deleteTest = async (req, res) => {
-    const { code } = req.params; // Pobieramy kod testu z parametrów URL
-    const userId = req.user.id; // Zakładamy, że middleware autoryzacyjny doda `req.user`
+    const { code } = req.params;
+    const userId = req.user.id;
 
     try {
-        // Sprawdzenie, czy test istnieje i należy do użytkownika
         const test = await Test.findOne({ where: { code, userId } });
         if (!test) {
             return res.status(404).json({ message: 'Test nie został znaleziony lub nie należy do tego użytkownika.' });
         }
 
-        // Usunięcie testu
         await test.destroy();
         res.status(200).json({ message: 'Test został pomyślnie usunięty.' });
     } catch (error) {

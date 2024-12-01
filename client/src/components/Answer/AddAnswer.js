@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../../styles/AddAnswer.module.css';
 
-const AddAnswer = ({ questionId, onAnswerAdded }) => {
+const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
   const [content, setContent] = useState('');
   const [isTrue, setIsTrue] = useState('true'); 
   const [error, setError] = useState('');
@@ -70,7 +70,8 @@ const AddAnswer = ({ questionId, onAnswerAdded }) => {
 
   return (
     <div className={styles.addAnswerSection}>
-      <h3>Odpowiedzi:</h3>
+      <h3>Dodaj odpowiedzi do pytania:</h3>
+      <p>{questionContent}</p>
       {error && <div className={styles.alert}>{error}</div>}
 
       <ul className={styles.answersList}>
