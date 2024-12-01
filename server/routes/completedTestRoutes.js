@@ -4,6 +4,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const { createCompletedTest, getCompletedTest, getAllCompletedTestsForTest} = require('../controllers/completedTestController');
 
 router.post('/create', authMiddleware, createCompletedTest);
-router.get('/get-test/:id', getCompletedTest);
-router.get('/history/:id', authMiddleware, getAllCompletedTestsForTest);
+router.get('/get-test/:id', authMiddleware, getCompletedTest);
+router.get('/history/:testCode', authMiddleware, getAllCompletedTestsForTest);
 module.exports = router;

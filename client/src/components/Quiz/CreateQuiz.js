@@ -153,7 +153,7 @@ const CreateQuiz = ({ setId, onClose }) => {
 
             <h4>Wybierz pytania:</h4>
             <div>
-                <label>
+                <label className={styles.checkbox}>
                     <input
                         type="checkbox"
                         onChange={handleSelectAll}
@@ -165,7 +165,7 @@ const CreateQuiz = ({ setId, onClose }) => {
 
             {questions.length > 0 ? (
                 questions.map((question) => (
-                    <label key={question.id}>
+                    <label key={question.id} className={styles.checkbox}>
                         <input
                             type="checkbox"
                             checked={selectedQuestions.includes(question.id)}

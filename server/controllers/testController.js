@@ -225,6 +225,4 @@ const deleteTest = async (req, res) => {
     }
 };
 
-module.exports = { deleteTest };
-
 module.exports = { createTestManual, createTestRandom, getTestInformation, getTestQuestion, getAllTests, deleteTest }

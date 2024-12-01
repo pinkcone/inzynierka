@@ -22,10 +22,10 @@ Set.hasMany(Flashcards, { foreignKey: 'setId', onDelete: 'CASCADE' });
 Question.hasMany(Flashcards, { foreignKey: 'questionId', onDelete: 'CASCADE' });
 
 // Relacje dla Test i CompletedTest
-Test.hasMany(CompletedTest, { foreignKey: 'testId' });
+Test.hasMany(CompletedTest, { foreignKey: 'testCode', onDelete: "CASCADE" });
 Test.belongsToMany(Question, {through: 'TestQuestions', foreignKey: 'code'});
 Question.belongsToMany(Test, { through: 'TestQuestions', foreignKey: 'questionId' });
-CompletedTest.belongsTo(Test, { foreignKey: 'testId', onDelete: 'CASCADE' });
+CompletedTest.belongsTo(Test, { foreignKey: 'testCode', onDelete: 'CASCADE' });
 CompletedTest.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Test.belongsTo(User, {foreignKey: "userId", onDelete:"CASCADE"});
 Test.belongsTo(Set, {foreignKey: "setId", onDelete: "CASCADE"})

@@ -64,7 +64,7 @@ const createCompletedTest = async (req, res) => {
         console.log("Total score: ", totalScore);
 
         const completedTest = await CompletedTest.create({
-            testId: test.code,
+            testCode: test.code,
             userId,
             selectedAnswer,
             score: totalScore,
@@ -100,7 +100,7 @@ const getCompletedTest = async (req, res) => {
             include: [
                 {
                     model: Test,
-                    where: { code: completedTest.testId },
+                    where: { code: completedTest.testCode },
                     attributes: []
                 },
                 {
@@ -138,18 +138,18 @@ const getCompletedTest = async (req, res) => {
 
 
 const getAllCompletedTestsForTest = async (req, res) => {
-    const { testId } = req.params;
+    const { testCode } = req.params;
     const userId = req.user.id;
-    console.log("TestId: DUPA: ", testId);
+    console.log("TestCode: DUPA: ", testCode);
 
     try {
-        const test = await Test.findOne({ where: { code: testId } });
+        const test = await Test.findOne({ where: { code: testCode } });
         if (!test) {
             return res.status(404).json({ message: 'Test nie został znaleziony.' });
         }
 
         const completedTests = await CompletedTest.findAll({
-            where: { testId: testId, userId: userId },
+            where: { testCode, userId: userId },
             attributes: ['id', 'score', 'createdAt'],
             order: [['createdAt', 'DESC']]
         });
