@@ -2,7 +2,7 @@
   position: fixed;
   top: 120px;
   left: 0;
-  height: 90vh;
+  height: 80vh;
   width: 250px;
   transform: translateX(-230px); /* Domyślnie schowane */
   transition: transform 0.3s ease;
@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 
