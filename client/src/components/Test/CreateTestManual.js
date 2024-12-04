@@ -126,7 +126,7 @@ const CreateTestManual = ({setId, onClose}) => {
             <button className={styles.popupClose} onClick={onClose}>X</button>
             <h3>Tworzenie testu ręcznie </h3>
 
-            <label>
+            <label className={styles.black}>
                 Nazwa testu:
                 <input
                     type="text"
@@ -137,7 +137,7 @@ const CreateTestManual = ({setId, onClose}) => {
                 />
             </label>
             {testNameError && <p className={styles.error}>{testNameError}</p>}
-            <label>
+            <label className={styles.black}>
                 Czas na cały test (minuty):
                 <input
                     type="text"
@@ -153,7 +153,7 @@ const CreateTestManual = ({setId, onClose}) => {
 
             {error && <p className={styles.error}>{error}</p>}
             <div>
-                <label>
+                <label className={styles.black}>
                     <input
                         type="checkbox"
                         onChange={handleSelectAll}
@@ -165,7 +165,7 @@ const CreateTestManual = ({setId, onClose}) => {
 
             {questions.length > 0 ? (
                 questions.map((question) => (
-                    <label key={question.id}>
+                    <label key={question.id} className={styles.black}>
                         <input
                             type="checkbox"
                             checked={selectedQuestions.includes(question.id)}

@@ -1,6 +1,137 @@
-.appContainer{
+.appContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background: linear-gradient(270deg, #a4508b, #5f0a87, #8e44ad, #663399);
+  background-size: 400% 400%;
+  animation: gradientAnimation 20s ease infinite;
+  color: white  !important;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 100px;
+    padding: 0 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    min-height: 80vh;
+    width: 80%;
+}
+.buttonStart {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.button {
+    background-color: #9b59b6;
+    color: white;
+    width: 100px;
+    padding: 30px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    text-align: start;
+    
+}   
+
+.button:hover {
+    background-color: #734f8b;
+}
+
+.puzzlecontainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.puzzlepiece {
+    position: relative;
+    background: #ffffff;
+    color: #000;
+    padding: 20px 30px;
+    font-size: 1rem;
+    text-align: center;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.puzzlepiece.left {
+    border-radius: 20px 0 0 20px;
+    clip-path: polygon(calc(100% - 2.5vmin) 0px, 100% 50%, calc(100% - 2.5vmin) 100%, 0px 100%, 0px 0px);
+    margin-right: -10px;
+}
+
+.puzzlepiece.right {
+    border-radius: 0 20px 20px 0;
+    clip-path: polygon(0px 0%, 100% 0px, 100% 100%, 0px 100%, 2.5vmin 50%);
+    
+  }
+
+
+.code {
+    cursor: pointer;
+    font-size: 3em;
+}
+
+.code span {
+    font-size: 2vh;
+}
+
+.quizDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.quizDetails p {
+    margin: 10px;
+    text-align: center;
+}
+
+.participantsList {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
 }
+.participantsList ul, .participantsList p{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.participant{
+    padding: 20px 10px;
+    margin: 10px;
+    background-color: #2e1a47;
+    color: white;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

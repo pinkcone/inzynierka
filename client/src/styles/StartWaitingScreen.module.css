@@ -1,0 +1,146 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(270deg, #a4508b, #5f0a87, #8e44ad, #663399);
+    background-size: 400% 400%;
+    animation: gradientAnimation 20s ease infinite;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.content h2, h6{
+    color: white;
+    margin: 20px 0;
+}
+.content {
+    text-align: center;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.dots span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.dots span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dots span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+.counter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    position: relative;
+    height: 3.5rem; /* Ustawiona wysokość, aby liczby się nie przesuwały */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ukrywanie wychodzących liczb */
+}
+
+.counterNumber {
+    display: inline-block;
+    animation: slide 1s ease-in-out;
+}
+
+/* Animacja dla licznika */
+@keyframes slide {
+    0% {
+        transform: translateY(100%); /* Start animacji poniżej widoku */
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(0); /* Widoczna liczba */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%); /* Przesunięcie liczby w górę */
+        opacity: 0;
+    }
+}
+.answers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.answer {
+    padding: 20px;
+    margin: 20px 20px  0 20px;
+    min-width: 250px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.answer:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resultMessageCorrect{
+    color: rgb(14, 237, 14) !important;
+}
+.resultMessageWrong{
+    color: rgb(73, 0, 0) !important;
+}
+
+.leaderboardItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.leaderboardItem p{
+    margin: 0 15px;
+}
+.leaderboardItem .span{
+    width: 200px;
+}
+.leaderboardItem h3{
+    margin: 0;
+    color: white;
+    text-align: left;
+}

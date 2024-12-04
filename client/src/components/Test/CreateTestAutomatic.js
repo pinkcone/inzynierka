@@ -103,7 +103,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
         <button className={styles.popupClose} onClick={onClose}>X</button>
         <h3>Generowanie testu automatycznie </h3>
 
-        <label>
+        <label className={styles.black}>
             Nazwa testu:
             <input
                 type="text"
@@ -114,7 +114,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
             />
         </label>
         {testNameError && <p className={styles.error}>{testNameError}</p>}
-        <label>
+        <label className={styles.black}>
             Liczba pytań:
             <input
                 type="text"
@@ -125,7 +125,7 @@ const CreateTestAutomatic = ({setId, onClose}) => {
         </label>
         {questionsError && <p className={styles.error}>{questionsError}</p>}
 
-        <label>
+        <label className={styles.black}>
             Czas na cały test (minuty):
             <input
                 type="text"

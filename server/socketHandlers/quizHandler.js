@@ -27,6 +27,7 @@ module.exports = (io, socket) => {
           code: existingQuizCode,
           name: existingQuiz.name,
           questionTime: existingQuiz.questionTime,
+          questionCount: existingQuiz.questionCount,
         });
 
         return;
@@ -57,7 +58,10 @@ module.exports = (io, socket) => {
         socket.emit('error', { message: 'Quiz nie zawiera pytań.' });
         return;
       }
-
+      if (!quiz || !Array.isArray(quiz.Questions)) {
+        socket.emit('error', { message: 'Quiz nie zawiera pytań.' });
+        return;
+      }
       activeQuizzes[code] = {
         code,
         name: quiz.name,
@@ -68,6 +72,7 @@ module.exports = (io, socket) => {
         currentQuestionIndex: 0,
         isStarted: false,
         organizerSocketId: socket.id,
+        questionCount: quiz.Questions.length,
       };
 
       socket.join(code);
@@ -76,6 +81,7 @@ module.exports = (io, socket) => {
         code,
         name: quiz.name,
         questionTime: quiz.questionTime,
+        questionCount: quiz.Questions.length,
       });
     } catch (error) {
       console.error('Błąd podczas tworzenia quizu:', error);
@@ -163,6 +169,7 @@ module.exports = (io, socket) => {
 
   socket.on('startQuiz', ({ code }) => {
     const quiz = activeQuizzes[code];
+    console.log("startuje do gówno kurewko")
     if (quiz && quiz.organizerSocketId === socket.id) {
       quiz.isStarted = true;
       io.to(code).emit('quizStarted');
@@ -177,7 +184,7 @@ module.exports = (io, socket) => {
   function sendQuestionToParticipants(quiz) {
     const code = quiz.code;
     const questionIndex = quiz.currentQuestionIndex;
-
+    console.log("wysylam pytanko", questionIndex);
     if (questionIndex >= quiz.questions.length) {
       return;
     }
@@ -233,7 +240,7 @@ module.exports = (io, socket) => {
     const correctAnswers = currentQuestion.Answers.filter(
       (answer) => answer.isTrue
     ).map((answer) => answer.id);
-
+    const userResults = {};
     for (const socketId in quiz.currentAnswers) {
       const participant = quiz.participants[socketId];
       const answer = quiz.currentAnswers[socketId];
@@ -246,13 +253,15 @@ module.exports = (io, socket) => {
           500;
         participant.score = (participant.score || 0) + points;
         participant.streak = (participant.streak || 0) + 1;
+        userResults[socketId] = true; 
       } else {
         participant.streak = 0;
+        userResults[socketId] = false;
       }
     }
 
     const leaderboard = getLeaderboard(quiz);
-
+ 
     if (quiz.currentQuestionIndex + 1 >= quiz.questions.length) {
       io.to(code).emit('startFinalCountdown', { countdown: 10 });
 
@@ -261,9 +270,15 @@ module.exports = (io, socket) => {
         delete activeQuizzes[code];
       }, 10000);
     } else {
-      io.to(code).emit('showLeaderboard', {
-        leaderboard: leaderboard.slice(0, 5),
-      });
+      for (const socketId in quiz.participants) {
+        const userResult = userResults[socketId]; // Wynik użytkownika
+
+        // Wysyłanie danych leaderboarda z wynikiem indywidualnym
+        io.to(socketId).emit('showLeaderboard', {
+            leaderboard: leaderboard.slice(0, 5), // Top 5 wyników
+            userResult, // Wynik indywidualny tego użytkownika
+        });
+    };
 
       quiz.currentQuestionIndex += 1;
       setTimeout(() => {
