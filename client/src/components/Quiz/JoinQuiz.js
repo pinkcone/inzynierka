@@ -48,21 +48,23 @@ const JoinQuiz = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Dołącz do quizu</h2>
-      {error && <div className={styles.alertDanger}>{error}</div>}
-      <input
-        type="text"
-        placeholder="Kod quizu"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Twoja nazwa"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button onClick={handleJoinQuiz}>Dołącz</button>
+      <div className={styles.content}>
+        <h2>Dołącz do quizu</h2>
+        {error && <div className={styles.alertDanger}>{error}</div>}
+        <input
+          type="text"
+          placeholder="Kod quizu"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Twoja nazwa"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button onClick={handleJoinQuiz} className={styles.button}>Dołącz</button>
+      </div>
     </div>
   );
 };

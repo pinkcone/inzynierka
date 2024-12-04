@@ -1,10 +1,12 @@
+
 body{
   background: linear-gradient(135deg, #b0a1c3, #9b59b6);
+  min-height: 97vh;
 }
 .homeContainer {
   display: flex;
   flex-direction: column;
-
+  min-height: 100vh;
 }
 
 .contentWrapper {

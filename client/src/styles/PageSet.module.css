@@ -292,6 +292,6 @@ button{
   margin-left: 5px;
 }
 
-.checkbox {
-  color: black;
+.black, .checkbox{
+  color: black !important;
 }

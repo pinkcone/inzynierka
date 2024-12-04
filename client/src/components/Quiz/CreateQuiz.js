@@ -118,7 +118,7 @@ const CreateQuiz = ({ setId, onClose }) => {
             </button>
             <h3>Tworzenie quizu</h3>
 
-            <label>
+            <label className={styles.black}>
                 Nazwa quizu:
                 <input
                     type="text"
@@ -129,7 +129,7 @@ const CreateQuiz = ({ setId, onClose }) => {
                 />
             </label>
 
-            <label>
+            <label className={styles.black}>
                 Czas na jedno pytanie (sekundy):
                 <input
                     type="text"
@@ -139,7 +139,7 @@ const CreateQuiz = ({ setId, onClose }) => {
                 />
             </label>
 
-            <label>
+            <label className={styles.black}>
                 Czy quiz jest publiczny:
                 <input
                     type="checkbox"

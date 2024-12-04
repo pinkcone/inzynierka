@@ -2,8 +2,13 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { SocketContext } from '../../contexts/SocketContext';
-import styles from '../../styles/QuizPlay.module.css';
-
+import CountdownScreen from './screens/CountdownScreen';
+import QuestionScreen from './screens/QuestionScreen';
+import StartWaitingScreen from './screens/StartWaitingScreen';
+import LeaderboardScreen from './screens/LeaderboardScreen';
+import FinalCountdownScreen from './screens/FinalCountdownScreen';
+import ResultsScreen from './screens/ResultsScreen';
+import BetweenWaitingScreen from './screens/BetweenWaitingScreen';
 const QuizPlay = () => {
   const { code } = useParams();
   const location = useLocation();
@@ -19,7 +24,7 @@ const QuizPlay = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
-
+  const [answerResult, setAnswerResult] = useState(false);
   const questionStartTimeRef = useRef(null); // Referencja do czasu rozpoczęcia pytania
 
   useEffect(() => {
@@ -53,9 +58,10 @@ const QuizPlay = () => {
       questionStartTimeRef.current = Date.now(); // Zapisz czas rozpoczęcia pytania
     });
 
-    socket.on('showLeaderboard', ({ leaderboard }) => {
+    socket.on('showLeaderboard', ({ leaderboard, userResult }) => {
       setScreen('leaderboard');
       setLeaderboard(leaderboard);
+      setAnswerResult(userResult);
       // Serwer automatycznie wyśle kolejne pytanie po opóźnieniu
     });
 
@@ -112,83 +118,34 @@ const QuizPlay = () => {
       time: timeInSeconds,
     });
 
-    setScreen('waiting');
+    setScreen('waiting-between');
   };
 
-  // Renderowanie różnych ekranów
-  if (screen === 'countdown') {
-    return (
-      <div className={styles.container}>
-        <h2>Przygotuj się!</h2>
-        <p>Pytanie rozpocznie się za {countdown} sekund...</p>
-      </div>
-    );
-  }
 
-  if (screen === 'question') {
-    return (
-      <div className={styles.container}>
-        <h2>{question.content}</h2>
-        <div className={styles.answers}>
-          {question.answers.map((answer) => (
-            <button key={answer.id} onClick={() => handleAnswerClick(answer.id)}>
-              {answer.content}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
-  if (screen === 'waiting') {
-    return (
-      <div className={styles.container}>
-        <h2>Oczekiwanie na pozostałych uczestników...</h2>
-      </div>
-    );
-  }
 
-  if (screen === 'leaderboard') {
-    return (
-      <div className={styles.container}>
-        <h2>Ranking</h2>
-        <ul>
-          {leaderboard.map((participant, index) => (
-            <li key={index}>
-              {participant.name}: {participant.score} pkt
-            </li>
-          ))}
-        </ul>
-        <p>Następne pytanie rozpocznie się za chwilę...</p>
-      </div>
-    );
+  switch (screen) {
+    case 'countdown':
+      return <CountdownScreen countdown={countdown} />;
+    case 'question':
+      return (
+        <QuestionScreen question={question} handleAnswerClick={handleAnswerClick} />
+      );
+    case 'waiting':
+      return <StartWaitingScreen />;
+    case 'leaderboard':
+       return <LeaderboardScreen leaderboard={leaderboard} answerResult={answerResult}/>;
+    case 'finalCountdown':
+      return <FinalCountdownScreen countdown={countdown} />;
+    case 'results':
+      return <ResultsScreen results={results} />;
+      case 'waiting-between':
+        return <BetweenWaitingScreen />; 
+    default:
+      <QuestionScreen question={question} handleAnswerClick={handleAnswerClick} />
   }
-
-  if (screen === 'finalCountdown') {
-    return (
-      <div className={styles.container}>
-        <h2>Przygotuj się!</h2>
-        <p>Wyniki końcowe pojawią się za {countdown} sekund...</p>
-      </div>
-    );
-  }
-
-  if (screen === 'results') {
-    return (
-      <div className={styles.container}>
-        <h2>Wyniki końcowe</h2>
-        <ul>
-          {results.map((participant, index) => (
-            <li key={index}>
-              {participant.name}: {participant.score} pkt
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-
-  return null;
 };
+
+
 
 export default QuizPlay;

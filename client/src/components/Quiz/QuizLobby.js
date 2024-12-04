@@ -1,16 +1,16 @@
-// QuizLobby.js
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from '../../styles/QuizLobby.module.css';
-import { SocketContext } from '../../contexts/SocketContext'; // Upewnij się, że ścieżka jest poprawna
+import { SocketContext } from '../../contexts/SocketContext';
 
 const QuizLobby = () => {
   const { quizId } = useParams();
   const [quizCode, setQuizCode] = useState('');
   const [quizName, setQuizName] = useState('');
   const [questionTime, setQuestionTime] = useState(0);
+  const [questionCount, setQuestionCount] = useState(0)
   const [participants, setParticipants] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -20,29 +20,24 @@ const QuizLobby = () => {
   useEffect(() => {
     console.log('wysylam zadnie stworzenia quizu: ', quizId);
 
-    // Emituj zdarzenie 'createQuiz'
     socket.emit('createQuiz', { quizId });
     console.log('wysylano zadnie stworzenia quizu: ', quizId);
-    // Nasłuchuj na zdarzenie 'quizCreated'
-    socket.on('quizCreated', ({ code, name, questionTime }) => {
+    socket.on('quizCreated', ({ code, name, questionTime, questionCount }) => {
       console.log('stworzono quiz:  ', code);
       setQuizCode(code);
       setQuizName(name);
       setQuestionTime(questionTime);
+      setQuestionCount(questionCount);
     });
-
-    // Nasłuchuj na aktualizacje listy uczestników
     socket.on('participantsList', (participantsList) => {
       setParticipants(participantsList);
     });
 
-    // Obsługa błędów
     socket.on('error', (data) => {
       console.error(data.message);
       setError(data.message);
     });
 
-    // Czyszczenie nasłuchiwaczy
     return () => {
       if (!quizStarted) {
         socket.emit('cancelQuiz', { code: quizCode });
@@ -57,46 +52,80 @@ const QuizLobby = () => {
     setQuizStarted(true);
     const organizerName = localStorage.getItem('username') || 'Host';
 
-    // Host dołącza do quizu jako uczestnik
     socket.emit('joinQuiz', { code: quizCode, name: organizerName });
 
-    // Emituj zdarzenie 'startQuiz'
     socket.emit('startQuiz', { code: quizCode });
 
-    // Przekieruj hosta do 'QuizPlay'
     navigate(`/quiz/play/${quizCode}`, { state: { name: organizerName } });
   };
 
+  const handleCopyCodeToClipboard = () => {
+    navigator.clipboard
+      .writeText(quizCode)
+      .then(() => {
+        alert("Kod quizu skopiowany do schowka!");
+      })
+      .catch((error) => {
+        console.error("Nie udało się skopiować kodu do schowka:", error);
+      });
+  };
+  const handleCopyLinkToClipboard = () => {
+    navigator.clipboard
+      .writeText("www.learnify.fun/join-quiz")
+      .then(() => {
+        alert("Link skopiowany do schowka!");
+      })
+      .catch((error) => {
+        console.error("Nie udało się skopiować linku do schowka:", error);
+      });
+  };
   return (
     <div className={styles.appContainer}>
-      <Navbar />
-      <div className={styles.mainContent}>
-        <Sidebar />
-        <div className={styles.content}>
-          <h2>Lobby Quizu: {quizName}</h2>
-          {error && <div className={styles.alertDanger}>{error}</div>}
-          <p>
-            Kod quizu: <strong>{quizCode}</strong>
-          </p>
-          <p>
-            Czas na pytanie: <strong>{questionTime} sekund</strong>
-          </p>
+      <div className={styles.content}>
+        {error && <div className={styles.alertDanger}>{error}</div>}
 
-          <h3>Uczestnicy:</h3>
-          {participants.length > 0 ? (
-            <ul>
-              {participants.map((participant, index) => (
-                <li key={index}>{participant.name}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>Brak uczestników.</p>
-          )}
-
-          <button className={styles.button} onClick={handleStartQuiz}>
-            Rozpocznij quiz
-          </button>
+        <div class={styles.puzzlecontainer}>
+          <div className={`${styles.puzzlepiece} ${styles.left} `} onClick={handleCopyLinkToClipboard}>
+            <h3>Dołącz do quizu na:<br /> www.learnify.fun/join-quiz</h3>
+          </div>
+          <div class={`${styles.puzzlepiece} ${styles.right} ${styles.code}`} onClick={handleCopyCodeToClipboard}>
+            <h3>
+              <span>Kod quizu:</span><br /><strong>{quizCode}</strong>
+            </h3>
+          </div>
+          
         </div>
+        
+
+        <div className={styles.quizDetails}>
+          <p>
+            Nazwa quizu: <strong>{quizName}</strong>
+          </p>
+          <p>
+            Ilość pytań: <strong>{questionCount}</strong>
+          </p>
+          <p>
+            Czas na odpowiedź: <strong>{questionTime} sekund</strong>
+          </p>
+
+        </div>
+        <div className={styles.buttonStart}>
+            <button className={styles.button} onClick={handleStartQuiz}>START</button>
+          </div>
+          <div className={styles.participantsList}>
+            <h3>Uczestnicy:</h3>
+            {participants.length > 0 ? (
+              <ul>
+                {participants.map((participant, index) => (
+                  <li key={index} className={styles.participant}>{participant.name}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>Brak uczestników.</p>
+            )}
+          </div>
+          
+
       </div>
     </div>
   );
