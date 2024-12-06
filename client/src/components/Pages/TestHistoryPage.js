@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from '../../styles/TestHistoryPage.module.css';
+import Sidebar from "../Sidebar/Sidebar";
 
 const TestHistoryPage = () => {
     const [testHistory, setTestHistory] = useState([]);
@@ -39,6 +40,7 @@ const TestHistoryPage = () => {
     return (
         <div className={styles.appContainer}>
             <Navbar />
+            <Sidebar />
             <div className={styles.historyContainer}>
                 <h1>Historia podejść do testu</h1>
                 {error && <p className={styles.error}>{error}</p>}

@@ -9,28 +9,74 @@
 
 .startButton {
     background-color: #9b59b6;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  font-size: 20px;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
 
 }
+
 .appContainer {
     display: flex;
     flex-direction: column;
     height: 100vh;
 }
+
 .startButton:hover {
     background-color: #2e1a47;
 }
-.red{
+
+.red {
     color: red;
     font-size: 20px;
     font-weight: 600;
     background-color: white;
     padding: 3px;
+}
+
+.shareButtonContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.shareButton {
+    background-color: #9b59b6;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.shareButton:hover {
+    background-color: #2e1a47;
+}
+
+.tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }

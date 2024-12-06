@@ -140,7 +140,6 @@ const getCompletedTest = async (req, res) => {
 const getAllCompletedTestsForTest = async (req, res) => {
     const { testCode } = req.params;
     const userId = req.user.id;
-    console.log("TestCode: DUPA: ", testCode);
 
     try {
         const test = await Test.findOne({ where: { code: testCode } });

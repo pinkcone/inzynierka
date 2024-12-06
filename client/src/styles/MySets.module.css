@@ -125,36 +125,6 @@
   background-color: #734f8b;
 }
 
-/* .table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 16px;
-  text-align: left;
-}
-
-.table th, .table td {
-  border: 2px solid #2e1a47;
-  padding: 10px;
-  text-align: center;
-}
-
-.table th {
-  background-color: #734f8b;
-  font-weight: bold;
-  color: white;
-}
-
-.table td{
-  background-color: #f2e6fe;
-}
-
-.table tr:hover {
-  background-color: #f1f1f1;
-}
-.short{
-  width: 200px;
-} */
 .deleteButton {
   background-color: #f44336 !important;
   color: white;
@@ -225,9 +195,6 @@
 .popup button:hover {
   background-color: #734f8b;
 }
-
-
-
 
 .searchInput {
   padding: 8px 15px;
@@ -306,4 +273,20 @@
   .content{
     margin: 60px 50px;
   }
+}
+
+.joinTestContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.joinTestTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
 }
