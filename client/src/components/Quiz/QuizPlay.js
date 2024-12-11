@@ -26,7 +26,7 @@ const QuizPlay = () => {
   const [error, setError] = useState('');
   const [answerResult, setAnswerResult] = useState(false);
   const questionStartTimeRef = useRef(null); // Referencja do czasu rozpoczęcia pytania
-
+  const [questionTime, setQuestionTime] = useState(30);
   useEffect(() => {
     if (!code || !name) {
       navigate('/join-quiz');
@@ -52,10 +52,20 @@ const QuizPlay = () => {
       }, 1000);
     });
 
-    socket.on('showQuestion', ({ question }) => {
+    socket.on('showQuestion', ({ question, questionTime }) => {
       setScreen('question');
       setQuestion(question);
-      questionStartTimeRef.current = Date.now(); // Zapisz czas rozpoczęcia pytania
+      setQuestionTime(questionTime);
+      questionStartTimeRef.current = Date.now();
+      const interval = setInterval(() => {
+        setQuestionTime((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     });
 
     socket.on('showLeaderboard', ({ leaderboard, userResult }) => {
@@ -129,7 +139,7 @@ const QuizPlay = () => {
       return <CountdownScreen countdown={countdown} />;
     case 'question':
       return (
-        <QuestionScreen question={question} handleAnswerClick={handleAnswerClick} />
+        <QuestionScreen question={question} questionTime={questionTime} handleAnswerClick={handleAnswerClick} />
       );
     case 'waiting':
       return <StartWaitingScreen />;

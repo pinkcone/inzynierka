@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../../styles/StartWaitingScreen.module.css';
 
-const QuestionScreen = ({ question, handleAnswerClick }) => {
+const QuestionScreen = ({ question, handleAnswerClick, questionTime }) => {
     const [shuffledColors, setShuffledColors] = useState([]);
 
     useEffect(() => {
@@ -14,6 +14,9 @@ const QuestionScreen = ({ question, handleAnswerClick }) => {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
+                <div className={`${styles.timer} ${questionTime < 5 ? styles.critical : ''}`}>
+                    {Math.floor((questionTime -1) / 60)}:{String((questionTime - 1 )% 60).padStart(2, '0')}
+                </div>
                 <h2>{question.content}</h2>
                 <div className={styles.answers}>
                     {question.answers.map((answer, index) => (

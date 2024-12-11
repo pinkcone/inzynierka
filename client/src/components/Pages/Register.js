@@ -99,7 +99,7 @@ const Register = () => {
         <h2 className={styles.registerTitle}>Rejestracja</h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.mb3}>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email" className={styles.label}>Email:</label>
             <input
               type="text"
               id="email"
@@ -112,7 +112,7 @@ const Register = () => {
           </div>
 
           <div className={styles.mb3}>
-            <label htmlFor="username">Nazwa użytkownika:</label>
+            <label htmlFor="username" className={styles.label}>Nazwa użytkownika:</label>
             <input
               type="text"
               id="username"
@@ -125,7 +125,7 @@ const Register = () => {
           </div>
 
           <div className={styles.mb3}>
-            <label htmlFor="password">Hasło:</label>
+            <label htmlFor="password" className={styles.label}>Hasło:</label>
             <input
               type="password"
               id="password"

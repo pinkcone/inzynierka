@@ -91,7 +91,7 @@ const CreateQuiz = ({ setId, onClose }) => {
                 body: JSON.stringify({
                     name: quizName,
                     questionTime: singleQuestionTime,
-                    isPublic,
+                    isPublic: false,
                     setId,
                     questionsIds: selectedQuestions,
                 }),
@@ -139,14 +139,14 @@ const CreateQuiz = ({ setId, onClose }) => {
                 />
             </label>
 
-            <label className={styles.black}>
+            {/* <label className={styles.black}>
                 Czy quiz jest publiczny:
                 <input
                     type="checkbox"
                     checked={isPublic}
                     onChange={(e) => setIsPublic(e.target.checked)}
                 />
-            </label>
+            </label> */}
 
             {timeError && <p className={styles.error}>{timeError}</p>}
             {error && <p className={styles.error}>{error}</p>}

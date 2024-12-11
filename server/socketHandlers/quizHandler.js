@@ -193,6 +193,9 @@ module.exports = (io, socket) => {
 
     setTimeout(() => {
       const question = quiz.questions[questionIndex];
+
+      // Wysyłamy pytanie wraz z questionTime
+      const questionTime = quiz.questionTime || 30; // Domyślnie 30 sekund, jeśli brak w bazie
       io.to(code).emit('showQuestion', {
         question: {
           id: question.id,
@@ -202,9 +205,17 @@ module.exports = (io, socket) => {
             content: answer.content,
           })),
         },
+        questionTime: questionTime // ZMIANA: Wysyłamy czas na odpowiedź
       });
 
       quiz.currentAnswers = {};
+
+      // ZMIANA: ustawiamy timeout, aby po upływie questionTime przejść do obliczania wyników
+      quiz.answerTimer = setTimeout(() => {
+        console.log('Upłynął czas na odpowiedź, obliczam wyniki...');
+        calculateResultsAndProceed(quiz);
+      }, questionTime * 1000);
+
     }, 5000);
   }
 
@@ -226,6 +237,11 @@ module.exports = (io, socket) => {
       const totalAnswers = Object.keys(quiz.currentAnswers).length;
 
       if (totalAnswers === totalParticipants) {
+        // ZMIANA: jeżeli wszyscy odpowiedzieli przed upływem czasu, czyścimy timeout
+        if (quiz.answerTimer) {
+          clearTimeout(quiz.answerTimer);
+          quiz.answerTimer = null;
+        }
         calculateResultsAndProceed(quiz);
       }
     } else {
@@ -240,6 +256,7 @@ module.exports = (io, socket) => {
     const correctAnswers = currentQuestion.Answers.filter(
       (answer) => answer.isTrue
     ).map((answer) => answer.id);
+
     const userResults = {};
     for (const socketId in quiz.currentAnswers) {
       const participant = quiz.participants[socketId];
@@ -249,11 +266,10 @@ module.exports = (io, socket) => {
         const maxTime = quiz.questionTime || 30;
         const timeTaken = answer.time;
         const points =
-          Math.max(0, Math.round(((maxTime - timeTaken) * 500) / maxTime)) +
-          500;
+          Math.max(0, Math.round(((maxTime - timeTaken) * 500) / maxTime)) + 500;
         participant.score = (participant.score || 0) + points;
         participant.streak = (participant.streak || 0) + 1;
-        userResults[socketId] = true; 
+        userResults[socketId] = true;
       } else {
         participant.streak = 0;
         userResults[socketId] = false;
@@ -261,7 +277,7 @@ module.exports = (io, socket) => {
     }
 
     const leaderboard = getLeaderboard(quiz);
- 
+
     if (quiz.currentQuestionIndex + 1 >= quiz.questions.length) {
       io.to(code).emit('startFinalCountdown', { countdown: 10 });
 
@@ -272,13 +288,11 @@ module.exports = (io, socket) => {
     } else {
       for (const socketId in quiz.participants) {
         const userResult = userResults[socketId]; // Wynik użytkownika
-
-        // Wysyłanie danych leaderboarda z wynikiem indywidualnym
         io.to(socketId).emit('showLeaderboard', {
-            leaderboard: leaderboard.slice(0, 5), // Top 5 wyników
-            userResult, // Wynik indywidualny tego użytkownika
+          leaderboard: leaderboard.slice(0, 5), // Top 5 wyników
+          userResult, // Wynik indywidualny tego użytkownika
         });
-    };
+      }
 
       quiz.currentQuestionIndex += 1;
       setTimeout(() => {
