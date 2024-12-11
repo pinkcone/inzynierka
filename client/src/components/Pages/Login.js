@@ -92,7 +92,7 @@ const Login = ({ onLoginSuccess }) => {
         <h2 className={styles.loginTitle}>Logowanie</h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.mb3}>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email" className={styles.label}>Email:</label>
             <input
               type="text"
               id="email"
@@ -105,7 +105,7 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           <div className={styles.mb3}>
-            <label htmlFor="password">Hasło:</label>
+            <label htmlFor="password" className={styles.label}>Hasło:</label>
             <input
               type="password"
               id="password"
