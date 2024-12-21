@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback, useMemo} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import styles from '../../styles/TestPage.module.css';
@@ -170,6 +170,18 @@ const TestPage = () => {
         endTest();
     };
 
+    // Wyodrębnianie obrazu z aktualnego pytania
+    let displayContent = '';
+    let imageUrl = null;
+    if (questions && questions.length > 0 && questions[currentQuestion]) {
+        displayContent = questions[currentQuestion].content || '';
+        const imageTagIndex = displayContent.indexOf('[Image]:');
+        if (imageTagIndex !== -1) {
+            imageUrl = displayContent.slice(imageTagIndex + '[Image]:'.length).trim();
+            displayContent = displayContent.slice(0, imageTagIndex).trim();
+        }
+    }
+
     return (
         <div className={styles.appContainer}>
             <Navbar/>
@@ -183,7 +195,8 @@ const TestPage = () => {
                     {error && <p className={styles.error}>{error}</p>}
                     {questions && questions.length > 0 ? (
                         <div className={styles.questionContainer}>
-                            <h3>{questions[currentQuestion].content}</h3>
+                            <h3>{displayContent}</h3>
+                            {imageUrl && <img src={imageUrl} alt="Question image" style={{maxWidth: '200px', height: 'auto', marginTop: '10px'}} />}
                             <div className={styles.answers}>
                                 {questions[currentQuestion].Answers.map((answer, index) => (
                                     <button
@@ -193,7 +206,6 @@ const TestPage = () => {
                                     >
                                         {answer.content}
                                     </button>
-
                                 ))}
                             </div>
                         </div>

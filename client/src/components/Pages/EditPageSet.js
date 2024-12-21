@@ -13,7 +13,7 @@ import DeleteSet from '../Set/DeleteSet';
 import CollaboratorsList from '../Set/CollaboratorsList';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const EditPageSet = () => {
   const { id } = useParams();
@@ -28,11 +28,11 @@ const EditPageSet = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showAddCollaborator, setShowAddCollaborator] = useState(false);
   const navigate = useNavigate();
-  const [isOwner, setIsOwner] = useState(false); 
+  const [isOwner, setIsOwner] = useState(false);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [confirmPopupContent, setConfirmPopupContent] = useState('');
-  const [onConfirm, setOnConfirm] = useState(() => () => {});
-
+  const [onConfirm, setOnConfirm] = useState(() => () => { });
+  const [isCollabolator, setIsCollabolator] = useState(false);
   const closeAllPopups = () => {
     setActiveSection('');
     setShowAddAnswer(false);
@@ -56,12 +56,15 @@ const EditPageSet = () => {
 
         const token = localStorage.getItem('token');
         const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userId || decodedToken.id || decodedToken.sub; 
+        const userId = decodedToken.userId || decodedToken.id || decodedToken.sub;
 
-        if (userId.toString() === data.ownerId.toString() || data.collaboratorsList?.[userId]) {
-          setIsOwner(true); 
-        } else {
-          setIsOwner(false); 
+        if (userId.toString() === data.ownerId.toString()) {
+          setIsOwner(true);
+        } else if( data.collaboratorsList?.[userId]){
+          setIsOwner(true);
+          setIsCollabolator(true);
+        }else{
+          setIsOwner(false);
         }
       } else {
         const errorData = await response.json();
@@ -194,7 +197,7 @@ const EditPageSet = () => {
         );
         setQuestions(questionsWithAnswers);
       } else {
-        if(response.status === 404)
+        if (response.status === 404)
           setQuestions([]);
 
         const errorData = await response.json();
@@ -212,7 +215,7 @@ const EditPageSet = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         const questionsWithAnswers = await Promise.all(
@@ -252,7 +255,7 @@ const EditPageSet = () => {
   };
 
   const handleCollaboratorAdded = async () => {
-    await fetchSet(); 
+    await fetchSet();
     showMessage('Współtwórca został dodany!');
   };
 
@@ -260,7 +263,7 @@ const EditPageSet = () => {
     setSuccessMessage('Zestaw został pomyślnie usunięty!');
     setTimeout(() => {
       setSuccessMessage('');
-      navigate('/mysets'); 
+      navigate('/mysets');
     }, 2000);
   };
 
@@ -272,14 +275,14 @@ const EditPageSet = () => {
     setOnConfirm(() => () => handleConfirmDelete('question', questionId));
     setShowConfirmPopup(true);
   };
-  
+
   const handleDeleteAnswerClick = (answerId) => {
     closeAllPopups();
     setConfirmPopupContent('Czy na pewno chcesz usunąć tę odpowiedź?');
     setOnConfirm(() => () => handleConfirmDelete('answer', answerId));
     setShowConfirmPopup(true);
   };
-  
+
   const handleConfirmDelete = async (type, id) => {
     try {
       const endpoint = type === 'question' ? `/api/questions/delete/${id}` : `/api/answers/delete/${id}`;
@@ -289,7 +292,7 @@ const EditPageSet = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-  
+
       if (response.ok) {
         showMessage(`${type === 'question' ? 'Pytanie' : 'Odpowiedź'} zostało usunięte.`);
         await refreshQuestions();
@@ -331,19 +334,20 @@ const EditPageSet = () => {
     <div className={styles.appContainer}>
       <Navbar />
       <div className={styles.mainContent}>
-        <SetSidebar  
-          onSectionClick={handleSidebarClick} 
-          activeSection={activeSection} 
+        <SetSidebar
+          onSectionClick={handleSidebarClick}
+          activeSection={activeSection}
           setName={set?.name || 'Loading...'}
-          setId={id} 
+          setId={id}
           onClose={handleSidebarClose}
-          onSetUpdated={handleSetUpdated} 
-          isOwner={isOwner} 
+          onSetUpdated={handleSetUpdated}
+          isOwner={isOwner}
           isEditing={true}
           handleStartFlashcards={handleStartFlashcards}
+          isCollabolator={isCollabolator}
         />
         <div className={styles.content}>
-          {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}         
+          {successMessage && <div className={`${styles.alert} ${styles.alertSuccess}`}>{successMessage}</div>}
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
 
           {isOwner && (
@@ -360,41 +364,52 @@ const EditPageSet = () => {
 
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
-              {questions.map((question) => (
-                <div key={question.id} className={styles.questionItem}>
-                  <h4>{question.content}</h4>
-  
-                  {isOwner && (
-                    <div className={styles.questionActions}>
-                      <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
-                      <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
-                      <button className={styles.buttonDelete} onClick={() => handleDeleteQuestionClick(question.id)}><FaTrash /> Usuń pytanie</button>
-                    </div>
-                  )}
-  
-                  <div className={styles.answersList}>
-                    {question.answers && question.answers.length > 0 ? (
-                      question.answers.map((answer) => (
-                        <div 
-                          key={answer.id} 
-                          className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}                        >
-                        
-                          <p>{answer.content}</p>
-  
-                          {isOwner && (
-                            <div className={styles.answerActions}>
-                              <button className={styles.buttonEdit} onClick={() => handleEditAnswerClick(answer)}><FaEdit /> Edytuj</button>
-                              <button className={styles.buttonDelete} onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
-                            </div>
-                          )}
-                        </div>
-                      ))
-                    ) : (
-                      <p>Brak odpowiedzi</p>
+              {questions.map((question) => {
+                let { content } = question;
+                let imageUrl = '';
+
+                const imageTagIndex = content.indexOf('[Image]:');
+                if (imageTagIndex !== -1) {
+                  imageUrl = content.slice(imageTagIndex + '[Image]:'.length).trim();
+                  content = content.slice(0, imageTagIndex).trim();
+                }
+
+                return (
+                  <div key={question.id} className={styles.questionItem}>
+                    <h4>{content}</h4>
+                    {imageUrl && <img src={imageUrl} alt="Question image" style={{ maxWidth: '200px', height: 'auto' }} />}
+
+                    {isOwner && (
+                      <div className={styles.questionActions}>
+                        <button className={styles.buttonAdd} onClick={() => handleAddAnswerClick(question.id)}>Dodaj odpowiedź</button>
+                        <button className={styles.buttonEdit} onClick={() => handleEditQuestionClick(question.id)}><FaEdit /> Edytuj pytanie</button>
+                        <button className={styles.buttonDelete} onClick={() => handleDeleteQuestionClick(question.id)}><FaTrash /> Usuń pytanie</button>
+                      </div>
                     )}
+
+                    <div className={styles.answersList}>
+                      {question.answers && question.answers.length > 0 ? (
+                        question.answers.map((answer) => (
+                          <div
+                            key={answer.id}
+                            className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}
+                          >
+                            <p>{answer.content}</p>
+                            {isOwner && (
+                              <div className={styles.answerActions}>
+                                <button className={styles.buttonEdit} onClick={() => handleEditAnswerClick(answer)}><FaEdit /> Edytuj</button>
+                                <button className={styles.buttonDelete} onClick={() => handleDeleteAnswerClick(answer.id)}><FaTrash /> Usuń</button>
+                              </div>
+                            )}
+                          </div>
+                        ))
+                      ) : (
+                        <p>Brak odpowiedzi</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <p>Brak pytań</p>
@@ -415,91 +430,91 @@ const EditPageSet = () => {
                 setSelectedQuestionId(null);
               }}>X</button>
               <AddAnswer
-                  questionId={selectedQuestionId}
-                  questionContent={questions.find(q => q.id === selectedQuestionId)?.content || ''}
-                  onAnswerAdded={handleAnswerAdded} />
+                questionId={selectedQuestionId}
+                questionContent={questions.find(q => q.id === selectedQuestionId)?.content || ''}
+                onAnswerAdded={handleAnswerAdded} />
             </div>
           )}
-  
+
           {activeSection === 'addQuestion' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
               <AddQuestion setId={id} onQuestionAdded={handleQuestionAdded} />
             </div>
           )}
-  
+
           {editQuestionId && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => {
                 setEditQuestionId(null);
                 closeAllPopups();
               }}>X</button>
-              <EditQuestion 
-                questionId={editQuestionId} 
+              <EditQuestion
+                questionId={editQuestionId}
                 onClose={() => {
                   setEditQuestionId(null);
                   closeAllPopups();
-                }} 
-                onEditComplete={handleEditComplete} 
+                }}
+                onEditComplete={handleEditComplete}
               />
             </div>
           )}
-  
+
           {editAnswerId && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => {
                 setEditAnswerId(null);
                 closeAllPopups();
               }}>X</button>
-              <EditAnswer 
-                answerId={editAnswerId} 
+              <EditAnswer
+                answerId={editAnswerId}
                 onClose={() => {
                   setEditAnswerId(null);
                   closeAllPopups();
-                }} 
-                onAnswerEdited={handleAnswerEdited} 
+                }}
+                onAnswerEdited={handleAnswerEdited}
               />
             </div>
           )}
-  
+
           {activeSection === 'manageSet' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
-              <ManageSet 
-                setId={id} 
-                initialName={set?.name || ''} 
-                initialPrivacy={set?.isPublic || true} 
-                onClose={handleSidebarClose} 
-                onUpdate={(updatedSet) => setSet(updatedSet)} 
-                onSetUpdated={handleSetUpdated} 
+              <ManageSet
+                setId={id}
+                initialName={set?.name || ''}
+                initialPrivacy={set?.isPublic || true}
+                onClose={handleSidebarClose}
+                onUpdate={(updatedSet) => setSet(updatedSet)}
+                onSetUpdated={handleSetUpdated}
               />
             </div>
           )}
-  
+
           {activeSection === 'addCollaborator' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={() => {
                 closeAllPopups();
                 setActiveSection('');
               }}>X</button>
-              <AddCollaborator 
-                setId={id} 
+              <AddCollaborator
+                setId={id}
                 onClose={() => {
                   closeAllPopups();
                   setActiveSection('');
-                }} 
-                onCollaboratorAdded={handleCollaboratorAdded} 
+                }}
+                onCollaboratorAdded={handleCollaboratorAdded}
               />
             </div>
           )}
-  
+
           {activeSection === 'deleteSet' && (
             <div className={styles.popup}>
               <button className={styles.popupClose} onClick={handleSidebarClose}>X</button>
-              <DeleteSet 
-                setId={id} 
-                onClose={handleSidebarClose} 
-                onSetDeleted={handleSetDeleted} 
+              <DeleteSet
+                setId={id}
+                onClose={handleSidebarClose}
+                onSetDeleted={handleSetDeleted}
               />
             </div>
           )}
@@ -510,12 +525,12 @@ const EditPageSet = () => {
                 closeAllPopups();
                 setActiveSection('');
               }}>X</button>
-              <CollaboratorsList 
-                setId={id} 
+              <CollaboratorsList
+                setId={id}
                 onClose={() => {
                   closeAllPopups();
                   setActiveSection('');
-                }} 
+                }}
               />
             </div>
           )}
@@ -523,7 +538,7 @@ const EditPageSet = () => {
         </div>
       </div>
     </div>
-  );  
+  );
 };
 
 export default EditPageSet;

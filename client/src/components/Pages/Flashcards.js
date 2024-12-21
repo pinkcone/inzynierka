@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import styles from '../../styles/Flashcards.module.css';
 import Navbar from '../Navbar/Navbar';
 import { useSwipeable } from 'react-swipeable'; // Import biblioteki do obsługi swipe
+
 const Flashcards = () => {
     const { setId } = useParams();
     const [currentCard, setCurrentCard] = useState(0);
@@ -12,8 +13,8 @@ const Flashcards = () => {
     const [loading, setLoading] = useState(true);
     const [question, setQuestion] = useState(null);
     const [answers, setAnswers] = useState([]);
-    const [sortHistory, setSortHistory] = useState([]); // Tablica do historii sortowania
     const [visitedCards, setVisitedCards] = useState([]);
+
     // Funkcja do pobrania fiszek z serwera
     const fetchFlashcards = async () => {
         const token = localStorage.getItem('token');
@@ -108,17 +109,17 @@ const Flashcards = () => {
     const nextCard = () => {
         // Dodaj aktualne ID karty do historii
         setVisitedCards((prevHistory) => [...prevHistory, cards[currentCard].id]);
-    
+
         // Przesuń kartę zgodnie z algorytmem
         moveCard(currentCard);
         setFlipped(false);
     };
-    
+
     const prevCard = () => {
         if (visitedCards.length > 0) {
             // Pobierz ostatnie ID z historii
             const lastId = visitedCards[visitedCards.length - 1];
-    
+
             // Znajdź indeks karty na podstawie ID
             const lastIndex = cards.findIndex((card) => card.id === lastId);
             if (lastIndex !== -1) {
@@ -126,7 +127,7 @@ const Flashcards = () => {
             } else {
                 console.warn('Nie znaleziono karty w tablicy.');
             }
-    
+
             // Usuń ostatnie ID z historii
             setVisitedCards((prevHistory) => prevHistory.slice(0, -1));
         } else {
@@ -139,7 +140,6 @@ const Flashcards = () => {
         setFlipped(!flipped);
     };
 
-    // Zaktualizowana funkcja lokalna do obliczania nowego poziomu (levelu) z uwzględnieniem lastEvaluation
     const calculateNewLevel = (evaluation, lastEvaluation) => {
         let currentLevel = cards[currentCard].currentLevel;
         if (evaluation === 1) {
@@ -156,37 +156,35 @@ const Flashcards = () => {
         return currentLevel;
     };
 
-    // Funkcja lokalna do obliczania nowego streaku
     const calculateNewStreak = (evaluation) => {
         let currentStreak = cards[currentCard].streak;
         if (evaluation === 1) {
             if (currentStreak < 0) return 0;
-            return currentStreak + 1
+            return currentStreak + 1;
         }
-        else if (evaluation == -1) {
+        else if (evaluation === -1) {
             if (currentStreak > 0) return 0;
             return currentStreak - 1;
         } else return 0;
     };
 
-    // Funkcja do wysyłania oceny na backend i aktualizacji postępu oraz przesunięcia fiszki na koniec
     const handleFeedback = async (evaluation) => {
         const token = localStorage.getItem('token');
         if (!token) {
             console.error('Brak tokenu autoryzacyjnego przy aktualizacji fiszki!');
             return;
         }
-    
+
         try {
             const flashcardId = cards[currentCard].id; // Aktualizujemy obecną fiszkę
             const lastEvaluation = cards[currentCard].lastEvaluation;
-    
+
             // Obliczamy nowe wartości
             const updatedLevel = calculateNewLevel(evaluation, lastEvaluation);
             const updatedStreak = calculateNewStreak(evaluation);
             const updatedEvaluation = evaluation;
             const updatedReviewed = new Date();
-    
+
             // Wysyłamy zapytanie do serwera
             const response = await fetch(`/api/flashcards/update/${flashcardId}`, {
                 method: 'PUT',
@@ -201,9 +199,8 @@ const Flashcards = () => {
                     lastReviewed: updatedReviewed,
                 }),
             });
-    
+
             if (response.ok) {
-                // Zmieniamy tylko jeden element w tablicy `cards`
                 const updatedCard = {
                     ...cards[currentCard],
                     currentLevel: updatedLevel,
@@ -211,24 +208,24 @@ const Flashcards = () => {
                     lastEvaluation: updatedEvaluation,
                     lastReviewed: updatedReviewed,
                 };
-    
+
                 const updatedCards = [...cards];
                 updatedCards[currentCard] = updatedCard;
-    
+
                 // Dodajemy aktualne ID do historii
                 setVisitedCards((prevHistory) => [...prevHistory, updatedCard.id]);
-    
+
                 // Przenosimy kartę na nowe miejsce
                 const newCards = [...updatedCards];
                 const [cardToMove] = newCards.splice(currentCard, 1); // Usuń aktualną kartę z bieżącej pozycji
                 const newPosition = calculateInsertPosition(cardToMove); // Oblicz nową pozycję
                 newCards.splice(newPosition, 0, cardToMove); // Wstaw kartę na obliczoną pozycję
-    
+
                 // Aktualizujemy tablicę fiszek i ustawiamy pierwszą kartę
                 setCards(newCards);
                 setFlipped(false);
                 setCurrentCard(0); // Wyświetl pierwszą kartę po przestawieniu
-    
+
                 console.log('Fiszka zaktualizowana lokalnie');
             } else {
                 console.error('Błąd podczas aktualizacji fiszki:', response.statusText);
@@ -238,7 +235,6 @@ const Flashcards = () => {
         }
     };
 
-    // Funkcja do obliczania miejsca wstawienia fiszki na podstawie algorytmu
     const calculateInsertPosition = (card) => {
         const totalCards = cards.length;
         let targetIndex;
@@ -262,26 +258,21 @@ const Flashcards = () => {
         return targetIndex;
     };
 
-    // Przenoszenie fiszki na wyliczoną pozycję
     const moveCard = (cardIndex) => {
         setFlipped(false);
         const updatedCards = [...cards];
         const [card] = updatedCards.splice(cardIndex, 1); // Wycinamy fiszkę
 
-        // Obliczamy nową pozycję na podstawie wyliczonego priorytetu
         const targetIndex = calculateInsertPosition(card);
-
-        // Wstawiamy fiszkę na obliczoną pozycję
         updatedCards.splice(targetIndex, 0, card);
 
-        // Aktualizujemy stan fiszek
         setCards(updatedCards);
-        setCurrentCard(0); // Wracamy do pierwszej fiszki
+        setCurrentCard(0); 
     };
+
     const updateProgressBar = (cards) => {
         const totalCards = cards.length;
 
-        // Obliczamy, ile fiszek ma który level (przypisujemy im kolory)
         const colorCounts = {
             green: 0,
             yellow: 0,
@@ -289,23 +280,19 @@ const Flashcards = () => {
             gray: 0
         };
 
-        // Zliczamy liczbę fiszek dla każdego koloru
         cards.forEach(card => {
             if (!card.lastReviewed) {
-                colorCounts.gray += 1; // Fiszka nie była jeszcze przeglądana
+                colorCounts.gray += 1; 
             } else if (card.currentLevel >= 6) {
-                colorCounts.green += 1; // Level 6-7
+                colorCounts.green += 1; 
             } else if (card.currentLevel >= 4) {
-                colorCounts.yellow += 1; // Level 4-5
+                colorCounts.yellow += 1; 
             } else {
-                colorCounts.red += 1; // Level 1-3
+                colorCounts.red += 1; 
             }
         });
 
-        // Tworzymy pasek wypełniony odpowiednimi kolorami, bez przerw
         const progressBarElements = [];
-
-        // Dodajemy fragmenty paska zgodnie z wyliczonymi proporcjami i kolejnością kolorów
         ['green', 'yellow', 'red', 'gray'].forEach(color => {
             if (colorCounts[color] > 0) {
                 progressBarElements.push(
@@ -313,9 +300,9 @@ const Flashcards = () => {
                         key={color}
                         className={`${styles.progressTile} ${styles[color]}`}
                         style={{
-                            display: 'inline-block', // Dodajemy inline-block, żeby nie było przerw
+                            display: 'inline-block',
                             width: `${(colorCounts[color] / totalCards) * 100}%`
-                        }} // Proporcjonalna szerokość
+                        }}
                     />
                 );
             }
@@ -323,10 +310,22 @@ const Flashcards = () => {
 
         return progressBarElements;
     };
+
     const swipeHandlers = useSwipeable({
         onSwipedLeft: () => prevCard(),
         onSwipedRight: () => nextCard(),
     });
+
+    let displayContent = question ? question.content : '';
+    let imageUrl = '';
+    if (displayContent) {
+        const imageTagIndex = displayContent.indexOf('[Image]:');
+        if (imageTagIndex !== -1) {
+            imageUrl = displayContent.slice(imageTagIndex + '[Image]:'.length).trim();
+            displayContent = displayContent.slice(0, imageTagIndex).trim();
+        }
+    }
+
     return (
         <div className={styles.appContainer}>
             <Navbar />
@@ -340,9 +339,10 @@ const Flashcards = () => {
                     ) : (
                         <>
                             <div {...swipeHandlers} className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={flipCard}>
-                                <div  className={styles.cardInner}>
+                                <div className={styles.cardInner}>
                                     <div className={styles.cardFront}>
-                                        {question ? question.content : 'Brak fiszek do wyświetlenia'}
+                                        {displayContent || 'Brak fiszek do wyświetlenia'}
+                                        {imageUrl && <img src={imageUrl} alt="Question image"/>}
                                     </div>
                                     <div className={styles.cardBack}>
                                         {answers.length > 0 ? (
@@ -356,8 +356,8 @@ const Flashcards = () => {
                                         )}
                                     </div>
                                 </div>
-                                <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}><img src="/images/arrow.svg"/></button>
-                                <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}><img src="/images/arrow.svg"/></button>
+                                <button onClick={(e) => { e.stopPropagation(); prevCard(); }} className={`${styles.arrow} ${styles.left}`}><img src="/images/arrow.svg" alt="Poprzednia karta" /></button>
+                                <button onClick={(e) => { e.stopPropagation(); nextCard(); }} className={`${styles.arrow} ${styles.right}`}><img src="/images/arrow.svg" alt="Następna karta" /></button>
                             </div>
 
                             <div className={styles.emotions}>
@@ -365,17 +365,6 @@ const Flashcards = () => {
                                 <span onClick={() => handleFeedback(0)}>&#128528;</span> {/* neutral */}
                                 <span onClick={() => handleFeedback(-1)}>&#128577;</span> {/* bad */}
                             </div>
-
-                            {/* Wyświetlanie aktualnej tablicy fiszek
-                            <div className={styles.sortHistory}>
-                                <h3>Aktualna tablica fiszek (ID, Index, Level, Streak):</h3>
-                                {cards.map((card, index) => (
-                                    <div key={index}>
-                                        <p>ID: {card.id}, Index: {index + 1}, Level: {card.currentLevel}, Streak: {card.streak}</p>
-                                    </div>
-                                ))}
-                            </div> */}
-
                         </>
                     )}
                 </div>
