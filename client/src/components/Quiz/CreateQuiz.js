@@ -110,6 +110,14 @@ const CreateQuiz = ({ setId, onClose }) => {
             console.log(error);
         }
     };
+    const getTextOnlyContent = (content) => {
+        if (!content) return '';
+        const imageTagIndex = content.indexOf('[Image]:');
+        if (imageTagIndex !== -1) {
+            return content.slice(0, imageTagIndex).trim();
+        }
+        return content.trim();
+    };
 
     return (
         <div className={styles.manualPopup}>
@@ -139,15 +147,6 @@ const CreateQuiz = ({ setId, onClose }) => {
                 />
             </label>
 
-            {/* <label className={styles.black}>
-                Czy quiz jest publiczny:
-                <input
-                    type="checkbox"
-                    checked={isPublic}
-                    onChange={(e) => setIsPublic(e.target.checked)}
-                />
-            </label> */}
-
             {timeError && <p className={styles.error}>{timeError}</p>}
             {error && <p className={styles.error}>{error}</p>}
 
@@ -164,16 +163,19 @@ const CreateQuiz = ({ setId, onClose }) => {
             </div>
 
             {questions.length > 0 ? (
-                questions.map((question) => (
-                    <label key={question.id} className={styles.checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={selectedQuestions.includes(question.id)}
-                            onChange={() => handleQuestionSelect(question.id)}
-                        />
-                        {question.content}
-                    </label>
-                ))
+                questions.map((question) => {
+                    const textContent = getTextOnlyContent(question.content);
+                    return (
+                        <label key={question.id} className={styles.checkbox}>
+                            <input
+                                type="checkbox"
+                                checked={selectedQuestions.includes(question.id)}
+                                onChange={() => handleQuestionSelect(question.id)}
+                            />
+                            {textContent}
+                        </label>
+                    );
+                })
             ) : (
                 <p>Brak pytań w zestawie.</p>
             )}

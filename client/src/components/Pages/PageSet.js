@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import SetSidebar from '../Sidebar/SetSidebar';
 import styles from '../../styles/PageSet.module.css';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'; 
+import { jwtDecode } from 'jwt-decode';
 import CreateTest from '../Test/CreateTest';
 import ReportForm from '../Report/ReportForm';
 import CreateQuiz from "../Quiz/CreateQuiz";
@@ -16,9 +16,8 @@ const PageSet = () => {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const [isOwner, setIsOwner] = useState(false); 
-  const [activeSection, setActiveSection] = useState(''); 
-
+  const [isOwner, setIsOwner] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   useEffect(() => {
     const fetchSet = async () => {
       try {
@@ -36,7 +35,7 @@ const PageSet = () => {
           const userId = decodedToken.userId || decodedToken.id || decodedToken.sub;
 
           if (userId.toString() === data.ownerId.toString() || data.collaboratorsList?.[userId]) {
-            setIsOwner(true); 
+            setIsOwner(true);
           } else {
             setIsOwner(false);
           }
@@ -85,18 +84,18 @@ const PageSet = () => {
 
     fetchSet();
     fetchQuestions();
-  }, [id]); 
+  }, [id]);
 
   const handleEditSetClick = () => {
-    navigate(`/editset/${id}`); 
+    navigate(`/editset/${id}`);
   };
 
   const handleSectionClick = (section) => {
-    setActiveSection(section); 
+    setActiveSection(section);
   };
 
   const handleClosePopup = () => {
-    setActiveSection(''); 
+    setActiveSection('');
   };
 
 
@@ -125,21 +124,22 @@ const PageSet = () => {
 
 
   return (
+    
     <div className={styles.appContainer}>
       <Navbar />
       <div className={styles.mainContent}>
-        <SetSidebar  
+        {set!=null && (<SetSidebar
           setName={set?.name || 'Loading...'}
           setId={id}
           onSectionClick={handleSectionClick}
-          isOwner={isOwner} 
-          isEditing={false} 
-          handleStartFlashcards={handleStartFlashcards} 
-        />
+          isOwner={isOwner}
+          isEditing={false}
+          handleStartFlashcards={handleStartFlashcards}
+        />)}
 
         <div className={styles.content}>
           {error && <div className={`${styles.alert} ${styles.alertDanger}`}>{error}</div>}
-          
+
           {isOwner && (
             <div className={styles.editSetButtonContainer}>
               <button className={styles.crudbutton} onClick={handleEditSetClick}>
@@ -150,14 +150,14 @@ const PageSet = () => {
 
           {activeSection === 'createTest' && (
             <div className={styles.popup}>
-              <CreateTest setId={id} onClose={handleClosePopup} /> 
+              <CreateTest setId={id} onClose={handleClosePopup} />
             </div>
           )}
 
           {activeSection === 'createQuiz' && (
-              <div className={styles.popup}>
-                <CreateQuiz setId={id} onClose={handleClosePopup} />
-              </div>
+            <div className={styles.popup}>
+              <CreateQuiz setId={id} onClose={handleClosePopup} />
+            </div>
           )}
 
           {activeSection === 'reportSet' && (
@@ -168,25 +168,37 @@ const PageSet = () => {
           {flashcardsError && <p className={styles.error}>{flashcardsError}</p>}
           {questions.length > 0 ? (
             <div className={styles.questionsList}>
-              {questions.map((question) => (
-                <div key={question.id} className={styles.questionItem}>
-                  <h4>{question.content}</h4>
-                  <div className={styles.answersList}>
-                  {question.answers && question.answers.length > 0 ? (
-                    question.answers.map((answer) => (
-                      <div 
-                        key={answer.id} 
-                        className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}
-                      >
-                        <p>{answer.content}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>Brak odpowiedzi</p>
-                  )}
+              {questions.map((question) => {
+                let { content } = question;
+                let imageUrl = '';
+
+                const imageTagIndex = content.indexOf('[Image]:');
+                if (imageTagIndex !== -1) {
+                  imageUrl = content.slice(imageTagIndex + '[Image]:'.length).trim();
+                  content = content.slice(0, imageTagIndex).trim();
+                }
+
+                return (
+                  <div key={question.id} className={styles.questionItem}>
+                    <h4>{content}</h4>
+                    {imageUrl && <img src={imageUrl} alt="Question image" style={{ maxWidth: '200px', height: 'auto' }} />}
+                    <div className={styles.answersList}>
+                      {question.answers && question.answers.length > 0 ? (
+                        question.answers.map((answer) => (
+                          <div
+                            key={answer.id}
+                            className={`${styles.answerItem} ${answer.isTrue ? styles.answerCorrect : styles.answerIncorrect}`}
+                          >
+                            <p>{answer.content}</p>
+                          </div>
+                        ))
+                      ) : (
+                        <p>Brak odpowiedzi</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <p>Brak pytań</p>

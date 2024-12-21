@@ -11,6 +11,7 @@ const SetSidebar = ({
   isEditing,
   setId,
   handleStartFlashcards,
+  isCollabolator,
 }) => {
   const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ const SetSidebar = ({
         </div>
 
         <ul>
-          {isOwner && isEditing && (
+          {!isCollabolator && isOwner && isEditing && (
             <>
               <li>
                 <button

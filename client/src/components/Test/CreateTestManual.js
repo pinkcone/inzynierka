@@ -65,7 +65,6 @@ const CreateTestManual = ({setId, onClose}) => {
         }
     };
 
-
     const handleTestNameChange = (e) => {
         const value = e.target.value;
 
@@ -121,6 +120,15 @@ const CreateTestManual = ({setId, onClose}) => {
         }
     };
 
+    const getTextOnlyContent = (content) => {
+        if (!content) return '';
+        const imageTagIndex = content.indexOf('[Image]:');
+        if (imageTagIndex !== -1) {
+            return content.slice(0, imageTagIndex).trim();
+        }
+        return content.trim();
+    };
+
     return (
         <div className={styles.manualPopup}>
             <button className={styles.popupClose} onClick={onClose}>X</button>
@@ -137,6 +145,7 @@ const CreateTestManual = ({setId, onClose}) => {
                 />
             </label>
             {testNameError && <p className={styles.error}>{testNameError}</p>}
+
             <label className={styles.black}>
                 Czas na cały test (minuty):
                 <input
@@ -164,16 +173,19 @@ const CreateTestManual = ({setId, onClose}) => {
             </div>
 
             {questions.length > 0 ? (
-                questions.map((question) => (
-                    <label key={question.id} className={styles.black}>
-                        <input
-                            type="checkbox"
-                            checked={selectedQuestions.includes(question.id)}
-                            onChange={() => handleQuestionSelect(question.id)}
-                        />
-                        {question.content}
-                    </label>
-                ))
+                questions.map((question) => {
+                    const textContent = getTextOnlyContent(question.content);
+                    return (
+                        <label key={question.id} className={styles.black}>
+                            <input
+                                type="checkbox"
+                                checked={selectedQuestions.includes(question.id)}
+                                onChange={() => handleQuestionSelect(question.id)}
+                            />
+                            {textContent}
+                        </label>
+                    );
+                })
             ) : (
                 <p>Brak pytań w zestawie.</p>
             )}

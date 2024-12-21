@@ -26,5 +26,6 @@ app.use('/api/tests', testRoutes);
 app.use('/api/completed-tests', completedTestRoutes);
 app.use('/api/report', reportRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/uploads', express.static('uploads'));
 
 module.exports = app;

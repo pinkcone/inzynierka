@@ -2,6 +2,80 @@ const Question = require('../models/Question');
 const Set = require('../models/Set');
 const Answer = require('../models/Answer');
 const { Sequelize } = require('sequelize');
+const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
+
+function deleteImageByUrl(req, res) {
+  const { imageUrl } = req.body;
+
+  if (!imageUrl) {
+    return res.status(400).json({ message: 'Brak URL obrazu.' });
+  }
+
+  const fileName = path.basename(imageUrl);
+  const filePath = path.join(__dirname, '..', 'uploads', fileName);
+
+  fs.stat(filePath, (err) => {
+    if (err) {
+      // Plik nie istnieje
+      return res.status(404).json({ message: 'Plik nie istnieje lub został już usunięty.' });
+    }
+
+    fs.unlink(filePath, (unlinkErr) => {
+      if (unlinkErr) {
+        console.error('Błąd podczas usuwania pliku:', unlinkErr);
+        return res.status(500).json({ message: 'Błąd podczas usuwania pliku.' });
+      }
+
+      return res.status(200).json({ message: 'Plik został usunięty pomyślnie.' });
+    });
+  });
+}
+
+// Konfiguracja multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // folder, w którym będą przechowywane pliki
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // przykładowy limit 5MB
+    fileFilter: (req, file, cb) => {
+        // Przykładowa walidacja typu pliku
+        if (!file.mimetype.startsWith('image/')) {
+            const errMessage = 'Niedozwolony format pliku, oczekiwany obraz.';
+            console.error(`[UPLOAD ERROR] ${errMessage} Typ pliku: ${file.mimetype}`);
+            return cb(new Error(errMessage), false);
+        }
+        cb(null, true);
+    }
+});
+
+// Funkcja obsługująca upload pliku
+const uploadImage = (req, res) => {
+    try {
+        if (!req.file) {
+            const msg = 'Brak pliku w żądaniu.';
+            console.error('[UPLOAD ERROR]', msg);
+            return res.status(400).json({ message: msg });
+        }
+
+        // Generujemy pełny URL do pliku
+        const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        console.log(`[UPLOAD SUCCESS] Plik zapisany: ${req.file.path}`);
+        res.status(200).json({ fileUrl });
+    } catch (error) {
+        console.error('[UPLOAD ERROR]', error.message);
+        res.status(500).json({ message: 'Wystąpił błąd podczas przesyłania obrazu.', error: error.message });
+    }
+};
 
 const addQuestion = async (req, res) => {
     try {
@@ -222,5 +296,8 @@ module.exports = {
     getQuestionsBySet,
     getQuestionById,
     updateQuestionType,
-    checkQuestionEligibility
+    checkQuestionEligibility,
+    upload, 
+    uploadImage,
+    deleteImageByUrl,
 };

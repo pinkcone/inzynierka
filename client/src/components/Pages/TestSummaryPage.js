@@ -3,7 +3,6 @@ import Navbar from '../Navbar/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from '../../styles/TestSummaryPage.module.css';
 
-
 const TestSummaryPage = () => {
     const [testSummary, setTestSummary] = useState(null);
     const [error, setError] = useState('');
@@ -64,9 +63,25 @@ const TestSummaryPage = () => {
                         const correct = correctAnswers[question.id] || [];
                         const scoreForQuestion = questionScores[question.id] || 0;
 
+                        // Wyodrębnianie obrazu z treści pytania
+                        let displayContent = question.content || '';
+                        let imageUrl = null;
+                        const imageTagIndex = displayContent.indexOf('[Image]:');
+                        if (imageTagIndex !== -1) {
+                            imageUrl = displayContent.slice(imageTagIndex + '[Image]:'.length).trim();
+                            displayContent = displayContent.slice(0, imageTagIndex).trim();
+                        }
+
                         return (
                             <div key={question.id} className={styles.questionBlock}>
-                                <h3>{question.content}</h3>
+                                <h3>{displayContent}</h3>
+                                {imageUrl && (
+                                    <img
+                                        src={imageUrl}
+                                        alt="Obraz do pytania"
+                                        style={{ maxWidth: '200px', height: 'auto', marginTop: '10px' }}
+                                    />
+                                )}
                                 <ul>
                                     {question.answers.map((answer) => {
                                         const isCorrect = correct.includes(answer.id);
@@ -91,12 +106,11 @@ const TestSummaryPage = () => {
                             </div>
                         );
                     })}
-                    <button className={styles.crudbutton}onClick={() => navigate('/mytests')}>Powrót do testów</button>
+                    <button className={styles.crudbutton} onClick={() => navigate('/mytests')}>Powrót do testów</button>
                 </div>
             </div>
         </div>
     );
-
 };
 
 export default TestSummaryPage;

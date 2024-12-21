@@ -34,7 +34,13 @@
     perspective: 1200px;
     cursor: pointer;
 }
-
+.card img{
+    display: block;
+    margin-top: 10px;
+    width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
 .cardInner {
     position: relative;
     width: 100%;
@@ -55,6 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
