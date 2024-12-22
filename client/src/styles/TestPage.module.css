@@ -53,9 +53,7 @@
     cursor: pointer;
     font-size: 16px;
     width: max(400px, 90%);
-    
     margin: 10px;
-
 }
 
 .answerButton:hover {

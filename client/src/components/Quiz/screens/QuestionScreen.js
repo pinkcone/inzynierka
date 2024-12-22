@@ -27,7 +27,7 @@ const QuestionScreen = ({ question, handleAnswerClick, questionTime }) => {
                     {Math.floor((questionTime -1) / 60)}:{String((questionTime - 1 )% 60).padStart(2, '0')}
                 </div>
                 <h2>{displayContent}</h2>
-                {imageUrl && <img src={imageUrl} alt="Question image" style={{maxWidth: '200px', height: 'auto', marginTop: '10px'}} />}
+                {imageUrl && <img src={imageUrl} alt="Question image" style={{maxWidth: '300px', height: 'auto', marginTop: '10px'}} />}
                 <div className={styles.answers}>
                     {question.answers.map((answer, index) => (
                         <button

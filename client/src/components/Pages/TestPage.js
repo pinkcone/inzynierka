@@ -196,7 +196,7 @@ const TestPage = () => {
                     {questions && questions.length > 0 ? (
                         <div className={styles.questionContainer}>
                             <h3>{displayContent}</h3>
-                            {imageUrl && <img src={imageUrl} alt="Question image" style={{maxWidth: '200px', height: 'auto', marginTop: '10px'}} />}
+                            {imageUrl && <img src={imageUrl} alt="Question image" style={{maxWidth: '300px', height: 'auto', marginTop: '10px'}} />}
                             <div className={styles.answers}>
                                 {questions[currentQuestion].Answers.map((answer, index) => (
                                     <button
