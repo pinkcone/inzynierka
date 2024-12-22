@@ -11,34 +11,59 @@ const TestSummaryPage = () => {
 
     useEffect(() => {
         const fetchTestSummary = async () => {
+            console.log("Rozpoczęto pobieranie podsumowania testu...");
             try {
+                if (!id) {
+                    console.warn("Brak ID testu w parametrze URL.");
+                    setError('Brak id zakończonego testu.');
+                    return;
+                }
+
+                console.log("ID testu:", id);
                 const response = await fetch(`/api/completed-tests/get-test/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    data.completedTest.selectedAnswer = JSON.parse(data.completedTest.selectedAnswer);
-                    data.completedTest.questionScores = JSON.parse(data.completedTest.questionScores);
-                    setTestSummary(data);
-                } else {
+                console.log("Status odpowiedzi z backendu:", response.status);
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Błąd odpowiedzi z backendu:", errorText);
                     setError('Nie udało się pobrać danych podsumowania testu.');
+                    return;
                 }
+
+                const data = await response.json();
+                console.log("Dane otrzymane z backendu:", data);
+
+                if (typeof data.completedTest.selectedAnswer === 'string') {
+                    console.log("Parsuję selectedAnswer...");
+                    data.completedTest.selectedAnswer = JSON.parse(data.completedTest.selectedAnswer);
+                } else {
+                    console.warn("selectedAnswer już jest obiektem:", data.completedTest.selectedAnswer);
+                }
+
+                if (typeof data.completedTest.questionScores === 'string') {
+                    console.log("Parsuję questionScores...");
+                    data.completedTest.questionScores = JSON.parse(data.completedTest.questionScores);
+                } else {
+                    console.warn("questionScores już jest obiektem:", data.completedTest.questionScores);
+                }
+
+                console.log("Dane po parsowaniu:", data);
+                setTestSummary(data);
             } catch (err) {
+                console.error("Błąd podczas pobierania danych:", err.message);
                 setError(`Wystąpił błąd: ${err.message}`);
             }
         };
 
-        if (id) {
-            fetchTestSummary();
-        } else {
-            setError('Brak id zakończonego testu.');
-        }
+        fetchTestSummary();
     }, [id]);
 
     if (!testSummary || !testSummary.questions) {
+        console.log("Brak danych lub pytania są puste:", { testSummary, error });
         return error ? <p>{error}</p> : <p>Ładowanie podsumowania...</p>;
     }
 
@@ -46,6 +71,12 @@ const TestSummaryPage = () => {
     const { selectedAnswer, questionScores, score, Test: testDetails } = completedTest;
 
     const totalPoints = Array.isArray(questions) ? questions.length : 0;
+
+    console.log("Renderowanie podsumowania testu...");
+    console.log("Test Details:", testDetails);
+    console.log("Total Points:", totalPoints);
+    console.log("Selected Answers:", selectedAnswer);
+    console.log("Question Scores:", questionScores);
 
     return (
         <div className={styles.pageWrapper}>
@@ -59,6 +90,7 @@ const TestSummaryPage = () => {
                 </div>
                 <div className={styles.questionsSummary}>
                     {questions.map((question) => {
+                        console.log("Pytanie:", question);
                         const userAnswers = selectedAnswer[question.id] || [];
                         const correct = correctAnswers[question.id] || [];
                         const scoreForQuestion = questionScores[question.id] || 0;
@@ -71,6 +103,11 @@ const TestSummaryPage = () => {
                             imageUrl = displayContent.slice(imageTagIndex + '[Image]:'.length).trim();
                             displayContent = displayContent.slice(0, imageTagIndex).trim();
                         }
+
+                        console.log("Obraz URL:", imageUrl);
+                        console.log("Odpowiedzi użytkownika:", userAnswers);
+                        console.log("Poprawne odpowiedzi:", correct);
+                        console.log("Wynik za pytanie:", scoreForQuestion);
 
                         return (
                             <div key={question.id} className={styles.questionBlock}>

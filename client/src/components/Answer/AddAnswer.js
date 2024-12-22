@@ -8,6 +8,19 @@ const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Funkcja pomocnicza do usuwania fragmentu z [Image]:
+  const getTextOnlyContent = (content) => {
+    if (!content) return '';
+    const imageTagIndex = content.indexOf('[Image]:');
+    if (imageTagIndex !== -1) {
+      return content.slice(0, imageTagIndex).trim();
+    }
+    return content.trim();
+  };
+
+  // Wyodrębniamy czystą treść pytania (bez linku do obrazka)
+  const textContent = getTextOnlyContent(questionContent);
+
   const fetchAnswers = useCallback(async () => {
     try {
       const response = await fetch(`/api/answers/question/${questionId}`, {
@@ -71,7 +84,7 @@ const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
   return (
     <div className={styles.addAnswerSection}>
       <h3>Dodaj odpowiedzi do pytania:</h3>
-      <p>{questionContent}</p>
+      <p>{textContent}</p> {/* Wyświetlamy tylko tekstową część pytania */}
       {error && <div className={styles.alert}>{error}</div>}
 
       <ul className={styles.answersList}>
