@@ -169,7 +169,6 @@ module.exports = (io, socket) => {
 
   socket.on('startQuiz', ({ code }) => {
     const quiz = activeQuizzes[code];
-    console.log("startuje do gówno kurewko")
     if (quiz && quiz.organizerSocketId === socket.id) {
       quiz.isStarted = true;
       io.to(code).emit('quizStarted');
@@ -184,11 +183,9 @@ module.exports = (io, socket) => {
   function sendQuestionToParticipants(quiz) {
     const code = quiz.code;
     const questionIndex = quiz.currentQuestionIndex;
-    console.log("wysylam pytanko", questionIndex);
     if (questionIndex >= quiz.questions.length) {
       return;
     }
-
     io.to(code).emit('showCountdown', { countdown: 5 });
 
     setTimeout(() => {
@@ -208,7 +205,6 @@ module.exports = (io, socket) => {
       });
 
       quiz.currentAnswers = {};
-
       quiz.answerTimer = setTimeout(() => {
         console.log('Upłynął czas na odpowiedź, obliczam wyniki...');
         calculateResultsAndProceed(quiz);
