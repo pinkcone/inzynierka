@@ -49,7 +49,6 @@ const QuizLobby = () => {
   }, [quizId, socket, quizStarted, quizCode]);
 
   useEffect(() => {
-    // Gdy isMuted zmieni się na false, spróbuj odtworzyć audio
     if (audioRef.current) {
       audioRef.current.muted = isMuted;
       audioRef.current.volume = volume;
@@ -102,7 +101,6 @@ const QuizLobby = () => {
         Your browser does not support the audio element.
       </audio>
 
-      {/* Ikona głośnika w prawym górnym rogu */}
       <div className={styles.soundControl}>
         <div className={styles.soundIcon} onClick={toggleMute}>
           {isMuted ? '🔇' : '🔊'}

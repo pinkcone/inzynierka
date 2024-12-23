@@ -4,13 +4,13 @@
   left: 0;
   height: 80vh;
   width: 250px;
-  transform: translateX(-230px); /* Domyślnie schowane */
+  transform: translateX(-230px);
   transition: transform 0.3s ease;
   z-index: 99;
 }
 
 .sidebar-container:hover {
-  transform: translateX(0); /* Wysunięcie przy najechaniu */
+  transform: translateX(0);
 }
 
 .sidebar-tab {

@@ -95,7 +95,6 @@ const TestSummaryPage = () => {
                         const correct = correctAnswers[question.id] || [];
                         const scoreForQuestion = questionScores[question.id] || 0;
 
-                        // Wyodrębnianie obrazu z treści pytania
                         let displayContent = question.content || '';
                         let imageUrl = null;
                         const imageTagIndex = displayContent.indexOf('[Image]:');

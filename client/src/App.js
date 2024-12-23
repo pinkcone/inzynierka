@@ -39,7 +39,6 @@ const App = () => {
     useEffect(() => {
         const logoutMessage = localStorage.getItem('logoutMessage');
         if (logoutMessage) {
-            // console.log("Toast message: ", logoutMessage);
             toast.success(logoutMessage);
             setTimeout(() => {
                 localStorage.removeItem('logoutMessage');

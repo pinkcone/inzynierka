@@ -4,7 +4,6 @@ import styles from '../../../styles/StartWaitingScreen.module.css';
 const QuestionScreen = ({ question, handleAnswerClick, questionTime }) => {
     const [shuffledColors, setShuffledColors] = useState([]);
 
-    // Wyodrębniamy obraz z treści pytania
     let displayContent = question.content || '';
     let imageUrl = null;
     const imageTagIndex = displayContent.indexOf('[Image]:');

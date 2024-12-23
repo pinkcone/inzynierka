@@ -18,7 +18,6 @@ function deleteImageByUrl(req, res) {
 
   fs.stat(filePath, (err) => {
     if (err) {
-      // Plik nie istnieje
       return res.status(404).json({ message: 'Plik nie istnieje lub został już usunięty.' });
     }
 
@@ -33,10 +32,9 @@ function deleteImageByUrl(req, res) {
   });
 }
 
-// Konfiguracja multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // folder, w którym będą przechowywane pliki
+        cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -46,9 +44,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // przykładowy limit 5MB
+    limits: { fileSize: 5 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
-        // Przykładowa walidacja typu pliku
         if (!file.mimetype.startsWith('image/')) {
             const errMessage = 'Niedozwolony format pliku, oczekiwany obraz.';
             console.error(`[UPLOAD ERROR] ${errMessage} Typ pliku: ${file.mimetype}`);
@@ -58,7 +55,6 @@ const upload = multer({
     }
 });
 
-// Funkcja obsługująca upload pliku
 const uploadImage = (req, res) => {
     try {
         if (!req.file) {
@@ -67,7 +63,6 @@ const uploadImage = (req, res) => {
             return res.status(400).json({ message: msg });
         }
 
-        // Generujemy pełny URL do pliku
         const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
         console.log(`[UPLOAD SUCCESS] Plik zapisany: ${req.file.path}`);
         res.status(200).json({ fileUrl });
@@ -82,7 +77,6 @@ const addQuestion = async (req, res) => {
         const { content, type, setId } = req.body;
         const userId = req.user.id;
 
-        // Sprawdzamy, czy użytkownik jest właścicielem lub współtwórcą zestawu
         const set = await Set.findOne({
             where: {
                 id: setId,
@@ -144,7 +138,6 @@ const editQuestion = async (req, res) => {
     }
 };
 
-// Usuwanie pytania
 const deleteQuestion = async (req, res) => {
     try {
         const { id } = req.params;
@@ -217,9 +210,6 @@ const getQuestionsBySet = async (req, res) => {
     }
 };
 
-
-
-// Pobieranie pytania na podstawie ID
 const getQuestionById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -236,7 +226,6 @@ const getQuestionById = async (req, res) => {
     }
 };
 
-// Aktualizacja typu pytania na podstawie liczby poprawnych odpowiedzi
 async function updateQuestionType(id) {
     try {
         const question = await Question.findByPk(id);
@@ -273,8 +262,8 @@ async function checkQuestionEligibility(id, type) {
 
     const counts = await Answer.findAll({
         attributes: [
-            [Sequelize.fn('COUNT', Sequelize.col('id')), 'totalAnswers'], // Liczba wszystkich odpowiedzi
-            [Sequelize.fn('SUM', Sequelize.literal('CASE WHEN isTrue = true THEN 1 ELSE 0 END')), 'correctAnswers'] // Liczba poprawnych odpowiedzi
+            [Sequelize.fn('COUNT', Sequelize.col('id')), 'totalAnswers'],
+            [Sequelize.fn('SUM', Sequelize.literal('CASE WHEN isTrue = true THEN 1 ELSE 0 END')), 'correctAnswers']
         ],
         where: {
             questionId: id
@@ -283,12 +272,11 @@ async function checkQuestionEligibility(id, type) {
 
     if (counts && counts[0]) {
         const { totalAnswers, correctAnswers } = counts[0].dataValues;
-        // Dla innych typów sprawdzaj oba warunki
-        return totalAnswers > 1 && correctAnswers > 0; // Zwraca true, jeśli oba warunki są spełnione
+        return totalAnswers > 1 && correctAnswers > 0;
     }
-
-    return false; // Jeśli brak odpowiedzi, zwróć false
+    return false;
 }
+
 module.exports = {
     addQuestion,
     editQuestion,

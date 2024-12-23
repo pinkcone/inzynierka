@@ -170,7 +170,6 @@ const TestPage = () => {
         endTest();
     };
 
-    // Wyodrębnianie obrazu z aktualnego pytania
     let displayContent = '';
     let imageUrl = null;
     if (questions && questions.length > 0 && questions[currentQuestion]) {

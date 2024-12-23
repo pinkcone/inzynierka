@@ -7,7 +7,7 @@ const Test = require('./Test');
 const CompletedTest = require('./CompletedTest');
 const Report = require('./Report');
 const Quiz = require('./Quiz');
-// Ustalanie relacji
+
 User.hasMany(Set, { foreignKey: 'ownerId', onDelete: 'CASCADE' });
 Set.belongsTo(User, { foreignKey: 'ownerId' });
 

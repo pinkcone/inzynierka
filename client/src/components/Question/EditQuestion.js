@@ -16,8 +16,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
         });
         if (response.ok) {
           const question = await response.json();
-          
-          // Wyodrębnianie URL obrazu z content
+
           let { content } = question;
           let imageUrl = '';
           const imageTagIndex = content.indexOf('[Image]:');
@@ -49,10 +48,9 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   };
 
   const handleDeleteOldImage = async (oldImageUrl) => {
-    if (!oldImageUrl) return true; // jeśli nie ma starego obrazu to nic nie robimy
+    if (!oldImageUrl) return true;
     
     try {
-      // Załóżmy, że backend obsługuje usuwanie poprzedniego obrazu np. po URL
       const response = await fetch('/api/questions/delete-image', {
         method: 'POST',
         headers: {
@@ -75,7 +73,7 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
   };
 
   const handleUploadNewImage = async () => {
-    if (!selectedFile) return { success: true, fileUrl: originalImageUrl }; // jeśli nie wybrano nowego pliku, używamy starego url
+    if (!selectedFile) return { success: true, fileUrl: originalImageUrl };
 
     const uploadData = new FormData();
     uploadData.append('file', selectedFile);
@@ -97,7 +95,6 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
             errorMsg = `Błąd podczas przesyłania obrazu: ${errorData.message}`;
           }
         } catch (parseError) {
-          // Ignorujemy błąd parsowania
         }
         setMessage(errorMsg);
         return { success: false };
@@ -115,21 +112,18 @@ const EditQuestion = ({ questionId, onClose, onEditComplete }) => {
     e.preventDefault();
     setMessage('');
 
-    // Jeśli wybrano nowy plik, a jest stary obraz, usuwamy stary
     if (selectedFile && originalImageUrl) {
       const deleteSuccess = await handleDeleteOldImage(originalImageUrl);
       if (!deleteSuccess) {
-        return; // jeśli nie udało się usunąć starego obrazka, przerywamy
+        return;
       }
     }
 
-    // Wgrywamy nowy obraz (jeśli jest)
     const { success, fileUrl } = await handleUploadNewImage();
     if (!success) {
-      return; // błąd w uploadzie
+      return;
     }
 
-    // Budujemy finalną treść pytania
     let finalContent = formData.content.trim();
     if (fileUrl) {
       finalContent += `\n\n[Image]: ${fileUrl}`;

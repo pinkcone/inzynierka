@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../styles/Flashcards.module.css';
 import Navbar from '../Navbar/Navbar';
-import { useSwipeable } from 'react-swipeable'; // Import biblioteki do obsługi swipe
+import { useSwipeable } from 'react-swipeable';
 
 const Flashcards = () => {
     const { setId } = useParams();
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [progress, setProgress] = useState([]); // Przechowywanie kolorów postępu
+    const [progress, setProgress] = useState([]);
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [question, setQuestion] = useState(null);
     const [answers, setAnswers] = useState([]);
     const [visitedCards, setVisitedCards] = useState([]);
 
-    // Funkcja do pobrania fiszek z serwera
     const fetchFlashcards = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -32,18 +31,15 @@ const Flashcards = () => {
             if (response.ok) {
                 const data = await response.json();
 
-                // Sortowanie fiszek według currentLevel od najmniejszego do największego
                 const sortedCards = data.sort((a, b) => a.currentLevel - b.currentLevel);
 
                 setCards(sortedCards);
                 setLoading(false);
 
-                // Inicjalizujemy tablicę postępu na szaro (domyślny stan)
                 setProgress(Array(data.length).fill('gray'));
 
-                // Pobieramy pierwsze pytanie i odpowiedzi
                 if (data.length > 0) {
-                    setCurrentCard(0);  // Ustawiamy na pierwszą fiszkę
+                    setCurrentCard(0);
                 }
 
             } else {
@@ -99,7 +95,6 @@ const Flashcards = () => {
         fetchFlashcards();
     }, [setId]);
 
-    // Wywołanie pobierania pytania i odpowiedzi za każdym razem, gdy currentCard się zmieni
     useEffect(() => {
         if (cards.length > 0) {
             fetchQuestion(cards[currentCard].questionId);
@@ -107,28 +102,23 @@ const Flashcards = () => {
     }, [currentCard, cards]);
 
     const nextCard = () => {
-        // Dodaj aktualne ID karty do historii
         setVisitedCards((prevHistory) => [...prevHistory, cards[currentCard].id]);
 
-        // Przesuń kartę zgodnie z algorytmem
         moveCard(currentCard);
         setFlipped(false);
     };
 
     const prevCard = () => {
         if (visitedCards.length > 0) {
-            // Pobierz ostatnie ID z historii
             const lastId = visitedCards[visitedCards.length - 1];
 
-            // Znajdź indeks karty na podstawie ID
             const lastIndex = cards.findIndex((card) => card.id === lastId);
             if (lastIndex !== -1) {
-                setCurrentCard(lastIndex); // Ustaw ostatnio przeglądaną kartę
+                setCurrentCard(lastIndex);
             } else {
                 console.warn('Nie znaleziono karty w tablicy.');
             }
 
-            // Usuń ostatnie ID z historii
             setVisitedCards((prevHistory) => prevHistory.slice(0, -1));
         } else {
             console.warn('Brak poprzednich kart w historii.');
@@ -143,9 +133,9 @@ const Flashcards = () => {
     const calculateNewLevel = (evaluation, lastEvaluation) => {
         let currentLevel = cards[currentCard].currentLevel;
         if (evaluation === 1) {
-            return Math.min(currentLevel + 1, 7); // Zwiększenie levelu o 1, maksymalnie 7
+            return Math.min(currentLevel + 1, 7);
         } else if (evaluation === -1) {
-            return Math.max(currentLevel - 1, 1); // Obniżenie levelu o 1, minimalnie 1
+            return Math.max(currentLevel - 1, 1);
         } else if (evaluation === 0) {
             if (lastEvaluation === 1) {
                 return Math.max(currentLevel - 1, 1);
@@ -176,16 +166,14 @@ const Flashcards = () => {
         }
 
         try {
-            const flashcardId = cards[currentCard].id; // Aktualizujemy obecną fiszkę
+            const flashcardId = cards[currentCard].id;
             const lastEvaluation = cards[currentCard].lastEvaluation;
 
-            // Obliczamy nowe wartości
             const updatedLevel = calculateNewLevel(evaluation, lastEvaluation);
             const updatedStreak = calculateNewStreak(evaluation);
             const updatedEvaluation = evaluation;
             const updatedReviewed = new Date();
 
-            // Wysyłamy zapytanie do serwera
             const response = await fetch(`/api/flashcards/update/${flashcardId}`, {
                 method: 'PUT',
                 headers: {
@@ -212,19 +200,16 @@ const Flashcards = () => {
                 const updatedCards = [...cards];
                 updatedCards[currentCard] = updatedCard;
 
-                // Dodajemy aktualne ID do historii
                 setVisitedCards((prevHistory) => [...prevHistory, updatedCard.id]);
 
-                // Przenosimy kartę na nowe miejsce
                 const newCards = [...updatedCards];
-                const [cardToMove] = newCards.splice(currentCard, 1); // Usuń aktualną kartę z bieżącej pozycji
-                const newPosition = calculateInsertPosition(cardToMove); // Oblicz nową pozycję
-                newCards.splice(newPosition, 0, cardToMove); // Wstaw kartę na obliczoną pozycję
+                const [cardToMove] = newCards.splice(currentCard, 1);
+                const newPosition = calculateInsertPosition(cardToMove);
+                newCards.splice(newPosition, 0, cardToMove);
 
-                // Aktualizujemy tablicę fiszek i ustawiamy pierwszą kartę
                 setCards(newCards);
                 setFlipped(false);
-                setCurrentCard(0); // Wyświetl pierwszą kartę po przestawieniu
+                setCurrentCard(0);
 
                 console.log('Fiszka zaktualizowana lokalnie');
             } else {
@@ -250,7 +235,7 @@ const Flashcards = () => {
             let streakFactor = (card.streak) / 6;
             let priorityScore = (levelFactor + streakFactor) / 2;
             targetIndex = Math.floor(priorityScore * totalCards);
-            const rand = -3 + Math.random() * (3 - (-3)); // Losowy offset
+            const rand = -3 + Math.random() * (3 - (-3));
             targetIndex += rand;
             if (targetIndex < 4) targetIndex = 4;
             if (targetIndex >= totalCards) targetIndex = totalCards - 1;
@@ -261,7 +246,7 @@ const Flashcards = () => {
     const moveCard = (cardIndex) => {
         setFlipped(false);
         const updatedCards = [...cards];
-        const [card] = updatedCards.splice(cardIndex, 1); // Wycinamy fiszkę
+        const [card] = updatedCards.splice(cardIndex, 1);
 
         const targetIndex = calculateInsertPosition(card);
         updatedCards.splice(targetIndex, 0, card);
@@ -361,9 +346,9 @@ const Flashcards = () => {
                             </div>
 
                             <div className={styles.emotions}>
-                                <span onClick={() => handleFeedback(1)}>&#128512;</span> {/* good */}
-                                <span onClick={() => handleFeedback(0)}>&#128528;</span> {/* neutral */}
-                                <span onClick={() => handleFeedback(-1)}>&#128577;</span> {/* bad */}
+                                <span onClick={() => handleFeedback(1)}>&#128512;</span>
+                                <span onClick={() => handleFeedback(0)}>&#128528;</span>
+                                <span onClick={() => handleFeedback(-1)}>&#128577;</span>
                             </div>
                         </>
                     )}

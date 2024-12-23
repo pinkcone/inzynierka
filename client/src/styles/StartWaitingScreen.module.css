@@ -67,11 +67,11 @@
     color: white;
     text-align: center;
     position: relative;
-    height: 3.5rem; /* Ustawiona wysokość, aby liczby się nie przesuwały */
+    height: 3.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Ukrywanie wychodzących liczb */
+    overflow: hidden;
 }
 
 .counterNumber {
@@ -79,18 +79,17 @@
     animation: slide 1s ease-in-out;
 }
 
-/* Animacja dla licznika */
 @keyframes slide {
     0% {
-        transform: translateY(100%); /* Start animacji poniżej widoku */
+        transform: translateY(100%);
         opacity: 0;
     }
     50% {
-        transform: translateY(0); /* Widoczna liczba */
+        transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: translateY(-100%); /* Przesunięcie liczby w górę */
+        transform: translateY(-100%);
         opacity: 0;
     }
 }
@@ -159,7 +158,6 @@
     transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Klasa nakładana, gdy czas < 5 sekund */
 .timer.critical {
     color: red;
     animation: pulse 1s infinite;

@@ -8,7 +8,6 @@ const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Funkcja pomocnicza do usuwania fragmentu z [Image]:
   const getTextOnlyContent = (content) => {
     if (!content) return '';
     const imageTagIndex = content.indexOf('[Image]:');
@@ -18,7 +17,6 @@ const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
     return content.trim();
   };
 
-  // Wyodrębniamy czystą treść pytania (bez linku do obrazka)
   const textContent = getTextOnlyContent(questionContent);
 
   const fetchAnswers = useCallback(async () => {
@@ -84,7 +82,7 @@ const AddAnswer = ({ questionId, questionContent, onAnswerAdded }) => {
   return (
     <div className={styles.addAnswerSection}>
       <h3>Dodaj odpowiedzi do pytania:</h3>
-      <p>{textContent}</p> {/* Wyświetlamy tylko tekstową część pytania */}
+      <p>{textContent}</p>
       {error && <div className={styles.alert}>{error}</div>}
 
       <ul className={styles.answersList}>

@@ -9,26 +9,24 @@ const ResultsScreen = ({ results }) => {
     useEffect(() => {
         if (!results || results.length === 0) return;
 
-        let currentIndex = results.length - 1; // Start from the last participant
+        let currentIndex = results.length - 1;
         const interval = setInterval(() => {
             if (currentIndex < 0) {
-                clearInterval(interval); // Stop the interval when done
+                clearInterval(interval);
                 return;
             }
 
             const participant = results[currentIndex];
             if (participant) {
-                // Add the current participant to the visible list
                 setVisibleParticipants((prev) => [participant, ...prev]);
 
-                // Show confetti for index 2, 1, and 0
                 if (currentIndex <= 2) {
                     setShowConfetti(true);
-                    setTimeout(() => setShowConfetti(false), 999999); // Hide confetti after 2 seconds
+                    setTimeout(() => setShowConfetti(false), 999999);
                 }
             }
 
-            currentIndex -= 1; // Move to the previous participant
+            currentIndex -= 1;
         }, 2000);
 
         return () => clearInterval(interval);
@@ -41,7 +39,6 @@ const ResultsScreen = ({ results }) => {
                 <h2>Ranking: </h2>
                 <ul className={styles.leaderboard}>
                     {visibleParticipants.map((participant) => {
-                        // Calculate the actual rank based on the original results array
                         const rank = results.findIndex((p) => p === participant) + 1;
 
                         return (

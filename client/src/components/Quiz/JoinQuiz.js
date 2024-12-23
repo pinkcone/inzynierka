@@ -1,4 +1,3 @@
-// JoinQuiz.js
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SocketContext } from '../../contexts/SocketContext';
@@ -19,13 +18,11 @@ const JoinQuiz = () => {
   }, [code, name]);
 
   useEffect(() => {
-    // Nasłuchujemy na zdarzenie 'joinedQuiz'
     socket.on('joinedQuiz', () => {
       console.log('Otrzymano joinedQuiz, przekierowuję na QuizPlay');
       navigate(`/quiz/play/${codeRef.current}`, { state: { name: nameRef.current } });
     });
 
-    // Nasłuchujemy na zdarzenie 'error'
     socket.on('error', (data) => {
       setError(data.message);
     });
@@ -33,7 +30,6 @@ const JoinQuiz = () => {
       alert(data.message);
       navigate('/join-quiz');
     });
-    // Czyszczenie nasłuchiwaczy
     return () => {
       socket.off('joinedQuiz');
       socket.off('error');

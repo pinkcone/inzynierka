@@ -7,7 +7,7 @@ const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [sessionExpired, setSessionExpired] = useState(false); // flaga
+  const [sessionExpired, setSessionExpired] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {

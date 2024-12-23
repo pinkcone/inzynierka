@@ -1,6 +1,5 @@
 const { Sequelize } = require('sequelize');
 
-// Połączenie z bazą danych
 const sequelize = new Sequelize('inzynierka', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'

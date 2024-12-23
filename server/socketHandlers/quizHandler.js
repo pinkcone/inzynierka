@@ -194,8 +194,7 @@ module.exports = (io, socket) => {
     setTimeout(() => {
       const question = quiz.questions[questionIndex];
 
-      // Wysyłamy pytanie wraz z questionTime
-      const questionTime = quiz.questionTime || 30; // Domyślnie 30 sekund, jeśli brak w bazie
+      const questionTime = quiz.questionTime || 30;
       io.to(code).emit('showQuestion', {
         question: {
           id: question.id,
@@ -205,12 +204,11 @@ module.exports = (io, socket) => {
             content: answer.content,
           })),
         },
-        questionTime: questionTime // ZMIANA: Wysyłamy czas na odpowiedź
+        questionTime: questionTime
       });
 
       quiz.currentAnswers = {};
 
-      // ZMIANA: ustawiamy timeout, aby po upływie questionTime przejść do obliczania wyników
       quiz.answerTimer = setTimeout(() => {
         console.log('Upłynął czas na odpowiedź, obliczam wyniki...');
         calculateResultsAndProceed(quiz);
@@ -237,7 +235,6 @@ module.exports = (io, socket) => {
       const totalAnswers = Object.keys(quiz.currentAnswers).length;
 
       if (totalAnswers === totalParticipants) {
-        // ZMIANA: jeżeli wszyscy odpowiedzieli przed upływem czasu, czyścimy timeout
         if (quiz.answerTimer) {
           clearTimeout(quiz.answerTimer);
           quiz.answerTimer = null;
@@ -287,10 +284,10 @@ module.exports = (io, socket) => {
       }, 10000);
     } else {
       for (const socketId in quiz.participants) {
-        const userResult = userResults[socketId]; // Wynik użytkownika
+        const userResult = userResults[socketId];
         io.to(socketId).emit('showLeaderboard', {
-          leaderboard: leaderboard.slice(0, 5), // Top 5 wyników
-          userResult, // Wynik indywidualny tego użytkownika
+          leaderboard: leaderboard.slice(0, 5),
+          userResult,
         });
       }
 
@@ -301,14 +298,11 @@ module.exports = (io, socket) => {
     }
   }
 
-  // Funkcja do generowania tablicy rankingowej
   function getLeaderboard(quiz) {
     const participants = Object.values(quiz.participants);
 
-    // Posortuj uczestników według wyniku malejąco
     participants.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-    // Zwróć listę uczestników
     return participants.map((participant) => ({
       name: participant.name,
       score: participant.score || 0,
@@ -316,42 +310,34 @@ module.exports = (io, socket) => {
     }));
   }
 
-  // Funkcja do pobierania wyników końcowych quizu
   function getQuizResults(quiz) {
     const participants = Object.values(quiz.participants);
 
-    // Posortuj uczestników według wyniku malejąco
     participants.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-    // Zwróć wyniki wszystkich uczestników
     return participants.map((participant) => ({
       name: participant.name,
       score: participant.score || 0,
     }));
   }
 
-  // Obsługa zdarzenia 'disconnect'
   socket.on('disconnect', () => {
     console.log(`Użytkownik rozłączony: ${socket.id}`);
     for (const code in activeQuizzes) {
       const quiz = activeQuizzes[code];
       if (quiz.organizerSocketId === socket.id) {
-        // Jeśli quiz nie został jeszcze rozpoczęty, usuń go
         if (!quiz.isStarted) {
           delete activeQuizzes[code];
           console.log(
             `Quiz o kodzie ${code} został usunięty z powodu rozłączenia hosta.`
           );
-          // Powiadom uczestników
           io.to(code).emit('quizCanceled', {
             message: 'Quiz został anulowany, ponieważ host się rozłączył.',
           });
         }
       }
-      // Usuń uczestnika z quizu, jeśli był uczestnikiem
       if (quiz.participants[socket.id]) {
         delete quiz.participants[socket.id];
-        // Wyślij zaktualizowaną listę uczestników
         const participantsList = Object.values(quiz.participants).map((p) => ({
           name: p.name,
         }));
@@ -360,15 +346,12 @@ module.exports = (io, socket) => {
     }
   });
 
-  // Obsługa zdarzenia 'cancelQuiz'
   socket.on('cancelQuiz', ({ code }) => {
     const quiz = activeQuizzes[code];
     if (quiz) {
-      // Sprawdź, czy quiz nie został jeszcze rozpoczęty
       if (!quiz.isStarted) {
         delete activeQuizzes[code];
         console.log(`Quiz o kodzie ${code} został anulowany przez hosta.`);
-        // Opcjonalnie, powiadom uczestników o anulowaniu quizu
         io.to(code).emit('quizCanceled', {
           message: 'Quiz został anulowany przez hosta.',
         });

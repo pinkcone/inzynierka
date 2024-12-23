@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 const sequelize = require('../config/sequelize');
 const Set = require('../models/Set');
 
-// Tworzenie fiszek na podstawie zestawu pytań i użytkownika
 const createFlashcardsForSet = async (req, res) => {
   const { setId } = req.params;
   const userId = req.user.id;
@@ -13,7 +12,6 @@ const createFlashcardsForSet = async (req, res) => {
   try {
     console.log('Tworzenie fiszek dla userId:', userId, 'i setId:', setId);
 
-    // Pobieramy wszystkie pytania dla danego zestawu (setId)
     const questions = await Question.findAll({ where: { setId } });
 
     if (!questions.length) {
@@ -42,11 +40,10 @@ const createFlashcardsForSet = async (req, res) => {
         error: 'Brak pytań w zestawie z poprawnymi odpowiedziami.',
       });
     }
-    // Tworzymy fiszki lub sprawdzamy, czy już istnieją
+
     const flashcards = await Promise.all(
-      filteredQuestions.map(async (question) => {
-        // Sprawdzamy, czy fiszka już istnieje dla danego użytkownika, pytania i zestawu
-        let flashcard = await Flashcards.findOne({
+        filteredQuestions.map(async (question) => {
+          let flashcard = await Flashcards.findOne({
           where: {
             questionId: question.id,
             userId: userId,
@@ -54,7 +51,6 @@ const createFlashcardsForSet = async (req, res) => {
           },
         });
 
-        // Jeśli nie istnieje, tworzymy nową fiszkę
         if (!flashcard) {
           flashcard = await Flashcards.create({
             questionId: question.id,
@@ -67,7 +63,6 @@ const createFlashcardsForSet = async (req, res) => {
       })
     );
 
-    // Zwracamy stworzone fiszki
     res.status(201).json(flashcards);
   } catch (error) {
     console.error('Błąd podczas tworzenia fiszek:', error);
@@ -75,7 +70,6 @@ const createFlashcardsForSet = async (req, res) => {
   }
 };
 
-// Pobieranie fiszek z konkretnego zestawu dla danego użytkownika
 const getFlashcardsBySet = async (req, res) => {
   try {
     const { setId } = req.params;
@@ -83,7 +77,6 @@ const getFlashcardsBySet = async (req, res) => {
 
     console.log('Pobieranie fiszek dla userId:', userId, 'i setId:', setId);
 
-    // Pobieramy fiszki na podstawie setId i userId
     const flashcards = await Flashcards.findAll({
       where: {
         setId,
@@ -103,26 +96,23 @@ const getFlashcardsBySet = async (req, res) => {
 };
 const updateFlashcardByUserRate = async (req, res) => {
   const { flashcardId } = req.params;
-  const { currentLevel, streak, lastReviewed, lastEvaluation } = req.body;  // Przyjmujemy obliczone wartości z frontendu
+  const { currentLevel, streak, lastReviewed, lastEvaluation } = req.body;
 
   try {
-    // Pobranie danych fiszki na podstawie flashcardId
     const flashcard = await Flashcards.findOne({ where: { id: flashcardId } });
 
     if (!flashcard) {
       return res.status(404).json({ message: 'Fiszka nie została znaleziona.' });
     }
 
-    // Aktualizujemy fiszkę na podstawie otrzymanych wartości z frontendu
     flashcard.currentLevel = currentLevel;
     flashcard.streak = streak;
-    flashcard.lastReviewed = new Date(lastReviewed);  // Ustawiamy datę przeglądu
-    flashcard.lastEvaluation = lastEvaluation;        // Ustawiamy nową ocenę
+    flashcard.lastReviewed = new Date(lastReviewed);
+    flashcard.lastEvaluation = lastEvaluation;
 
-    // Zapisujemy zaktualizowaną fiszkę
     await flashcard.save();
 
-    res.status(200).json(flashcard); // Zwracamy zaktualizowaną fiszkę
+    res.status(200).json(flashcard);
   } catch (error) {
     console.error('Błąd podczas aktualizacji fiszki:', error);
     res.status(500).json({ message: 'Błąd podczas aktualizacji fiszki.', error: error.message });
@@ -135,7 +125,6 @@ const getUserFlashcardSets = async (req, res) => {
 
     console.log('Fetching flashcard sets for userId:', userId);
 
-    // Query to find all sets that have flashcards for the user
     const sets = await Flashcards.findAll({
       where: { userId },
       attributes: [
@@ -155,7 +144,6 @@ const getUserFlashcardSets = async (req, res) => {
       return res.status(404).json({ message: 'No flashcards found for this user.' });
     }
 
-    // Map the results to the desired format
     const result = sets.map(flashcard => ({
       setId: flashcard.setId,
       setName: flashcard.Set.name,
@@ -197,8 +185,6 @@ const resetFlashcardsBySet = async (req, res) => {
     const { setId } = req.params;
     const userId = req.user.id;
 
-    console.log('Resetting flashcards for userId:', userId, 'and setId:', setId);
-
     const [updatedCount] = await Flashcards.update(
       {
         currentLevel: 4,
@@ -220,7 +206,6 @@ const resetFlashcardsBySet = async (req, res) => {
 
     res.status(200).json({ message: 'Postęp fiszek został pomyślnie zresetowany.', updatedCount });
   } catch (error) {
-    console.error('Błąd podczas resetowania fiszek:', error);
     res.status(500).json({ message: 'Błąd serwera podczas resetowania fiszek.', error: error.message });
   }
 };

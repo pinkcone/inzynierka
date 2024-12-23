@@ -1,4 +1,3 @@
-// QuizPlay.js
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { SocketContext } from '../../contexts/SocketContext';
@@ -9,6 +8,7 @@ import LeaderboardScreen from './screens/LeaderboardScreen';
 import FinalCountdownScreen from './screens/FinalCountdownScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import BetweenWaitingScreen from './screens/BetweenWaitingScreen';
+
 const QuizPlay = () => {
   const { code } = useParams();
   const location = useLocation();
@@ -18,14 +18,14 @@ const QuizPlay = () => {
   const name =
     location.state?.name || localStorage.getItem('username') || 'Anonim';
 
-  const [screen, setScreen] = useState('waiting'); // 'waiting', 'countdown', 'question', 'leaderboard', 'finalCountdown', 'results'
+  const [screen, setScreen] = useState('waiting');
   const [countdown, setCountdown] = useState(0);
   const [question, setQuestion] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
   const [answerResult, setAnswerResult] = useState(false);
-  const questionStartTimeRef = useRef(null); // Referencja do czasu rozpoczęcia pytania
+  const questionStartTimeRef = useRef(null);
   const [questionTime, setQuestionTime] = useState(30);
   useEffect(() => {
     if (!code || !name) {
@@ -33,10 +33,8 @@ const QuizPlay = () => {
       return;
     }
 
-    // Dołącz do pokoju quizu
     socket.emit('joinQuizRoom', { code, name });
 
-    // Nasłuchuj na zdarzenia
     socket.on('showCountdown', ({ countdown }) => {
       setScreen('countdown');
       setCountdown(countdown);
@@ -72,7 +70,6 @@ const QuizPlay = () => {
       setScreen('leaderboard');
       setLeaderboard(leaderboard);
       setAnswerResult(userResult);
-      // Serwer automatycznie wyśle kolejne pytanie po opóźnieniu
     });
 
     socket.on('startFinalCountdown', ({ countdown }) => {
@@ -104,7 +101,6 @@ const QuizPlay = () => {
       navigate('/join-quiz');
     });
 
-    // Czyszczenie nasłuchiwaczy
     return () => {
       socket.off('showCountdown');
       socket.off('showQuestion');
@@ -118,8 +114,8 @@ const QuizPlay = () => {
 
   const handleAnswerClick = (answerId) => {
     const currentTime = Date.now();
-    const timeElapsed = (currentTime - questionStartTimeRef.current) / 1000; // Czas w sekundach
-    const timeInSeconds = Math.round(timeElapsed * 100) / 100; // Zaokrąglenie do dwóch miejsc po przecinku
+    const timeElapsed = (currentTime - questionStartTimeRef.current) / 1000;
+    const timeInSeconds = Math.round(timeElapsed * 100) / 100;
 
     socket.emit('submitAnswer', {
       code,
@@ -130,9 +126,6 @@ const QuizPlay = () => {
 
     setScreen('waiting-between');
   };
-
-
-
 
   switch (screen) {
     case 'countdown':
@@ -155,7 +148,5 @@ const QuizPlay = () => {
       <QuestionScreen question={question} handleAnswerClick={handleAnswerClick} />
   }
 };
-
-
 
 export default QuizPlay;

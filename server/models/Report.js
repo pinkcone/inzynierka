@@ -28,11 +28,11 @@ const Report = sequelize.define('Report', {
     },
     checkedById: {
         type: DataTypes.INTEGER,
-        allowNull: true,  // Może być null, jeśli zgłoszenie nie zostało jeszcze sprawdzone
+        allowNull: true,
     },
     status: {
         type: DataTypes.STRING,
-        defaultValue: 'oczekujące', // Początkowy status zgłoszenia
+        defaultValue: 'oczekujące',
         allowNull: false,
     },
 }, {
@@ -40,7 +40,6 @@ const Report = sequelize.define('Report', {
     hooks: {
         beforeUpdate: async (report, options) => {
             if (report.checkedById) {
-                // Tylko wtedy, gdy 'checkedById' jest ustawione, sprawdzamy rolę
                 const adminUser = await User.findByPk(report.checkedById);
                 if (!adminUser || adminUser.role !== 'admin') {
                     throw new Error('Tylko administrator może sprawdzić zgłoszenie.');

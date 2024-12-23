@@ -1,5 +1,3 @@
-// index.js
-
 const app = require('./app');
 const http = require('http');
 const server = http.createServer(app);
@@ -7,19 +5,16 @@ const { Server } = require('socket.io');
 const sequelize = require('./config/sequelize');
 const { User, Set, Question, Answer, Report } = require('./models/associations');
 
-// Inicjalizacja Socket.io
+
 const io = new Server(server, {
   cors: {
-    origin: '*', // Ustaw odpowiedni adres URL frontend (np. 'http://localhost:3000')
+    origin: '*',
     methods: ['GET', 'POST'],
     credentials: true,
   },
 });
 require('./socket')(io);
-// Import modułu Socket.io i przekazanie instancji io
 
-
-// Synchronizacja modeli z bazą danych
 sequelize.sync({ force: false })
   .then(() => {
     console.log('Modele zostały zsynchronizowane z bazą danych.');
@@ -28,7 +23,6 @@ sequelize.sync({ force: false })
     console.error('Błąd synchronizacji modeli:', err);
   });
 
-// Uruchomienie serwera
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Serwer działa na porcie ${PORT}`);

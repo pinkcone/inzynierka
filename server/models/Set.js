@@ -21,9 +21,9 @@ const Set = sequelize.define('Set', {
     allowNull: true
   },
   collaboratorsList: {
-    type: DataTypes.JSON, // Przechowuje tablicę ID użytkowników
+    type: DataTypes.JSON,
     allowNull: false,
-    defaultValue: {}, // Domyślnie pusta lista
+    defaultValue: {},
 },
 });
 

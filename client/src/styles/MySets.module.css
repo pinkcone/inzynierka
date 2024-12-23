@@ -52,7 +52,7 @@
   font-size: 72px;
   display: block;
   animation: advancedBounce 1.5s ease-out;
-  animation-fill-mode: forwards; /* Animacja nie powtarza się */
+  animation-fill-mode: forwards;
 }
 
 .alertSuccess {

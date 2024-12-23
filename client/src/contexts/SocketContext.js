@@ -1,4 +1,3 @@
-// SocketContext.js
 import React, { createContext } from 'react';
 import { io } from 'socket.io-client';
 

@@ -13,7 +13,7 @@ const Flashcards = sequelize.define('Flashcards', {
   currentLevel: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 4, // Domyślny poziom startowy fiszki
+    defaultValue: 4,
     validate: {
       min: 1,
       max: 7
@@ -21,20 +21,20 @@ const Flashcards = sequelize.define('Flashcards', {
   },
   lastReviewed: {
     type: DataTypes.DATE,
-    allowNull: true // Data ostatniego przeglądu fiszki
+    allowNull: true
   },
   lastEvaluation: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0, // 1 dla poprawnej, 0 dla neutralnej, -1 dla negatywnej
+    defaultValue: 0,
     validate: {
-      isIn: [[1, 0, -1]] // Dozwolone wartości: 1 (poprawna), 0 (neutralna), -1 (negatywna)
+      isIn: [[1, 0, -1]]
     }
   },
   streak: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0 // Seria poprawnych odpowiedzi pod rząd
+    defaultValue: 0
   }
 });
 Flashcards.belongsTo(User, { foreignKey: 'userId' });

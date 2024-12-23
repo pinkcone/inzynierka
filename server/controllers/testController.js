@@ -87,7 +87,6 @@ async function generateCode() {
 
     do {
         code = await generateCodeValue();
-        console.log("Szukam kodu w bazie danych");
         existingCode = await Test.findOne({ where: { code } });
     } while (existingCode);
 
