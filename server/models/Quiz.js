@@ -19,6 +19,10 @@ const Quiz = sequelize.define('Quiz', {
         },
         comment: 'Czas na jedno pytanie w sekundach',
       },
+      isPublic: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        comment: 'Czy quiz jest publiczny',
+      },
 });
 module.exports = Quiz;
-
